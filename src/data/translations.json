@@ -16,8 +16,8 @@
     "title_1": { "pt": "Ativa sua clínica.", "en": "Activate your clinic." },
     "title_2": { "pt": "Preserva sua essência.", "en": "Preserve your essence." },
     "subtitle": {
-      "pt": "Sua clínica perde pacientes entre o primeiro contato e a sessão confirmada — não por falta de competência, mas por falta de processo. A PsiAtiva fecha esse buraco de forma ética e estruturada.",
-      "en": "Your clinic loses patients between first contact and the confirmed session — not from lack of competence, but from lack of process. PsiAtiva closes that gap ethically and structurally."
+      "pt": "Sua clínica perde pacientes entre o primeiro contato e a sessão confirmada por falta de processo. A PsiAtiva fecha esse buraco de forma ética e estruturada.",
+      "en": "Your clinic loses patients between first contact and the confirmed session from lack of process. PsiAtiva closes that gap ethically and structurally."
     },
     "cta_primary": { "pt": "Agendar Diagnóstico Gratuito", "en": "Schedule Free Diagnostic" }
   },

@@ -225,7 +225,8 @@ export default function ContactForm() {
           style={{ ...inputStyles, resize: 'vertical' as const, minHeight: '120px' }}
         />
       </div>
-
+      
+      {/*
       <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '0.5rem 0' }}>
         <HCaptcha
           ref={captchaRef}
@@ -234,6 +235,7 @@ export default function ContactForm() {
           onExpire={() => setCaptchaToken(null)}
         />
       </div>
+      */}
       
       {status === 'captcha_required' && (
         <p style={errorStyles} data-i18n="contact.form_captcha_required">

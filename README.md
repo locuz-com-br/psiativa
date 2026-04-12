@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚀 Psiativa Landing Page Template
+# 🚀 PsiAtiva — Landing Page
 
-**A specialized Healthcare landing page template built with Astro, React & Tailwind CSS.**
+**A specialized Healthcare patient acquisition system built with Astro, React & Tailwind CSS.**
 
 [![Astro](https://img.shields.io/badge/Astro-FF5D01?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build/)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -15,7 +15,7 @@
 
 ---
 
-A production-ready Astro landing page template designed for **healthcare providers, medical clinics, and health-tech startups**. Clone it, edit **one file** (`src/config/site.config.ts`), and you have a fully branded healthcare platform.
+A production-ready Astro landing page designed for **healthcare providers, psychology clinics, and medical specialists**. Configure it via `src/config/site.config.ts` to deploy a fully branded clinical platform in minutes.
 
 ### Key Features
 
@@ -36,9 +36,9 @@ A production-ready Astro landing page template designed for **healthcare provide
 ## ⚡ Quick Start
 
 ```bash
-# 1. Clone the template
-git clone https://github.com/locuz-com-br/psiativa-template.git
-cd psiativa-template
+# 1. Clone the project
+git clone https://github.com/locuz-com-br/psiativa.git
+cd psiativa
 
 # 2. Install dependencies
 npm install
@@ -143,7 +143,7 @@ export const SITE_CONFIG = {
 ## 📁 Project Structure
 
 ```
-psiativa-template/
+psiativa/
 ├── public/
 │   ├── fonts/              # Local fonts (New York, Lora)
 │   ├── images/logo/        # Brand logos (light/dark, navbar/footer)

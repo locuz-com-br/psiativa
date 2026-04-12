@@ -35,8 +35,8 @@ export const SITE_CONFIG = {
   // ── Contact ────────────────────────────────
   contact: {
     email: "contato@psiativa.com.br",
-    phone: "+55 (11) 00000-0000",
-    whatsappNumber: "5511000000000",
+    phone: "+55 (21) 97990-7947",
+    whatsappNumber: "5521979907947",
     meetingUrl: "",
     hours: {
       pt: "Seg–Sex, 9h às 18h",
@@ -47,8 +47,8 @@ export const SITE_CONFIG = {
   // ── Social Links ───────────────────────────
   socials: {
     whatsapp: "",
-    instagram: "https://instagram.com/psiativa",
-    linkedin: "https://linkedin.com/company/psiativa",
+    instagram: "https://instagram.com/psiativa.com.br",
+    linkedin: "https://linkedin.com/company/psiativa-com-br",
     facebook: "",
     tiktok: "",
     youtube: "",
@@ -57,11 +57,11 @@ export const SITE_CONFIG = {
 
   // ── Logos ───────────────────────────────────
   logos: {
-    navbarLight: "/images/logo/logo-light.svg",
-    navbarDark: "/images/logo/logo-dark.svg",
-    footerLight: "/images/logo/logo-footer-light.svg",
-    footerDark: "/images/logo/logo-footer-dark.svg",
-    favicon: "/images/logo/logo-dark.svg",
+    navbarLight: "/images/logo/navbar-full-dark.svg",
+    navbarDark: "/images/logo/navbar-full-dark.svg",
+    footerLight: "/images/logo/navbar-full-dark.svg",
+    footerDark: "/images/logo/navbar-full-dark.svg",
+    favicon: "/images/logo/psiativa-profile.svg",
   },
 
   // ── Hero Background ────────────────────────
