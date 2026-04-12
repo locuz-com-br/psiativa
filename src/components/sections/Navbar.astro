@@ -1,0 +1,358 @@
+---
+// Navbar — Glassmorphism pill bar (PsiAtiva design system)
+import { SITE_CONFIG } from "../../config/site.config";
+import LINKS from "../../constants/links";
+---
+
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner container">
+    <a
+      href={LINKS.pages.home}
+      class="navbar-logo"
+      aria-label={`${SITE_CONFIG.name} - Home`}
+    >
+      <img
+        src={SITE_CONFIG.logos.navbarLight}
+        alt={SITE_CONFIG.name}
+        width="120"
+        height="36"
+        class="logo-img"
+        loading="eager"
+      />
+    </a>
+
+    <ul class="navbar-links">
+      <li><a href={LINKS.sections.inicio} data-i18n="nav.inicio">Início</a></li>
+      <li><a href={LINKS.sections.sobre} data-i18n="nav.sobre">Sobre</a></li>
+      <li>
+        <a href={LINKS.sections.funcionalidades} data-i18n="nav.funcionalidades"
+          >Funcionalidades</a>
+      </li>
+      <li>
+        <a href={LINKS.sections.depoimentos} data-i18n="nav.depoimentos"
+          >Depoimentos</a>
+      </li>
+      <li>
+        <a href={LINKS.sections.resultados} data-i18n="nav.resultados"
+          >Resultados</a>
+      </li>
+    </ul>
+
+    <div class="navbar-actions">
+      <!-- Language Toggle -->
+      <button
+        class="lang-toggle"
+        id="lang-toggle"
+        aria-label="Switch language"
+        title="Mudar o Idioma"
+      >
+        <img
+          class="lang-toggle-flag"
+          src="https://flagcdn.com/w20/br.png"
+          width="20"
+          height="15"
+          alt="Idioma"
+          style="border-radius:2px;"
+          loading="eager"
+        />
+      </button>
+
+      <a href={LINKS.contact.phoneHref} class="btn-nav-cta" data-i18n="nav.cta">
+        <span>Teste Grátis</span>
+        <span class="icon-circle">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
+            ></path>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="navbar-mobile-actions">
+      <button
+        class="lang-toggle"
+        id="lang-toggle-mobile"
+        aria-label="Switch language"
+      >
+        <img
+          class="lang-toggle-flag"
+          src="https://flagcdn.com/w20/br.png"
+          width="20"
+          height="15"
+          alt="Idioma"
+          style="border-radius:2px;"
+          loading="eager"
+        />
+      </button>
+      <button
+        class="navbar-toggle"
+        id="navbar-toggle"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="navbar-mobile" id="navbar-mobile">
+    <ul class="navbar-mobile-links">
+      <li><a href={LINKS.sections.inicio} data-i18n="nav.inicio">Início</a></li>
+      <li><a href={LINKS.sections.sobre} data-i18n="nav.sobre">Sobre</a></li>
+      <li>
+        <a href={LINKS.sections.funcionalidades} data-i18n="nav.funcionalidades"
+          >Funcionalidades</a>
+      </li>
+      <li>
+        <a href={LINKS.sections.depoimentos} data-i18n="nav.depoimentos"
+          >Depoimentos</a>
+      </li>
+      <li>
+        <a href={LINKS.sections.resultados} data-i18n="nav.resultados"
+          >Resultados</a>
+      </li>
+    </ul>
+    <a
+      href={LINKS.contact.phoneHref}
+      class="btn-nav-cta"
+      style="width:100%;justify-content:center;margin-top:1rem;"
+      data-i18n="nav.cta"
+    >
+      <span>Teste Grátis</span>
+      <span class="icon-circle">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
+          ></path>
+        </svg>
+      </span>
+    </a>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 18px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--container-padding);
+  }
+
+  .navbar-inner {
+    max-width: var(--container-max);
+    width: 100%;
+    height: 64px;
+    background: var(--primary-dark-50);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: var(--radius-pill);
+    padding: 12px 12px 12px 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-logo img {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: opacity var(--transition-fast);
+  }
+
+  .navbar-logo:hover img {
+    opacity: 0.8;
+  }
+
+  .navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-links a {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16.8px;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    color: var(--light-blue);
+    transition: color var(--transition-fast);
+  }
+
+  .navbar-links a:hover {
+    color: #ffffff;
+  }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* Shared icon button style */
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--light-blue-40);
+    background: transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .lang-toggle:hover {
+    background: rgba(214, 228, 238, 0.15);
+    border-color: rgba(214, 228, 238, 0.6);
+  }
+
+  .lang-toggle-flag {
+    display: block;
+    width: 20px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .navbar-mobile-actions {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navbar-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .navbar-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: all var(--transition-base);
+  }
+
+  .navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .navbar-mobile {
+    display: none;
+    width: 100%;
+    max-width: var(--container-max);
+    padding: 1.5rem;
+    margin-top: 0.5rem;
+    background: var(--primary-dark-50);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: var(--radius-card);
+  }
+
+  .navbar-mobile.open {
+    display: block;
+  }
+
+  .navbar-mobile-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar-mobile-links a {
+    display: block;
+    padding: 0.875rem 0;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.56px;
+    color: var(--light-blue);
+    border-bottom: 1px solid rgba(214, 228, 238, 0.15);
+    transition: color var(--transition-fast);
+  }
+
+  .navbar-mobile-links a:hover {
+    color: #ffffff;
+  }
+
+  @media (max-width: 810px) {
+    .navbar-links,
+    .navbar-actions {
+      display: none;
+    }
+    .navbar-mobile-actions {
+      display: flex;
+    }
+
+    .navbar-inner {
+      height: 56px;
+      padding: 8px 8px 8px 14px;
+    }
+  }
+</style>
+
+<script>
+  // Mobile toggle
+  const toggle = document.getElementById("navbar-toggle");
+  const mobile = document.getElementById("navbar-mobile");
+  toggle?.addEventListener("click", () => {
+    toggle.classList.toggle("active");
+    mobile?.classList.toggle("open");
+    toggle.setAttribute(
+      "aria-expanded",
+      toggle.classList.contains("active").toString(),
+    );
+  });
+
+  mobile?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.classList.remove("active");
+      mobile?.classList.remove("open");
+    });
+  });
+</script>

@@ -1,0 +1,29 @@
+---
+import { SITE_CONFIG } from '../config/site.config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import LogoBar from '../components/sections/LogoBar.astro';
+import WhyUs from '../components/sections/WhyUs.astro';
+import Services from '../components/sections/Services.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import Process from '../components/sections/Process.astro';
+import Integrations from '../components/sections/Integrations.astro';
+import CTA from '../components/sections/CTA.astro';
+import Results from '../components/sections/Results.astro';
+import Contact from '../components/sections/Contact.astro';
+
+const s = SITE_CONFIG.sections;
+---
+
+<BaseLayout title={SITE_CONFIG.description.pt}>
+  {s.hero && <Hero />}
+  {s.partners && <LogoBar />}
+  {s.about && <WhyUs />}
+  {s.features && <Services />}
+  {s.testimonials && <Testimonials />}
+  {s.functionalities && <Process />}
+  {s.integrations && <Integrations />}
+  {s.ctaFinal && <CTA />}
+  {s.cases && <Results />}
+  {s.contact && <Contact />}
+</BaseLayout>

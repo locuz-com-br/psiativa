@@ -1,0 +1,175 @@
+---
+// Functionalities — 3×2 numbered card grid (PsiAtiva design system)
+// Previously "Process"
+---
+
+<section class="func section" id="funcionalidades-detail">
+  <div class="container">
+    <div class="func-header">
+      <span class="section-label" data-i18n="func.label">Funcionalidades</span>
+      <h2 class="func-title">
+        <span data-i18n="func.title_1">Tudo o que você precisa</span><br />
+        <span data-i18n="func.title_2">em uma plataforma</span>
+      </h2>
+    </div>
+
+    <div class="func-grid">
+      <!-- Card 1 -->
+      <div class="func-card">
+        <span class="func-card-number">01</span>
+        <h3 class="func-card-title" data-i18n="func.c1_title">
+          Triagem inteligente
+        </h3>
+        <p class="func-card-description" data-i18n="func.c1_desc">
+          Algoritmos de IA que classificam e direcionam cada paciente para o
+          atendimento mais adequado, reduzindo o tempo de espera e melhorando a
+          experiência.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="func-card">
+        <span class="func-card-number">02</span>
+        <h3 class="func-card-title" data-i18n="func.c2_title">
+          Agendamento online
+        </h3>
+        <p class="func-card-description" data-i18n="func.c2_desc">
+          Sistema de agendamento completo com confirmação automática, lembretes
+          por WhatsApp e gerenciamento de disponibilidade dos profissionais.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="func-card">
+        <span class="func-card-number">03</span>
+        <h3 class="func-card-title" data-i18n="func.c3_title">
+          Prontuário digital
+        </h3>
+        <p class="func-card-description" data-i18n="func.c3_desc">
+          Histórico completo do paciente acessível em qualquer dispositivo.
+          Dados seguros, organizados e prontos para apoiar decisões clínicas.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="func-card">
+        <span class="func-card-number">04</span>
+        <h3 class="func-card-title" data-i18n="func.c4_title">
+          Telemedicina integrada
+        </h3>
+        <p class="func-card-description" data-i18n="func.c4_desc">
+          Consultas por vídeo nativas na plataforma, com sala de espera virtual,
+          gravação opcional e integração com o prontuário eletrônico.
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="func-card">
+        <span class="func-card-number">05</span>
+        <h3 class="func-card-title" data-i18n="func.c5_title">
+          Faturamento automatizado
+        </h3>
+        <p class="func-card-description" data-i18n="func.c5_desc">
+          Geração automática de guias, faturamento TISS, controle de glosas e
+          relatórios financeiros detalhados para simplificar a gestão.
+        </p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="func-card">
+        <span class="func-card-number">06</span>
+        <h3 class="func-card-title" data-i18n="func.c6_title">
+          Indicadores e BI
+        </h3>
+        <p class="func-card-description" data-i18n="func.c6_desc">
+          Dashboards personalizáveis com indicadores de performance, satisfação
+          do paciente e eficiência operacional — dados para decisões
+          estratégicas.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .func {
+    padding: var(--section-padding-md) 0;
+    background: var(--background);
+  }
+
+  .func-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 56px;
+  }
+
+  .func-title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46.8px;
+    color: var(--text-primary);
+  }
+
+  .func-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+  }
+
+  .func-card {
+    width: 384px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    background: var(--background);
+    transition: all var(--transition-base);
+  }
+
+  .func-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(56, 86, 100, 0.08);
+  }
+
+  .func-card-number {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--secondary);
+    line-height: 1;
+  }
+
+  .func-card-title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-primary);
+  }
+
+  .func-card-description {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--secondary);
+  }
+
+  @media (max-width: 810px) {
+    .func-grid {
+      gap: 20px;
+    }
+
+    .func-card {
+      width: 100%;
+      min-height: auto;
+      padding: 24px;
+    }
+  }
+</style>

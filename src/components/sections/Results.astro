@@ -1,0 +1,146 @@
+---
+// Cases — Stats and metrics (PsiAtiva design system)
+// Previously "Results"
+import LINKS from "../../constants/links";
+---
+
+<section class="cases section" id="resultados">
+  <div class="container">
+    <div class="cases-header">
+      <span class="section-label" data-i18n="cases.label">Cases</span>
+      <h2 class="cases-heading">
+        <span data-i18n="cases.title_1">Resultados que</span><br />
+        <span data-i18n="cases.title_2">falam por si</span>
+      </h2>
+    </div>
+
+    <div class="cases-grid">
+      <div class="case-stat">
+        <span class="stat-number" data-i18n="cases.stat_1_value">+300 mil</span>
+        <p class="stat-description" data-i18n="cases.stat_1_desc">
+          Vidas impactadas pela plataforma em todo o Brasil
+        </p>
+      </div>
+      <div class="case-stat">
+        <span class="stat-number" data-i18n="cases.stat_2_value">-60%</span>
+        <p class="stat-description" data-i18n="cases.stat_2_desc">
+          Redução no tempo de espera dos pacientes
+        </p>
+      </div>
+      <div class="case-stat">
+        <span class="stat-number" data-i18n="cases.stat_3_value">+200</span>
+        <p class="stat-description" data-i18n="cases.stat_3_desc">
+          Clínicas e hospitais utilizam a solução
+        </p>
+      </div>
+      <div class="case-stat">
+        <span class="stat-number" data-i18n="cases.stat_4_value">98%</span>
+        <p class="stat-description" data-i18n="cases.stat_4_desc">
+          Taxa de satisfação dos usuários da plataforma
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cases-cta-wrapper">
+      <a href={LINKS.contact.phoneHref} class="btn-primary-dark">
+        <span data-i18n="cases.cta">Agende uma demonstração</span>
+        <span class="icon-circle">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cases {
+    padding: var(--section-padding-lg) 0;
+    background: var(--background);
+  }
+
+  .cases-header {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto 56px;
+  }
+
+  .cases-heading {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 54px;
+    color: var(--text-primary);
+  }
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+
+  .case-stat {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 16px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    transition: all var(--transition-base);
+  }
+
+  .case-stat:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 24px rgba(56, 86, 100, 0.06);
+  }
+
+  .stat-number {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+
+  .stat-description {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--secondary);
+    max-width: 200px;
+  }
+
+  .cases-cta-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 1024px) {
+    .cases-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cases-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

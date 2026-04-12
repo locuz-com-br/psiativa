@@ -1,0 +1,44 @@
+---
+// Badge — Tag pill component (PsiAtiva design system)
+
+interface Props {
+  text: string;
+  variant?: "primary" | "light";
+  class?: string;
+}
+
+const { text, variant = "primary", class: className } = Astro.props;
+---
+
+<span class={`tag-pill tag-pill--${variant} ${className || ""}`}>
+  <span class="tag-pill-text">{text}</span>
+</span>
+
+<style>
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 12px;
+    height: 32px;
+    border-radius: var(--radius-tag);
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16.8px;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+  }
+
+  .tag-pill--primary {
+    background: rgba(56, 86, 100, 0.1);
+    color: var(--text-primary);
+  }
+
+  .tag-pill--light {
+    background: var(--secondary-40);
+    backdrop-filter: blur(10.5px);
+    -webkit-backdrop-filter: blur(10.5px);
+    color: var(--light-blue);
+  }
+</style>

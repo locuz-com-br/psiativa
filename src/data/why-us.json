@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "translationPrefix": "why.v1", "icon": "layers" },
+    { "translationPrefix": "why.v2", "icon": "clock" },
+    { "translationPrefix": "why.v3", "icon": "chart" },
+    { "translationPrefix": "why.v4", "icon": "shield" },
+    { "translationPrefix": "why.v5", "icon": "people" },
+    { "translationPrefix": "why.v6", "icon": "growth" }
+  ]
+}

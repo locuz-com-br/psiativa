@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "translationPrefix": "testimonials.t1", "photo": "", "initial": "M" },
+    { "translationPrefix": "testimonials.t2", "photo": "", "initial": "C" },
+    { "translationPrefix": "testimonials.t3", "photo": "", "initial": "E" },
+    { "translationPrefix": "testimonials.t4", "photo": "", "initial": "A" }
+  ]
+}

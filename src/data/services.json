@@ -1,0 +1,25 @@
+{
+  "tiers": [
+    {
+      "id": "t1",
+      "icon": "🔐",
+      "highlighted": false,
+      "featureCount": 6,
+      "translationPrefix": "services.t1"
+    },
+    {
+      "id": "t2",
+      "icon": "💻",
+      "highlighted": true,
+      "featureCount": 8,
+      "translationPrefix": "services.t2"
+    },
+    {
+      "id": "t3",
+      "icon": "💎",
+      "highlighted": false,
+      "featureCount": 8,
+      "translationPrefix": "services.t3"
+    }
+  ]
+}

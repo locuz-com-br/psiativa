@@ -1,0 +1,216 @@
+{
+  "nav": {
+    "inicio": { "pt": "Início", "en": "Home" },
+    "sobre": { "pt": "Sobre", "en": "About" },
+    "funcionalidades": { "pt": "Funcionalidades", "en": "Features" },
+    "depoimentos": { "pt": "Depoimentos", "en": "Testimonials" },
+    "resultados": { "pt": "Resultados", "en": "Results" },
+    "contato": { "pt": "Contato", "en": "Contact" },
+    "cta": { "pt": "Teste Grátis", "en": "Free Trial" }
+  },
+
+  "hero": {
+    "tag_1": { "pt": "Chatbot", "en": "Chatbot" },
+    "tag_2": { "pt": "Inteligência Artificial", "en": "Artificial Intelligence" },
+    "tag_3": { "pt": "Saúde", "en": "Healthcare" },
+    "title_1": { "pt": "Cuidado de verdade começa", "en": "Real care starts" },
+    "title_2": { "pt": "com um atendimento", "en": "with an experience that is" },
+    "subtitle": {
+      "pt": "Automatize o atendimento, reduza filas e ofereça uma experiência personalizada para cada paciente — 24 horas por dia.",
+      "en": "Automate patient care, reduce wait times, and deliver a personalized experience for every patient — 24 hours a day."
+    },
+    "cta_primary": { "pt": "Quero Testar Agora", "en": "Try It Now" }
+  },
+
+  "partners": {
+    "title": { "pt": "Empresas que confiam em nós", "en": "Companies that trust us" },
+    "impact_prefix": { "pt": "MAIS DE", "en": "MORE THAN" },
+    "impact_number": { "pt": "300 MIL VIDAS", "en": "300K LIVES" },
+    "impact_suffix": { "pt": "IMPACTADAS", "en": "IMPACTED" }
+  },
+
+  "about": {
+    "label": { "pt": "Sobre Nós", "en": "About Us" },
+    "title": { "pt": "A plataforma que transforma o atendimento", "en": "The platform that transforms patient care" },
+    "desc": {
+      "pt": "Combinamos inteligência artificial e automação para criar experiências de atendimento que realmente importam — mais rápidas, mais humanas e escaláveis.",
+      "en": "We combine artificial intelligence and automation to create care experiences that truly matter — faster, more human, and scalable."
+    },
+    "check_1": { "pt": "Atendimento automatizado 24/7", "en": "24/7 automated support" },
+    "check_2": { "pt": "Integração com sistemas existentes", "en": "Integration with existing systems" },
+    "check_3": { "pt": "Dashboard de métricas em tempo real", "en": "Real-time metrics dashboard" },
+    "check_4": { "pt": "Personalização por paciente", "en": "Per-patient personalization" },
+    "cta": { "pt": "Conheça nossas soluções", "en": "Explore our solutions" }
+  },
+
+  "features": {
+    "label": { "pt": "Funcionalidades", "en": "Features" },
+    "title_1": { "pt": "O que podemos", "en": "What we can" },
+    "title_2": { "pt": "fazer por você", "en": "do for you" },
+    "f1_title": { "pt": "Chatbot inteligente para triagem", "en": "Smart chatbot for triage" },
+    "f1_desc": {
+      "pt": "Automatize a triagem inicial e direcione cada paciente para o atendimento correto de forma instantânea.",
+      "en": "Automate initial triage and instantly direct each patient to the right care path."
+    },
+    "f2_title": { "pt": "Agendamento automatizado", "en": "Automated scheduling" },
+    "f2_desc": {
+      "pt": "Seus pacientes agendam consultas a qualquer hora, sem filas e com confirmação automática.",
+      "en": "Your patients schedule appointments anytime, without lines and with automatic confirmation."
+    },
+    "f3_title": { "pt": "Relatórios em tempo real", "en": "Real-time reports" },
+    "f3_desc": {
+      "pt": "Acompanhe métricas, desempenho e satisfação dos pacientes em dashboards intuitivos.",
+      "en": "Track metrics, performance, and patient satisfaction through intuitive dashboards."
+    }
+  },
+
+  "testimonials": {
+    "label": { "pt": "Depoimentos", "en": "Testimonials" },
+    "title_1": { "pt": "O que nossos", "en": "What our" },
+    "title_2": { "pt": "clientes dizem", "en": "clients say" },
+    "t1_quote": {
+      "pt": "A plataforma transformou completamente nosso fluxo de atendimento. Reduzimos o tempo de espera em 65% e a satisfação dos pacientes nunca esteve tão alta.",
+      "en": "The platform completely transformed our care flow. We reduced wait times by 65% and patient satisfaction has never been higher."
+    },
+    "t1_name": { "pt": "Dr. Rafael Mendes", "en": "Dr. Rafael Mendes" },
+    "t1_role": { "pt": "Diretor Clínico | Hospital Regional", "en": "Clinical Director | Regional Hospital" },
+    "t2_quote": {
+      "pt": "Implementamos em 3 semanas e o ROI veio no primeiro mês. O chatbot resolve 80% das demandas sem intervenção humana.",
+      "en": "We implemented in 3 weeks and ROI came in the first month. The chatbot resolves 80% of requests without human intervention."
+    },
+    "t2_name": { "pt": "Dra. Camila Ferreira", "en": "Dr. Camila Ferreira" },
+    "t2_role": { "pt": "CEO | Rede de Clínicas", "en": "CEO | Clinic Network" },
+    "t3_quote": {
+      "pt": "A integração com nosso sistema legado foi surpreendentemente simples. A equipe de suporte é excepcional.",
+      "en": "Integration with our legacy system was surprisingly simple. The support team is exceptional."
+    },
+    "t3_name": { "pt": "Eduardo Santos", "en": "Eduardo Santos" },
+    "t3_role": { "pt": "CTO | Operadora de Saúde", "en": "CTO | Health Insurance Provider" },
+    "t4_quote": {
+      "pt": "Nossos pacientes adoram a facilidade de agendar pelo WhatsApp. E nós adoramos os relatórios detalhados que orientam nossas decisões.",
+      "en": "Our patients love the ease of scheduling via WhatsApp. And we love the detailed reports that guide our decisions."
+    },
+    "t4_name": { "pt": "Ana Beatriz Gomes", "en": "Ana Beatriz Gomes" },
+    "t4_role": { "pt": "Coordenadora | UBS Municipal", "en": "Coordinator | Municipal Health Center" }
+  },
+
+  "func": {
+    "label": { "pt": "Funcionalidades", "en": "Features" },
+    "title_1": { "pt": "Tudo o que você precisa", "en": "Everything you need" },
+    "title_2": { "pt": "em uma plataforma", "en": "in one platform" },
+    "c1_title": { "pt": "Triagem inteligente", "en": "Smart triage" },
+    "c1_desc": {
+      "pt": "Algoritmos de IA que classificam e direcionam cada paciente para o atendimento mais adequado, reduzindo o tempo de espera e melhorando a experiência.",
+      "en": "AI algorithms that classify and direct each patient to the most appropriate care, reducing wait times and improving experience."
+    },
+    "c2_title": { "pt": "Agendamento online", "en": "Online scheduling" },
+    "c2_desc": {
+      "pt": "Sistema de agendamento completo com confirmação automática, lembretes por WhatsApp e gerenciamento de disponibilidade dos profissionais.",
+      "en": "Complete scheduling system with auto-confirmation, WhatsApp reminders, and professional availability management."
+    },
+    "c3_title": { "pt": "Prontuário digital", "en": "Digital health records" },
+    "c3_desc": {
+      "pt": "Histórico completo do paciente acessível em qualquer dispositivo. Dados seguros, organizados e prontos para apoiar decisões clínicas.",
+      "en": "Complete patient history accessible from any device. Secure, organized data ready to support clinical decisions."
+    },
+    "c4_title": { "pt": "Telemedicina integrada", "en": "Integrated telemedicine" },
+    "c4_desc": {
+      "pt": "Consultas por vídeo nativas na plataforma, com sala de espera virtual, gravação opcional e integração com o prontuário eletrônico.",
+      "en": "Native video consultations with virtual waiting room, optional recording, and electronic health record integration."
+    },
+    "c5_title": { "pt": "Faturamento automatizado", "en": "Automated billing" },
+    "c5_desc": {
+      "pt": "Geração automática de guias, faturamento TISS, controle de glosas e relatórios financeiros detalhados para simplificar a gestão.",
+      "en": "Automatic guide generation, TISS billing, denial management, and detailed financial reports to simplify operations."
+    },
+    "c6_title": { "pt": "Indicadores e BI", "en": "Analytics & BI" },
+    "c6_desc": {
+      "pt": "Dashboards personalizáveis com indicadores de performance, satisfação do paciente e eficiência operacional — dados para decisões estratégicas.",
+      "en": "Customizable dashboards with performance indicators, patient satisfaction, and operational efficiency — data for strategic decisions."
+    }
+  },
+
+  "integrations": {
+    "label": { "pt": "Integrações", "en": "Integrations" },
+    "title_1": { "pt": "Conecta-se com os", "en": "Connects with the" },
+    "title_2": { "pt": "sistemas que você já usa", "en": "systems you already use" },
+    "desc": {
+      "pt": "Integração nativa com os principais sistemas de gestão, prontuário eletrônico e ferramentas do mercado de saúde.",
+      "en": "Native integration with leading management systems, electronic health records, and healthcare market tools."
+    }
+  },
+
+  "cta": {
+    "label": { "pt": "Pronto para começar?", "en": "Ready to get started?" },
+    "title_1": { "pt": "Está na hora de ", "en": "It's time to " },
+    "title_2": { "pt": "revolucionar o atendimento", "en": "revolutionize patient care" },
+    "btn": { "pt": "Fale com nossos especialistas", "en": "Talk to our experts" },
+    "btn_secondary": { "pt": "Agende uma demonstração", "en": "Schedule a demo" }
+  },
+
+  "cases": {
+    "label": { "pt": "Cases", "en": "Cases" },
+    "title_1": { "pt": "Resultados que", "en": "Results that" },
+    "title_2": { "pt": "falam por si", "en": "speak for themselves" },
+    "stat_1_value": { "pt": "+300 mil", "en": "+300K" },
+    "stat_1_desc": { "pt": "Vidas impactadas pela plataforma em todo o Brasil", "en": "Lives impacted by the platform across Brazil" },
+    "stat_2_value": { "pt": "-60%", "en": "-60%" },
+    "stat_2_desc": { "pt": "Redução no tempo de espera dos pacientes", "en": "Reduction in patient wait times" },
+    "stat_3_value": { "pt": "+200", "en": "+200" },
+    "stat_3_desc": { "pt": "Clínicas e hospitais utilizam a solução", "en": "Clinics and hospitals use the solution" },
+    "stat_4_value": { "pt": "98%", "en": "98%" },
+    "stat_4_desc": { "pt": "Taxa de satisfação dos usuários da plataforma", "en": "Platform user satisfaction rate" },
+    "cta": { "pt": "Agende uma demonstração", "en": "Schedule a demo" }
+  },
+
+  "contact": {
+    "label": { "pt": "Contato", "en": "Contact" },
+    "title_1": { "pt": "Vamos conversar", "en": "Let's talk" },
+    "title_2": { "pt": "sobre seu projeto", "en": "about your project" },
+    "desc": {
+      "pt": "Agende uma consultoria de 30 minutos. Analisaremos sua situação atual e mostraremos exatamente como podemos ajudar seu negócio a crescer.",
+      "en": "Schedule a 30-minute consultation. We'll analyze your current situation and show you exactly how we can help your business grow."
+    },
+    "email_label": { "pt": "E-mail", "en": "Email" },
+    "whatsapp_label": { "pt": "WhatsApp", "en": "WhatsApp" },
+    "hours_label": { "pt": "Atendimento", "en": "Hours" },
+    "hours_value": { "pt": "24h/dia, 7 dias/semana", "en": "24h/day, 7 days/week" },
+    "form_name": { "pt": "Nome *", "en": "Name *" },
+    "form_name_placeholder": { "pt": "Seu nome completo", "en": "Your full name" },
+    "form_email": { "pt": "E-mail *", "en": "Email *" },
+    "form_email_placeholder": { "pt": "seu@email.com", "en": "your@email.com" },
+    "form_phone": { "pt": "Telefone", "en": "Phone" },
+    "form_phone_placeholder": { "pt": "(11) 99999-9999", "en": "+1 (555) 000-0000" },
+    "form_company": { "pt": "Empresa", "en": "Company" },
+    "form_company_placeholder": { "pt": "Nome da empresa", "en": "Company name" },
+    "form_message": { "pt": "Mensagem *", "en": "Message *" },
+    "form_message_placeholder": { "pt": "Conte-nos sobre seu projeto e objetivos...", "en": "Tell us about your project and goals..." },
+    "form_submit": { "pt": "Enviar Mensagem →", "en": "Send Message →" },
+    "form_sending": { "pt": "Enviando...", "en": "Sending..." },
+    "form_success": { "pt": "✓ Mensagem enviada com sucesso! Retornaremos em até 24h.", "en": "✓ Message sent successfully! We'll respond within 24h." },
+    "form_error": { "pt": "Algo deu errado. Por favor, tente novamente.", "en": "Something went wrong. Please try again." }
+  },
+
+  "footer": {
+    "tagline": { "pt": "Inovação que transforma resultados.", "en": "Innovation that transforms results." },
+    "col_product": { "pt": "Produto", "en": "Product" },
+    "col_company": { "pt": "Empresa", "en": "Company" },
+    "col_resources": { "pt": "Recursos", "en": "Resources" },
+    "link_features": { "pt": "Funcionalidades", "en": "Features" },
+    "link_integrations": { "pt": "Integrações", "en": "Integrations" },
+    "link_cases": { "pt": "Cases", "en": "Cases" },
+    "link_about": { "pt": "Sobre Nós", "en": "About Us" },
+    "link_testimonials": { "pt": "Depoimentos", "en": "Testimonials" },
+    "link_contact": { "pt": "Contato", "en": "Contact" },
+    "link_blog": { "pt": "Blog", "en": "Blog" },
+    "link_terms": { "pt": "Termos de Uso", "en": "Terms of Use" },
+    "link_privacy": { "pt": "Privacidade", "en": "Privacy" },
+    "copyright": { "pt": "Todos os direitos reservados.", "en": "All rights reserved." }
+  },
+
+  "not_found": {
+    "title": { "pt": "Página não encontrada", "en": "Page not found" },
+    "desc": { "pt": "Desculpe, não conseguimos encontrar a página que você está procurando.", "en": "Sorry, we couldn't find the page you're looking for." },
+    "btn": { "pt": "Voltar ao Início", "en": "Go to Home" }
+  }
+}

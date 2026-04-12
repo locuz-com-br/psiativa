@@ -1,0 +1,159 @@
+---
+// Partners — Logo marquee with impact counter (PsiAtiva design system)
+// Previously "LogoBar"
+---
+
+<section class="partners section" id="parceiros">
+  <div class="container">
+    <div class="partners-container">
+      <h2 class="partners-title" data-i18n="partners.title">
+        Empresas que confiam em nós
+      </h2>
+
+      <!-- Marquee -->
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          {
+            [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <div class="partners-logo-card">
+                <img
+                  src={`https://logo-placeholder.com/partner-${i}`}
+                  alt={`Partner ${i}`}
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Impact counter -->
+      <div class="partners-impact">
+        <span class="partners-impact-text" data-i18n="partners.impact_prefix"
+          >MAIS DE</span
+        >
+        <span
+          class="partners-impact-highlight"
+          data-i18n="partners.impact_number">300 MIL VIDAS</span
+        >
+        <span class="partners-impact-text" data-i18n="partners.impact_suffix"
+          >IMPACTADAS</span
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners {
+    padding: 0;
+    margin-top: -60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .partners-container {
+    max-width: var(--container-max);
+    border-radius: var(--radius-card);
+    background: var(--gradient-partners);
+    padding: 52px 0;
+    box-shadow: 0 4px 32px rgba(56, 86, 100, 0.08);
+  }
+
+  .partners-title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 54px;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  /* Marquee */
+  .marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+
+  .partners-logo-card {
+    border-radius: var(--radius-logo);
+    width: 218px;
+    height: 80px;
+    background: rgba(214, 228, 238, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .partners-logo-card img {
+    max-width: 80%;
+    max-height: 60%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: all var(--transition-base);
+  }
+
+  .partners-logo-card:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Impact counter */
+  .partners-impact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 32px;
+  }
+
+  .partners-impact-text {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.56px;
+    color: var(--text-primary);
+  }
+
+  .partners-impact-highlight {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.56px;
+    color: var(--orange);
+  }
+
+  @media (max-width: 810px) {
+    .partners {
+      margin-top: -30px;
+    }
+
+    .partners-title {
+      font-size: 28px;
+      line-height: 36px;
+      padding: 0 var(--container-padding);
+    }
+
+    .partners-logo-card {
+      width: 160px;
+      height: 60px;
+    }
+  }
+</style>

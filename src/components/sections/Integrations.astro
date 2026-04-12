@@ -1,0 +1,158 @@
+---
+// Integrations — Logo grid with slide-in animation (PsiAtiva design system)
+---
+
+<section class="integrations section" id="integracoes">
+  <div class="container">
+    <div class="integrations-header">
+      <span class="section-label" data-i18n="integrations.label"
+        >Integrações</span
+      >
+      <h2 class="integrations-title">
+        <span data-i18n="integrations.title_1">Conecta-se com os</span><br />
+        <span data-i18n="integrations.title_2">sistemas que você já usa</span>
+      </h2>
+      <p class="integrations-desc" data-i18n="integrations.desc">
+        Integração nativa com os principais sistemas de gestão, prontuário
+        eletrônico e ferramentas do mercado de saúde.
+      </p>
+    </div>
+
+    <div class="integrations-grid" id="integrations-grid">
+      {
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+          <div class="integration-logo" data-integration={i}>
+            <div class="integration-logo-inner">
+              <img
+                src={`https://logo-placeholder.com/integration-${i}`}
+                alt={`Integration ${i}`}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .integrations {
+    padding: var(--section-padding-lg) 0;
+    background: var(--background-subtle);
+  }
+
+  .integrations-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 56px;
+  }
+
+  .integrations-title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 54px;
+    color: var(--text-primary);
+  }
+
+  .integrations-desc {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--secondary);
+    margin-top: 16px;
+  }
+
+  .integrations-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .integration-logo {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 0.6s var(--ease-out);
+  }
+
+  .integration-logo.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .integration-logo-inner {
+    border-radius: var(--radius-logo);
+    border: 1px solid var(--color-border);
+    background: var(--background);
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    transition: all var(--transition-base);
+  }
+
+  .integration-logo-inner:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: 0 4px 24px rgba(56, 86, 100, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .integration-logo-inner img {
+    max-width: 80%;
+    max-height: 48px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all var(--transition-base);
+  }
+
+  .integration-logo-inner:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
+
+  @media (max-width: 810px) {
+    .integrations-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .integrations-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer for slide-in animation
+  const grid = document.getElementById("integrations-grid");
+  if (grid) {
+    const logos = grid.querySelectorAll(".integration-logo");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Stagger the animation
+            logos.forEach((logo, index) => {
+              setTimeout(() => {
+                logo.classList.add("visible");
+              }, index * 100);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(grid);
+  }
+</script>

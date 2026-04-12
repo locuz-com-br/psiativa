@@ -1,0 +1,70 @@
+---
+import { SITE_CONFIG } from '../config/site.config';
+
+interface Props {
+  title: string;
+  description?: string;
+  hideNavAndFooter?: boolean;
+}
+
+const { 
+  title, 
+  description = SITE_CONFIG.description.pt,
+  hideNavAndFooter = false
+} = Astro.props;
+
+const siteName = SITE_CONFIG.name;
+
+import '../styles/global.css';
+import Navbar from '../components/sections/Navbar.astro';
+import Footer from '../components/sections/Footer.astro';
+import WhatsAppFab from '../components/sections/WhatsAppFab.astro';
+---
+
+<!doctype html>
+<html lang={SITE_CONFIG.defaultLocale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <!-- OG / Social -->
+    <meta property="og:title" content={`${title} | ${siteName}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={SITE_CONFIG.defaultLocale.replace('-', '_')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | ${siteName}`} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#385664" />
+
+    <title>{title} | {siteName}</title>
+    <link rel="icon" type="image/svg+xml" href={SITE_CONFIG.logos.favicon} />
+
+    <!-- Google Fonts: Barlow -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Prevent FOUC: apply saved theme before paint (preserved for future use) -->
+    <script is:inline>
+      (function() {
+        const saved = localStorage.getItem('site-theme');
+        if (saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    {!hideNavAndFooter && <Navbar />}
+    <main>
+      <slot />
+    </main>
+    {!hideNavAndFooter && <Footer />}
+    {SITE_CONFIG.sections.whatsappFab && <WhatsAppFab />}
+    <script src="../scripts/i18n.ts"></script>
+  </body>
+</html>

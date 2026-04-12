@@ -1,0 +1,171 @@
+---
+// Features — 3-column card grid with images (PsiAtiva design system)
+// Previously "Services"
+import LINKS from "../../constants/links";
+---
+
+<section class="features section" id="funcionalidades">
+  <div class="container">
+    <div class="features-header">
+      <span class="section-label" data-i18n="features.label"
+        >Funcionalidades</span
+      >
+      <h2 class="features-title">
+        <span data-i18n="features.title_1">O que podemos</span><br />
+        <span data-i18n="features.title_2">fazer por você</span>
+      </h2>
+    </div>
+
+    <div class="features-grid">
+      <!-- Card 1 -->
+      <div class="feature-card">
+        <div class="feature-card-image">
+          <img
+            src="https://image-placeholder.com/feature-1"
+            alt="Feature 1"
+            loading="lazy"
+          />
+        </div>
+        <div class="feature-card-content">
+          <h3 class="feature-card-title" data-i18n="features.f1_title">
+            Chatbot <em>inteligente</em> para triagem
+          </h3>
+          <p class="feature-card-description" data-i18n="features.f1_desc">
+            Automatize a triagem inicial e direcione cada paciente para o
+            atendimento correto de forma instantânea.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="feature-card">
+        <div class="feature-card-image">
+          <img
+            src="https://image-placeholder.com/feature-2"
+            alt="Feature 2"
+            loading="lazy"
+          />
+        </div>
+        <div class="feature-card-content">
+          <h3 class="feature-card-title" data-i18n="features.f2_title">
+            Agendamento <em>automatizado</em>
+          </h3>
+          <p class="feature-card-description" data-i18n="features.f2_desc">
+            Seus pacientes agendam consultas a qualquer hora, sem filas e com
+            confirmação automática.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="feature-card">
+        <div class="feature-card-image">
+          <img
+            src="https://image-placeholder.com/feature-3"
+            alt="Feature 3"
+            loading="lazy"
+          />
+        </div>
+        <div class="feature-card-content">
+          <h3 class="feature-card-title" data-i18n="features.f3_title">
+            Relatórios em <em>tempo real</em>
+          </h3>
+          <p class="feature-card-description" data-i18n="features.f3_desc">
+            Acompanhe métricas, desempenho e satisfação dos pacientes em
+            dashboards intuitivos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 0 0 var(--section-padding-lg);
+    background: var(--background);
+  }
+
+  .features-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 48px;
+  }
+
+  .features-title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46.8px;
+    color: var(--text-primary);
+  }
+
+  .features-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .feature-card {
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-card-image {
+    border-radius: var(--radius-card);
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      var(--light-blue) 0%,
+      var(--background-subtle) 100%
+    );
+  }
+
+  .feature-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feature-card-content {
+    padding: 24px 0 36px;
+  }
+
+  .feature-card-title {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 30.8px;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .feature-card-title em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .feature-card-description {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22.72px;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 810px) {
+    .features-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-card {
+      width: 100%;
+      max-width: 440px;
+    }
+  }
+</style>

@@ -1,0 +1,8 @@
+{
+  "stats": [
+    { "icon": "📈", "translationPrefix": "results.stat_1" },
+    { "icon": "🎯", "translationPrefix": "results.stat_2" },
+    { "icon": "⚡", "translationPrefix": "results.stat_3" },
+    { "icon": "🛡️", "translationPrefix": "results.stat_4" }
+  ]
+}

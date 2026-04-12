@@ -1,0 +1,329 @@
+---
+// Testimonials — Dark gradient carousel (PsiAtiva design system)
+import testimonialsData from "../../data/testimonials.json";
+---
+
+<section class="testimonials section" id="depoimentos">
+  <div class="container">
+    <div class="testimonials-header">
+      <span
+        class="section-label section-label--light"
+        data-i18n="testimonials.label">Depoimentos</span
+      >
+      <h2 class="testimonials-title">
+        <span data-i18n="testimonials.title_1">O que nossos</span><br />
+        <span data-i18n="testimonials.title_2">clientes dizem</span>
+      </h2>
+    </div>
+
+    <div class="testimonial-carousel" id="testimonial-carousel">
+      {
+        testimonialsData.items.map((item, index) => (
+          <div
+            class={`testimonial-card ${index === 0 ? "active" : ""}`}
+            data-index={index}
+          >
+            <div class="testimonial-quote-mark">"</div>
+            <blockquote
+              class="testimonial-quote"
+              data-i18n={`${item.translationPrefix}_quote`}
+            />
+            <div class="testimonial-author">
+              {item.photo ? (
+                <img
+                  src={item.photo}
+                  alt=""
+                  width="48"
+                  height="48"
+                  class="testimonial-photo"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="testimonial-avatar">{item.initial}</div>
+              )}
+              <div class="testimonial-info">
+                <span
+                  class="testimonial-name"
+                  data-i18n={`${item.translationPrefix}_name`}
+                />
+                <span
+                  class="testimonial-role"
+                  data-i18n={`${item.translationPrefix}_role`}
+                />
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Carousel controls -->
+    <div class="carousel-controls">
+      <button
+        class="carousel-btn"
+        id="carousel-prev"
+        aria-label="Previous testimonial"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="carousel-dots" id="carousel-dots">
+        {
+          testimonialsData.items.map((_, index) => (
+            <span
+              class={`carousel-dot ${index === 0 ? "active" : ""}`}
+              data-dot={index}
+            />
+          ))
+        }
+      </div>
+      <button
+        class="carousel-btn"
+        id="carousel-next"
+        aria-label="Next testimonial"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--gradient-testimonials);
+    padding: var(--section-padding-sm) 0 110px;
+    width: 100%;
+  }
+
+  .testimonials-header {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto 52px;
+  }
+
+  .section-label--light {
+    color: var(--light-blue);
+  }
+
+  .testimonials-title {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46.8px;
+    color: #ffffff;
+  }
+
+  /* Carousel */
+  .testimonial-carousel {
+    max-width: 1002px;
+    margin: 0 auto;
+    position: relative;
+    min-height: 280px;
+  }
+
+  .testimonial-card {
+    display: none;
+    flex-direction: column;
+    gap: 32px;
+    animation: fadeIn 0.5s var(--ease-out) both;
+  }
+
+  .testimonial-card.active {
+    display: flex;
+  }
+
+  .testimonial-quote-mark {
+    font-family: var(--font-family);
+    font-size: 80px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 0.6;
+    opacity: 0.5;
+  }
+
+  .testimonial-quote {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    color: #ffffff;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--secondary-40);
+    color: var(--light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .testimonial-photo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    flex-shrink: 0;
+  }
+
+  .testimonial-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .testimonial-name {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 18px;
+    color: #ffffff;
+  }
+
+  .testimonial-role {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--light-blue);
+  }
+
+  /* Controls */
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .carousel-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--light-blue-40);
+    background: transparent;
+    color: var(--light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .carousel-btn:hover {
+    background: rgba(214, 228, 238, 0.15);
+    border-color: rgba(214, 228, 238, 0.6);
+    color: #ffffff;
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--light-blue-40);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .carousel-dot.active {
+    width: 24px;
+    border-radius: 4px;
+    background: var(--accent);
+  }
+
+  @media (max-width: 810px) {
+    .testimonials {
+      padding: 60px 0 80px;
+    }
+
+    .testimonial-quote {
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .testimonial-quote-mark {
+      font-size: 60px;
+    }
+  }
+</style>
+
+<script>
+  const carousel = document.getElementById("testimonial-carousel");
+  const cards = carousel?.querySelectorAll(".testimonial-card");
+  const dots = document
+    .getElementById("carousel-dots")
+    ?.querySelectorAll(".carousel-dot");
+  const prevBtn = document.getElementById("carousel-prev");
+  const nextBtn = document.getElementById("carousel-next");
+
+  if (cards && cards.length > 0) {
+    let current = 0;
+
+    function showSlide(index: number) {
+      cards!.forEach((card, i) => {
+        card.classList.toggle("active", i === index);
+      });
+      dots?.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+      current = index;
+    }
+
+    prevBtn?.addEventListener("click", () => {
+      showSlide(current === 0 ? cards!.length - 1 : current - 1);
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      showSlide(current === cards!.length - 1 ? 0 : current + 1);
+    });
+
+    dots?.forEach((dot, i) => {
+      dot.addEventListener("click", () => showSlide(i));
+    });
+
+    // Auto-advance every 6 seconds
+    setInterval(() => {
+      showSlide(current === cards!.length - 1 ? 0 : current + 1);
+    }, 6000);
+  }
+</script>
