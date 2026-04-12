@@ -1,49 +1,131 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
 @import "tailwindcss";
 
-/* ═══════════════════════════════════════════════════════════════
-   PsiAtiva Design System — Astro Template
-   Based on the PsiAtiva landing page reverse-engineering doc.
+/* ══════���══════════════════════════════��═════════════════════════
+   PsiAtiva Design System
+   Paleta: Teal + Sage Green | Fontes: New York, Lora, Source Serif
    Single-theme (light) with dark teal sections.
-   Dark toggle infrastructure preserved for future use.
-   ═══════════════════════════════════════════════════════════════ */
+   ══���════════════════════════════════════════════════════════════ */
+
+/* ── @font-face: New York (Display) ─���───────────────────────── */
+
+@font-face {
+  font-family: 'New York';
+  src: url('/fonts/new-york/NewYorkLarge-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'New York';
+  src: url('/fonts/new-york/NewYorkLarge-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'New York';
+  src: url('/fonts/new-york/NewYorkLarge-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'New York';
+  src: url('/fonts/new-york/NewYorkLarge-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── @font-face: Lora (Body) ────��───────────────────────────── */
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/lora-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/lora-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/lora-italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/lora-bold-italic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* ── Design Tokens (PsiAtiva Palette) ─────────────────────────── */
 
 :root {
-  /* === CORES PRIMÁRIAS === */
-  --primary: #385664;
-  --primary-dark: #2F434D;
-  --primary-darker: #22343D;
+  /* === CORES PRIMARIAS (Teal) === */
+  --primary: #1A4B51;
+  --primary-dark: #112E31;
+  --primary-darker: #071113;
+  --primary-light: #40AEBB;
+  --primary-lighter: #62BEC8;
 
-  /* === COR DE DESTAQUE (ACCENT) === */
-  --accent: #DEDA93;
+  /* === COR DE DESTAQUE (Sage Green) === */
+  --accent: #7EAE89;
+  --accent-dark: #5F976B;
+  --accent-light: #ADCBB4;
 
-  /* === COR SECUNDÁRIA === */
-  --secondary: #5D879D;
-  --secondary-light: #8BAFC3;
+  /* === ACENTOS ESPECIAIS === */
+  --accent-green: #00FA8F;
+  --accent-cyan: #00B1C8;
 
-  /* === COR TERCIÁRIA === */
-  --light-blue: #D6E4EE;
+  /* === COR SECUNDARIA === */
+  --secondary: #338E98;
+  --secondary-light: #62BEC8;
+
+  /* === COR TERCIARIA === */
+  --light-blue: #CDEAED;
 
   /* === BACKGROUNDS === */
-  --background: #FFFFFF;
-  --background-subtle: #FAFDFF;
+  --background: #FAFFFF;
+  --background-subtle: #F0F7F4;
+  --sage-bg: #E4E6E3;
 
   /* === TEXTOS === */
-  --text-primary: #385664;
-  --text-secondary: #5D879D;
-  --text-heading-dark: #2F434D;
-  --text-hero-white: #FFFFFF;
-  --text-hero-subtitle: #D6E4EE;
+  --text-primary: #071113;
+  --text-secondary: #4A4A4A;
+  --text-heading: #1A4B51;
+  --text-heading-dark: #112E31;
+  --text-hero-white: #FAFFFF;
+  --text-hero-subtitle: #CDEAED;
 
-  /* === DESTAQUE LARANJA === */
-  --orange: #EF853C;
+  /* === DESTAQUE AMARELO (nunca vermelho) === */
+  --yellow: #F7C800;
+
+  /* === DARK GREEN (hero, footer, secoes escuras) === */
+  --dark-green: #1C2B2B;
 
   /* === TIPOGRAFIA === */
-  --font-family: 'Barlow', sans-serif;
+  --font-display: 'New York', Georgia, serif;
+  --font-body: 'Lora', Georgia, serif;
+  --font-ui: 'Source Serif 4', 'Lora', Georgia, serif;
 
-  /* === ESPAÇAMENTO === */
+  /* === ESPACAMENTO === */
   --container-max: 1216px;
   --container-padding: clamp(1.25rem, 4vw, 2rem);
   --section-padding-lg: 140px;
@@ -54,7 +136,7 @@
   --radius-pill: 200px;
   --radius-btn: 80px;
   --radius-tag: 60px;
-  --radius-card: 20px;
+  --radius-card: 16px;
   --radius-logo: 12px;
   --radius-circle: 100px;
   --radius-whatsapp: 8px;
@@ -65,20 +147,24 @@
   --shadow-fab: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   /* === GRADIENTES === */
-  --gradient-partners: linear-gradient(#FFFFFF -5%, #FAFDFF 100%);
-  --gradient-testimonials: linear-gradient(#385664 0%, #2F434D 100%);
-  --gradient-footer: linear-gradient(#385664 0%, #22343D 100%);
+  --gradient-hero: linear-gradient(180deg, #1C2B2B 0%, #1A4B51 100%);
+  --gradient-partners: linear-gradient(#FAFFFF -5%, #F0F7F4 100%);
+  --gradient-testimonials: linear-gradient(#1A4B51 0%, #112E31 100%);
+  --gradient-footer: linear-gradient(#1C2B2B 0%, #112E31 100%);
+  --gradient-brand: linear-gradient(135deg, #1A4B51, #7EAE89);
+  --gradient-light: linear-gradient(#F0F7F4, #E4E6E3);
+  --gradient-accent: linear-gradient(135deg, #40AEBB, #00B1C8);
   --gradient-whatsapp: linear-gradient(#3FD150 0%, #1F802A 100%);
 
   /* === OPACIDADES === */
-  --primary-dark-50: rgba(47, 67, 77, 0.5);
-  --secondary-40: rgba(93, 135, 157, 0.4);
-  --secondary-20: rgba(93, 135, 157, 0.2);
-  --light-blue-50: rgba(214, 228, 238, 0.5);
-  --light-blue-40: rgba(214, 228, 238, 0.4);
-  --light-blue-20: rgba(214, 228, 238, 0.2);
-  --white-08: rgba(255, 255, 255, 0.08);
-  --white-04: rgba(255, 255, 255, 0.04);
+  --primary-dark-50: rgba(17, 46, 49, 0.5);
+  --secondary-40: rgba(51, 142, 152, 0.4);
+  --secondary-20: rgba(51, 142, 152, 0.2);
+  --light-blue-50: rgba(205, 234, 237, 0.5);
+  --light-blue-40: rgba(205, 234, 237, 0.4);
+  --light-blue-20: rgba(205, 234, 237, 0.2);
+  --white-08: rgba(250, 255, 255, 0.08);
+  --white-04: rgba(250, 255, 255, 0.04);
   --black-20: rgba(0, 0, 0, 0.2);
 
   /* === TRANSITIONS === */
@@ -89,56 +175,56 @@
   --transition-slow: 600ms var(--ease-out);
 
   /* ── Theme-aware tokens (light default) ─────────────────── */
-  --color-bg: #FFFFFF;
-  --color-bg-alt: #FAFDFF;
-  --color-text: #385664;
-  --color-text-secondary: #5D879D;
-  --color-text-muted: #8BAFC3;
-  --color-border: rgba(56, 86, 100, 0.12);
-  --color-border-hover: rgba(56, 86, 100, 0.25);
+  --color-bg: #FAFFFF;
+  --color-bg-alt: #F0F7F4;
+  --color-text: #071113;
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted: #86CCD4;
+  --color-border: rgba(26, 75, 81, 0.12);
+  --color-border-hover: rgba(26, 75, 81, 0.25);
 
   /* ── Buttons ──────────────────────────────────────── */
-  --btn-primary-bg: #385664;
-  --btn-primary-color: #FFFFFF;
-  --btn-primary-hover-bg: #2F434D;
+  --btn-primary-bg: #1A4B51;
+  --btn-primary-color: #FAFFFF;
+  --btn-primary-hover-bg: #266D74;
 
-  /* ── Scrollbar ──────────────────────────────────────── */
-  --scrollbar-track: #FAFDFF;
-  --scrollbar-thumb: #D6E4EE;
-  --scrollbar-thumb-hover: #8BAFC3;
+  /* ── Scrollbar ───────────���──────────────────────────���─ */
+  --scrollbar-track: #F0F7F4;
+  --scrollbar-thumb: #CDEAED;
+  --scrollbar-thumb-hover: #86CCD4;
 
-  /* ── Selection ──────────────────────────────────────── */
-  --selection-bg: #385664;
-  --selection-text: #FFFFFF;
+  /* ── Selection ─��─────────────────────────────��──────── */
+  --selection-bg: #1A4B51;
+  --selection-text: #FAFFFF;
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* ══��════════════════════════════════════════════════════════════
    DARK THEME (Preserved for future use)
    Activate by adding data-theme="dark" to <html>
-   ═══════════════════════════════════════════════════════════════ */
+   ══════════════════════════��═══════════════════════���════════════ */
 
 [data-theme="dark"] {
-  --color-bg: #22343D;
-  --color-bg-alt: #2F434D;
-  --color-text: #D6E4EE;
-  --color-text-secondary: #8BAFC3;
-  --color-text-muted: #5D879D;
-  --color-border: rgba(214, 228, 238, 0.1);
-  --color-border-hover: rgba(214, 228, 238, 0.2);
+  --color-bg: #1C2B2B;
+  --color-bg-alt: #112E31;
+  --color-text: #CDEAED;
+  --color-text-secondary: #86CCD4;
+  --color-text-muted: #338E98;
+  --color-border: rgba(205, 234, 237, 0.1);
+  --color-border-hover: rgba(205, 234, 237, 0.2);
 
-  --btn-primary-bg: #D6E4EE;
-  --btn-primary-color: #385664;
-  --btn-primary-hover-bg: #FFFFFF;
+  --btn-primary-bg: #CDEAED;
+  --btn-primary-color: #1A4B51;
+  --btn-primary-hover-bg: #FAFFFF;
 
-  --scrollbar-track: #22343D;
-  --scrollbar-thumb: #385664;
-  --scrollbar-thumb-hover: #5D879D;
+  --scrollbar-track: #1C2B2B;
+  --scrollbar-thumb: #1A4B51;
+  --scrollbar-thumb-hover: #338E98;
 
-  --selection-bg: #DEDA93;
-  --selection-text: #22343D;
+  --selection-bg: #7EAE89;
+  --selection-text: #1C2B2B;
 }
 
-/* ── Reset ──────────────────────────────────────────────────── */
+/* ── Reset ──��───────────────────────────────────────────────── */
 
 *,
 *::before,
@@ -148,10 +234,10 @@
   padding: 0;
 }
 
-/* ── Base Styles ────────────────────────────────────────────── */
+/* ── Base Styles ─────────���──────────────────────────────────── */
 
 html {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -173,7 +259,7 @@ body {
   color: var(--selection-text);
 }
 
-/* ── Typography ─────────────────────────────────────────────── */
+/* ── Typography ─────��───────────────────────────────────────── */
 
 h1,
 h2,
@@ -181,9 +267,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-family);
+  font-family: var(--font-display);
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text-heading);
   line-height: 1.3;
 }
 
@@ -210,13 +296,14 @@ h4 {
 }
 
 p {
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: var(--text-primary);
 }
 
-/* ── Links & Images ─────────────────────────────────────────── */
+/* ��─ Links & Images ───────���────────────────────────────���────── */
 
 a {
   color: inherit;
@@ -231,7 +318,7 @@ video {
   display: block;
 }
 
-/* ── Container ──────────────────────────────────────────────── */
+/* ── Container ───��──────────────────────────────────────────── */
 
 .container {
   width: 100%;
@@ -240,7 +327,7 @@ video {
   padding: 0 var(--container-padding);
 }
 
-/* ── Section Base ───────────────────────────────────────────── */
+/* ─�� Section Base ───────��────────────────────────────────────��� */
 
 .section {
   display: flex;
@@ -251,32 +338,32 @@ video {
   overflow: hidden;
 }
 
-/* ── Section Label (Overline) ───────────────────────────────── */
+/* ── Section Label (Overline) ─────────���─────────────────────── */
 
 .section-label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-family);
+  font-family: var(--font-ui);
   font-size: 14px;
   font-weight: 600;
   line-height: 16.8px;
   letter-spacing: 0.56px;
   text-transform: uppercase;
-  color: var(--text-primary);
+  color: var(--text-heading);
   margin-bottom: 1rem;
 }
 
-/* ── Accent Text ────────────────────────────────────────────── */
+/* ── Accent Text ──────────���─────────────────────────────────── */
 
 .text-accent-gold {
   color: var(--accent);
 }
 
-/* ── Glass Card ─────────────────────────────────────────────── */
+/* ── Glass Card ───────────────────────────────────────���─────── */
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(250, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-border);
@@ -287,7 +374,7 @@ video {
 .glass-card:hover {
   border-color: var(--color-border-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(56, 86, 100, 0.08);
+  box-shadow: 0 8px 32px rgba(26, 75, 81, 0.08);
 }
 
 /* ── Buttons ────────────────────────────────────────────────── */
@@ -303,7 +390,7 @@ video {
   background: var(--light-blue);
   border: none;
   cursor: pointer;
-  font-family: var(--font-family);
+  font-family: var(--font-ui);
   font-weight: 600;
   font-size: 22px;
   text-transform: uppercase;
@@ -315,7 +402,7 @@ video {
 }
 
 .btn-primary-light:hover {
-  background: #C8DCE8;
+  background: #AADBE0;
 }
 
 .btn-primary-light .icon-circle {
@@ -346,19 +433,19 @@ video {
   background: var(--primary);
   border: none;
   cursor: pointer;
-  font-family: var(--font-family);
+  font-family: var(--font-ui);
   font-weight: 600;
   font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  color: #FFFFFF;
+  color: #FAFFFF;
   text-decoration: none;
   transition: background var(--transition-fast);
   white-space: nowrap;
 }
 
 .btn-primary-dark:hover {
-  background: var(--primary-dark);
+  background: var(--btn-primary-hover-bg);
 }
 
 .btn-primary-dark .icon-circle {
@@ -389,7 +476,7 @@ video {
   background: var(--light-blue);
   border: none;
   cursor: pointer;
-  font-family: var(--font-family);
+  font-family: var(--font-ui);
   font-weight: 600;
   font-size: 20px;
   text-transform: uppercase;
@@ -401,7 +488,7 @@ video {
 }
 
 .btn-secondary-light:hover {
-  background: #C8DCE8;
+  background: #AADBE0;
 }
 
 /* Nav CTA */
@@ -415,19 +502,19 @@ video {
   background: transparent;
   border: 1px solid var(--light-blue-40);
   cursor: pointer;
-  font-family: var(--font-family);
+  font-family: var(--font-ui);
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.28px;
-  color: #FFFFFF;
+  color: #FAFFFF;
   text-decoration: none;
   transition: border-color var(--transition-fast);
   white-space: nowrap;
 }
 
 .btn-nav-cta:hover {
-  border-color: rgba(214, 228, 238, 0.7);
+  border-color: rgba(205, 234, 237, 0.7);
 }
 
 .btn-nav-cta .icon-circle {
@@ -450,18 +537,18 @@ video {
   border-radius: var(--radius-btn);
   background: transparent;
   border: 1px solid var(--light-blue-40);
-  font-family: var(--font-family);
+  font-family: var(--font-ui);
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #FAFFFF;
   text-decoration: none;
   cursor: pointer;
   transition: border-color var(--transition-fast);
 }
 
 .btn-footer-cta:hover {
-  border-color: rgba(214, 228, 238, 0.7);
+  border-color: rgba(205, 234, 237, 0.7);
 }
 
 /* ── Legacy btn system (keep for Contact form / optional) ──── */
@@ -474,7 +561,7 @@ video {
   padding: 0.75rem 1.75rem;
   border: none;
   border-radius: var(--radius-btn);
-  font-family: var(--font-family);
+  font-family: var(--font-ui);
   font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -492,18 +579,18 @@ video {
 .btn-primary:hover {
   background: var(--btn-primary-hover-bg);
   transform: translateY(-1px);
-  box-shadow: 0 4px 24px rgba(56, 86, 100, 0.15);
+  box-shadow: 0 4px 24px rgba(26, 75, 81, 0.15);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--text-primary);
+  color: var(--text-heading);
   border: 1.5px solid var(--color-border-hover);
 }
 
 .btn-outline:hover {
   border-color: var(--secondary);
-  background: rgba(93, 135, 157, 0.05);
+  background: rgba(51, 142, 152, 0.05);
   transform: translateY(-1px);
 }
 
@@ -512,7 +599,7 @@ video {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(10px);
   }
 
   to {
@@ -534,7 +621,7 @@ video {
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-24px);
+    transform: translateX(-10px);
   }
 
   to {
@@ -625,7 +712,7 @@ video {
   animation-delay: 600ms;
 }
 
-/* ── Scrollbar ──────────────────────────────────────────────── */
+/* ─�� Scrollbar ───────────��──────────────────────────────────── */
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -644,7 +731,7 @@ video {
   background: var(--scrollbar-thumb-hover);
 }
 
-/* ── Divider ────────────────────────────────────────────────── */
+/* ── Divider ────���───────────────────────────────────────────���─ */
 
 .section-divider {
   width: 100%;

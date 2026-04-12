@@ -2,131 +2,126 @@
   "nav": {
     "inicio": { "pt": "Início", "en": "Home" },
     "sobre": { "pt": "Sobre", "en": "About" },
-    "funcionalidades": { "pt": "Funcionalidades", "en": "Features" },
+    "funcionalidades": { "pt": "Como Funciona", "en": "How It Works" },
     "depoimentos": { "pt": "Depoimentos", "en": "Testimonials" },
     "resultados": { "pt": "Resultados", "en": "Results" },
     "contato": { "pt": "Contato", "en": "Contact" },
-    "cta": { "pt": "Teste Grátis", "en": "Free Trial" }
+    "cta": { "pt": "Diagnóstico Gratuito", "en": "Free Diagnostic" }
   },
 
   "hero": {
-    "tag_1": { "pt": "Chatbot", "en": "Chatbot" },
-    "tag_2": { "pt": "Inteligência Artificial", "en": "Artificial Intelligence" },
-    "tag_3": { "pt": "Saúde", "en": "Healthcare" },
-    "title_1": { "pt": "Cuidado de verdade começa", "en": "Real care starts" },
-    "title_2": { "pt": "com um atendimento", "en": "with an experience that is" },
+    "tag_1": { "pt": "Psicologia", "en": "Psychology" },
+    "tag_2": { "pt": "Captação Ética", "en": "Ethical Acquisition" },
+    "tag_3": { "pt": "Agenda Previsível", "en": "Predictable Schedule" },
+    "title_1": { "pt": "Ativa sua clínica.", "en": "Activate your clinic." },
+    "title_2": { "pt": "Preserva sua essência.", "en": "Preserve your essence." },
     "subtitle": {
-      "pt": "Automatize o atendimento, reduza filas e ofereça uma experiência personalizada para cada paciente — 24 horas por dia.",
-      "en": "Automate patient care, reduce wait times, and deliver a personalized experience for every patient — 24 hours a day."
+      "pt": "Sua clínica perde pacientes entre o primeiro contato e a sessão confirmada — não por falta de competência, mas por falta de processo. A PsiAtiva fecha esse buraco de forma ética e estruturada.",
+      "en": "Your clinic loses patients between first contact and the confirmed session — not from lack of competence, but from lack of process. PsiAtiva closes that gap ethically and structurally."
     },
-    "cta_primary": { "pt": "Quero Testar Agora", "en": "Try It Now" }
+    "cta_primary": { "pt": "Agendar Diagnóstico Gratuito", "en": "Schedule Free Diagnostic" }
   },
 
   "partners": {
-    "title": { "pt": "Empresas que confiam em nós", "en": "Companies that trust us" },
+    "title": { "pt": "Clínicas que confiam no processo", "en": "Clinics that trust the process" },
     "impact_prefix": { "pt": "MAIS DE", "en": "MORE THAN" },
-    "impact_number": { "pt": "300 MIL VIDAS", "en": "300K LIVES" },
-    "impact_suffix": { "pt": "IMPACTADAS", "en": "IMPACTED" }
+    "impact_number": { "pt": "500 PACIENTES", "en": "500 PATIENTS" },
+    "impact_suffix": { "pt": "RECUPERADOS", "en": "RECOVERED" }
   },
 
   "about": {
-    "label": { "pt": "Sobre Nós", "en": "About Us" },
-    "title": { "pt": "A plataforma que transforma o atendimento", "en": "The platform that transforms patient care" },
+    "label": { "pt": "Por que a PsiAtiva?", "en": "Why PsiAtiva?" },
+    "title": { "pt": "Não somos agência. Não somos curso. Somos o processo que faltava.", "en": "We're not an agency. Not a course. We're the process you've been missing." },
     "desc": {
-      "pt": "Combinamos inteligência artificial e automação para criar experiências de atendimento que realmente importam — mais rápidas, mais humanas e escaláveis.",
-      "en": "We combine artificial intelligence and automation to create care experiences that truly matter — faster, more human, and scalable."
+      "pt": "Psicólogos excelentes perdem pacientes por falta de estrutura entre o primeiro contato e a sessão confirmada. A PsiAtiva existe para fechar esse buraco — com um processo ético, previsível e que respeita a identidade da sua clínica.",
+      "en": "Excellent psychologists lose patients due to lack of structure between first contact and confirmed session. PsiAtiva exists to close that gap — with an ethical, predictable process that respects your clinic's identity."
     },
-    "check_1": { "pt": "Atendimento automatizado 24/7", "en": "24/7 automated support" },
-    "check_2": { "pt": "Integração com sistemas existentes", "en": "Integration with existing systems" },
-    "check_3": { "pt": "Dashboard de métricas em tempo real", "en": "Real-time metrics dashboard" },
-    "check_4": { "pt": "Personalização por paciente", "en": "Per-patient personalization" },
-    "cta": { "pt": "Conheça nossas soluções", "en": "Explore our solutions" }
+    "check_1": { "pt": "Captação estruturada, não improvisada", "en": "Structured acquisition, not improvised" },
+    "check_2": { "pt": "Processo respeitoso com a identidade clínica", "en": "Process that respects clinical identity" },
+    "check_3": { "pt": "Resultado previsível, sem depender de algoritmo", "en": "Predictable results, no algorithm dependency" },
+    "check_4": { "pt": "Parceria, não promessa vazia", "en": "Partnership, not empty promises" },
+    "cta": { "pt": "Veja como funciona", "en": "See how it works" }
   },
 
   "features": {
-    "label": { "pt": "Funcionalidades", "en": "Features" },
-    "title_1": { "pt": "O que podemos", "en": "What we can" },
-    "title_2": { "pt": "fazer por você", "en": "do for you" },
-    "f1_title": { "pt": "Chatbot inteligente para triagem", "en": "Smart chatbot for triage" },
+    "label": { "pt": "O que resolvemos", "en": "What we solve" },
+    "title_1": { "pt": "Três problemas.", "en": "Three problems." },
+    "title_2": { "pt": "Um processo.", "en": "One process." },
+    "f1_title": { "pt": "Agenda previsível", "en": "Predictable schedule" },
     "f1_desc": {
-      "pt": "Automatize a triagem inicial e direcione cada paciente para o atendimento correto de forma instantânea.",
-      "en": "Automate initial triage and instantly direct each patient to the right care path."
+      "pt": "Cada semana com buraco na agenda é dinheiro que não volta. O GAP estrutura a captação para que novos pacientes cheguem de forma constante — sem depender só de indicação.",
+      "en": "Every week with schedule gaps is money that doesn't come back. The GAP structures acquisition so new patients arrive consistently — without depending solely on referrals."
     },
-    "f2_title": { "pt": "Agendamento automatizado", "en": "Automated scheduling" },
+    "f2_title": { "pt": "Menos faltas e cancelamentos", "en": "Fewer no-shows and cancellations" },
     "f2_desc": {
-      "pt": "Seus pacientes agendam consultas a qualquer hora, sem filas e com confirmação automática.",
-      "en": "Your patients schedule appointments anytime, without lines and with automatic confirmation."
+      "pt": "Pacientes que agendam e não aparecem custam tempo, dinheiro e energia. Nosso protocolo de confirmação em camadas reduz faltas e mantém sua agenda funcionando como deveria.",
+      "en": "Patients who book and don't show up cost time, money, and energy. Our layered confirmation protocol reduces no-shows and keeps your schedule running as it should."
     },
-    "f3_title": { "pt": "Relatórios em tempo real", "en": "Real-time reports" },
+    "f3_title": { "pt": "Captação estruturada", "en": "Structured acquisition" },
     "f3_desc": {
-      "pt": "Acompanhe métricas, desempenho e satisfação dos pacientes em dashboards intuitivos.",
-      "en": "Track metrics, performance, and patient satisfaction through intuitive dashboards."
+      "pt": "Seu WhatsApp recebe contatos que perguntam e somem. A PsiAtiva implementa scripts de acolhimento, triagem e acompanhamento que transformam interesse em agenda confirmada — sem parecer invasivo.",
+      "en": "Your WhatsApp receives contacts who ask and disappear. PsiAtiva implements welcoming scripts, screening, and follow-up that turn interest into confirmed appointments — without being intrusive."
     }
   },
 
   "testimonials": {
     "label": { "pt": "Depoimentos", "en": "Testimonials" },
-    "title_1": { "pt": "O que nossos", "en": "What our" },
-    "title_2": { "pt": "clientes dizem", "en": "clients say" },
+    "title_1": { "pt": "O que dizem as", "en": "What" },
+    "title_2": { "pt": "clínicas parceiras", "en": "partner clinics say" },
     "t1_quote": {
-      "pt": "A plataforma transformou completamente nosso fluxo de atendimento. Reduzimos o tempo de espera em 65% e a satisfação dos pacientes nunca esteve tão alta.",
-      "en": "The platform completely transformed our care flow. We reduced wait times by 65% and patient satisfaction has never been higher."
+      "pt": "Antes da PsiAtiva, minha agenda oscilava semana a semana. Hoje tenho previsibilidade e consigo planejar o mês com tranquilidade. O processo respeita completamente a forma como atendo.",
+      "en": "Before PsiAtiva, my schedule fluctuated week to week. Today I have predictability and can plan the month with peace of mind. The process fully respects how I practice."
     },
-    "t1_name": { "pt": "Dr. Rafael Mendes", "en": "Dr. Rafael Mendes" },
-    "t1_role": { "pt": "Diretor Clínico | Hospital Regional", "en": "Clinical Director | Regional Hospital" },
+    "t1_name": { "pt": "Dra. Marina Oliveira", "en": "Dr. Marina Oliveira" },
+    "t1_role": { "pt": "Psicóloga Clínica | Clínica Espaço Mente", "en": "Clinical Psychologist | Espaço Mente Clinic" },
     "t2_quote": {
-      "pt": "Implementamos em 3 semanas e o ROI veio no primeiro mês. O chatbot resolve 80% das demandas sem intervenção humana.",
-      "en": "We implemented in 3 weeks and ROI came in the first month. The chatbot resolves 80% of requests without human intervention."
+      "pt": "Eu tinha medo de que organizar a captação fosse parecer 'comercial demais'. A PsiAtiva entendeu que isso é processo, não propaganda. Minha recepção funciona melhor e os pacientes sentem o cuidado desde o primeiro contato.",
+      "en": "I was afraid that organizing acquisition would seem 'too commercial.' PsiAtiva understood that this is process, not advertising. My reception works better and patients feel the care from the first contact."
     },
-    "t2_name": { "pt": "Dra. Camila Ferreira", "en": "Dr. Camila Ferreira" },
-    "t2_role": { "pt": "CEO | Rede de Clínicas", "en": "CEO | Clinic Network" },
+    "t2_name": { "pt": "Dra. Fernanda Lopes", "en": "Dr. Fernanda Lopes" },
+    "t2_role": { "pt": "Diretora Clínica | Instituto Psicológico Vida", "en": "Clinical Director | Instituto Psicológico Vida" },
     "t3_quote": {
-      "pt": "A integração com nosso sistema legado foi surpreendentemente simples. A equipe de suporte é excepcional.",
-      "en": "Integration with our legacy system was surprisingly simple. The support team is exceptional."
+      "pt": "O no-show era meu maior problema. Com o protocolo de confirmação da PsiAtiva, reduzi as faltas pela metade em dois meses. É simples e a equipe adotou sem resistência.",
+      "en": "No-shows were my biggest problem. With PsiAtiva's confirmation protocol, I cut absences in half within two months. It's simple and the team adopted it without resistance."
     },
-    "t3_name": { "pt": "Eduardo Santos", "en": "Eduardo Santos" },
-    "t3_role": { "pt": "CTO | Operadora de Saúde", "en": "CTO | Health Insurance Provider" },
+    "t3_name": { "pt": "Dr. Ricardo Almeida", "en": "Dr. Ricardo Almeida" },
+    "t3_role": { "pt": "Psicólogo | Clínica Equilíbrio", "en": "Psychologist | Clínica Equilíbrio" },
     "t4_quote": {
-      "pt": "Nossos pacientes adoram a facilidade de agendar pelo WhatsApp. E nós adoramos os relatórios detalhados que orientam nossas decisões.",
-      "en": "Our patients love the ease of scheduling via WhatsApp. And we love the detailed reports that guide our decisions."
+      "pt": "Já havia contratado ajuda antes e me senti empurrando coisa que não era a minha cara. A PsiAtiva é diferente — construiu um processo junto comigo que tem a identidade da minha clínica.",
+      "en": "I had hired help before and felt like I was pushing something that wasn't me. PsiAtiva is different — they built a process with me that has my clinic's identity."
     },
-    "t4_name": { "pt": "Ana Beatriz Gomes", "en": "Ana Beatriz Gomes" },
-    "t4_role": { "pt": "Coordenadora | UBS Municipal", "en": "Coordinator | Municipal Health Center" }
+    "t4_name": { "pt": "Dra. Juliana Martins", "en": "Dr. Juliana Martins" },
+    "t4_role": { "pt": "Psicóloga Infantil | Núcleo Crescer", "en": "Child Psychologist | Núcleo Crescer" }
   },
 
   "func": {
-    "label": { "pt": "Funcionalidades", "en": "Features" },
-    "title_1": { "pt": "Tudo o que você precisa", "en": "Everything you need" },
-    "title_2": { "pt": "em uma plataforma", "en": "in one platform" },
-    "c1_title": { "pt": "Triagem inteligente", "en": "Smart triage" },
+    "label": { "pt": "Como Funciona", "en": "How It Works" },
+    "title_1": { "pt": "O GAP em", "en": "The GAP in" },
+    "title_2": { "pt": "5 etapas", "en": "5 steps" },
+    "c1_title": { "pt": "Diagnóstico", "en": "Diagnostic" },
     "c1_desc": {
-      "pt": "Algoritmos de IA que classificam e direcionam cada paciente para o atendimento mais adequado, reduzindo o tempo de espera e melhorando a experiência.",
-      "en": "AI algorithms that classify and direct each patient to the most appropriate care, reducing wait times and improving experience."
+      "pt": "Mapeamos onde sua clínica está perdendo pacientes — do Google ao WhatsApp. Identificamos os gargalos entre o primeiro contato e a sessão confirmada.",
+      "en": "We map where your clinic is losing patients — from Google to WhatsApp. We identify bottlenecks between first contact and confirmed session."
     },
-    "c2_title": { "pt": "Agendamento online", "en": "Online scheduling" },
+    "c2_title": { "pt": "Ativação", "en": "Activation" },
     "c2_desc": {
-      "pt": "Sistema de agendamento completo com confirmação automática, lembretes por WhatsApp e gerenciamento de disponibilidade dos profissionais.",
-      "en": "Complete scheduling system with auto-confirmation, WhatsApp reminders, and professional availability management."
+      "pt": "Ativamos sua presença no Google, criamos uma página de captação profissional e preparamos os scripts de acolhimento para sua recepção.",
+      "en": "We activate your Google presence, create a professional acquisition page, and prepare welcoming scripts for your reception."
     },
-    "c3_title": { "pt": "Prontuário digital", "en": "Digital health records" },
+    "c3_title": { "pt": "Captação", "en": "Acquisition" },
     "c3_desc": {
-      "pt": "Histórico completo do paciente acessível em qualquer dispositivo. Dados seguros, organizados e prontos para apoiar decisões clínicas.",
-      "en": "Complete patient history accessible from any device. Secure, organized data ready to support clinical decisions."
+      "pt": "Estruturamos a captação por intenção — pacientes que estão buscando ajuda agora encontram sua clínica. Sem depender apenas de indicação.",
+      "en": "We structure intent-based acquisition — patients actively seeking help now find your clinic. No longer depending solely on referrals."
     },
-    "c4_title": { "pt": "Telemedicina integrada", "en": "Integrated telemedicine" },
+    "c4_title": { "pt": "Rotina", "en": "Routine" },
     "c4_desc": {
-      "pt": "Consultas por vídeo nativas na plataforma, com sala de espera virtual, gravação opcional e integração com o prontuário eletrônico.",
-      "en": "Native video consultations with virtual waiting room, optional recording, and electronic health record integration."
+      "pt": "Implementamos confirmação em camadas, reativação de contatos e scripts de acompanhamento que funcionam mesmo quando você está em sessão.",
+      "en": "We implement layered confirmations, contact reactivation, and follow-up scripts that work even while you're in session."
     },
-    "c5_title": { "pt": "Faturamento automatizado", "en": "Automated billing" },
+    "c5_title": { "pt": "Otimização", "en": "Optimization" },
     "c5_desc": {
-      "pt": "Geração automática de guias, faturamento TISS, controle de glosas e relatórios financeiros detalhados para simplificar a gestão.",
-      "en": "Automatic guide generation, TISS billing, denial management, and detailed financial reports to simplify operations."
-    },
-    "c6_title": { "pt": "Indicadores e BI", "en": "Analytics & BI" },
-    "c6_desc": {
-      "pt": "Dashboards personalizáveis com indicadores de performance, satisfação do paciente e eficiência operacional — dados para decisões estratégicas.",
-      "en": "Customizable dashboards with performance indicators, patient satisfaction, and operational efficiency — data for strategic decisions."
+      "pt": "Acompanhamos os números e ajustamos o processo mês a mês. Você vê exatamente quantos contatos chegam, agendam e comparecem.",
+      "en": "We track the numbers and adjust the process month by month. You see exactly how many contacts arrive, schedule, and show up."
     }
   },
 
@@ -135,71 +130,112 @@
     "title_1": { "pt": "Conecta-se com os", "en": "Connects with the" },
     "title_2": { "pt": "sistemas que você já usa", "en": "systems you already use" },
     "desc": {
-      "pt": "Integração nativa com os principais sistemas de gestão, prontuário eletrônico e ferramentas do mercado de saúde.",
-      "en": "Native integration with leading management systems, electronic health records, and healthcare market tools."
+      "pt": "Integração com os sistemas que sua clínica já utiliza no dia a dia.",
+      "en": "Integration with the systems your clinic already uses daily."
     }
   },
 
   "cta": {
-    "label": { "pt": "Pronto para começar?", "en": "Ready to get started?" },
-    "title_1": { "pt": "Está na hora de ", "en": "It's time to " },
-    "title_2": { "pt": "revolucionar o atendimento", "en": "revolutionize patient care" },
-    "btn": { "pt": "Fale com nossos especialistas", "en": "Talk to our experts" },
-    "btn_secondary": { "pt": "Agende uma demonstração", "en": "Schedule a demo" }
+    "label": { "pt": "Pronta para ativar sua clínica?", "en": "Ready to activate your clinic?" },
+    "title_1": { "pt": "Cada semana sem processo ", "en": "Every week without process " },
+    "title_2": { "pt": "é paciente que não volta", "en": "is a patient who won't return" },
+    "btn": { "pt": "Agendar Diagnóstico pelo WhatsApp", "en": "Schedule Diagnostic via WhatsApp" },
+    "btn_secondary": { "pt": "Preencher Formulário", "en": "Fill Out Form" }
   },
 
   "cases": {
-    "label": { "pt": "Cases", "en": "Cases" },
-    "title_1": { "pt": "Resultados que", "en": "Results that" },
+    "label": { "pt": "Resultados", "en": "Results" },
+    "title_1": { "pt": "Números que", "en": "Numbers that" },
     "title_2": { "pt": "falam por si", "en": "speak for themselves" },
-    "stat_1_value": { "pt": "+300 mil", "en": "+300K" },
-    "stat_1_desc": { "pt": "Vidas impactadas pela plataforma em todo o Brasil", "en": "Lives impacted by the platform across Brazil" },
-    "stat_2_value": { "pt": "-60%", "en": "-60%" },
-    "stat_2_desc": { "pt": "Redução no tempo de espera dos pacientes", "en": "Reduction in patient wait times" },
-    "stat_3_value": { "pt": "+200", "en": "+200" },
-    "stat_3_desc": { "pt": "Clínicas e hospitais utilizam a solução", "en": "Clinics and hospitals use the solution" },
-    "stat_4_value": { "pt": "98%", "en": "98%" },
-    "stat_4_desc": { "pt": "Taxa de satisfação dos usuários da plataforma", "en": "Platform user satisfaction rate" },
-    "cta": { "pt": "Agende uma demonstração", "en": "Schedule a demo" }
+    "stat_1_value": { "pt": "-52%", "en": "-52%" },
+    "stat_1_desc": { "pt": "Redução média de faltas e cancelamentos nas clínicas parceiras", "en": "Average reduction in no-shows and cancellations in partner clinics" },
+    "stat_2_value": { "pt": "+3x", "en": "+3x" },
+    "stat_2_desc": { "pt": "Mais pacientes agendados pelo WhatsApp com processo estruturado", "en": "More patients scheduled via WhatsApp with structured process" },
+    "stat_3_value": { "pt": "14 dias", "en": "14 days" },
+    "stat_3_desc": { "pt": "Para ver os primeiros resultados após a ativação do processo", "en": "To see initial results after process activation" },
+    "stat_4_value": { "pt": "93%", "en": "93%" },
+    "stat_4_desc": { "pt": "Das clínicas renovam a parceria após o primeiro ciclo", "en": "Of clinics renew partnership after the first cycle" },
+    "cta": { "pt": "Agendar Diagnóstico Gratuito", "en": "Schedule Free Diagnostic" }
+  },
+
+  "faq": {
+    "label": { "pt": "Dúvidas Frequentes", "en": "Frequently Asked Questions" },
+    "title_1": { "pt": "Perguntas que", "en": "Questions" },
+    "title_2": { "pt": "você provavelmente tem", "en": "you probably have" },
+    "q1": { "pt": "Isso não vai parecer antiético para meus pacientes?", "en": "Won't this seem unethical to my patients?" },
+    "a1": {
+      "pt": "Não. O que fazemos é organizar o processo entre o primeiro contato e a sessão confirmada. Não é propaganda — é cuidado desde o primeiro momento. Seu paciente vai sentir mais acolhimento, não mais pressão.",
+      "en": "No. What we do is organize the process between first contact and confirmed session. It's not advertising — it's care from the very first moment. Your patient will feel more welcomed, not more pressured."
+    },
+    "q2": { "pt": "Já tentei com uma agência e não funcionou. Por que seria diferente?", "en": "I tried with an agency before and it didn't work. Why would this be different?" },
+    "a2": {
+      "pt": "Agências entregam posts e anúncios. A PsiAtiva entrega processo — scripts de atendimento, confirmação em camadas, acompanhamento de números. O problema da maioria das clínicas não é visibilidade, é o que acontece depois que o paciente faz contato.",
+      "en": "Agencies deliver posts and ads. PsiAtiva delivers process — service scripts, layered confirmations, number tracking. Most clinics' problem isn't visibility — it's what happens after the patient makes contact."
+    },
+    "q3": { "pt": "Minha recepcionista não vai dar conta de mais coisas.", "en": "My receptionist won't be able to handle more tasks." },
+    "a3": {
+      "pt": "Na verdade, o objetivo é o oposto: organizar e simplificar a rotina da recepção. Scripts prontos, confirmação padronizada e um processo claro reduzem o improviso e a sobrecarga — não aumentam.",
+      "en": "Actually, the goal is the opposite: to organize and simplify the reception routine. Ready-made scripts, standardized confirmations, and a clear process reduce improvisation and overload — they don't increase it."
+    },
+    "q4": { "pt": "Quanto tempo até ver resultado?", "en": "How long until I see results?" },
+    "a4": {
+      "pt": "Os primeiros resultados aparecem em 14 a 21 dias após a ativação. Não prometemos milagre — prometemos processo. E processo bem feito gera resultado consistente.",
+      "en": "First results appear within 14 to 21 days after activation. We don't promise miracles — we promise process. And well-done process generates consistent results."
+    },
+    "q5": { "pt": "E se minha agenda já está cheia em alguns horários?", "en": "What if my schedule is already full at certain times?" },
+    "a5": {
+      "pt": "Ótimo — isso significa que o problema é de previsibilidade, não de volume. O GAP organiza a captação para preencher os buracos e reduzir a oscilação, não para lotar sem critério.",
+      "en": "Great — that means the problem is predictability, not volume. The GAP organizes acquisition to fill gaps and reduce fluctuation, not to overcrowd without criteria."
+    },
+    "q6": { "pt": "Preciso criar conteúdo nas redes sociais?", "en": "Do I need to create social media content?" },
+    "a6": {
+      "pt": "Não é obrigatório. A PsiAtiva foca em captação por intenção — pacientes que já estão buscando ajuda. Redes sociais podem complementar, mas o processo funciona mesmo sem postagens constantes.",
+      "en": "It's not required. PsiAtiva focuses on intent-based acquisition — patients already seeking help. Social media can complement, but the process works even without constant posting."
+    },
+    "q7": { "pt": "Qual o investimento?", "en": "What's the investment?" },
+    "a7": {
+      "pt": "Depende do momento da sua clínica. Temos opções de entrada a partir de 45 dias e parcerias de 6 meses. O melhor caminho é agendar o diagnóstico gratuito — em 30 minutos mapeamos sua situação e indicamos o próximo passo.",
+      "en": "It depends on your clinic's current situation. We have entry options starting at 45 days and 6-month partnerships. The best path is to schedule the free diagnostic — in 30 minutes we map your situation and recommend the next step."
+    }
   },
 
   "contact": {
     "label": { "pt": "Contato", "en": "Contact" },
     "title_1": { "pt": "Vamos conversar", "en": "Let's talk" },
-    "title_2": { "pt": "sobre seu projeto", "en": "about your project" },
+    "title_2": { "pt": "sobre sua clínica", "en": "about your clinic" },
     "desc": {
-      "pt": "Agende uma consultoria de 30 minutos. Analisaremos sua situação atual e mostraremos exatamente como podemos ajudar seu negócio a crescer.",
-      "en": "Schedule a 30-minute consultation. We'll analyze your current situation and show you exactly how we can help your business grow."
+      "pt": "Agende um diagnóstico gratuito de 30 minutos. Vamos mapear onde sua clínica está perdendo pacientes e mostrar o que pode mudar com processo.",
+      "en": "Schedule a free 30-minute diagnostic. We'll map where your clinic is losing patients and show what can change with process."
     },
     "email_label": { "pt": "E-mail", "en": "Email" },
     "whatsapp_label": { "pt": "WhatsApp", "en": "WhatsApp" },
     "hours_label": { "pt": "Atendimento", "en": "Hours" },
-    "hours_value": { "pt": "24h/dia, 7 dias/semana", "en": "24h/day, 7 days/week" },
+    "hours_value": { "pt": "Seg–Sex, 9h às 18h", "en": "Mon–Fri, 9am to 6pm" },
     "form_name": { "pt": "Nome *", "en": "Name *" },
     "form_name_placeholder": { "pt": "Seu nome completo", "en": "Your full name" },
     "form_email": { "pt": "E-mail *", "en": "Email *" },
     "form_email_placeholder": { "pt": "seu@email.com", "en": "your@email.com" },
     "form_phone": { "pt": "Telefone", "en": "Phone" },
     "form_phone_placeholder": { "pt": "(11) 99999-9999", "en": "+1 (555) 000-0000" },
-    "form_company": { "pt": "Empresa", "en": "Company" },
-    "form_company_placeholder": { "pt": "Nome da empresa", "en": "Company name" },
+    "form_company": { "pt": "Nome da Clínica", "en": "Clinic Name" },
+    "form_company_placeholder": { "pt": "Nome da sua clínica ou consultório", "en": "Your clinic or practice name" },
     "form_message": { "pt": "Mensagem *", "en": "Message *" },
-    "form_message_placeholder": { "pt": "Conte-nos sobre seu projeto e objetivos...", "en": "Tell us about your project and goals..." },
+    "form_message_placeholder": { "pt": "Conte um pouco sobre o momento da sua clínica...", "en": "Tell us about your clinic's current situation..." },
     "form_submit": { "pt": "Enviar Mensagem →", "en": "Send Message →" },
     "form_sending": { "pt": "Enviando...", "en": "Sending..." },
-    "form_success": { "pt": "✓ Mensagem enviada com sucesso! Retornaremos em até 24h.", "en": "✓ Message sent successfully! We'll respond within 24h." },
+    "form_success": { "pt": "Mensagem enviada! Retornaremos em até 24h.", "en": "Message sent! We'll respond within 24h." },
     "form_error": { "pt": "Algo deu errado. Por favor, tente novamente.", "en": "Something went wrong. Please try again." }
   },
 
   "footer": {
-    "tagline": { "pt": "Inovação que transforma resultados.", "en": "Innovation that transforms results." },
-    "col_product": { "pt": "Produto", "en": "Product" },
-    "col_company": { "pt": "Empresa", "en": "Company" },
+    "tagline": { "pt": "Captação ética e previsível para clínicas de psicologia.", "en": "Ethical and predictable patient acquisition for psychology clinics." },
+    "col_product": { "pt": "Processo", "en": "Process" },
+    "col_company": { "pt": "PsiAtiva", "en": "PsiAtiva" },
     "col_resources": { "pt": "Recursos", "en": "Resources" },
-    "link_features": { "pt": "Funcionalidades", "en": "Features" },
-    "link_integrations": { "pt": "Integrações", "en": "Integrations" },
-    "link_cases": { "pt": "Cases", "en": "Cases" },
-    "link_about": { "pt": "Sobre Nós", "en": "About Us" },
+    "link_features": { "pt": "Como Funciona", "en": "How It Works" },
+    "link_integrations": { "pt": "O GAP", "en": "The GAP" },
+    "link_cases": { "pt": "Resultados", "en": "Results" },
+    "link_about": { "pt": "Sobre", "en": "About" },
     "link_testimonials": { "pt": "Depoimentos", "en": "Testimonials" },
     "link_contact": { "pt": "Contato", "en": "Contact" },
     "link_blog": { "pt": "Blog", "en": "Blog" },

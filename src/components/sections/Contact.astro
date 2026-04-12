@@ -8,11 +8,10 @@ import LINKS from '../../constants/links';
     <div class="contact-grid">
       <div class="contact-info">
         <span class="section-label" data-i18n="contact.label">Contato</span>
-        <h2><span data-i18n="contact.title_1">Vamos conversar</span><br /><span class="gradient-text" data-i18n="contact.title_2">sobre seu projeto</span></h2>
+        <h2><span data-i18n="contact.title_1">Vamos conversar</span><br /><span class="gradient-text" data-i18n="contact.title_2">sobre sua clínica</span></h2>
         <p class="contact-desc" data-i18n="contact.desc">
-          Agende uma consultoria de 30 minutos.
-          Analisaremos sua situação atual e mostraremos
-          exatamente como podemos ajudar seu negócio a crescer no digital.
+          Agende um diagnóstico gratuito de 30 minutos. Vamos mapear onde sua
+          clínica está perdendo pacientes e mostrar o que pode mudar com processo.
         </p>
 
         <div class="contact-details">
@@ -64,7 +63,8 @@ import LINKS from '../../constants/links';
 
 <style>
   .contact {
-    background: var(--gray-graphene);
+    padding: var(--section-padding-md) 0;
+    background: var(--sage-bg);
   }
 
   .contact-grid {
@@ -80,10 +80,21 @@ import LINKS from '../../constants/links';
     gap: 1rem;
   }
 
+  .contact-info h2 {
+    font-family: var(--font-display);
+    color: var(--text-heading);
+  }
+
+  .gradient-text {
+    color: var(--secondary);
+  }
+
   .contact-desc {
     margin-top: 0.5rem;
+    font-family: var(--font-body);
     font-size: 1.0625rem;
     line-height: 1.7;
+    color: var(--text-primary);
   }
 
   .contact-details {
@@ -102,9 +113,9 @@ import LINKS from '../../constants/links';
   .contact-detail-icon {
     width: 44px;
     height: 44px;
-    border-radius: var(--radius-md);
-    background: rgba(54, 162, 172, 0.08);
-    color: var(--color-accent);
+    border-radius: var(--radius-card);
+    background: rgba(26, 75, 81, 0.08);
+    color: var(--primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,21 +124,23 @@ import LINKS from '../../constants/links';
 
   .contact-detail-label {
     display: block;
+    font-family: var(--font-ui);
     font-size: 0.75rem;
-    color: var(--gray-base);
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin-bottom: 0.125rem;
   }
 
   .contact-detail-value {
+    font-family: var(--font-body);
     font-size: 0.9375rem;
     font-weight: 500;
-    color: var(--white-marble);
+    color: var(--text-heading);
   }
 
   a.contact-detail-value:hover {
-    color: var(--color-accent);
+    color: var(--secondary);
   }
 
   .contact-form-wrapper {

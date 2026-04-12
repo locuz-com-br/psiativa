@@ -1,0 +1,11 @@
+{
+  "items": [
+    { "translationPrefix": "faq.q1", "answerPrefix": "faq.a1" },
+    { "translationPrefix": "faq.q2", "answerPrefix": "faq.a2" },
+    { "translationPrefix": "faq.q3", "answerPrefix": "faq.a3" },
+    { "translationPrefix": "faq.q4", "answerPrefix": "faq.a4" },
+    { "translationPrefix": "faq.q5", "answerPrefix": "faq.a5" },
+    { "translationPrefix": "faq.q6", "answerPrefix": "faq.a6" },
+    { "translationPrefix": "faq.q7", "answerPrefix": "faq.a7" }
+  ]
+}

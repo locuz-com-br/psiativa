@@ -1,47 +1,43 @@
 // ─────────────────────────────────────────────
-// Landing Page Template — Site Configuration
+// PsiAtiva — Site Configuration
 // ─────────────────────────────────────────────
-// Design System: PsiAtiva (teal/gold palette, Barlow font)
+// Design System: PsiAtiva (Teal/Sage Green palette, New York + Lora fonts)
 // This is the SINGLE file you need to edit to customize the entire template.
-// Fill in your client's brand, colors, contact info, and the site will
-// automatically adapt everywhere: meta tags, navbar, footer, forms, etc.
 
 export const SITE_CONFIG = {
   // ── Brand ──────────────────────────────────
   name: "PsiAtiva",
   tagline: {
-    pt: "Inovação que transforma resultados.",
-    en: "Innovation that transforms results.",
+    pt: "Ativa sua clínica. Preserva sua essência.",
+    en: "Activate your clinic. Preserve your essence.",
   },
   description: {
-    pt: "Plataforma inteligente para transformar a experiência do seu cliente.",
-    en: "Intelligent platform to transform your customer experience.",
+    pt: "Captação ética e previsível para clínicas de psicologia. Agenda previsível, menos faltas e um processo estruturado que respeita sua identidade clínica.",
+    en: "Ethical and predictable patient acquisition for psychology clinics. Predictable schedules, fewer no-shows, and a structured process that respects your clinical identity.",
   },
-  url: "https://your-domain.com",
-  defaultLocale: "pt-BR" as const, // "pt-BR" | "en"
+  url: "https://psiativa.com.br",
+  defaultLocale: "pt-BR" as const,
 
   // ── Colors ─────────────────────────────────
-  // PsiAtiva Design System palette
   colors: {
-    primary: "#385664",    // Teal escuro principal
-    accent: "#DEDA93",     // Dourado/Mostarda
-    highlight: "#EF853C",  // Detalhes em laranja
+    primary: "#1A4B51",
+    accent: "#7EAE89",
+    highlight: "#00B1C8",
   },
 
   // ── Typography ─────────────────────────────
-  // Barlow (Google Fonts) is the primary and only font family.
   fonts: {
-    display: "'Barlow', sans-serif",
-    subtitle: "'Barlow', sans-serif",
-    body: "'Barlow', sans-serif",
+    display: "'New York', Georgia, serif",
+    subtitle: "'Lora', Georgia, serif",
+    body: "'Lora', Georgia, serif",
   },
 
   // ── Contact ────────────────────────────────
   contact: {
-    email: "hello@your-domain.com",
-    phone: "+1 (555) 000-0000",
-    whatsappNumber: "15550000000", // Raw international number (no +, no spaces)
-    meetingUrl: "https://cal.com/your-name/30min",
+    email: "contato@psiativa.com.br",
+    phone: "+55 (11) 00000-0000",
+    whatsappNumber: "5511000000000",
+    meetingUrl: "",
     hours: {
       pt: "Seg–Sex, 9h às 18h",
       en: "Mon–Fri, 9am to 6pm",
@@ -49,11 +45,10 @@ export const SITE_CONFIG = {
   },
 
   // ── Social Links ───────────────────────────
-  // Set to empty string "" to hide the icon in the footer.
   socials: {
-    whatsapp: "", // Auto-generated from whatsappNumber if empty
-    instagram: "https://instagram.com/your-handle",
-    linkedin: "https://linkedin.com/company/your-company",
+    whatsapp: "",
+    instagram: "https://instagram.com/psiativa",
+    linkedin: "https://linkedin.com/company/psiativa",
     facebook: "",
     tiktok: "",
     youtube: "",
@@ -61,45 +56,42 @@ export const SITE_CONFIG = {
   },
 
   // ── Logos ───────────────────────────────────
-  // Paths relative to /public. Replace with your client's logo files.
   logos: {
-    navbarLight: "/images/logo/logo-light.svg",   // White logo for dark hero bg
-    navbarDark: "/images/logo/logo-dark.svg",      // Dark logo (for future dark theme)
+    navbarLight: "/images/logo/logo-light.svg",
+    navbarDark: "/images/logo/logo-dark.svg",
     footerLight: "/images/logo/logo-footer-light.svg",
     footerDark: "/images/logo/logo-footer-dark.svg",
     favicon: "/images/logo/logo-dark.svg",
   },
 
   // ── Hero Background ────────────────────────
-  // The hero section uses a full-bleed dark teal background image.
   hero: {
-    backgroundImage: "https://images.unsplash.com/photo-placeholder-hero-bg",
-    typewriterWords: ["automatizado", "inteligente", "personalizado", "eficiente"],
+    backgroundImage: "",
+    typewriterWords: ["previsível", "estruturado", "ético", "consistente"],
   },
 
   // ── Section Toggles ────────────────────────
-  // Set to `false` to completely hide a section from the landing page.
   sections: {
     hero: true,
-    partners: true,         // was: logoBar
-    about: true,            // was: whyUs
-    features: true,         // was: services
+    partners: false,
+    about: true,
+    features: true,
     testimonials: true,
-    functionalities: true,  // was: process
-    integrations: true,     // NEW
-    ctaFinal: true,         // was: cta
-    cases: true,            // was: results
-    contact: false,         // Disabled by default (available for opt-in)
-    whatsappFab: true,      // NEW: Floating WhatsApp button
+    functionalities: true,
+    integrations: false,
+    ctaFinal: true,
+    cases: true,
+    contact: true,
+    faq: true,
+    whatsappFab: true,
   },
 
   // ── Analytics & Integrations ───────────────
-  // Leave empty strings "" to disable.
   analytics: {
-    web3formsKey: "",                                   // Web3Forms access key for contact form
-    hcaptchaSiteKey: "50b2fe65-b00b-4b9e-ad62-3ba471098be2", // hCaptcha site key
-    googleAnalyticsId: "",                              // e.g. "G-XXXXXXXXXX"
-    clarityId: "",                                      // Microsoft Clarity ID
+    web3formsKey: "",
+    hcaptchaSiteKey: "50b2fe65-b00b-4b9e-ad62-3ba471098be2",
+    googleAnalyticsId: "",
+    clarityId: "",
   },
 
   // ── Legal Page Slugs ───────────────────────
@@ -113,4 +105,4 @@ export const SITE_CONFIG = {
 
 // ── Derived values (do not edit) ─────────────
 export const WHATSAPP_LINK = SITE_CONFIG.socials.whatsapp
-  || `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}`;
+  || `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent("Olá! Vim pelo site da PsiAtiva e gostaria de agendar o diagnóstico gratuito da minha clínica.")}`;

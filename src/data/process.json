@@ -1,9 +1,9 @@
 {
   "steps": [
-    { "number": "01", "translationPrefix": "process.s1" },
-    { "number": "02", "translationPrefix": "process.s2" },
-    { "number": "03", "translationPrefix": "process.s3" },
-    { "number": "04", "translationPrefix": "process.s4" },
-    { "number": "05", "translationPrefix": "process.s5" }
+    { "number": "01", "translationPrefix": "func.c1" },
+    { "number": "02", "translationPrefix": "func.c2" },
+    { "number": "03", "translationPrefix": "func.c3" },
+    { "number": "04", "translationPrefix": "func.c4" },
+    { "number": "05", "translationPrefix": "func.c5" }
   ]
 }

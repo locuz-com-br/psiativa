@@ -302,7 +302,7 @@ const inputStyles: React.CSSProperties = {
   borderRadius: '0.75rem',
   color: 'var(--input-color)',
   fontSize: '0.9375rem',
-  fontFamily: 'Inter, system-ui, sans-serif',
+  fontFamily: 'var(--font-ui)',
   outline: 'none',
   transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
 };
@@ -315,27 +315,27 @@ const buttonStyles: React.CSSProperties = {
   borderRadius: '9999px',
   fontSize: '0.9375rem',
   fontWeight: 600,
-  fontFamily: 'Inter, system-ui, sans-serif',
+  fontFamily: 'var(--font-ui)',
   transition: 'all 0.3s ease',
   marginTop: '0.5rem',
 };
 
 const successStyles: React.CSSProperties = {
-  color: '#36A2AC',
+  color: '#7EAE89',
   fontSize: '0.875rem',
   fontWeight: 500,
   padding: '0.75rem 1rem',
   borderRadius: '0.75rem',
-  background: 'rgba(54, 162, 172, 0.1)',
-  border: '1px solid rgba(54, 162, 172, 0.2)',
+  background: 'rgba(126, 174, 137, 0.1)',
+  border: '1px solid rgba(126, 174, 137, 0.2)',
 };
 
 const errorStyles: React.CSSProperties = {
-  color: '#ef4444',
+  color: '#F7C800',
   fontSize: '0.875rem',
   fontWeight: 500,
   padding: '0.75rem 1rem',
   borderRadius: '0.75rem',
-  background: 'rgba(239, 68, 68, 0.1)',
-  border: '1px solid rgba(239, 68, 68, 0.2)',
+  background: 'rgba(247, 200, 0, 0.1)',
+  border: '1px solid rgba(247, 200, 0, 0.2)',
 };

@@ -16,8 +16,8 @@ import LINKS from "../../constants/links";
         >
       </h2>
       <div class="cta-final-actions">
-        <a href={LINKS.contact.phoneHref} class="btn-primary-dark">
-          <span data-i18n="cta.btn">Fale com nossos especialistas</span>
+        <a href={LINKS.socials.whatsapp} target="_blank" rel="noopener" class="btn-primary-dark">
+          <span data-i18n="cta.btn">Agendar Diagnóstico pelo WhatsApp</span>
           <span class="icon-circle">
             <svg
               width="14"
@@ -34,8 +34,8 @@ import LINKS from "../../constants/links";
             </svg>
           </span>
         </a>
-        <a href={LINKS.contact.meet} class="btn-secondary-light">
-          <span data-i18n="cta.btn_secondary">Agende uma demonstração</span>
+        <a href="#contato" class="btn-secondary-light">
+          <span data-i18n="cta.btn_secondary">Preencher Formulário</span>
           <span
             class="icon-circle"
             style="width:40px;height:40px;background:var(--primary);border-radius:100%;display:flex;align-items:center;justify-content:center;"
@@ -76,7 +76,7 @@ import LINKS from "../../constants/links";
   }
 
   .cta-final-heading {
-    font-family: var(--font-family);
+    font-family: var(--font-display);
     font-weight: 500;
     font-size: 36px;
     line-height: 54px;

@@ -7,8 +7,8 @@ interface Props {
   hideNavAndFooter?: boolean;
 }
 
-const { 
-  title, 
+const {
+  title,
   description = SITE_CONFIG.description.pt,
   hideNavAndFooter = false
 } = Astro.props;
@@ -38,15 +38,19 @@ import WhatsAppFab from '../components/sections/WhatsAppFab.astro';
     <meta name="twitter:description" content={description} />
 
     <!-- Theme -->
-    <meta name="theme-color" content="#385664" />
+    <meta name="theme-color" content="#1A4B51" />
 
     <title>{title} | {siteName}</title>
     <link rel="icon" type="image/svg+xml" href={SITE_CONFIG.logos.favicon} />
 
-    <!-- Google Fonts: Barlow -->
+    <!-- Preload critical fonts: New York + Lora -->
+    <link rel="preload" href="/fonts/new-york/NewYorkLarge-Semibold.otf" as="font" type="font/opentype" crossorigin />
+    <link rel="preload" href="/fonts/lora/lora-regular.ttf" as="font" type="font/truetype" crossorigin />
+
+    <!-- Google Fonts: Source Serif 4 (UI / buttons) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet" />
 
     <!-- Prevent FOUC: apply saved theme before paint (preserved for future use) -->
     <script is:inline>

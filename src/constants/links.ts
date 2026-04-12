@@ -3,23 +3,22 @@
 // ─────────────────────────────────────────────
 // All links are derived from site.config.ts.
 // Import and use these instead of hard-coding hrefs in components.
-// Example:  <a href={LINKS.nav.servicos}>
 
 import { SITE_CONFIG, WHATSAPP_LINK } from '../config/site.config';
 
-// ── Pages ────────────────────────────────────
+// ── Pages ───────���────────────────────────────
 export const PAGES = {
   home: "/",
 } as const;
 
-// ── Section Anchors ──────────────────────────
+// ── Section Anchors ──────────────���───────────
 export const SECTIONS = {
   inicio: "#inicio",
   sobre: "#sobre",
   funcionalidades: "#funcionalidades",
   depoimentos: "#depoimentos",
-  integracoes: "#integracoes",
   resultados: "#resultados",
+  faq: "#faq",
   cta: "#cta",
   contato: "#contato",
 } as const;

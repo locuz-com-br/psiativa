@@ -7,9 +7,9 @@ import WhyUs from '../components/sections/WhyUs.astro';
 import Services from '../components/sections/Services.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import Process from '../components/sections/Process.astro';
-import Integrations from '../components/sections/Integrations.astro';
-import CTA from '../components/sections/CTA.astro';
 import Results from '../components/sections/Results.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import CTA from '../components/sections/CTA.astro';
 import Contact from '../components/sections/Contact.astro';
 
 const s = SITE_CONFIG.sections;
@@ -20,10 +20,10 @@ const s = SITE_CONFIG.sections;
   {s.partners && <LogoBar />}
   {s.about && <WhyUs />}
   {s.features && <Services />}
-  {s.testimonials && <Testimonials />}
   {s.functionalities && <Process />}
-  {s.integrations && <Integrations />}
-  {s.ctaFinal && <CTA />}
   {s.cases && <Results />}
+  {s.testimonials && <Testimonials />}
+  {s.faq && <FAQ />}
+  {s.ctaFinal && <CTA />}
   {s.contact && <Contact />}
 </BaseLayout>
