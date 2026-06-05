@@ -6,6 +6,7 @@
 /sources
 /plans
 /skills
+.mcp.json
 
 # dependencies
 node_modules
