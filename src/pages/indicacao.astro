@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/indicacao/Hero.astro';
+import Audience from '../components/sections/indicacao/Audience.astro';
+import WhyNotAgency from '../components/sections/indicacao/WhyNotAgency.astro';
+import HowItWorks from '../components/sections/indicacao/HowItWorks.astro';
+import NR1 from '../components/sections/indicacao/NR1.astro';
+import NextStep from '../components/sections/indicacao/NextStep.astro';
+import WhoWeAre from '../components/sections/indicacao/WhoWeAre.astro';
+import FAQ from '../components/sections/indicacao/FAQ.astro';
+
+const title = "Página de Indicação";
+const description = "Você foi indicada. PsiAtiva — assessoria de captação ética para clínicas e consultórios de psicologia. Diagnóstico gratuito pelo WhatsApp.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Hero />
+  <Audience />
+  <WhyNotAgency />
+  <HowItWorks />
+  <NR1 />
+  <NextStep />
+  <WhoWeAre />
+  <FAQ />
+</BaseLayout>

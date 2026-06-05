@@ -1,0 +1,133 @@
+---
+// NR-1 2026 — janela estrutural (PsiAtiva)
+// Brand rule: alerts use yellow #F7C800, never red.
+---
+
+<section class="nr1 section" id="nr1">
+  <div class="container">
+    <div class="nr1-card">
+      <div class="nr1-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>Janela estrutural</span>
+      </div>
+
+      <h2 class="nr1-heading">
+        NR-1 2026 — a demanda corporativa por psicólogos vai aumentar.
+      </h2>
+
+      <div class="nr1-body">
+        <p>
+          A partir de janeiro de 2026, empresas brasileiras passam a ser
+          legalmente obrigadas a oferecer suporte psicológico aos colaboradores
+          (atualização da NR-1).
+        </p>
+        <p>
+          Ao longo de 2026, a demanda por psicólogos bem posicionados online
+          vai aumentar. Quem aparece nas buscas de SST, RH e benefícios
+          corporativos captura essa demanda primeiro.
+        </p>
+        <p class="nr1-emphasis">
+          Quem não está pronto, perde a janela.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nr1 {
+    padding: var(--section-padding-sm) 0;
+    background: var(--background);
+  }
+
+  .nr1-card {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px;
+    border-radius: var(--radius-card);
+    background: var(--dark-green);
+    color: var(--text-hero-white);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nr1-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(247, 200, 0, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .nr1-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    height: 30px;
+    border-radius: var(--radius-tag);
+    background: rgba(247, 200, 0, 0.15);
+    border: 1px solid rgba(247, 200, 0, 0.4);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--yellow);
+    width: fit-content;
+    z-index: 1;
+  }
+
+  .nr1-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.25;
+    color: var(--text-hero-white);
+    z-index: 1;
+  }
+
+  .nr1-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 1;
+  }
+
+  .nr1-body p {
+    font-family: var(--font-body);
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--light-blue);
+  }
+
+  .nr1-emphasis {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 18px !important;
+    color: var(--yellow) !important;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 720px) {
+    .nr1-card {
+      padding: 32px 24px;
+    }
+
+    .nr1-heading {
+      font-size: 24px;
+    }
+
+    .nr1-body p {
+      font-size: 15px;
+    }
+  }
+</style>

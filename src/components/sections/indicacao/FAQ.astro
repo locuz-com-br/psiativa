@@ -1,0 +1,178 @@
+---
+// Indicação FAQ — short objection-handling accordion (PsiAtiva)
+const faqItems = [
+  {
+    q: "Vocês são uma agência?",
+    a: "Não. Somos assessoria de processo. Agência traz contato; a gente trabalha o caminho inteiro até a sessão confirmada.",
+  },
+  {
+    q: "É um curso ou mentoria?",
+    a: "Não. É implementação real, junto com você ou com a sua equipe.",
+  },
+  {
+    q: "Aceitam qualquer profissional?",
+    a: "Não. Trabalhamos com perfis que já têm uma base de pacientes (mesmo que pequena) e que cobram dentro ou perto do mínimo recomendado pelo CRP.",
+  },
+  {
+    q: "E a ética?",
+    a: "Não usamos abordagens agressivas, follow-up frio nem promessa de \"explodir agenda\". Aparecer no Google e organizar o WhatsApp não é publicidade — é facilitar o acesso de quem já está te buscando.",
+  },
+  {
+    q: "Qual é o investimento?",
+    a: "Conversamos sobre isso na primeira conversa, depois de entender o seu cenário. A garantia vem antes do preço — se não bater a meta combinada, a gente fica até bater, sem custo adicional.",
+  },
+];
+---
+
+<section class="faq section" id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <span class="section-label">FAQ curto</span>
+      <h2 class="faq-title">
+        Perguntas que provavelmente passaram pela sua cabeça.
+      </h2>
+    </div>
+
+    <div class="faq-list">
+      {faqItems.map((item) => (
+        <div class="faq-item" data-faq-item>
+          <button class="faq-question" aria-expanded="false" data-faq-toggle>
+            <span>{item.q}</span>
+            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-faq-answer>
+            <p>{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: var(--section-padding-md) 0;
+    background: var(--background);
+  }
+
+  .faq-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .faq-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.3;
+    color: var(--text-heading);
+  }
+
+  .faq-list {
+    max-width: 768px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--text-heading);
+    text-align: left;
+    transition: color var(--transition-fast);
+  }
+
+  .faq-question:hover {
+    color: var(--secondary);
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+    color: var(--text-secondary);
+  }
+
+  .faq-item.open .faq-chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    padding: 0;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 320px;
+    padding: 0 0 1.25rem 0;
+  }
+
+  .faq-answer p {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 720px) {
+    .faq-title {
+      font-size: 24px;
+    }
+
+    .faq-question {
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('#faq [data-faq-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('[data-faq-item]');
+      if (!item) return;
+
+      const isOpen = item.classList.contains('open');
+
+      document.querySelectorAll('#faq [data-faq-item]').forEach((other) => {
+        other.classList.remove('open');
+        other.querySelector('[data-faq-toggle]')?.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

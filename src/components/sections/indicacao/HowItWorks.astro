@@ -1,0 +1,220 @@
+---
+// How It Works — GAP four-step process (PsiAtiva)
+const steps = [
+  {
+    n: "01",
+    title: "Consciência",
+    surface: "Google · Instagram · busca local",
+    desc: "Paciente percebe que você existe.",
+  },
+  {
+    n: "02",
+    title: "Ativação",
+    surface: "Perfil",
+    desc: "O seu perfil é confiável o suficiente para a pessoa entrar em contato.",
+  },
+  {
+    n: "03",
+    title: "Aquisição",
+    surface: "WhatsApp",
+    desc: "O primeiro contato é recebido e respondido com processo.",
+  },
+  {
+    n: "04",
+    title: "Conversão",
+    surface: "Sessão",
+    desc: "O contato vira sessão confirmada — com confirmação ativa e prevenção de no-show.",
+  },
+];
+---
+
+<section class="how section" id="como-funciona">
+  <div class="container">
+    <div class="how-header">
+      <span class="section-label">Como funciona — em 3 minutos</span>
+      <h2 class="how-heading">
+        GAP — <em>Gerador de Agenda Previsível</em>
+      </h2>
+      <p class="how-subtitle">
+        Quatro etapas. Você não precisa entender em detalhe agora.
+        O desenho mostra onde a sua agenda está vazando hoje.
+      </p>
+    </div>
+
+    <!-- Flow: Consciência → Ativação → Aquisição → Conversão -->
+    <ol class="how-flow">
+      {steps.map((s, i) => (
+        <>
+          <li class="how-step">
+            <div class="how-step-card">
+              <span class="how-step-num">{s.n}</span>
+              <h3 class="how-step-title">{s.title}</h3>
+              <span class="how-step-surface">{s.surface}</span>
+              <p class="how-step-desc">{s.desc}</p>
+            </div>
+          </li>
+          {i < steps.length - 1 && (
+            <li class="how-arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </li>
+          )}
+        </>
+      ))}
+    </ol>
+
+    <p class="how-footnote">
+      A gente diagnostica em qual dessas etapas a sua agenda está vazando.
+      Fecha esse buraco antes de abrir o próximo.
+    </p>
+  </div>
+</section>
+
+<style>
+  .how {
+    padding: var(--section-padding-md) 0;
+    background: var(--background);
+  }
+
+  .how-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .how-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46.8px;
+    color: var(--text-primary);
+  }
+
+  .how-heading em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .how-subtitle {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    max-width: 640px;
+  }
+
+  .how-flow {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .how-step {
+    flex: 1;
+    min-width: 220px;
+    max-width: 260px;
+    display: flex;
+  }
+
+  .how-step-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px 24px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    background: var(--background);
+    transition: all var(--transition-base);
+  }
+
+  .how-step-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26, 75, 81, 0.06);
+  }
+
+  .how-step-num {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    color: var(--accent);
+  }
+
+  .how-step-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--text-primary);
+  }
+
+  .how-step-surface {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--secondary);
+    margin-bottom: 4px;
+  }
+
+  .how-step-desc {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .how-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    flex: 0 0 auto;
+  }
+
+  .how-footnote {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 28px;
+    border-radius: var(--radius-card);
+    background: var(--sage-bg);
+  }
+
+  @media (max-width: 900px) {
+    .how-heading {
+      font-size: 28px;
+      line-height: 36.4px;
+    }
+
+    .how-flow {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .how-step {
+      max-width: 100%;
+    }
+
+    .how-arrow {
+      transform: rotate(90deg);
+      padding: 4px 0;
+    }
+  }
+</style>

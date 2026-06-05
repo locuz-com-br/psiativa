@@ -1,0 +1,177 @@
+---
+// Why Not Agency — comparison table (PsiAtiva)
+---
+
+<section class="why-not-agency section" id="diferenca">
+  <div class="container">
+    <div class="wna-header">
+      <span class="section-label">Não somos uma agência</span>
+      <h2 class="wna-heading">
+        A diferença é onde a gente atua.
+      </h2>
+      <p class="wna-subtitle">
+        Anúncio sem processo é dinheiro jogado fora. A gente entra onde o
+        anúncio termina.
+      </p>
+    </div>
+
+    <div class="wna-table">
+      <div class="wna-row wna-row-head">
+        <div class="wna-cell wna-cell-left">
+          <span class="wna-cell-label">Agência tradicional</span>
+        </div>
+        <div class="wna-cell wna-cell-right">
+          <span class="wna-cell-label wna-cell-label-us">PsiAtiva</span>
+        </div>
+      </div>
+
+      <div class="wna-row">
+        <div class="wna-cell wna-cell-left">
+          Traz tráfego — entrega contato bruto
+        </div>
+        <div class="wna-cell wna-cell-right">
+          Trabalha o caminho inteiro até a sessão confirmada
+        </div>
+      </div>
+
+      <div class="wna-row">
+        <div class="wna-cell wna-cell-left">
+          Não conhece a rotina de uma clínica de psicologia
+        </div>
+        <div class="wna-cell wna-cell-right">
+          Especializada em psicologia, com filtro ético em cada passo
+        </div>
+      </div>
+
+      <div class="wna-row">
+        <div class="wna-cell wna-cell-left">
+          Mede impressões e cliques
+        </div>
+        <div class="wna-cell wna-cell-right">
+          Mede paciente que sentou na sua sala
+        </div>
+      </div>
+
+      <div class="wna-row">
+        <div class="wna-cell wna-cell-left">
+          Cobra por entrega de anúncio ou material
+        </div>
+        <div class="wna-cell wna-cell-right">
+          Trabalha por meta de processo, com garantia
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-not-agency {
+    padding: var(--section-padding-md) 0;
+    background: var(--background-subtle);
+  }
+
+  .wna-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wna-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46.8px;
+    color: var(--text-primary);
+  }
+
+  .wna-subtitle {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .wna-table {
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--background);
+    border: 1px solid var(--color-border);
+  }
+
+  .wna-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .wna-row:last-child {
+    border-bottom: none;
+  }
+
+  .wna-cell {
+    padding: 22px 28px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .wna-cell-left {
+    color: var(--text-secondary);
+    border-right: 1px solid var(--color-border);
+    background: rgba(26, 75, 81, 0.02);
+  }
+
+  .wna-cell-right {
+    color: var(--text-primary);
+    background: rgba(126, 174, 137, 0.06);
+  }
+
+  .wna-row-head {
+    background: var(--primary);
+  }
+
+  .wna-row-head .wna-cell {
+    background: transparent;
+    border-right: 1px solid rgba(205, 234, 237, 0.18);
+    padding: 18px 28px;
+  }
+
+  .wna-row-head .wna-cell:last-child {
+    border-right: none;
+  }
+
+  .wna-cell-label {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--light-blue);
+  }
+
+  .wna-cell-label-us {
+    color: var(--accent-green);
+  }
+
+  @media (max-width: 720px) {
+    .wna-heading {
+      font-size: 28px;
+      line-height: 36.4px;
+    }
+
+    .wna-cell {
+      padding: 16px 18px;
+      font-size: 14.5px;
+    }
+
+    .wna-row-head .wna-cell {
+      padding: 14px 18px;
+    }
+  }
+</style>

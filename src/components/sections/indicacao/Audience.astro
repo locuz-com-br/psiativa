@@ -1,0 +1,332 @@
+---
+// Audience — Two ICP fork (clinic + solo) shown as separate blocks (PsiAtiva)
+// The brand rule is "never mix ICPs in a single sentence" — these are two
+// clearly forked cards, not blended copy.
+---
+
+<section class="audience section" id="para-quem">
+  <div class="container">
+    <div class="audience-header">
+      <span class="section-label">A quem isto se destina</span>
+      <h2 class="audience-heading">
+        Você foi indicada para ler isto.
+      </h2>
+      <p class="audience-subtitle">
+        Vale a pena se você se reconhece em um destes dois cenários.
+      </p>
+    </div>
+
+    <div class="audience-grid">
+      <!-- ICP 1: Clínica com equipe -->
+      <article class="audience-card">
+        <header class="audience-card-header">
+          <span class="audience-card-tag">Cenário 1</span>
+          <h3 class="audience-card-title">
+            Você tem clínica com equipe
+          </h3>
+          <p class="audience-card-sub">
+            2+ profissionais e ao menos uma recepção.
+          </p>
+        </header>
+
+        <div class="audience-card-block">
+          <h4 class="audience-block-title">Sinais</h4>
+          <ul class="audience-checklist">
+            <li>
+              <span class="check-dot"></span>
+              <span>Semana cheia, semana morta — sem conseguir prever o mês</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>Recepção que recebe mensagens mas não fecha o paciente</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>No-show recorrente, especialmente em primeira sessão</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>Já tentou anunciar, veio contato — só que parou ali</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>A cidade tem clínicas menos qualificadas com agenda mais cheia que a sua</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="audience-card-block">
+          <h4 class="audience-block-title">O que a parceria entrega</h4>
+          <p>
+            Organização do caminho do primeiro contato à sessão confirmada — atendimento,
+            follow-up, redução de no-show, presença online com ética.
+          </p>
+        </div>
+
+        <div class="audience-card-meta">
+          <div class="meta-row">
+            <span class="meta-label">Meta</span>
+            <span class="meta-value">+R$10.000 de faturamento em até 6 meses</span>
+          </div>
+          <div class="meta-row meta-row-warranty">
+            <span class="meta-label">Garantia</span>
+            <span class="meta-value">Se não bater, ficamos junto até bater — sem custo adicional</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ICP 2: Consultório solo -->
+      <article class="audience-card">
+        <header class="audience-card-header">
+          <span class="audience-card-tag">Cenário 2</span>
+          <h3 class="audience-card-title">
+            Você atende sozinha
+          </h3>
+          <p class="audience-card-sub">
+            Consultório solo, sem equipe.
+          </p>
+        </header>
+
+        <div class="audience-card-block">
+          <h4 class="audience-block-title">Sinais</h4>
+          <ul class="audience-checklist">
+            <li>
+              <span class="check-dot"></span>
+              <span>Você sai da sessão e o WhatsApp já tem mensagem de quem foi para outra pessoa</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>Ninguém te encontra no Google — ou te encontra e o perfil está vazio</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>Cobra abaixo do que merece porque tem medo de perder paciente</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>Depende 100% de indicação e a agenda oscila junto com a fonte</span>
+            </li>
+            <li>
+              <span class="check-dot"></span>
+              <span>Quer aparecer online sem virar produtora de conteúdo</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="audience-card-block">
+          <h4 class="audience-block-title">O que a parceria entrega</h4>
+          <p>
+            Presença ética online — Google Meu Negócio, site simples, WhatsApp
+            organizado — que funciona enquanto você atende.
+          </p>
+        </div>
+
+        <div class="audience-card-meta">
+          <div class="meta-row">
+            <span class="meta-label">Prazo</span>
+            <span class="meta-value">Processo ativo em até 45 dias</span>
+          </div>
+          <div class="meta-row meta-row-warranty">
+            <span class="meta-label">Garantia</span>
+            <span class="meta-value">Se os canais não gerarem contato, a gente ajusta sem custo até gerarem</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .audience {
+    padding: var(--section-padding-md) 0;
+    background: var(--background);
+  }
+
+  .audience-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .audience-heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46.8px;
+    color: var(--text-primary);
+  }
+
+  .audience-subtitle {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .audience-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 36px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    background: var(--background);
+    transition: all var(--transition-base);
+  }
+
+  .audience-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(26, 75, 81, 0.08);
+  }
+
+  .audience-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .audience-card-tag {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .audience-card-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.25;
+    color: var(--text-primary);
+  }
+
+  .audience-card-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .audience-card-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .audience-card-block p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  .audience-block-title {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  .audience-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .audience-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--text-primary);
+  }
+
+  .check-dot {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 9px;
+  }
+
+  .audience-card-meta {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    border-radius: var(--radius-card);
+    background: var(--background-subtle);
+  }
+
+  .meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  .meta-row-warranty .meta-label {
+    color: var(--accent-dark);
+  }
+
+  .meta-value {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 900px) {
+    .audience-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .audience-heading {
+      font-size: 28px;
+      line-height: 36.4px;
+    }
+
+    .audience-card {
+      padding: 28px;
+    }
+
+    .audience-card-title {
+      font-size: 22px;
+    }
+  }
+</style>
