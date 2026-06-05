@@ -64,6 +64,11 @@ export const SITE_CONFIG = {
     favicon: "/images/logo/psiativa-profile.svg",
   },
 
+  // ── SEO / Social Preview ────────────────────
+  seo: {
+    ogImage: "/images/logo/psiativa-full.png",
+  },
+
   // ── Hero Background ────────────────────────
   hero: {
     backgroundImage: "",

@@ -13,14 +13,14 @@ export const PAGES = {
 
 // ── Section Anchors ──────────────���───────────
 export const SECTIONS = {
-  inicio: "#inicio",
-  sobre: "#sobre",
-  funcionalidades: "#funcionalidades",
-  depoimentos: "#depoimentos",
-  resultados: "#resultados",
-  faq: "#faq",
-  cta: "#cta",
-  contato: "#contato",
+  inicio: "/#inicio",
+  sobre: "/#sobre",
+  funcionalidades: "/#funcionalidades",
+  depoimentos: "/#depoimentos",
+  resultados: "/#resultados",
+  faq: "/#faq",
+  cta: "/#cta",
+  contato: "/#contato",
 } as const;
 
 // ── Social Media ─────────────────────────────

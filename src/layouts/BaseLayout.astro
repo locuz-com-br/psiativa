@@ -1,19 +1,28 @@
 ---
 import { SITE_CONFIG } from '../config/site.config';
+import SEOHead from '../components/seo/SEOHead.astro';
 
 interface Props {
   title: string;
   description?: string;
   hideNavAndFooter?: boolean;
+  canonicalPath?: string;
+  ogType?: "website" | "article";
+  image?: string;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  noindex?: boolean;
 }
 
 const {
   title,
   description = SITE_CONFIG.description.pt,
-  hideNavAndFooter = false
+  hideNavAndFooter = false,
+  canonicalPath,
+  ogType = "website",
+  image,
+  schema,
+  noindex = false,
 } = Astro.props;
-
-const siteName = SITE_CONFIG.name;
 
 import '../styles/global.css';
 import Navbar from '../components/sections/Navbar.astro';
@@ -26,21 +35,18 @@ import WhatsAppFab from '../components/sections/WhatsAppFab.astro';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-
-    <!-- OG / Social -->
-    <meta property="og:title" content={`${title} | ${siteName}`} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content={SITE_CONFIG.defaultLocale.replace('-', '_')} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} | ${siteName}`} />
-    <meta name="twitter:description" content={description} />
+    <SEOHead
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      type={ogType}
+      image={image}
+      schema={schema}
+      noindex={noindex}
+    />
 
     <!-- Theme -->
     <meta name="theme-color" content="#1A4B51" />
-
-    <title>{title} | {siteName}</title>
     <link rel="icon" type="image/svg+xml" href={SITE_CONFIG.logos.favicon} />
 
     <!-- Preload critical fonts: New York + Lora -->

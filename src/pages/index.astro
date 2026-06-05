@@ -11,11 +11,34 @@ import Results from '../components/sections/Results.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import CTA from '../components/sections/CTA.astro';
 import Contact from '../components/sections/Contact.astro';
+import faqData from '../data/faq.json';
+import translations from '../data/translations.json';
+import { faqPageSchema, organizationSchema, websiteSchema } from '../lib/schema';
 
 const s = SITE_CONFIG.sections;
+
+function getTranslation(path: string) {
+  return path.split('.').reduce((acc, key) => acc?.[key], translations as any)?.pt ?? '';
+}
+
+const homeFaqs = faqData.items.map((item) => ({
+  question: getTranslation(item.translationPrefix),
+  answer: getTranslation(item.answerPrefix),
+}));
+
+const homeSchema = [
+  organizationSchema(),
+  websiteSchema(),
+  faqPageSchema(homeFaqs),
+];
 ---
 
-<BaseLayout title={SITE_CONFIG.description.pt}>
+<BaseLayout
+  title="Captação ética para clínicas de psicologia"
+  description={SITE_CONFIG.description.pt}
+  canonicalPath="/"
+  schema={homeSchema}
+>
   {s.hero && <Hero />}
   {s.partners && <LogoBar />}
   {s.about && <WhyUs />}

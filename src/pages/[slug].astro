@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -12,9 +13,20 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+const pagePath = `/${page.id}/`;
+const schema = breadcrumbSchema([
+  { name: 'Início', path: '/' },
+  { name: page.data.title, path: pagePath },
+]);
 ---
 
-<BaseLayout title={page.data.title}>
+<BaseLayout
+  title={page.data.title}
+  description={page.data.description}
+  canonicalPath={pagePath}
+  schema={schema}
+  noindex={Boolean(page.data.noindex) || page.id === 'example'}
+>
   <article class="page-content container">
     <Content />
   </article>

@@ -1,6 +1,11 @@
 ---
 // FAQ — Accordion-style objection handling (PsiAtiva)
 import faqData from "../../data/faq.json";
+import translations from "../../data/translations.json";
+
+function getTranslation(path: string) {
+  return path.split(".").reduce((acc, key) => acc?.[key], translations as any)?.pt ?? "";
+}
 ---
 
 <section class="faq section" id="faq">
@@ -17,13 +22,13 @@ import faqData from "../../data/faq.json";
       {faqData.items.map((item, index) => (
         <div class="faq-item" data-faq-item>
           <button class="faq-question" aria-expanded="false" data-faq-toggle>
-            <span data-i18n={item.translationPrefix}></span>
+            <span data-i18n={item.translationPrefix}>{getTranslation(item.translationPrefix)}</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
           </button>
           <div class="faq-answer" data-faq-answer>
-            <p data-i18n={item.answerPrefix}></p>
+            <p data-i18n={item.answerPrefix}>{getTranslation(item.answerPrefix)}</p>
           </div>
         </div>
       ))}

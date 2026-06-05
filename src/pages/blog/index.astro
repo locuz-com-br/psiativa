@@ -1,0 +1,139 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { breadcrumbSchema } from "../../lib/schema";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+const schema = breadcrumbSchema([
+  { name: "Início", path: "/" },
+  { name: "Blog", path: "/blog/" },
+]);
+---
+
+<BaseLayout
+  title="Guias para psicólogas e clínicas"
+  description="Guias da PsiAtiva sobre presença, processo e agenda previsível para clínicas de psicologia e consultórios solo."
+  canonicalPath="/blog/"
+  schema={schema}
+>
+  <section class="blog-hero">
+    <div class="container blog-hero-inner">
+      <span class="section-label">Blog PsiAtiva</span>
+      <h1>Guias para organizar a agenda com mais previsibilidade.</h1>
+      <p>
+        Conteúdo para psicólogas e clínicas que querem entender onde pacientes se perdem
+        entre a busca, o primeiro contato e a sessão confirmada.
+      </p>
+    </div>
+  </section>
+
+  <section class="blog-list-section">
+    <div class="container blog-list">
+      {posts.map((post) => (
+        <article class="post-card">
+          <div class="post-meta">
+            <span>{post.data.icp}</span>
+            <span>{post.data.gapStage}</span>
+          </div>
+          <h2>
+            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+          </h2>
+          <p>{post.data.excerpt}</p>
+          <a class="post-link" href={`/blog/${post.id}/`}>Ler guia</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-hero {
+    padding: 9rem 0 5rem;
+    background: var(--gradient-hero);
+  }
+
+  .blog-hero-inner {
+    max-width: 860px;
+  }
+
+  .blog-hero .section-label {
+    color: var(--accent-light);
+  }
+
+  .blog-hero h1 {
+    max-width: 780px;
+    color: var(--text-hero-white);
+    font-size: clamp(2.5rem, 7vw, 4.25rem);
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+
+  .blog-hero p {
+    max-width: 680px;
+    margin-top: 1.5rem;
+    color: var(--text-hero-subtitle);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .blog-list-section {
+    padding: 5rem 0 7rem;
+    background: var(--background);
+  }
+
+  .blog-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .post-card {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #ffffff;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--secondary);
+    font-family: var(--font-ui);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .post-card h2 {
+    margin-bottom: 0.75rem;
+    font-size: clamp(1.45rem, 2vw, 1.8rem);
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+
+  .post-card h2 a:hover,
+  .post-link:hover {
+    color: var(--secondary);
+  }
+
+  .post-card p {
+    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .post-link {
+    color: var(--primary);
+    font-family: var(--font-ui);
+    font-weight: 700;
+  }
+
+  @media (max-width: 760px) {
+    .blog-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -164,23 +164,23 @@
     "title_2": { "pt": "você provavelmente tem", "en": "you probably have" },
     "q1": { "pt": "Isso não vai parecer antiético para meus pacientes?", "en": "Won't this seem unethical to my patients?" },
     "a1": {
-      "pt": "Não. O que fazemos é organizar o processo entre o primeiro contato e a sessão confirmada. Não é propaganda — é cuidado desde o primeiro momento. Seu paciente vai sentir mais acolhimento, não mais pressão.",
-      "en": "No. What we do is organize the process between first contact and confirmed session. It's not advertising — it's care from the very first moment. Your patient will feel more welcomed, not more pressured."
+      "pt": "Não. O que fazemos é organizar o processo entre o primeiro contato e a sessão confirmada. É presença com critério, sem pressão. O paciente encontra um caminho mais claro para falar com a clínica.",
+      "en": "No. What we do is organize the process between first contact and confirmed session. It is presence with criteria, without pressure. The patient finds a clearer path to contact the clinic."
     },
-    "q2": { "pt": "Já tentei com uma agência e não funcionou. Por que seria diferente?", "en": "I tried with an agency before and it didn't work. Why would this be different?" },
+    "q2": { "pt": "Já tentei com uma assessoria genérica e não funcionou. Por que seria diferente?", "en": "I tried a generic advisory service before and it did not work. Why would this be different?" },
     "a2": {
-      "pt": "Agências entregam posts e anúncios. A PsiAtiva entrega processo — scripts de atendimento, confirmação em camadas, acompanhamento de números. O problema da maioria das clínicas não é visibilidade, é o que acontece depois que o paciente faz contato.",
-      "en": "Agencies deliver posts and ads. PsiAtiva delivers process — service scripts, layered confirmations, number tracking. Most clinics' problem isn't visibility — it's what happens after the patient makes contact."
+      "pt": "A PsiAtiva trabalha o processo completo: primeira resposta, confirmação em camadas e acompanhamento dos números da agenda. O problema de muitas clínicas não é só visibilidade. É o que acontece depois que o paciente faz contato.",
+      "en": "PsiAtiva works on the full process: first response, layered confirmation, and schedule metrics. The problem for many clinics is not only visibility. It is what happens after the patient makes contact."
     },
     "q3": { "pt": "Minha recepcionista não vai dar conta de mais coisas.", "en": "My receptionist won't be able to handle more tasks." },
     "a3": {
       "pt": "Na verdade, o objetivo é o oposto: organizar e simplificar a rotina da recepção. Scripts prontos, confirmação padronizada e um processo claro reduzem o improviso e a sobrecarga — não aumentam.",
       "en": "Actually, the goal is the opposite: to organize and simplify the reception routine. Ready-made scripts, standardized confirmations, and a clear process reduce improvisation and overload — they don't increase it."
     },
-    "q4": { "pt": "Quanto tempo até ver resultado?", "en": "How long until I see results?" },
+    "q4": { "pt": "Quando começo a perceber movimento?", "en": "When do I start noticing movement?" },
     "a4": {
-      "pt": "Os primeiros resultados aparecem em 14 a 21 dias após a ativação. Não prometemos milagre — prometemos processo. E processo bem feito gera resultado consistente.",
-      "en": "First results appear within 14 to 21 days after activation. We don't promise miracles — we promise process. And well-done process generates consistent results."
+      "pt": "A primeira mudança costuma aparecer na clareza do atendimento: menos improviso, mais registro e mais previsibilidade sobre onde a agenda trava. A partir daí, a evolução depende do cenário da clínica e dos canais ativos.",
+      "en": "The first change usually appears in the clarity of service: less improvisation, more records, and more predictability about where the schedule gets stuck. From there, progress depends on the clinic's context and active channels."
     },
     "q5": { "pt": "E se minha agenda já está cheia em alguns horários?", "en": "What if my schedule is already full at certain times?" },
     "a5": {
@@ -194,8 +194,8 @@
     },
     "q7": { "pt": "Qual o investimento?", "en": "What's the investment?" },
     "a7": {
-      "pt": "Depende do momento da sua clínica. Temos opções de entrada a partir de 45 dias e parcerias de 6 meses. O melhor caminho é agendar o diagnóstico gratuito — em 30 minutos mapeamos sua situação e indicamos o próximo passo.",
-      "en": "It depends on your clinic's current situation. We have entry options starting at 45 days and 6-month partnerships. The best path is to schedule the free diagnostic — in 30 minutes we map your situation and recommend the next step."
+      "pt": "Depende do momento da sua clínica e do tamanho do buraco entre contato e sessão confirmada. O caminho certo é conversar primeiro, mapear a situação e entender qual passo faz sentido antes de falar de proposta.",
+      "en": "It depends on your clinic's current moment and the size of the gap between contact and confirmed session. The right path is to talk first, map the situation, and understand which step makes sense before discussing a proposal."
     }
   },
 
