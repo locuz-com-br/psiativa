@@ -4,7 +4,9 @@
       "Bash(npm run:*)",
       "Bash(npm install:*)",
       "Bash(npx astro:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(curl -s \"http://localhost:4321/indicacao\")",
+      "Bash(taskkill //F //IM node.exe //T)"
     ]
   }
 }
