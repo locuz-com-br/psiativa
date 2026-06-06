@@ -1,0 +1,421 @@
+---
+// ─────────────────────────────────────────────────────────────
+// /quiz — Diagnóstico de 2 Minutos (Quiz de Diagnóstico)
+// Camada indexável (SEO) + island interativa.
+// UM quiz, DOIS ICPs: as perguntas perfilam (autônoma vs. clínica);
+// cada resultado fala com um ICP só. SEM oferta em lugar nenhum.
+// Plano: plans/quiz-diagnostico/plan.md
+// ─────────────────────────────────────────────────────────────
+import { SITE_CONFIG } from "../config/site.config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import QuizIsland from "../components/quiz/QuizIsland.tsx";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  organizationSchema,
+  webApplicationSchema,
+} from "../lib/schema";
+
+const title = "Diagnóstico: onde a sua agenda está vazando?";
+const description =
+  "Responda 6 perguntas e descubra em 2 minutos qual buraco esvazia sua agenda hoje. De graça, sem cadastro, com um material pra começar a fechar esse buraco.";
+const pagePath = "/quiz/";
+
+const faqs = [
+  {
+    question: "O diagnóstico é gratuito?",
+    answer: "É. São 6 perguntas rápidas e o resultado aparece na hora, sem custo.",
+  },
+  {
+    question: "Preciso me cadastrar pra ver o resultado?",
+    answer:
+      "Não. O resultado aparece assim que você responde. Você só deixa o WhatsApp no fim se quiser receber o material relacionado à sua dor.",
+  },
+  {
+    question: "Quanto tempo leva?",
+    answer: "Cerca de 2 minutos. São 6 perguntas sobre o seu dia a dia.",
+  },
+  {
+    question: "Serve pra quem atende sozinha?",
+    answer:
+      "Serve. As primeiras perguntas entendem se você atende sozinha ou tem equipe, e o resultado fala com a sua realidade, não com uma genérica.",
+  },
+  {
+    question: "Isso é uma avaliação clínica?",
+    answer:
+      "Não. É um diagnóstico do seu processo de captação e da sua agenda, pra começar uma conversa. Não é laudo nem avaliação psicológica.",
+  },
+  {
+    question: "O que acontece depois que eu deixo meu WhatsApp?",
+    answer:
+      "A gente te envia o material por lá e fica à disposição se você quiser conversar sobre o que apareceu. Seu contato fica só com a PsiAtiva, sem disparo em massa.",
+  },
+];
+
+const schema = [
+  organizationSchema(),
+  webApplicationSchema({
+    name: "Diagnóstico de 2 Minutos da PsiAtiva",
+    description,
+    path: pagePath,
+  }),
+  faqPageSchema(faqs),
+  breadcrumbSchema([
+    { name: "Início", path: "/" },
+    { name: "Diagnóstico", path: pagePath },
+  ]),
+];
+
+const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+  "Olá! Fiz o diagnóstico de 2 minutos no site da PsiAtiva e gostaria de conversar sobre o que apareceu.",
+)}`;
+---
+
+<BaseLayout title={title} description={description} canonicalPath={pagePath} schema={schema}>
+  <!-- ── Hero (dark teal) ─────────────────────────────────── -->
+  <section class="quiz-hero">
+    <div class="quiz-hero-bg"></div>
+    <div class="container quiz-hero-content">
+      <div class="quiz-tag-hero">Diagnóstico gratuito</div>
+      <h1 class="quiz-h1">
+        Onde a sua agenda está vazando?<br />
+        <span class="quiz-h1-accent">Descubra em 2 minutos.</span>
+      </h1>
+      <p class="quiz-hero-sub">
+        Mês bom e mês ruim, sem conseguir prever. Antes de achar que é falta de paciente, vale olhar onde eles estão
+        se perdendo no caminho.
+      </p>
+      <p class="quiz-tldr">
+        Este diagnóstico faz 6 perguntas sobre o seu dia a dia: como chega o paciente, o que acontece no primeiro
+        contato, de onde vêm as indicações. No fim, ele nomeia o buraco que mais esvazia a sua agenda hoje e te entrega
+        um material pra começar a fechar. Leva uns 2 minutos e é de graça.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── O quiz (island) ──────────────────────────────────── -->
+  <section class="quiz-tool">
+    <div class="container quiz-tool-inner">
+      <QuizIsland client:visible />
+    </div>
+  </section>
+
+  <!-- ── Conteúdo de apoio (camada indexável) ─────────────── -->
+  <section class="quiz-content">
+    <div class="container quiz-prose">
+      <h2>Por que a agenda de psicóloga oscila tanto?</h2>
+      <p>
+        Na maioria das vezes a demanda existe. O paciente chega por indicação, vê o Instagram, manda mensagem no
+        WhatsApp. O que falha é o caminho entre esse primeiro contato e a sessão confirmada. Uma mensagem que demora
+        a ser respondida, uma primeira sessão que ninguém confirma, uma agenda que depende só de quem indica. Cada um
+        desses pontos é um lugar por onde a agenda vaza, e quase sempre passa despercebido até o mês virar.
+      </p>
+
+      <h2>Como saber onde você está perdendo paciente?</h2>
+      <p>
+        Olhando para o seu próprio dia a dia, não para uma média de mercado. Quem responde o primeiro contato? Quanto
+        tempo a pessoa espera? Quantos pacientes novos chegam por mês e de onde vêm? O diagnóstico faz essas perguntas
+        e devolve, em uma frase, qual buraco está pesando mais agora. Quando a dor tem nome, fica mais fácil decidir
+        o que olhar primeiro.
+      </p>
+
+      <h2>O problema é falta de paciente ou o caminho até a sessão?</h2>
+      <p>
+        Você não perde paciente por falta de competência clínica. Perde no caminho, entre o contato e a consulta
+        confirmada. É por isso que captar mais gente, sem arrumar esse caminho, costuma não resolver: entra mais
+        contato e continua vazando na mesma porta. O diagnóstico separa as duas coisas, se o aperto está na chegada
+        de paciente novo ou na perda do que já chegou.
+      </p>
+
+      <h2>O que você recebe no fim do diagnóstico?</h2>
+      <p>
+        Primeiro, o nome do buraco principal e o que ele custa por mês na sua agenda. Depois, se você deixar seu
+        WhatsApp, um material gratuito feito pra essa dor específica: um guia, um roteiro ou um checklist pra começar
+        a fechar esse buraco com as próprias mãos. O material chega pelo WhatsApp, sem preço e sem compromisso.
+      </p>
+
+      <h2>Isso serve pra consultório solo e pra clínica?</h2>
+      <p>
+        Serve para os dois. As primeiras perguntas entendem se você atende sozinha, sem recepção, ou se tem uma equipe
+        cuidando dos primeiros contatos. A partir daí, o resultado fala com a sua realidade. Quem atende sozinha tem
+        dores diferentes de quem coordena uma clínica, e o diagnóstico respeita essa diferença em vez de tratar todo
+        mundo igual.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FAQ (indexável + FAQPage schema) ─────────────────── -->
+  <section class="quiz-faq">
+    <div class="container quiz-prose">
+      <h2 class="quiz-faq-title">Perguntas frequentes</h2>
+      {
+        faqs.map((f) => (
+          <details class="quiz-faq-item">
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ── Links internos ───────────────────────────────────── -->
+  <section class="quiz-related">
+    <div class="container quiz-prose">
+      <p>
+        Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada?{" "}
+        <a href="/">Veja como funciona o processo</a>. Se você atende sozinha e quer ver a conta em números,{" "}
+        <a href="/calculadora/">use a calculadora de custo da agenda vazia</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── CTA final (espelha a home) ───────────────────────── -->
+  <section class="quiz-cta-final">
+    <div class="container quiz-cta-inner">
+      <h2>Primeiro passo: uma conversa. Só isso.</h2>
+      <p>Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
+      <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-light">
+        <span>Agendar diagnóstico gratuito</span>
+        <span class="icon-circle">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ─────────────────────────────────────────────── */
+  .quiz-hero {
+    position: relative;
+    top: -72px;
+    margin-bottom: -72px;
+    padding: 160px 0 80px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  .quiz-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-hero);
+    z-index: 0;
+  }
+  .quiz-hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+    max-width: 860px;
+  }
+  .quiz-tag-hero {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    color: var(--light-blue);
+    background: var(--secondary-40);
+    backdrop-filter: blur(10.5px);
+    -webkit-backdrop-filter: blur(10.5px);
+    padding: 6px 14px;
+    border-radius: var(--radius-tag);
+  }
+  .quiz-h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 52px;
+    line-height: 1.15;
+    letter-spacing: -1.04px;
+    color: var(--text-hero-white);
+  }
+  .quiz-h1-accent {
+    color: var(--accent);
+  }
+  .quiz-hero-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--accent-light);
+    max-width: 680px;
+  }
+  .quiz-tldr {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--text-hero-subtitle);
+    max-width: 720px;
+  }
+
+  /* ── Tool section ─────────────────────────────────────── */
+  .quiz-tool {
+    background: var(--background-subtle);
+    padding: 64px 0;
+  }
+  .quiz-tool-inner {
+    max-width: 760px;
+  }
+
+  /* ── Prose / content ──────────────────────────────────── */
+  .quiz-content {
+    background: var(--background);
+    padding: 80px 0;
+  }
+  .quiz-prose {
+    max-width: 760px;
+  }
+  .quiz-prose h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--text-heading);
+    margin: 2.25rem 0 0.75rem;
+  }
+  .quiz-prose h2:first-child {
+    margin-top: 0;
+  }
+  .quiz-prose p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .quiz-prose strong {
+    color: var(--text-heading);
+    font-weight: 700;
+  }
+  .quiz-prose a {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .quiz-prose a:hover {
+    color: var(--primary);
+  }
+
+  /* ── FAQ ──────────────────────────────────────────────── */
+  .quiz-faq {
+    background: var(--sage-bg);
+    padding: 80px 0;
+  }
+  .quiz-faq-title {
+    margin-bottom: 1.5rem !important;
+  }
+  .quiz-faq-item {
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.1rem 0;
+  }
+  .quiz-faq-item summary {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text-heading);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .quiz-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .quiz-faq-item summary::after {
+    content: "+";
+    font-size: 24px;
+    color: var(--secondary);
+    line-height: 1;
+  }
+  .quiz-faq-item[open] summary::after {
+    content: "−";
+  }
+  .quiz-faq-item p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-top: 0.75rem;
+  }
+
+  /* ── Related ──────────────────────────────────────────── */
+  .quiz-related {
+    background: var(--background);
+    padding: 40px 0;
+  }
+  .quiz-related p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+  .quiz-related a {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── CTA final ────────────────────────────────────────── */
+  .quiz-cta-final {
+    background: var(--gradient-testimonials);
+    padding: 96px 0;
+  }
+  .quiz-cta-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 680px;
+  }
+  .quiz-cta-inner h2 {
+    font-family: var(--font-display);
+    font-size: 34px;
+    color: var(--text-hero-white);
+  }
+  .quiz-cta-inner p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-hero-subtitle);
+  }
+  .quiz-cta-inner .btn-primary-light {
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 810px) {
+    .quiz-h1 {
+      font-size: 34px;
+      letter-spacing: -0.6px;
+    }
+    .quiz-hero-sub {
+      font-size: 17px;
+    }
+    .quiz-tldr {
+      font-size: 15px;
+      line-height: 24px;
+    }
+    .quiz-prose h2 {
+      font-size: 23px;
+    }
+    .quiz-cta-inner h2 {
+      font-size: 26px;
+    }
+  }
+</style>

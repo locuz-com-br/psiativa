@@ -1,0 +1,187 @@
+{
+  "_comment": "Conteúdo do Quiz de Diagnóstico (plans/quiz-diagnostico/plan.md). UM quiz, DOIS ICPs: as perguntas perfilam (autônoma vs. clínica), cada resultado fala com um ICP só. SEM preço, garantia, prazo ou condição em lugar nenhum (§0 regra 1). Voz: regras do skills/humanizer/SKILL.md. Tokens: ui.progress usa {n}/{total}; capture.title usa {isca} (= iscaPromise); handoff.body usa {isca} (= iscaTitle). Copy PENDENTE de voice-auditor + CFP-light + offer-guardian antes de publicar.",
+
+  "intro": {
+    "tag": "Diagnóstico em 2 minutos",
+    "title": "Descubra onde sua agenda está vazando",
+    "subtitle": "São 6 perguntas sobre o seu dia a dia. No fim, você vê qual buraco esvazia sua agenda hoje e recebe um material pra começar a fechar esse buraco.",
+    "note": "De graça, sem cadastro. Você só deixa seu WhatsApp no fim, pra eu te enviar o material.",
+    "start": "Começar"
+  },
+
+  "questions": [
+    {
+      "id": "perfil",
+      "kind": "profiling",
+      "prompt": "Como funciona o atendimento no seu espaço hoje?",
+      "options": [
+        { "id": "solo", "label": "Atendo sozinha, sem recepção", "icp": { "autonoma": 2 } },
+        { "id": "equipe", "label": "Tenho equipe e/ou recepção comigo", "icp": { "clinica": 2 } },
+        { "id": "transicao", "label": "Estou montando agora, em transição", "icp": { "autonoma": 1 } }
+      ]
+    },
+    {
+      "id": "primeiro_contato",
+      "kind": "profiling",
+      "prompt": "Quando chega uma mensagem de paciente novo no WhatsApp, quem responde?",
+      "options": [
+        { "id": "eu_quando_da", "label": "Eu mesma, quando consigo entre uma sessão e outra", "icp": { "autonoma": 1 }, "pains": { "solo_perda_silenciosa": 1, "clinica_correria": 1 } },
+        { "id": "recepcao", "label": "Minha recepção ou secretária", "icp": { "clinica": 1 } },
+        { "id": "depende", "label": "Depende do dia, às vezes demora", "icp": { "autonoma": 1 }, "pains": { "solo_perda_silenciosa": 1, "clinica_correria": 1 } }
+      ]
+    },
+    {
+      "id": "incomodo",
+      "kind": "diagnostic",
+      "prompt": "Pensando na sua agenda hoje, o que mais te incomoda?",
+      "helper": "Escolha o que pesa mais.",
+      "options": [
+        { "id": "previsao", "label": "Não consigo prever como vai ser o próximo mês", "pains": { "clinica_previsibilidade": 3, "solo_oscilante": 3 } },
+        { "id": "mensagem_esperando", "label": "Paciente novo manda mensagem e fica esperando enquanto eu atendo", "pains": { "solo_perda_silenciosa": 3, "clinica_correria": 2 } },
+        { "id": "so_indicacao", "label": "Quase todo paciente chega por indicação, e isso me deixa refém", "pains": { "clinica_dependencia": 3, "solo_oscilante": 2 } },
+        { "id": "cobro_pouco", "label": "Cobro menos do que poderia, com medo de perder quem já é paciente", "pains": { "solo_vps": 3 } },
+        { "id": "apago_incendio", "label": "Apago incêndio o dia todo e faço quase tudo sozinha", "pains": { "clinica_correria": 3, "solo_perda_silenciosa": 1 } }
+      ]
+    },
+    {
+      "id": "primeira_resposta",
+      "kind": "diagnostic",
+      "prompt": "Quando um paciente novo entra em contato, o que costuma acontecer?",
+      "options": [
+        { "id": "as_vezes_some", "label": "Às vezes demoro pra responder e a pessoa some", "pains": { "solo_perda_silenciosa": 2, "clinica_correria": 1 } },
+        { "id": "sem_roteiro", "label": "Respondo, mas sem um roteiro, cada vez de um jeito", "pains": { "clinica_correria": 2, "solo_perda_silenciosa": 1 } },
+        { "id": "some_na_confirmacao", "label": "Marca a primeira sessão e some na hora de confirmar", "pains": { "clinica_previsibilidade": 2, "solo_oscilante": 1 } },
+        { "id": "poucos_chegam", "label": "O problema é antes: chega pouca gente nova", "pains": { "clinica_dependencia": 2, "solo_oscilante": 2 } }
+      ]
+    },
+    {
+      "id": "origem",
+      "kind": "diagnostic",
+      "prompt": "De onde vêm seus pacientes hoje?",
+      "options": [
+        { "id": "tudo_indicacao", "label": "Quase tudo boca a boca e indicação", "pains": { "clinica_dependencia": 3, "solo_oscilante": 2 } },
+        { "id": "online_nao_traz", "label": "Tento aparecer no Google e no Instagram, mas não chega ninguém por ali", "pains": { "clinica_dependencia": 2, "solo_oscilante": 2 } },
+        { "id": "mix_oscila", "label": "Um pouco de cada, mas oscila demais de um mês pro outro", "pains": { "clinica_previsibilidade": 2, "solo_oscilante": 3 } },
+        { "id": "fonte_unica", "label": "Depende de uma fonte só. Se ela secar, a agenda vai junto", "pains": { "clinica_dependencia": 3, "solo_oscilante": 3 } }
+      ]
+    },
+    {
+      "id": "valor",
+      "kind": "diagnostic",
+      "prompt": "E sobre o valor da sua sessão?",
+      "options": [
+        { "id": "medo_subir", "label": "Cobro abaixo do que gostaria, com medo de perder paciente se subir", "pains": { "solo_vps": 3, "clinica_previsibilidade": 1 } },
+        { "id": "ok_mas_vazio", "label": "O valor está ok. O problema é a agenda que não enche", "pains": { "clinica_previsibilidade": 2, "solo_oscilante": 2 } },
+        { "id": "ocupada_demais", "label": "Nem penso nisso, estou ocupada demais apagando incêndio", "pains": { "clinica_correria": 3, "solo_perda_silenciosa": 1 } },
+        { "id": "valor_justo", "label": "Cobro um valor justo e constante", "pains": {} }
+      ]
+    },
+    {
+      "id": "urgencia",
+      "kind": "temperature",
+      "prompt": "Se nada mudar nos próximos meses, como você se sente?",
+      "options": [
+        { "id": "agora", "label": "Preciso resolver isso logo, já está pesando", "temperature": "desesperado" },
+        { "id": "entender", "label": "Quero entender melhor antes de decidir qualquer coisa", "temperature": "curioso" },
+        { "id": "tranquilo", "label": "Está tranquilo, é mais curiosidade", "temperature": "acomodado" }
+      ]
+    }
+  ],
+
+  "results": [
+    {
+      "key": "clinica_previsibilidade",
+      "icp": "clinica",
+      "slug": "previsibilidade",
+      "painName": "Falta de previsibilidade",
+      "echo": "Você nunca sabe como vai ser o próximo mês. Uma semana cheia, a seguinte morta, e nada na sua mão pra prever.",
+      "hemorrhage": "Cadeira vazia é custo fixo rodando sem receita. Sem previsão, você não consegue planejar sala, equipe nem o caixa do mês. Cada semana com buraco na agenda é dinheiro que não volta.",
+      "aspiration": "Quando a agenda para de oscilar, o mês deixa de ser uma surpresa. Você planeja a sala, a equipe e a sua rotina com antecedência, em vez de torcer pra semana ser boa.",
+      "iscaTitle": "Guia da Agenda Previsível",
+      "iscaPromise": "um guia pra enxergar e estabilizar a oscilação da sua agenda"
+    },
+    {
+      "key": "clinica_correria",
+      "icp": "clinica",
+      "slug": "correria",
+      "painName": "Correria e desorganização",
+      "echo": "Você apaga incêndio o dia todo. A recepção não dá conta, e no fim tudo depende de você pra funcionar.",
+      "hemorrhage": "Paciente que chega e não vira agendamento por falta de roteiro é paciente perdido na própria porta. Cada contato sem resposta clara é alguém que vai pra quem respondeu primeiro.",
+      "aspiration": "Com um roteiro de primeira resposta, a recepção para de perder paciente na porta. O contato vira sessão marcada sem depender de você estar disponível a cada mensagem.",
+      "iscaTitle": "Roteiro de Primeira Resposta no WhatsApp",
+      "iscaPromise": "um roteiro de recepção no WhatsApp pra não perder paciente no primeiro contato"
+    },
+    {
+      "key": "clinica_dependencia",
+      "icp": "clinica",
+      "slug": "dependencia",
+      "painName": "Dependência de indicação",
+      "echo": "Aqui é quase só indicação. Se a fonte seca, a agenda vai junto, e isso te deixa refém de algo que você não controla.",
+      "hemorrhage": "Receita refém de terceiros transforma um mês fraco de indicação em um mês fraco de caixa. Sem um canal próprio, a sua agenda depende sempre da boa vontade de quem indica.",
+      "aspiration": "Com fontes próprias de paciente além da indicação, um mês fraco de boca a boca para de derrubar o seu caixa. A agenda passa a depender de algo que é seu.",
+      "iscaTitle": "Checklist: 3 fontes de paciente além da indicação",
+      "iscaPromise": "um checklist com 3 fontes de paciente que não dependem de indicação"
+    },
+    {
+      "key": "solo_perda_silenciosa",
+      "icp": "autonoma",
+      "slug": "perda-silenciosa",
+      "painName": "Perda silenciosa durante o atendimento",
+      "echo": "Quando você sai da sala, já tem mensagem esperando. E quem espera demais acaba indo pra quem respondeu primeiro.",
+      "hemorrhage": "Cada mensagem que fica horas sem resposta é um paciente de quem foi mais rápido. É uma perda invisível, que acontece todo dia, enquanto você faz o seu trabalho dentro da sala.",
+      "aspiration": "Com respostas prontas pros primeiros contatos, o paciente para de esfriar enquanto você atende. Você segura quem chegou sem precisar largar a sessão no meio.",
+      "iscaTitle": "Kit de Respostas Rápidas no WhatsApp",
+      "iscaPromise": "um kit de respostas prontas pra segurar o paciente enquanto você atende"
+    },
+    {
+      "key": "solo_oscilante",
+      "icp": "autonoma",
+      "slug": "agenda-oscilante",
+      "painName": "Agenda oscilante",
+      "echo": "É tudo boca a boca. Mês bom e mês ruim, sem conseguir prever qual vem pela frente.",
+      "hemorrhage": "Sem um jeito próprio de atrair paciente, a sua renda fica fora do seu controle. Você espera a indicação chegar, e o mês ruim sempre pega de surpresa.",
+      "aspiration": "Com um caminho próprio de captação, o mês para de depender de quando alguém lembra de te indicar. A agenda fica mais estável e dá pra contar com ela.",
+      "iscaTitle": "Mini-plano de captação sem depender de indicação",
+      "iscaPromise": "um mini-plano pra captar paciente sem depender só de indicação"
+    },
+    {
+      "key": "solo_vps",
+      "icp": "autonoma",
+      "slug": "valor-da-sessao",
+      "painName": "Valor da sessão abaixo do seu potencial",
+      "echo": "Você cobra abaixo do que gostaria, com medo de perder paciente se subir o valor.",
+      "hemorrhage": "Cada sessão abaixo do que vale, multiplicada por todas as semanas do mês, é um valor que fica na mesa toda vez. Você trabalha o mesmo e leva pra casa menos do que poderia.",
+      "aspiration": "Com um critério claro pra precificar, você para de deixar dinheiro na mesa toda semana. Dá pra ajustar o valor de um jeito que respeita quem já é seu paciente.",
+      "iscaTitle": "Guia de Precificação Justa",
+      "iscaPromise": "um guia pra ajustar o valor da sua sessão sem perder quem já é paciente"
+    }
+  ],
+
+  "capture": {
+    "eyebrow": "Receba seu material",
+    "title": "Pra receber {isca}, me diz seu WhatsApp.",
+    "nameLabel": "Seu nome",
+    "namePlaceholder": "Como te chamo?",
+    "phoneLabel": "Seu WhatsApp",
+    "phonePlaceholder": "(11) 99999-9999",
+    "submit": "Quero receber meu material",
+    "sending": "Enviando...",
+    "micro": "Seu contato fica só com a PsiAtiva. Sem disparo em massa, sem repassar pra ninguém.",
+    "phoneRequired": "Me deixa seu WhatsApp pra eu conseguir te enviar.",
+    "captchaRequired": "Confirme o desafio de segurança antes de enviar.",
+    "error": "Algo não funcionou no envio. Tenta de novo em instantes."
+  },
+
+  "handoff": {
+    "title": "Pronto.",
+    "body": "Recebi seus dados. Em instantes te envio {isca} no seu WhatsApp. Se quiser, a gente conversa por lá sobre o que apareceu no seu diagnóstico."
+  },
+
+  "ui": {
+    "progress": "Pergunta {n} de {total}",
+    "back": "Voltar",
+    "resultEyebrow": "Seu diagnóstico",
+    "restart": "Refazer o diagnóstico",
+    "disclaimer": "Este diagnóstico é um ponto de partida pra uma conversa. Não é laudo nem avaliação clínica."
+  }
+}
