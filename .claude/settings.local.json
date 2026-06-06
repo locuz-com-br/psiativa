@@ -6,10 +6,28 @@
       "Bash(npx astro:*)",
       "Bash(git add:*)",
       "Bash(curl -s \"http://localhost:4321/indicacao\")",
-      "Bash(taskkill //F //IM node.exe //T)"
+      "Bash(taskkill //F //IM node.exe //T)",
+      "Bash(node -e \"const t=require\\('./src/data/translations.json'\\); console.log\\(Object.keys\\(t\\).join\\(', '\\)\\);\")",
+      "Bash(git --no-pager diff --stat)",
+      "Bash(git --no-pager diff src/config/site.config.ts)",
+      "Bash(git --no-pager diff src/components/sections/Hero.astro)",
+      "Bash(git --no-pager diff --stat src/data/translations.json)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/data/translations.json','utf8'\\)\\); console.log\\('valid JSON ✓'\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\); console.log\\(JSON.stringify\\(p.scripts,null,2\\)\\)\")",
+      "Bash(node -e \"const t=require\\('./src/data/translations.json'\\); console.log\\(JSON.stringify\\(t.cta,null,1\\)\\);\")",
+      "Bash(node -e \"const t=require\\('./src/data/translations.json'\\); console.log\\('valid JSON; calcCta keys:', Object.keys\\(t.calcCta\\).join\\(','\\)\\);\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/data/translations.json','utf8'\\)\\);console.log\\('translations.json OK'\\)\")",
+      "Bash(grep -oE \".{0,15}[—–].{0,15}\" dist/calculadora/index.html)",
+      "Bash(node -e \"const t=JSON.parse\\(require\\('fs'\\).readFileSync\\('src/data/translations.json','utf8'\\)\\); console.log\\('valid JSON ✓; indicacao keys:', Object.keys\\(t.indicacao\\).join\\(', '\\)\\)\")",
+      "Bash(grep -noiE \"\\(não \\(é|são|representa|precisa|tem|vem|existe|adianta|basta|dá|depende|perde|para\\)|, não |nunca|em vez de|ao invés|mas sim|não .{1,40} mas |deixa de \\)\" src/data/translations.json)",
+      "Bash(grep -rnoiE \"\\(não \\(é|são|representa|representam|precisa|tem|vem|existe|adianta|basta|dá|depende|perde|para|vai\\)|, não |nunca|em vez de|ao invés|mas sim|não .{1,40} mas |deixa de \\)\" src/components/sections src/components/calculadora src/pages/calculadora.astro src/pages/index.astro src/config/calculadora.config.ts)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/data/translations.json','utf8'\\)\\); console.log\\('translations.json OK'\\)\")",
+      "Bash(grep -v \":0$\")",
+      "Bash(sed -e 's/<script[^>]*>.*<\\\\/script>//g' -e 's/<style[^>]*>.*<\\\\/style>//g' dist/calculadora/index.html)",
+      "Bash(sed -n '1,40p' src/pages/[slug].astro)",
+      "Bash(sed -n '1,12p' privacidade.md)"
     ],
-    "additionalDirectories": [
-    ]
+    "additionalDirectories": []
   },
   "enabledMcpjsonServers": [
     "TalkToFigma",
