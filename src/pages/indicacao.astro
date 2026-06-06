@@ -8,12 +8,33 @@ import NR1 from '../components/sections/indicacao/NR1.astro';
 import NextStep from '../components/sections/indicacao/NextStep.astro';
 import WhoWeAre from '../components/sections/indicacao/WhoWeAre.astro';
 import FAQ from '../components/sections/indicacao/FAQ.astro';
+import { SITE_CONFIG } from '../config/site.config';
 
-const title = "Página de Indicação";
-const description = "Você foi indicada. PsiAtiva — assessoria de captação ética para clínicas e consultórios de psicologia. Diagnóstico gratuito pelo WhatsApp.";
+const title = "Você foi indicada | PsiAtiva";
+const description = "Você foi indicada. A PsiAtiva é a assessoria de captação ética para clínicas e consultórios de psicologia. Diagnóstico gratuito pelo WhatsApp.";
+
+// Navbar tailored to this page's own sections (not the home anchors).
+const indicacaoWhats = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent("Olá! Vim por uma indicação e gostaria de agendar o diagnóstico gratuito.")}`;
+
+const indicacaoNav = {
+  items: [
+    { href: "#inicio", key: "indicacao.nav.inicio", label: "Início" },
+    { href: "#para-quem", key: "indicacao.nav.para_quem", label: "Para quem" },
+    { href: "#diferenca", key: "indicacao.nav.diferenca", label: "Diferença" },
+    { href: "#como-funciona", key: "indicacao.nav.como_funciona", label: "Como Funciona" },
+    { href: "#nr1", key: "indicacao.nav.nr1", label: "NR-1 2026" },
+  ],
+  cta: { href: indicacaoWhats, key: "indicacao.nav.cta", label: "Diagnóstico Gratuito" },
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  titleKey="indicacao.meta.title"
+  descriptionKey="indicacao.meta.description"
+  navbar={indicacaoNav}
+>
   <Hero />
   <Audience />
   <WhyNotAgency />
