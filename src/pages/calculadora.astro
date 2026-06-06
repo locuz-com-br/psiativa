@@ -1,0 +1,416 @@
+---
+// ─────────────────────────────────────────────────────────────
+// /calculadora — Calculadora de Custo da Inação (Sprint 6)
+// Camada indexável (SEO) + island interativa.
+// ICP-alvo do texto que ranqueia: Perfil B — consultório solo.
+// Briefing: plans/seo-briefing-roi-calculator.md
+// ─────────────────────────────────────────────────────────────
+import { SITE_CONFIG } from "../config/site.config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CalculadoraIsland from "../components/calculadora/CalculadoraIsland.tsx";
+import { POV } from "../config/calculadora.config";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  organizationSchema,
+  webApplicationSchema,
+} from "../lib/schema";
+
+const title = "Calculadora: quanto a agenda vazia custa ao psicólogo";
+const description =
+  "Simule, com os seus próprios números, quanto sua agenda inconstante deixa de faturar por mês, e o que muda com um processo de captação. Projeção baseada nos seus dados.";
+const pagePath = "/calculadora/";
+
+const faqs = [
+  {
+    question: "A calculadora promete que vou faturar isso?",
+    answer:
+      "Não. Ela projeta a partir dos seus números: ticket, sessões, entradas atuais e retenção. A meta de verdade é definida junto, numa conversa.",
+  },
+  {
+    question: "De onde vêm os valores?",
+    answer:
+      "Dos seus: o valor que você cobra por sessão, quantas sessões por mês, quantos pacientes novos entram hoje e por quanto tempo eles continuam com você.",
+  },
+  {
+    question: "Preciso pagar para usar?",
+    answer: "Não. A calculadora é aberta e gratuita.",
+  },
+  {
+    question: "Serve para clínica também?",
+    answer:
+      "Sim. Troque o perfil no topo da ferramenta. Mas o conteúdo aqui fala com quem atende sozinha, a psicóloga de consultório solo.",
+  },
+  {
+    question: "E se a minha conta já estiver boa?",
+    answer:
+      "A ferramenta mostra isso. Se a sua projeção sem um processo de captação já é boa, você não precisa de processo agora, e a gente prefere te dizer isso.",
+  },
+];
+
+const schema = [
+  organizationSchema(),
+  webApplicationSchema({
+    name: "Calculadora de Custo da Inação da PsiAtiva",
+    description,
+    path: pagePath,
+  }),
+  faqPageSchema(faqs),
+  breadcrumbSchema([
+    { name: "Início", path: "/" },
+    { name: "Calculadora", path: pagePath },
+  ]),
+];
+
+const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+  "Olá! Usei a calculadora de custo da inação no site da PsiAtiva e gostaria de entender melhor o meu cenário.",
+)}`;
+---
+
+<BaseLayout title={title} description={description} canonicalPath={pagePath} schema={schema}>
+  <!-- ── Hero (dark teal) ─────────────────────────────────── -->
+  <section class="calc-hero">
+    <div class="calc-hero-bg"></div>
+    <div class="container calc-hero-content">
+      <div class="calc-tag">Ferramenta gratuita</div>
+      <h1 class="calc-h1">
+        Quanto a agenda vazia custa ao seu consultório?<br />
+        <span class="calc-h1-accent">Descubra com os seus números.</span>
+      </h1>
+      <p class="calc-hero-sub">
+        Mês bom e mês ruim, sem conseguir prever. Quando a agenda depende de quando alguém indica, falta constância
+        para planejar o mês.
+      </p>
+      <p class="calc-tldr">
+        Uma agenda inconstante custa, em faturamento, o que poderia entrar de pacientes novos retidos ao longo do
+        ciclo. Esta calculadora usa o seu ticket, a sua retenção e quantas entradas você já tem hoje para projetar,
+        com os seus números, quanto fica na mesa a cada mês sem um processo de captação.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── A calculadora (island) ───────────────────────────── -->
+  <section class="calc-tool">
+    <div class="container calc-tool-inner">
+      <CalculadoraIsland client:visible />
+    </div>
+  </section>
+
+  <!-- ── Conteúdo de apoio (camada indexável) ─────────────── -->
+  <section class="calc-content">
+    <div class="container calc-prose">
+      <h2>Como calcular quanto você deixa de faturar com a agenda vazia?</h2>
+      <p>
+        Some o faturamento que entraria se cada mês trouxesse alguns pacientes novos que continuam com você por
+        vários meses. A conta certa acompanha esse acúmulo de quem entra e fica ao longo do tempo. A diferença
+        entre o seu ritmo de hoje e um ritmo com captação ativa é o que fica na mesa.
+      </p>
+
+      <h2>Por que "pacientes × sessões" subestima? O modelo de coorte</h2>
+      <p>
+        Multiplicar pacientes novos × ticket × meses trata cada paciente como se viesse uma vez e sumisse. Na
+        psicologia, quem entra costuma continuar por vários meses. O jeito honesto de projetar é por
+        <strong> coorte</strong>: a cada mês entra um grupo novo de pacientes que se soma aos que já estão em
+        acompanhamento, ponderado pela retenção. Por isso a projeção aparece como uma <strong>banda</strong>: o piso
+        conta cada paciente uma única vez; o teto considera todos ficando o ciclo inteiro; e o número real fica
+        entre os dois, posicionado pela retenção que você ajusta. Com retenção alta, sua projeção se aproxima do teto.
+        Com retenção baixa, do piso. A calculadora faz essa conta com os seus números, sem usar média de mercado.
+      </p>
+
+      <h2>Com método vs. sem método: o que muda no seu cenário?</h2>
+      <p>
+        A curva de baixo usa as entradas que você já tem hoje, normalmente poucas e dependentes de indicação. A de
+        cima usa um cenário com captação ativa, que você ajusta. O espaço entre as duas é o faturamento que poderia
+        estar entrando com constância. Se as duas curvas ficam coladas, a ferramenta te diz: a sua conta já está boa.
+      </p>
+
+      <h2>Quanto custa capturar esse faturamento?</h2>
+      <p>
+        Depende do seu perfil e do nível de estrutura. A leitura completa (investimento a partir de um valor, verba
+        de mídia e o retorno sobre o seu cenário) aparece quando você deixa o contato. O valor exato e as formas de
+        pagamento saem de uma conversa, no seu momento.
+      </p>
+
+      <h2>Isso é garantia de faturamento?</h2>
+      <p>
+        Não. A calculadora projeta a partir dos seus dados: o seu ticket, a sua retenção, as suas entradas.
+        <strong>{POV}</strong> Se a
+        sua projeção sem um processo já é boa, a ferramenta mostra isso e você não precisa da gente.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FAQ (indexável + FAQPage schema) ─────────────────── -->
+  <section class="calc-faq">
+    <div class="container calc-prose">
+      <h2 class="calc-faq-title">Perguntas frequentes</h2>
+      {
+        faqs.map((f) => (
+          <details class="calc-faq-item">
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ── Link interno (satélite → pilar) ──────────────────── -->
+  <section class="calc-related">
+    <div class="container calc-prose">
+      <p>
+        Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada?{" "}
+        <a href="/">Veja como funciona o processo</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── CTA final (espelha a home) ───────────────────────── -->
+  <section class="calc-cta-final">
+    <div class="container calc-cta-inner">
+      <h2>Primeiro passo: uma conversa. Só isso.</h2>
+      <p>Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
+      <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-light">
+        <span>Agendar diagnóstico gratuito</span>
+        <span class="icon-circle">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ─────────────────────────────────────────────── */
+  .calc-hero {
+    position: relative;
+    top: -72px;
+    margin-bottom: -72px;
+    padding: 160px 0 80px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  .calc-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-hero);
+    z-index: 0;
+  }
+  .calc-hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+    max-width: 860px;
+  }
+  .calc-tag {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    color: var(--light-blue);
+    background: var(--secondary-40);
+    backdrop-filter: blur(10.5px);
+    -webkit-backdrop-filter: blur(10.5px);
+    padding: 6px 14px;
+    border-radius: var(--radius-tag);
+  }
+  .calc-h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 52px;
+    line-height: 1.15;
+    letter-spacing: -1.04px;
+    color: var(--text-hero-white);
+  }
+  .calc-h1-accent {
+    color: var(--accent);
+  }
+  .calc-hero-sub {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--accent-light);
+    max-width: 680px;
+  }
+  .calc-tldr {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 28px;
+    color: var(--text-hero-subtitle);
+    max-width: 720px;
+  }
+
+  /* ── Tool section ─────────────────────────────────────── */
+  .calc-tool {
+    background: var(--background-subtle);
+    padding: 64px 0;
+  }
+  .calc-tool-inner {
+    max-width: 920px;
+  }
+
+  /* ── Prose / content ──────────────────────────────────── */
+  .calc-content {
+    background: var(--background);
+    padding: 80px 0;
+  }
+  .calc-prose {
+    max-width: 760px;
+  }
+  .calc-prose h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--text-heading);
+    margin: 2.25rem 0 0.75rem;
+  }
+  .calc-prose h2:first-child {
+    margin-top: 0;
+  }
+  .calc-prose p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .calc-prose strong {
+    color: var(--text-heading);
+    font-weight: 700;
+  }
+  .calc-prose a {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .calc-prose a:hover {
+    color: var(--primary);
+  }
+
+  /* ── FAQ ──────────────────────────────────────────────── */
+  .calc-faq {
+    background: var(--sage-bg);
+    padding: 80px 0;
+  }
+  .calc-faq-title {
+    margin-bottom: 1.5rem !important;
+  }
+  .calc-faq-item {
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.1rem 0;
+  }
+  .calc-faq-item summary {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text-heading);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .calc-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .calc-faq-item summary::after {
+    content: "+";
+    font-size: 24px;
+    color: var(--secondary);
+    line-height: 1;
+  }
+  .calc-faq-item[open] summary::after {
+    content: "−";
+  }
+  .calc-faq-item p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-top: 0.75rem;
+  }
+
+  /* ── Related ──────────────────────────────────────────── */
+  .calc-related {
+    background: var(--background);
+    padding: 40px 0;
+  }
+  .calc-related p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+  .calc-related a {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* ── CTA final ────────────────────────────────────────── */
+  .calc-cta-final {
+    background: var(--gradient-testimonials);
+    padding: 96px 0;
+  }
+  .calc-cta-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 680px;
+  }
+  .calc-cta-inner h2 {
+    font-family: var(--font-display);
+    font-size: 34px;
+    color: var(--text-hero-white);
+  }
+  .calc-cta-inner p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-hero-subtitle);
+  }
+  .calc-cta-inner .btn-primary-light {
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 810px) {
+    .calc-h1 {
+      font-size: 34px;
+      letter-spacing: -0.6px;
+    }
+    .calc-hero-sub {
+      font-size: 17px;
+    }
+    .calc-tldr {
+      font-size: 15px;
+      line-height: 24px;
+    }
+    .calc-prose h2 {
+      font-size: 23px;
+    }
+    .calc-cta-inner h2 {
+      font-size: 26px;
+    }
+  }
+</style>
