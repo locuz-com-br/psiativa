@@ -33,6 +33,15 @@ function applyTranslations(lang: Lang) {
     }
   });
 
+  // Content attributes (e.g. <title>, <meta name="description" data-i18n-content="...">)
+  document.querySelectorAll('[data-i18n-content]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-content')!;
+    const entry = getNestedValue(translations, key);
+    if (entry && typeof entry === 'object' && lang in entry) {
+      el.setAttribute('content', (entry as Record<string, string>)[lang]);
+    }
+  });
+
   // Update html lang attribute
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 

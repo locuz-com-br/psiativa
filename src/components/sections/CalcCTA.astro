@@ -1,0 +1,124 @@
+---
+// Calculadora teaser — liga a home (clínica) à ferramenta /calculadora.
+// Copy clínica-framed (a home é Perfil A); a página em si fala com a solo.
+// Copy vive em translations.json (calcCta) + fallback hardcoded aqui (regra dupla).
+---
+
+<section class="calc-home-cta section" id="calculadora-cta">
+  <div class="container">
+    <div class="calc-home-card">
+      <div class="calc-home-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+          <line x1="8" y1="6" x2="16" y2="6"></line>
+          <line x1="8" y1="10" x2="8" y2="10"></line>
+          <line x1="12" y1="10" x2="12" y2="10"></line>
+          <line x1="16" y1="10" x2="16" y2="10"></line>
+          <line x1="8" y1="14" x2="8" y2="14"></line>
+          <line x1="12" y1="14" x2="12" y2="14"></line>
+          <line x1="16" y1="14" x2="16" y2="18"></line>
+          <line x1="8" y1="18" x2="12" y2="18"></line>
+        </svg>
+      </div>
+
+      <div class="calc-home-text">
+        <span class="section-label" data-i18n="calcCta.label">Calculadora gratuita</span>
+        <h2 class="calc-home-title" data-i18n="calcCta.title">
+          Quanto a agenda vazia custa à sua clínica?
+        </h2>
+        <p class="calc-home-desc" data-i18n="calcCta.desc">
+          Faça a conta com os seus números: valor da sessão, retenção e quantos pacientes novos entram
+          hoje. Leva 1 minuto, sem cadastro.
+        </p>
+      </div>
+
+      <a href="/calculadora/" class="btn-primary-dark calc-home-btn">
+        <span data-i18n="calcCta.btn">Abrir a calculadora</span>
+        <span class="icon-circle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calc-home-cta {
+    padding: 64px 0;
+    background: var(--background);
+  }
+
+  .calc-home-card {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 2rem 2.25rem;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    background: linear-gradient(135deg, rgba(26, 75, 81, 0.05), rgba(126, 174, 137, 0.1));
+  }
+
+  .calc-home-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-card);
+    background: var(--background);
+    border: 1px solid var(--color-border);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calc-home-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .calc-home-text .section-label {
+    margin-bottom: 0.25rem;
+  }
+
+  .calc-home-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.25;
+    color: var(--text-heading);
+  }
+
+  .calc-home-desc {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 620px;
+  }
+
+  .calc-home-btn {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 810px) {
+    .calc-home-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.75rem;
+    }
+
+    .calc-home-title {
+      font-size: 22px;
+    }
+
+    .calc-home-btn {
+      align-self: stretch;
+      justify-content: space-between;
+    }
+  }
+</style>

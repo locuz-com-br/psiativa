@@ -70,8 +70,8 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
 
     <!-- Title with typewriter word -->
     <h1 class="hero-title animate-fade-in-up delay-100">
-      <span data-i18n="hero.title_1">Ativa sua clínica.</span><br />
-      <span data-i18n="hero.title_2">Preserva sua essência.</span>
+      <span data-i18n="hero.title_1">Processo de captação</span><br />
+      <span data-i18n="hero.title_2">para clínicas de psicologia.</span>
     </h1>
 
     <!-- Subtitle -->
@@ -79,9 +79,9 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
       class="hero-subtitle animate-fade-in-up delay-200"
       data-i18n="hero.subtitle"
     >
-      Sua clínica perde pacientes entre o primeiro contato e a sessão confirmada
-      — não por falta de competência, mas por falta de processo. A PsiAtiva fecha
-      esse buraco de forma ética e estruturada.
+      Sua clínica perde paciente entre o primeiro contato e a sessão confirmada,
+      por falta de processo. A PsiAtiva fecha esse buraco com método clínico e sem
+      pressão.
     </p>
 
     <!-- Typewriter word (standalone below subtitle) -->
@@ -240,6 +240,37 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 1rem;
+  }
+
+  @media (max-width: 1280px) {
+    .hero {
+      min-height: 672px;
+      padding-top: 0px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      line-height: 56px;
+      letter-spacing: -0.96px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .hero-typewriter-line {
+      font-size: 22px;
+    }
+
+    .hero-content {
+      padding-top: 24px;
+      padding-bottom: 0px;
+    }
+
+    .tag-pill-text {
+      font-size: 12px;
+    }
   }
 
   @media (max-width: 810px) {

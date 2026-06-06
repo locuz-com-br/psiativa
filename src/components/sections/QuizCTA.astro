@@ -1,0 +1,117 @@
+---
+// Quiz teaser — liga a home (clínica) ao Diagnóstico de 2 Minutos (/quiz).
+// Copy clínica-framed (a home é Perfil A); a página em si é neutra (perfila os dois).
+// Copy vive em translations.json (quizCta) + fallback hardcoded aqui (regra dupla).
+---
+
+<section class="quiz-home-cta section" id="quiz-cta">
+  <div class="container">
+    <div class="quiz-home-card">
+      <div class="quiz-home-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 2h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1z"></path>
+          <path d="M9 13l2 2 4-4"></path>
+        </svg>
+      </div>
+
+      <div class="quiz-home-text">
+        <span class="section-label" data-i18n="quizCta.label">Diagnóstico gratuito</span>
+        <h2 class="quiz-home-title" data-i18n="quizCta.title">
+          Onde a agenda da sua clínica está vazando?
+        </h2>
+        <p class="quiz-home-desc" data-i18n="quizCta.desc">
+          Responda 6 perguntas sobre o seu dia a dia e descubra em 2 minutos qual buraco esvazia sua agenda.
+          De graça, sem cadastro.
+        </p>
+      </div>
+
+      <a href="/quiz/" class="btn-primary-dark quiz-home-btn">
+        <span data-i18n="quizCta.btn">Fazer o diagnóstico</span>
+        <span class="icon-circle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quiz-home-cta {
+    padding: 64px 0;
+    background: var(--background-subtle);
+  }
+
+  .quiz-home-card {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 2rem 2.25rem;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-border);
+    background: linear-gradient(135deg, rgba(126, 174, 137, 0.1), rgba(0, 177, 200, 0.08));
+  }
+
+  .quiz-home-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-card);
+    background: var(--background);
+    border: 1px solid var(--color-border);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quiz-home-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .quiz-home-text .section-label {
+    margin-bottom: 0.25rem;
+  }
+
+  .quiz-home-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.25;
+    color: var(--text-heading);
+  }
+
+  .quiz-home-desc {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 620px;
+  }
+
+  .quiz-home-btn {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 810px) {
+    .quiz-home-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.75rem;
+    }
+
+    .quiz-home-title {
+      font-size: 22px;
+    }
+
+    .quiz-home-btn {
+      align-self: stretch;
+      justify-content: space-between;
+    }
+  }
+</style>

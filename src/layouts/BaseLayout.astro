@@ -2,26 +2,44 @@
 import { SITE_CONFIG } from '../config/site.config';
 import SEOHead from '../components/seo/SEOHead.astro';
 
+interface NavItem {
+  href: string;
+  key: string;
+  label: string;
+}
+
 interface Props {
   title: string;
   description?: string;
+  /** Optional i18n keys so <title>/description localize on the language toggle. */
+  titleKey?: string;
+  descriptionKey?: string;
   hideNavAndFooter?: boolean;
   canonicalPath?: string;
   ogType?: "website" | "article";
   image?: string;
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
+  /** Override the navbar links/CTA/logo for this page (defaults to the home set). */
+  navbar?: {
+    items?: NavItem[];
+    cta?: NavItem;
+    logoHref?: string;
+  };
 }
 
 const {
   title,
   description = SITE_CONFIG.description.pt,
+  titleKey,
+  descriptionKey,
   hideNavAndFooter = false,
   canonicalPath,
   ogType = "website",
   image,
   schema,
   noindex = false,
+  navbar,
 } = Astro.props;
 
 import '../styles/global.css';
@@ -38,6 +56,8 @@ import WhatsAppFab from '../components/sections/WhatsAppFab.astro';
     <SEOHead
       title={title}
       description={description}
+      titleKey={titleKey}
+      descriptionKey={descriptionKey}
       canonicalPath={canonicalPath}
       type={ogType}
       image={image}
@@ -69,7 +89,7 @@ import WhatsAppFab from '../components/sections/WhatsAppFab.astro';
     </script>
   </head>
   <body>
-    {!hideNavAndFooter && <Navbar />}
+    {!hideNavAndFooter && <Navbar items={navbar?.items} cta={navbar?.cta} logoHref={navbar?.logoHref} />}
     <main>
       <slot />
     </main>

@@ -1,12 +1,12 @@
 {
   "capabilities": [
-    "Chatbot IA",
-    "Telemedicina",
-    "Prontuário Digital",
-    "Agendamento Online",
-    "Faturamento TISS",
-    "BI & Analytics",
-    "WhatsApp API",
-    "Integração HL7"
+    "Captação por intenção",
+    "Presença no Google",
+    "Página de captação",
+    "Acolhimento no WhatsApp",
+    "Confirmação em camadas",
+    "Reativação de contatos",
+    "Redução de no-show",
+    "Acompanhamento da agenda"
   ]
 }

@@ -1,14 +1,14 @@
 [
   {
-    "title": "Blazing Fast",
-    "description": "Ships zero JS by default — only what you opt into."
+    "title": "Agenda previsível",
+    "description": "Captação estruturada para novos pacientes chegarem de forma constante, sem depender só de indicação."
   },
   {
-    "title": "Island Architecture",
-    "description": "Hydrate only the interactive components you need."
+    "title": "Menos faltas e cancelamentos",
+    "description": "Protocolo de confirmação em camadas que reduz o no-show e segura a sua agenda."
   },
   {
-    "title": "Content Collections",
-    "description": "Type-safe MDX with Zod schema validation out of the box."
+    "title": "Captação estruturada",
+    "description": "Scripts de acolhimento e confirmação que transformam interesse em sessão agendada, sem soar invasivo."
   }
 ]

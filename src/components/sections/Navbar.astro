@@ -2,12 +2,38 @@
 // Navbar — Glassmorphism pill bar (PsiAtiva design system)
 import { SITE_CONFIG } from "../../config/site.config";
 import LINKS from "../../constants/links";
+
+interface NavItem {
+  href: string;
+  key: string;
+  label: string;
+}
+
+interface Props {
+  items?: NavItem[];
+  cta?: NavItem;
+  logoHref?: string;
+}
+
+const defaultItems: NavItem[] = [
+  { href: LINKS.sections.inicio, key: "nav.inicio", label: "Início" },
+  { href: LINKS.sections.sobre, key: "nav.sobre", label: "Sobre" },
+  { href: LINKS.sections.funcionalidades, key: "nav.funcionalidades", label: "Funcionalidades" },
+  { href: LINKS.sections.depoimentos, key: "nav.depoimentos", label: "Depoimentos" },
+  { href: LINKS.sections.resultados, key: "nav.resultados", label: "Resultados" },
+];
+
+const {
+  items = defaultItems,
+  cta = { href: LINKS.contact.phoneHref, key: "nav.cta", label: "Diagnóstico Gratuito" },
+  logoHref = LINKS.pages.home,
+} = Astro.props;
 ---
 
 <nav class="navbar" id="navbar">
   <div class="navbar-inner container">
     <a
-      href={LINKS.pages.home}
+      href={logoHref}
       class="navbar-logo"
       aria-label={`${SITE_CONFIG.name} - Home`}
     >
@@ -22,20 +48,9 @@ import LINKS from "../../constants/links";
     </a>
 
     <ul class="navbar-links">
-      <li><a href={LINKS.sections.inicio} data-i18n="nav.inicio">Início</a></li>
-      <li><a href={LINKS.sections.sobre} data-i18n="nav.sobre">Sobre</a></li>
-      <li>
-        <a href={LINKS.sections.funcionalidades} data-i18n="nav.funcionalidades"
-          >Funcionalidades</a>
-      </li>
-      <li>
-        <a href={LINKS.sections.depoimentos} data-i18n="nav.depoimentos"
-          >Depoimentos</a>
-      </li>
-      <li>
-        <a href={LINKS.sections.resultados} data-i18n="nav.resultados"
-          >Resultados</a>
-      </li>
+      {items.map((item) => (
+        <li><a href={item.href} data-i18n={item.key}>{item.label}</a></li>
+      ))}
     </ul>
 
     <div class="navbar-actions">
@@ -57,8 +72,8 @@ import LINKS from "../../constants/links";
         />
       </button>
 
-      <a href={LINKS.contact.phoneHref} class="btn-nav-cta">
-        <span data-i18n="nav.cta">Diagnóstico Gratuito</span>
+      <a href={cta.href} class="btn-nav-cta">
+        <span data-i18n={cta.key}>{cta.label}</span>
         <span class="icon-circle">
           <svg
             width="14"
@@ -107,27 +122,16 @@ import LINKS from "../../constants/links";
   <!-- Mobile Menu -->
   <div class="navbar-mobile" id="navbar-mobile">
     <ul class="navbar-mobile-links">
-      <li><a href={LINKS.sections.inicio} data-i18n="nav.inicio">Início</a></li>
-      <li><a href={LINKS.sections.sobre} data-i18n="nav.sobre">Sobre</a></li>
-      <li>
-        <a href={LINKS.sections.funcionalidades} data-i18n="nav.funcionalidades"
-          >Funcionalidades</a>
-      </li>
-      <li>
-        <a href={LINKS.sections.depoimentos} data-i18n="nav.depoimentos"
-          >Depoimentos</a>
-      </li>
-      <li>
-        <a href={LINKS.sections.resultados} data-i18n="nav.resultados"
-          >Resultados</a>
-      </li>
+      {items.map((item) => (
+        <li><a href={item.href} data-i18n={item.key}>{item.label}</a></li>
+      ))}
     </ul>
     <a
-      href={LINKS.contact.phoneHref}
+      href={cta.href}
       class="btn-nav-cta"
       style="width:100%;justify-content:center;margin-top:1rem;"
     >
-      <span data-i18n="nav.cta">Diagnóstico Gratuito</span>
+      <span data-i18n={cta.key}>{cta.label}</span>
       <span class="icon-circle">
         <svg
           width="14"

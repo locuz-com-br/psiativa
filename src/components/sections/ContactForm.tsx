@@ -201,12 +201,12 @@ export default function ContactForm() {
           />
         </div>
         <div style={fieldStyles}>
-          <label style={labelStyles} htmlFor="company" data-i18n="contact.form_company">Empresa</label>
+          <label style={labelStyles} htmlFor="company" data-i18n="contact.form_company">Nome da Clínica</label>
           <input
             id="company"
             type="text"
             name="company"
-            placeholder="Nome da empresa"
+            placeholder="Nome da sua clínica ou consultório"
             data-i18n-placeholder="contact.form_company_placeholder"
             style={inputStyles}
           />
@@ -220,7 +220,7 @@ export default function ContactForm() {
           name="message"
           required
           rows={4}
-          placeholder="Conte-nos sobre seu projeto e objetivos..."
+          placeholder="Conte um pouco sobre o momento da sua clínica..."
           data-i18n-placeholder="contact.form_message_placeholder"
           style={{ ...inputStyles, resize: 'vertical' as const, minHeight: '120px' }}
         />
@@ -258,7 +258,7 @@ export default function ContactForm() {
 
       {status === 'sent' && (
         <p style={successStyles} data-i18n="contact.form_success">
-          ✓ Mensagem enviada com sucesso! Retornaremos em até 24h.
+          Mensagem enviada! Retornaremos em até 24h.
         </p>
       )}
       {status === 'error' && (
