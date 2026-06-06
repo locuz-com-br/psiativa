@@ -29,35 +29,33 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
           <circle cx="9" cy="7" r="4"></circle>
           <path d="M22 11l-3-3m0 0l-3 3m3-3v8"></path>
         </svg>
-        <span class="tag-pill-text">Página de Indicação</span>
+        <span class="tag-pill-text" data-i18n="indicacao.hero.tag">Página de Indicação</span>
       </div>
     </div>
 
     <!-- Title -->
     <h1 class="hero-title animate-fade-in-up delay-100">
-      <span>Você está perdendo pacientes</span><br />
-      <span>entre o primeiro contato e a sessão confirmada.</span>
+      <span data-i18n="indicacao.hero.title_1">Você está perdendo pacientes</span><br />
+      <span data-i18n="indicacao.hero.title_2">entre o primeiro contato e a sessão confirmada.</span>
     </h1>
 
     <!-- Subtitle -->
-    <p class="hero-subtitle animate-fade-in-up delay-200">
+    <p class="hero-subtitle animate-fade-in-up delay-200" data-i18n="indicacao.hero.subtitle">
       O buraco está no processo entre esses dois momentos.
     </p>
 
     <p class="hero-body animate-fade-in-up delay-200">
-      A PsiAtiva é a <strong>assessoria de captação ética</strong> especializada em
-      psicologia clínica. A maioria das clínicas só percebe esse buraco quando o mês vira.
+      <span data-i18n="indicacao.hero.body1_pre">A PsiAtiva é a </span><strong data-i18n="indicacao.hero.body1_strong">assessoria de captação ética</strong><span data-i18n="indicacao.hero.body1_post"> especializada em psicologia clínica. A maioria das clínicas só percebe esse buraco quando o mês vira.</span>
     </p>
 
     <p class="hero-body animate-fade-in-up delay-200">
-      A gente fecha o caminho que vai de "alguém te procurando" até
-      "paciente sentado na sua sala". Esse caminho tem nome: <em>GAP — Gerador de Agenda Previsível</em>.
+      <span data-i18n="indicacao.hero.body2_pre">A gente fecha o caminho que vai de quem te procura até o paciente sentado na sua sala. Esse caminho tem nome: </span><em data-i18n="indicacao.hero.body2_gap">GAP, o Gerador de Agenda Previsível</em>.
     </p>
 
     <!-- CTA -->
     <div class="hero-actions animate-fade-in-up delay-300">
       <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-light">
-        <span>Agendar Diagnóstico Gratuito</span>
+        <span data-i18n="indicacao.hero.cta">Agendar Diagnóstico Gratuito</span>
         <span class="icon-circle">
           <svg
             width="15"

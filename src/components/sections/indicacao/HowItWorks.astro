@@ -5,7 +5,7 @@ const steps = [
     n: "01",
     title: "Consciência",
     surface: "Google · Instagram · busca local",
-    desc: "Paciente percebe que você existe.",
+    desc: "O paciente percebe que você existe.",
   },
   {
     n: "02",
@@ -21,9 +21,9 @@ const steps = [
   },
   {
     n: "04",
-    title: "Conversão",
+    title: "Confirmação",
     surface: "Sessão",
-    desc: "O contato vira sessão confirmada — com confirmação ativa e prevenção de no-show.",
+    desc: "O contato vira sessão confirmada, com confirmação ativa e prevenção de no-show.",
   },
 ];
 ---
@@ -31,26 +31,26 @@ const steps = [
 <section class="how section" id="como-funciona">
   <div class="container">
     <div class="how-header">
-      <span class="section-label">Como funciona — em 3 minutos</span>
+      <span class="section-label" data-i18n="indicacao.how.label">Como funciona, em 3 minutos</span>
       <h2 class="how-heading">
-        GAP — <em>Gerador de Agenda Previsível</em>
+        <span data-i18n="indicacao.how.heading_1">GAP, o </span><em data-i18n="indicacao.how.heading_2">Gerador de Agenda Previsível</em>
       </h2>
-      <p class="how-subtitle">
+      <p class="how-subtitle" data-i18n="indicacao.how.subtitle">
         Quatro etapas. Você não precisa entender em detalhe agora.
         O desenho mostra onde a sua agenda está vazando hoje.
       </p>
     </div>
 
-    <!-- Flow: Consciência → Ativação → Aquisição → Conversão -->
+    <!-- Flow: Consciência → Ativação → Aquisição → Confirmação -->
     <ol class="how-flow">
       {steps.map((s, i) => (
         <>
           <li class="how-step">
             <div class="how-step-card">
               <span class="how-step-num">{s.n}</span>
-              <h3 class="how-step-title">{s.title}</h3>
-              <span class="how-step-surface">{s.surface}</span>
-              <p class="how-step-desc">{s.desc}</p>
+              <h3 class="how-step-title" data-i18n={`indicacao.how.step${i + 1}_title`}>{s.title}</h3>
+              <span class="how-step-surface" data-i18n={`indicacao.how.step${i + 1}_surface`}>{s.surface}</span>
+              <p class="how-step-desc" data-i18n={`indicacao.how.step${i + 1}_desc`}>{s.desc}</p>
             </div>
           </li>
           {i < steps.length - 1 && (
@@ -65,7 +65,7 @@ const steps = [
       ))}
     </ol>
 
-    <p class="how-footnote">
+    <p class="how-footnote" data-i18n="indicacao.how.footnote">
       A gente diagnostica em qual dessas etapas a sua agenda está vazando.
       Fecha esse buraco antes de abrir o próximo.
     </p>

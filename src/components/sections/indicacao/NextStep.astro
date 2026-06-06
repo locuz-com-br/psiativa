@@ -8,18 +8,18 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
 <section class="next-step section" id="proximo-passo">
   <div class="container">
     <div class="next-step-content">
-      <span class="section-label">Próximo passo</span>
+      <span class="section-label" data-i18n="indicacao.next.label">Próximo passo</span>
       <h2 class="next-step-heading">
-        O primeiro passo é uma conversa de <strong>20 minutos</strong>, sem compromisso.
+        <span data-i18n="indicacao.next.heading_pre">O primeiro passo é uma conversa de </span><strong data-i18n="indicacao.next.heading_strong">20 minutos</strong><span data-i18n="indicacao.next.heading_post">, sem compromisso.</span>
       </h2>
-      <p class="next-step-body">
+      <p class="next-step-body" data-i18n="indicacao.next.body">
         A ideia é entender o seu cenário e ver se faz sentido seguir.
         Se não fizer, a gente diz na própria conversa.
       </p>
 
       <div class="next-step-actions">
         <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-dark">
-          <span>Diagnóstico gratuito pelo WhatsApp</span>
+          <span data-i18n="indicacao.next.cta">Diagnóstico gratuito pelo WhatsApp</span>
           <span class="icon-circle">
             <svg
               width="14"
@@ -38,8 +38,8 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
         </a>
       </div>
 
-      <p class="next-step-fineprint">
-        Mensagem pré-preenchida — basta enviar pelo seu WhatsApp.
+      <p class="next-step-fineprint" data-i18n="indicacao.next.fineprint">
+        Mensagem pré-preenchida. Basta enviar pelo seu WhatsApp.
       </p>
     </div>
   </div>
