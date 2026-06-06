@@ -26,6 +26,7 @@ interface Props {
     cta?: NavItem;
     logoHref?: string;
   };
+  footerType?: "default" | "minimal";
 }
 
 const {
@@ -40,6 +41,7 @@ const {
   schema,
   noindex = false,
   navbar,
+  footerType = "default",
 } = Astro.props;
 
 import '../styles/global.css';
@@ -93,7 +95,7 @@ import WhatsAppFab from '../components/sections/WhatsAppFab.astro';
     <main>
       <slot />
     </main>
-    {!hideNavAndFooter && <Footer />}
+    {!hideNavAndFooter && <Footer minimal={footerType === "minimal"} />}
     {SITE_CONFIG.sections.whatsappFab && <WhatsAppFab />}
     <script src="../scripts/i18n.ts"></script>
   </body>

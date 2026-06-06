@@ -2,6 +2,12 @@
 // Footer — Dark teal gradient (PsiAtiva design system)
 import { SITE_CONFIG } from "../../config/site.config";
 import LINKS from "../../constants/links";
+
+interface Props {
+  minimal?: boolean;
+}
+
+const { minimal = false } = Astro.props;
 const year = new Date().getFullYear();
 
 // Build social links array dynamically — only show non-empty ones
@@ -53,7 +59,7 @@ const socialEntries = [
 
 <footer class="footer">
   <div class="container">
-    <div class="footer-top">
+    <div class={`footer-top ${minimal ? "minimal" : ""}`}>
       <div class="footer-brand">
         <a href={LINKS.pages.home} aria-label={SITE_CONFIG.name}>
           <img
@@ -70,8 +76,9 @@ const socialEntries = [
         </p>
       </div>
 
-      <div class="footer-columns">
-        <div class="footer-column">
+      {!minimal && (
+        <div class="footer-columns">
+          <div class="footer-column">
           <h4 class="footer-column-title" data-i18n="footer.col_product">
             Processo
           </h4>
@@ -132,6 +139,7 @@ const socialEntries = [
           </ul>
         </div>
       </div>
+      )}
     </div>
 
     <div class="footer-bottom">
@@ -183,6 +191,18 @@ const socialEntries = [
     gap: 4rem;
     padding-bottom: 3rem;
     border-bottom: 1px solid rgba(214, 228, 238, 0.15);
+  }
+
+  .footer-top.minimal {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-top.minimal .footer-brand {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .footer-brand {
