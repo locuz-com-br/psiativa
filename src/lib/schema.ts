@@ -126,3 +126,60 @@ export function articleSchema(input: ArticleSchemaInput) {
     },
   };
 }
+
+interface WebApplicationInput {
+  name: string;
+  description: string;
+  path: string;
+  image?: string;
+}
+
+// Ferramenta interativa (calculadora). SEM `offers`/`price`/`priceRange`
+// — a página pública nunca publica a oferta (briefing §5; oferta-travada Regra de Ferro).
+export function webApplicationSchema(input: WebApplicationInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    applicationCategory: "HealthApplication",
+    operatingSystem: "Web",
+    inLanguage: SITE_CONFIG.defaultLocale,
+    isAccessibleForFree: true,
+    publisher: {
+      "@type": "Organization",
+      name: SITE_CONFIG.name,
+      url: siteUrl,
+    },
+    ...(input.image ? { image: absoluteUrl(input.image) } : {}),
+  };
+}
+
+interface PersonAuthorInput {
+  name: string;
+  /** registro profissional, ex.: "CRP 05/12345" */
+  crp: string;
+  url?: string;
+}
+
+// Autor com CRP = sinal E-E-A-T (briefing §5). Opcional: só emitir quando
+// houver um(a) profissional atribuível de verdade — nunca fabricar registro.
+export function personAuthorSchema(input: PersonAuthorInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: input.name,
+    ...(input.url ? { url: input.url } : {}),
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Registro Profissional",
+      name: input.crp,
+      recognizedBy: {
+        "@type": "Organization",
+        name: "Conselho Federal de Psicologia (CFP)",
+      },
+    },
+    worksFor: { "@type": "Organization", name: SITE_CONFIG.name, url: siteUrl },
+  };
+}

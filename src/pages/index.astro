@@ -10,6 +10,8 @@ import Process from '../components/sections/Process.astro';
 import Results from '../components/sections/Results.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import CTA from '../components/sections/CTA.astro';
+import CalcCTA from '../components/sections/CalcCTA.astro';
+import QuizCTA from '../components/sections/QuizCTA.astro';
 import Contact from '../components/sections/Contact.astro';
 import faqData from '../data/faq.json';
 import translations from '../data/translations.json';
@@ -43,8 +45,10 @@ const homeSchema = [
   {s.partners && <LogoBar />}
   {s.about && <WhyUs />}
   {s.features && <Services />}
+  {s.calcCta && <CalcCTA />}
   {s.functionalities && <Process />}
   {s.cases && <Results />}
+  {s.quizCta && <QuizCTA />}
   {s.testimonials && <Testimonials />}
   {s.faq && <FAQ />}
   {s.ctaFinal && <CTA />}

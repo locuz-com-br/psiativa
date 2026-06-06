@@ -8,6 +8,8 @@ export async function GET() {
   const urls = [
     { loc: "/", lastmod: new Date() },
     { loc: "/blog/", lastmod: new Date() },
+    { loc: "/calculadora/", lastmod: new Date() },
+    { loc: "/quiz/", lastmod: new Date() },
     ...pages.map((page) => ({
       loc: `/${page.id}/`,
       lastmod: page.data.publishedAt ?? new Date(),

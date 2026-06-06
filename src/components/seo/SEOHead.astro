@@ -4,6 +4,10 @@ import { SITE_CONFIG } from "../../config/site.config";
 interface Props {
   title: string;
   description: string;
+  /** Optional i18n key for the <title>; swapped client-side on language toggle. */
+  titleKey?: string;
+  /** Optional i18n key for the meta description; swapped client-side on language toggle. */
+  descriptionKey?: string;
   canonicalPath?: string;
   image?: string;
   type?: "website" | "article";
@@ -14,6 +18,8 @@ interface Props {
 const {
   title,
   description,
+  titleKey,
+  descriptionKey,
   canonicalPath = Astro.url.pathname,
   image = SITE_CONFIG.seo.ogImage,
   type = "website",
@@ -29,22 +35,22 @@ const imageUrl = new URL(image, siteUrl).toString();
 const schemaItems = Array.isArray(schema) ? schema : schema ? [schema] : [];
 ---
 
-<title>{fullTitle}</title>
-<meta name="description" content={description} />
+<title data-i18n={titleKey}>{fullTitle}</title>
+<meta name="description" content={description} data-i18n-content={descriptionKey} />
 <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
 <link rel="canonical" href={canonicalUrl} />
 
 <!-- OG / Social -->
-<meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={fullTitle} data-i18n-content={titleKey} />
+<meta property="og:description" content={description} data-i18n-content={descriptionKey} />
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:locale" content={SITE_CONFIG.defaultLocale.replace("-", "_")} />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:title" content={fullTitle} data-i18n-content={titleKey} />
+<meta name="twitter:description" content={description} data-i18n-content={descriptionKey} />
 <meta name="twitter:image" content={imageUrl} />
 
 {schemaItems.map((item) => (

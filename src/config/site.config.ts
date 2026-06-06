@@ -8,12 +8,12 @@ export const SITE_CONFIG = {
   // ── Brand ──────────────────────────────────
   name: "PsiAtiva",
   tagline: {
-    pt: "Ativa sua clínica. Preserva sua essência.",
-    en: "Activate your clinic. Preserve your essence.",
+    pt: "Processo de captação para clínicas de psicologia.",
+    en: "Patient acquisition process for psychology clinics.",
   },
   description: {
-    pt: "Captação ética e previsível para clínicas de psicologia. Agenda previsível, menos faltas e um processo estruturado que respeita sua identidade clínica.",
-    en: "Ethical and predictable patient acquisition for psychology clinics. Predictable schedules, fewer no-shows, and a structured process that respects your clinical identity.",
+    pt: "Processo de captação para clínicas de psicologia, do primeiro contato à sessão confirmada. Agenda previsível, menos faltas e um processo estruturado que respeita sua identidade clínica.",
+    en: "Patient acquisition process for psychology clinics, from initial contact to confirmed session. Predictable schedules, fewer no-shows, and a structured process that respects your clinical identity.",
   },
   url: "https://psiativa.com.br",
   defaultLocale: "pt-BR" as const,
@@ -39,8 +39,8 @@ export const SITE_CONFIG = {
     whatsappNumber: "5521979907947",
     meetingUrl: "",
     hours: {
-      pt: "Seg–Sex, 9h às 18h",
-      en: "Mon–Fri, 9am to 6pm",
+      pt: "Seg a Sex, das 9h às 18h",
+      en: "Mon to Fri, 9am to 6pm",
     },
   },
 
@@ -85,6 +85,8 @@ export const SITE_CONFIG = {
     functionalities: true,
     integrations: false,
     ctaFinal: true,
+    calcCta: true,
+    quizCta: true,
     cases: true,
     contact: true,
     faq: true,
