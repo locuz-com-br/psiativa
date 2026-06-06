@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FormbricksAppSurvey from "../components/external/FormbricksAppSurvey";
+import { SITE_CONFIG } from "../config/site.config";
+import "../styles/survey.css";
+---
+
+<BaseLayout
+  title="Tríade PsiAtiva"
+  description="Diagnóstico Tríade PsiAtiva para Leonardo Lima."
+  canonicalPath="/leonardo-lima"
+  hideNavAndFooter={true}
+  hideWhatsAppFab={true}
+  noindex={true}
+>
+  <FormbricksAppSurvey
+    client:only="react"
+    appUrl={SITE_CONFIG.formbricks.appUrl}
+    workspaceId={SITE_CONFIG.formbricks.workspaceId}
+    environmentId={SITE_CONFIG.formbricks.environmentId}
+    trigger={SITE_CONFIG.formbricks.appSurveyTrigger}
+  />
+</BaseLayout>

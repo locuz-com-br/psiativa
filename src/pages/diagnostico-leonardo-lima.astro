@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FormbricksLinkSurvey from "../components/external/FormbricksLinkSurvey";
+import { SITE_CONFIG } from "../config/site.config";
+import "../styles/survey.css";
+---
+
+<BaseLayout
+  title="Diagnóstico - Leonardo Lima"
+  description="Diagnóstico PsiAtiva para a clínica Leonardo Lima."
+  canonicalPath="/diagnostico-leonardo-lima"
+  hideNavAndFooter={true}
+  hideWhatsAppFab={true}
+  noindex={true}
+>
+  <FormbricksLinkSurvey
+    client:only="react"
+    appUrl={SITE_CONFIG.formbricks.appUrl}
+    surveyId={SITE_CONFIG.formbricks.linkSurveyId}
+  />
+</BaseLayout>
+
+<style is:global>
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+  }
+</style>

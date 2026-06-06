@@ -5,9 +5,13 @@ import LINKS from "../../constants/links";
 
 interface Props {
   minimal?: boolean;
+  showCookiePreferences?: boolean;
 }
 
-const { minimal = false } = Astro.props;
+const {
+  minimal = false,
+  showCookiePreferences = false,
+} = Astro.props;
 const year = new Date().getFullYear();
 
 // Build social links array dynamically — only show non-empty ones
@@ -136,6 +140,9 @@ const socialEntries = [
               <a href={LINKS.legal.privacy} data-i18n="footer.link_privacy"
                 >Privacidade</a>
             </li>
+            <li>
+              <a href={LINKS.legal.cookies}>Cookies</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -143,11 +150,24 @@ const socialEntries = [
     </div>
 
     <div class="footer-bottom">
-      <p class="footer-copy">
+      <div class="footer-meta">
+        <p class="footer-copy">
         © {year}
         {SITE_CONFIG.name}. <span data-i18n="footer.copyright"
           >Todos os direitos reservados.</span>
-      </p>
+        </p>
+        {
+          showCookiePreferences && (
+            <button
+              type="button"
+              class="footer-link-button"
+              data-cookie-preferences
+            >
+              Preferências de cookies
+            </button>
+          )
+        }
+      </div>
       {
         socialEntries.length > 0 && (
           <div class="footer-social">
@@ -177,6 +197,18 @@ const socialEntries = [
     </div>
   </div>
 </footer>
+
+{
+  showCookiePreferences && (
+    <script is:inline>
+      document.querySelectorAll("[data-cookie-preferences]").forEach((button) => {
+        button.addEventListener("click", () => {
+          window.psiativaAnalytics?.openPreferences();
+        });
+      });
+    </script>
+  )
+}
 
 <style>
   .footer {
@@ -246,7 +278,8 @@ const socialEntries = [
     gap: 0.625rem;
   }
 
-  .footer-column a {
+  .footer-column a,
+  .footer-link-button {
     font-family: var(--font-body);
     font-weight: 500;
     font-size: 16px;
@@ -256,7 +289,16 @@ const socialEntries = [
     transition: color var(--transition-fast);
   }
 
-  .footer-column a:hover {
+  .footer-link-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .footer-column a:hover,
+  .footer-link-button:hover {
     color: #ffffff;
   }
 
@@ -274,6 +316,13 @@ const socialEntries = [
     line-height: 1.4;
     color: var(--light-blue);
     opacity: 0.7;
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
   }
 
   .footer-social {

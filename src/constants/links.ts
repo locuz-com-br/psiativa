@@ -9,6 +9,9 @@ import { SITE_CONFIG, WHATSAPP_LINK } from '../config/site.config';
 // ── Pages ───────���────────────────────────────
 export const PAGES = {
   home: "/",
+  obrigado: "/obrigado",
+  diagnosticoLeonardoLima: "/diagnostico-leonardo-lima",
+  leonardoLima: "/leonardo-lima",
 } as const;
 
 // ── Section Anchors ──────────────���───────────

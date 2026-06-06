@@ -72,6 +72,7 @@ This is the **single source of truth** for the entire site. Edit this file to ch
 | `logos.*` | Logo file paths for navbar/footer (light/dark) |
 | `sections.*` | Toggle sections on/off (`true`/`false`) |
 | `analytics.*` | Web3Forms, hCaptcha, GA, and Clarity IDs |
+| `formbricks.*` | Formbricks host, workspace/environment, survey, and trigger |
 
 ### 2. Content (`src/data/`)
 
@@ -98,7 +99,7 @@ Replace the placeholder SVGs with your client's logos:
 
 ### 4. Legal Pages (`src/content/pages/`)
 
-Replace `[COMPANY_NAME]` and `[COMPANY_EMAIL]` placeholders in:
+Review the public legal copy before each production release:
 - `termos.mdx` — Terms of Use
 - `privacidade.mdx` — Privacy Policy
 - `cookies.mdx` — Cookie Policy
@@ -107,7 +108,7 @@ Replace `[COMPANY_NAME]` and `[COMPANY_EMAIL]` placeholders in:
 
 ```bash
 cp .env.example .env
-# Fill in your Web3Forms access key
+# Configure Web3Forms, GA4, Clarity, Formbricks, and capture webhooks.
 ```
 
 ---

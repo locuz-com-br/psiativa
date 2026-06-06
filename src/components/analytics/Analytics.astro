@@ -1,0 +1,245 @@
+---
+interface Props {
+  googleAnalyticsId?: string;
+  clarityId?: string;
+}
+
+const {
+  googleAnalyticsId = "",
+  clarityId = "",
+} = Astro.props;
+---
+
+<script
+  is:inline
+  define:vars={{ googleAnalyticsId, clarityId }}
+>
+  (() => {
+    const STORAGE_KEY = "psiativa-analytics-consent-v1";
+    const CONSENT_EVENT = "psiativa:consent-change";
+    const OPEN_EVENT = "psiativa:open-consent";
+    const BLOCKED_PARAMS = new Set([
+      "email",
+      "phone",
+      "name",
+      "message",
+      "answer",
+      "user_id",
+      "userid",
+      "visitor_id",
+    ]);
+    let vendorsLoaded = false;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+    });
+
+    const getStoredConsent = () => {
+      try {
+        const value = localStorage.getItem(STORAGE_KEY);
+        return value === "granted" || value === "denied" ? value : null;
+      } catch {
+        return null;
+      }
+    };
+
+    const setStoredConsent = (value) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, value);
+      } catch {
+        // Consent still applies for this page when storage is unavailable.
+      }
+    };
+
+    const loadGoogleAnalytics = () => {
+      if (!googleAnalyticsId || document.querySelector("[data-psiativa-ga]")) return;
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(googleAnalyticsId)}`;
+      script.dataset.psiativaGa = "true";
+      document.head.appendChild(script);
+
+      window.gtag("js", new Date());
+      window.gtag("config", googleAnalyticsId);
+    };
+
+    const loadClarity = () => {
+      if (!clarityId || document.querySelector("[data-psiativa-clarity]")) return;
+
+      window.clarity = window.clarity || function () {
+        (window.clarity.q = window.clarity.q || []).push(arguments);
+      };
+
+      window.clarity("consentv2", {
+        ad_Storage: "denied",
+        analytics_Storage: "granted",
+      });
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = `https://www.clarity.ms/tag/${encodeURIComponent(clarityId)}`;
+      script.dataset.psiativaClarity = "true";
+      document.head.appendChild(script);
+    };
+
+    const loadVendors = () => {
+      if (vendorsLoaded) return;
+      vendorsLoaded = true;
+      loadGoogleAnalytics();
+      loadClarity();
+    };
+
+    const clearAnalyticsCookies = () => {
+      const names = document.cookie
+        .split(";")
+        .map((cookie) => cookie.split("=")[0]?.trim())
+        .filter((name) =>
+          name && (
+            name.startsWith("_ga") ||
+            name === "_gid" ||
+            name === "_gat" ||
+            name === "_clck" ||
+            name === "_clsk"
+          )
+        );
+
+      const hostParts = window.location.hostname.split(".");
+      const domains = ["", window.location.hostname];
+      if (hostParts.length > 1) {
+        domains.push(`.${hostParts.slice(-2).join(".")}`);
+      }
+
+      for (const name of names) {
+        for (const domain of domains) {
+          const domainPart = domain ? `; domain=${domain}` : "";
+          document.cookie = `${name}=; Max-Age=0; path=/${domainPart}; SameSite=Lax`;
+        }
+      }
+    };
+
+    const updateVendorConsent = (value) => {
+      const granted = value === "granted";
+
+      window.gtag("consent", "update", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: granted ? "granted" : "denied",
+      });
+
+      if (window.clarity) {
+        window.clarity("consentv2", {
+          ad_Storage: "denied",
+          analytics_Storage: granted ? "granted" : "denied",
+        });
+        if (!granted) window.clarity("consent", false);
+      }
+    };
+
+    const setConsent = (value) => {
+      const previous = getStoredConsent();
+      setStoredConsent(value);
+      updateVendorConsent(value);
+
+      if (value === "granted") {
+        loadVendors();
+      } else {
+        clearAnalyticsCookies();
+      }
+
+      window.dispatchEvent(new CustomEvent(CONSENT_EVENT, {
+        detail: { analytics: value },
+      }));
+
+      if (previous === "granted" && value === "denied") {
+        window.setTimeout(() => window.location.reload(), 50);
+      }
+    };
+
+    const trackEvent = (name, params = {}) => {
+      if (getStoredConsent() !== "granted") return;
+
+      const safeParams = Object.fromEntries(
+        Object.entries(params).filter(
+          ([key, value]) =>
+            !BLOCKED_PARAMS.has(key.toLowerCase()) && value !== undefined,
+        ),
+      );
+
+      if (googleAnalyticsId) {
+        window.gtag("event", name, safeParams);
+      }
+      if (clarityId && window.clarity) {
+        window.clarity("event", name);
+      }
+    };
+
+    window.psiativaAnalytics = {
+      getConsent: getStoredConsent,
+      setConsent,
+      trackEvent,
+      openPreferences: () => window.dispatchEvent(new Event(OPEN_EVENT)),
+    };
+
+    const storedConsent = getStoredConsent();
+    if (storedConsent) {
+      updateVendorConsent(storedConsent);
+      if (storedConsent === "granted") loadVendors();
+    }
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const anchor = target.closest("a");
+      if (!anchor) return;
+
+      const explicitEvent = anchor.dataset.analyticsEvent;
+      const section = anchor.closest("section");
+      const location =
+        anchor.dataset.analyticsLocation ||
+        section?.id ||
+        (anchor.closest("nav") ? "navbar" : "") ||
+        (anchor.closest("footer") ? "footer" : "") ||
+        "page";
+
+      if (explicitEvent) {
+        trackEvent(explicitEvent, {
+          cta_location: location,
+          destination: anchor.dataset.analyticsDestination || "internal",
+        });
+      }
+
+      let url;
+      try {
+        url = new URL(anchor.href, window.location.href);
+      } catch {
+        return;
+      }
+
+      const isWhatsApp =
+        url.protocol === "whatsapp:" ||
+        ["wa.me", "api.whatsapp.com", "web.whatsapp.com"].includes(url.hostname);
+
+      if (isWhatsApp) {
+        trackEvent("whatsapp_click", {
+          cta_location: location,
+          destination: "whatsapp",
+        });
+        trackEvent("cta_click", {
+          cta_location: location,
+          destination: "whatsapp",
+        });
+      }
+    });
+  })();
+</script>

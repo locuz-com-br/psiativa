@@ -1,6 +1,8 @@
 ---
 import { SITE_CONFIG } from '../config/site.config';
 import SEOHead from '../components/seo/SEOHead.astro';
+import Analytics from '../components/analytics/Analytics.astro';
+import CookieConsent from '../components/analytics/CookieConsent.astro';
 
 interface NavItem {
   href: string;
@@ -15,6 +17,7 @@ interface Props {
   titleKey?: string;
   descriptionKey?: string;
   hideNavAndFooter?: boolean;
+  hideWhatsAppFab?: boolean;
   canonicalPath?: string;
   ogType?: "website" | "article";
   image?: string;
@@ -35,6 +38,7 @@ const {
   titleKey,
   descriptionKey,
   hideNavAndFooter = false,
+  hideWhatsAppFab = hideNavAndFooter,
   canonicalPath,
   ogType = "website",
   image,
@@ -43,6 +47,11 @@ const {
   navbar,
   footerType = "default",
 } = Astro.props;
+
+const hasAnalytics = Boolean(
+  SITE_CONFIG.analytics.googleAnalyticsId ||
+  SITE_CONFIG.analytics.clarityId
+);
 
 import '../styles/global.css';
 import Navbar from '../components/sections/Navbar.astro';
@@ -89,14 +98,28 @@ import WhatsAppFab from '../components/sections/WhatsAppFab.astro';
         }
       })();
     </script>
+    {
+      hasAnalytics && (
+        <Analytics
+          googleAnalyticsId={SITE_CONFIG.analytics.googleAnalyticsId}
+          clarityId={SITE_CONFIG.analytics.clarityId}
+        />
+      )
+    }
   </head>
   <body>
     {!hideNavAndFooter && <Navbar items={navbar?.items} cta={navbar?.cta} logoHref={navbar?.logoHref} />}
     <main>
       <slot />
     </main>
-    {!hideNavAndFooter && <Footer minimal={footerType === "minimal"} />}
-    {SITE_CONFIG.sections.whatsappFab && <WhatsAppFab />}
+    {!hideNavAndFooter && (
+      <Footer
+        minimal={footerType === "minimal"}
+        showCookiePreferences={hasAnalytics}
+      />
+    )}
+    {SITE_CONFIG.sections.whatsappFab && !hideWhatsAppFab && <WhatsAppFab />}
+    {hasAnalytics && <CookieConsent />}
     <script src="../scripts/i18n.ts"></script>
   </body>
 </html>

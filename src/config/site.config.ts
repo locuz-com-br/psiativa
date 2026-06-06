@@ -97,8 +97,22 @@ export const SITE_CONFIG = {
   analytics: {
     web3formsKey: "",
     hcaptchaSiteKey: "50b2fe65-b00b-4b9e-ad62-3ba471098be2",
-    googleAnalyticsId: "",
-    clarityId: "",
+    googleAnalyticsId:
+      import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID ||
+      import.meta.env.PUBLIC_GA_ID ||
+      "",
+    clarityId: import.meta.env.PUBLIC_CLARITY_ID || "",
+  },
+
+  // Formbricks surveys
+  formbricks: {
+    appUrl: import.meta.env.PUBLIC_FORMBRICKS_APP_URL || "https://app.formbricks.com",
+    workspaceId: import.meta.env.PUBLIC_FORMBRICKS_WORKSPACE_ID || "",
+    environmentId: import.meta.env.PUBLIC_FORMBRICKS_ENV_ID || "",
+    linkSurveyId:
+      import.meta.env.PUBLIC_FORMBRICKS_LINK_SURVEY_ID ||
+      "xnnk82ql3hkany9kmlkp47oi",
+    appSurveyTrigger: "view_psi_survey",
   },
 
   // ── Legal Page Slugs ───────────────────────

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import { trackEvent } from '../../lib/analytics';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error' | 'captcha_required'>('idle');
@@ -109,15 +110,27 @@ export default function ContactForm() {
 
       if (data.success) {
         setStatus('sent');
+        trackEvent('generate_lead', {
+          form_name: 'contact',
+          page_path: window.location.pathname,
+        });
         form.reset();
         captchaRef.current?.resetCaptcha();
         setCaptchaToken(null);
       } else {
         console.error('Erro Web3Forms:', data);
+        trackEvent('form_error', {
+          form_name: 'contact',
+          error_type: 'provider_error',
+        });
         setStatus('error');
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
+      trackEvent('form_error', {
+        form_name: 'contact',
+        error_type: 'network_error',
+      });
       setStatus('error');
     }
   }
@@ -159,7 +172,11 @@ export default function ContactForm() {
           background: var(--input-bg, transparent);
         }
       `}</style>
-      <form onSubmit={handleSubmit} style={formStyles}>
+      <form
+        onSubmit={handleSubmit}
+        style={formStyles}
+        data-clarity-mask="true"
+      >
       <div style={rowStyles}>
         <div style={fieldStyles}>
           <label style={labelStyles} htmlFor="name" data-i18n="contact.form_name">Nome *</label>
