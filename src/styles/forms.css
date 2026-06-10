@@ -1,0 +1,16 @@
+/* Shell de página dos formulários nativos (noindex, sem nav/footer).
+   O card/inputs vêm do <style> inline da island (FormIsland.tsx). */
+.nf-page {
+  width: 100%;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background:
+    radial-gradient(circle at top, rgba(126, 174, 137, 0.18), transparent 45%),
+    var(--background-subtle);
+}
+
+.nf-page > * {
+  width: min(100%, 640px);
+}
