@@ -96,11 +96,16 @@ export const SITE_CONFIG = {
   // ── Analytics & Integrations ───────────────
   analytics: {
     web3formsKey: "",
-    hcaptchaSiteKey: "50b2fe65-b00b-4b9e-ad62-3ba471098be2",
+    // hCaptcha SITE key (public — safe in the bundle). The matching SECRET lives
+    // server-side in n8n (HCAPTCHA_SECRET), never here. They must come from the
+    // SAME hCaptcha site or siteverify returns `sitekey-secret-mismatch`.
+    // Fallback is hCaptcha's test sitekey (only passes against the test secret) —
+    // production builds MUST set PUBLIC_HCAPTCHA_SITE_KEY.
+    hcaptchaSiteKey:
+      import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "",
     googleAnalyticsId:
       import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID ||
-      import.meta.env.PUBLIC_GA_ID ||
-      "",
+      import.meta.env.PUBLIC_GA_ID || "",
     clarityId: import.meta.env.PUBLIC_CLARITY_ID || "",
   },
 
