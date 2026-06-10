@@ -562,6 +562,12 @@ function devMockReveal(
     autonomo: { p7k: 3000, p10k: 5000 },
     clinica: { p7k: 5000, p10k: 8000 },
   };
+  // Frases de garantia travadas (oferta-travada.md §1) — espelham o nó Recompute
+  // Calc do webhook. P7K carrega "(Não é devolução.)"; P10K = prazo é resultado.
+  const GARANTIA: Record<Produto, string> = {
+    p7k: "uma meta de novo faturamento definida junto, na primeira conversa. Se não bater, a PsiAtiva segue trabalhando sem custo até bater. (Não é devolução.)",
+    p10k: "a PsiAtiva fica até bater a meta acordada. O prazo é resultado, não calendário.",
+  };
   const investimento = TABELA[perfil][produto];
   const midiaMes = MIDIA[perfil][produto];
   const r = computeReveal(input, proj, { investimento, midiaMes });
@@ -573,8 +579,7 @@ function devMockReveal(
     desembolsoTotal: r.desembolsoTotal,
     roi: r.roi,
     paybackMeses: r.paybackMeses,
-    garantia:
-      "uma meta de novo faturamento definida junto, na primeira conversa. Se não bater, a PsiAtiva segue trabalhando sem custo até bater.",
+    garantia: GARANTIA[produto],
   };
 }
 
