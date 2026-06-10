@@ -1,0 +1,107 @@
+{
+  "_comment": "SCAFFOLD/PLACEHOLDER. Nao e a discovery survey validada. O conteudo real vem da transcricao do Formbricks (ver plans/native-forms/plan.md, secao 6a; owner: trilha de conteudo). Existe so para exercitar os tipos de campo do engine em modo DEV, e deve passar pelos passes de voz, CFP e oferta antes de ir ao ar. Removido do bundle no forms.config.ts.",
+  "meta": { "slug": "discovery" },
+  "intro": {
+    "tag": "Diagnóstico",
+    "title": "Vamos entender o momento da sua clínica",
+    "subtitle": "Algumas perguntas rápidas sobre a sua agenda e a sua rotina. Leva menos de dois minutos.",
+    "note": "Suas respostas ficam só com a nossa equipe.",
+    "start": "Começar"
+  },
+  "questions": [
+    {
+      "id": "abertura",
+      "type": "statement",
+      "prompt": "Antes de começar",
+      "helper": "Não existe resposta certa aqui. Quanto mais honesto o retrato da agenda hoje, mais útil fica a conversa depois.",
+      "cta": "Entendi, vamos lá"
+    },
+    {
+      "id": "estrutura",
+      "type": "single_select",
+      "prompt": "Como funciona o atendimento no seu espaço hoje?",
+      "options": [
+        { "id": "equipe", "label": "Tenho equipe e recepção comigo" },
+        { "id": "sozinha", "label": "Atendo com agenda própria, sem recepção" },
+        { "id": "montando", "label": "Estou montando a estrutura agora" }
+      ]
+    },
+    {
+      "id": "pesos",
+      "type": "multi_select",
+      "prompt": "O que mais pesa na sua agenda hoje?",
+      "helper": "Escolha até duas.",
+      "maxSelections": 2,
+      "options": [
+        { "id": "buraco", "label": "Semanas cheias seguidas de semanas vazias" },
+        { "id": "noshow", "label": "Falta e remarcação em cima da hora" },
+        { "id": "primeira_resposta", "label": "Demora para responder quem chega no WhatsApp" },
+        { "id": "indicacao", "label": "Dependo quase só de indicação" }
+      ]
+    },
+    {
+      "id": "previsibilidade",
+      "type": "rating",
+      "prompt": "Quão previsível é o seu próximo mês?",
+      "scale": { "min": 1, "max": 5, "style": "number", "minLabel": "Uma incógnita", "maxLabel": "Bem previsível" }
+    },
+    {
+      "id": "rotina",
+      "type": "rating",
+      "prompt": "Como você sente a sua rotina de captação hoje?",
+      "scale": { "min": 1, "max": 5, "style": "star", "minLabel": "Trava tudo", "maxLabel": "Flui bem" }
+    },
+    {
+      "id": "incomodo",
+      "type": "open_text",
+      "prompt": "Em uma frase, qual o maior incômodo com a agenda hoje?",
+      "placeholder": "Escreva com as suas palavras",
+      "maxLength": 160
+    },
+    {
+      "id": "contexto",
+      "type": "long_text",
+      "prompt": "Quer contar um pouco mais sobre o momento da clínica?",
+      "helper": "Opcional.",
+      "required": false,
+      "placeholder": "O que estiver na sua cabeça sobre a agenda e a captação"
+    },
+    {
+      "id": "consentimento",
+      "type": "consent",
+      "prompt": "Tudo certo para a gente entrar em contato?",
+      "helper": "Autorizo a PsiAtiva a usar minhas respostas para preparar a conversa sobre a minha clínica."
+    }
+  ],
+  "contact": {
+    "enabled": true,
+    "eyebrow": "Quase lá",
+    "title": "Para onde mandamos o retorno do diagnóstico?",
+    "collectName": true,
+    "collectPhone": true,
+    "requireCaptcha": true,
+    "nameLabel": "Seu nome",
+    "namePlaceholder": "Como podemos te chamar",
+    "phoneLabel": "Seu WhatsApp",
+    "phonePlaceholder": "(21) 99999-9999",
+    "submit": "Enviar respostas",
+    "sending": "Enviando...",
+    "micro": "A gente usa só para falar sobre a sua clínica.",
+    "phoneRequired": "Informe um número de WhatsApp válido.",
+    "captchaRequired": "Confirme que você não é um robô.",
+    "error": "Algo não saiu como esperado. Tente enviar de novo."
+  },
+  "thankYou": {
+    "title": "Recebemos as suas respostas",
+    "body": "Obrigado pela honestidade. Nossa equipe vai olhar o retrato da sua agenda e te chamar no WhatsApp para conversar sobre os próximos passos."
+  },
+  "ui": {
+    "progress": "{n} de {total}",
+    "back": "Voltar",
+    "next": "Continuar",
+    "required": "Responda para continuar.",
+    "selectAtLeast": "Selecione pelo menos {n}.",
+    "selectAtMost": "Selecione no máximo {n}.",
+    "disclaimer": "Este diagnóstico é um retrato do momento da sua clínica. Não é laudo nem avaliação clínica."
+  }
+}

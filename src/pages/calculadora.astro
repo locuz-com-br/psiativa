@@ -8,7 +8,6 @@
 import { SITE_CONFIG } from "../config/site.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CalculadoraIsland from "../components/calculadora/CalculadoraIsland.tsx";
-import { POV } from "../config/calculadora.config";
 import {
   breadcrumbSchema,
   faqPageSchema,
@@ -67,21 +66,28 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
 )}`;
 ---
 
-<BaseLayout title={title} description={description} canonicalPath={pagePath} schema={schema}>
+<BaseLayout
+  title={title}
+  description={description}
+  titleKey="calculadora.meta.title"
+  descriptionKey="calculadora.meta.description"
+  canonicalPath={pagePath}
+  schema={schema}
+>
   <!-- ── Hero (dark teal) ─────────────────────────────────── -->
   <section class="calc-hero">
     <div class="calc-hero-bg"></div>
     <div class="container calc-hero-content">
-      <div class="calc-tag">Ferramenta gratuita</div>
+      <div class="calc-tag" data-i18n="calculadora.hero.tag">Ferramenta gratuita</div>
       <h1 class="calc-h1">
-        Quanto a agenda vazia custa ao seu consultório?<br />
-        <span class="calc-h1-accent">Descubra com os seus números.</span>
+        <span data-i18n="calculadora.hero.h1_line1">Quanto a agenda vazia custa ao seu consultório?</span><br />
+        <span class="calc-h1-accent" data-i18n="calculadora.hero.h1_accent">Descubra com os seus números.</span>
       </h1>
-      <p class="calc-hero-sub">
+      <p class="calc-hero-sub" data-i18n="calculadora.hero.sub">
         Mês bom e mês ruim, sem conseguir prever. Quando a agenda depende de quando alguém indica, falta constância
         para planejar o mês.
       </p>
-      <p class="calc-tldr">
+      <p class="calc-tldr" data-i18n="calculadora.hero.tldr">
         Uma agenda inconstante custa, em faturamento, o que poderia entrar de pacientes novos retidos ao longo do
         ciclo. Esta calculadora usa o seu ticket, a sua retenção e quantas entradas você já tem hoje para projetar,
         com os seus números, quanto fica na mesa a cada mês sem um processo de captação.
@@ -99,15 +105,15 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── Conteúdo de apoio (camada indexável) ─────────────── -->
   <section class="calc-content">
     <div class="container calc-prose">
-      <h2>Como calcular quanto você deixa de faturar com a agenda vazia?</h2>
-      <p>
+      <h2 data-i18n="calculadora.content.h2_1">Como calcular quanto você deixa de faturar com a agenda vazia?</h2>
+      <p data-i18n="calculadora.content.p_1">
         Some o faturamento que entraria se cada mês trouxesse alguns pacientes novos que continuam com você por
         vários meses. A conta certa acompanha esse acúmulo de quem entra e fica ao longo do tempo. A diferença
         entre o seu ritmo de hoje e um ritmo com captação ativa é o que fica na mesa.
       </p>
 
-      <h2>Por que "pacientes × sessões" subestima? O modelo de coorte</h2>
-      <p>
+      <h2 data-i18n="calculadora.content.h2_2">Por que "pacientes × sessões" subestima? O modelo de coorte</h2>
+      <p data-i18n-html="calculadora.content.p_2_html">
         Multiplicar pacientes novos × ticket × meses trata cada paciente como se viesse uma vez e sumisse. Na
         psicologia, quem entra costuma continuar por vários meses. O jeito honesto de projetar é por
         <strong> coorte</strong>: a cada mês entra um grupo novo de pacientes que se soma aos que já estão em
@@ -117,24 +123,23 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
         Com retenção baixa, do piso. A calculadora faz essa conta com os seus números, sem usar média de mercado.
       </p>
 
-      <h2>Com método vs. sem método: o que muda no seu cenário?</h2>
-      <p>
+      <h2 data-i18n="calculadora.content.h2_3">Com método vs. sem método: o que muda no seu cenário?</h2>
+      <p data-i18n="calculadora.content.p_3">
         A curva de baixo usa as entradas que você já tem hoje, normalmente poucas e dependentes de indicação. A de
         cima usa um cenário com captação ativa, que você ajusta. O espaço entre as duas é o faturamento que poderia
         estar entrando com constância. Se as duas curvas ficam coladas, a ferramenta te diz: a sua conta já está boa.
       </p>
 
-      <h2>Quanto custa capturar esse faturamento?</h2>
-      <p>
+      <h2 data-i18n="calculadora.content.h2_4">Quanto custa capturar esse faturamento?</h2>
+      <p data-i18n="calculadora.content.p_4">
         Depende do seu perfil e do nível de estrutura. A leitura completa (investimento a partir de um valor, verba
         de mídia e o retorno sobre o seu cenário) aparece quando você deixa o contato. O valor exato e as formas de
         pagamento saem de uma conversa, no seu momento.
       </p>
 
-      <h2>Isso é garantia de faturamento?</h2>
-      <p>
-        Não. A calculadora projeta a partir dos seus dados: o seu ticket, a sua retenção, as suas entradas.
-        <strong>{POV}</strong> Se a
+      <h2 data-i18n="calculadora.content.h2_5">Isso é garantia de faturamento?</h2>
+      <p data-i18n-html="calculadora.content.p_5_html">
+        Não. A calculadora projeta a partir dos seus dados: o seu ticket, a sua retenção, as suas entradas. <strong>A conta é sua, não nossa.</strong> Se a
         sua projeção sem um processo já é boa, a ferramenta mostra isso e você não precisa da gente.
       </p>
     </div>
@@ -143,12 +148,12 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── FAQ (indexável + FAQPage schema) ─────────────────── -->
   <section class="calc-faq">
     <div class="container calc-prose">
-      <h2 class="calc-faq-title">Perguntas frequentes</h2>
+      <h2 class="calc-faq-title" data-i18n="calculadora.faq.title">Perguntas frequentes</h2>
       {
-        faqs.map((f) => (
+        faqs.map((f, i) => (
           <details class="calc-faq-item">
-            <summary>{f.question}</summary>
-            <p>{f.answer}</p>
+            <summary data-i18n={`calculadora.faq.items.${i}.q`}>{f.question}</summary>
+            <p data-i18n={`calculadora.faq.items.${i}.a`}>{f.answer}</p>
           </details>
         ))
       }
@@ -158,9 +163,8 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── Link interno (satélite → pilar) ──────────────────── -->
   <section class="calc-related">
     <div class="container calc-prose">
-      <p>
-        Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada?{" "}
-        <a href="/">Veja como funciona o processo</a>.
+      <p data-i18n-html="calculadora.related_html">
+        Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada? <a href="/">Veja como funciona o processo</a>.
       </p>
     </div>
   </section>
@@ -168,10 +172,10 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── CTA final (espelha a home) ───────────────────────── -->
   <section class="calc-cta-final">
     <div class="container calc-cta-inner">
-      <h2>Primeiro passo: uma conversa. Só isso.</h2>
-      <p>Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
+      <h2 data-i18n="calculadora.cta.title">Primeiro passo: uma conversa. Só isso.</h2>
+      <p data-i18n="calculadora.cta.desc">Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
       <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-light">
-        <span>Agendar diagnóstico gratuito</span>
+        <span data-i18n="calculadora.cta.btn">AGENDAR DIAGNÓSTICO</span>
         <span class="icon-circle">
           <svg
             width="15"

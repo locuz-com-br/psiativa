@@ -15,6 +15,13 @@
 //
 // Conteúdo (perguntas/pesos/resultados) vive em src/data/quiz.json — este
 // motor só lê. Editar copy/pesos sem tocar no componente.
+//
+// BILÍNGUE: todo texto visível no quiz.json é { pt, en } (L10n). A island
+// resolve com pick()/useSiteLang; o scoring aqui só lê campos de lógica
+// (id/icp/pains/temperature/slug/key), nunca a copy. Type-only import =
+// apagado no build, não puxa React pra este módulo puro.
+
+import type { L10n, Lang } from "./useSiteLang";
 
 export type Icp = "clinica" | "autonoma";
 
@@ -36,7 +43,7 @@ export type QuestionKind = "profiling" | "diagnostic" | "temperature";
 
 export interface QuizOption {
   id: string;
-  label: string;
+  label: L10n;
   /** profiling: soma na contagem de ICP */
   icp?: Partial<Record<Icp, number>>;
   /** diagnostic: soma na contagem de dor */
@@ -48,8 +55,8 @@ export interface QuizOption {
 export interface QuizQuestion {
   id: string;
   kind: QuestionKind;
-  prompt: string;
-  helper?: string;
+  prompt: L10n;
+  helper?: L10n;
   options: QuizOption[];
 }
 
@@ -62,54 +69,55 @@ export interface QuizResultContent {
   /** slug da dor → source_detail / campaign (§5 do plano) */
   slug: string;
   /** nome da dor (rótulo curto) */
-  painName: string;
+  painName: L10n;
   /** a dor devolvida nas palavras dela (a lead verbaliza o próprio problema) */
-  echo: string;
+  echo: L10n;
   /** a implicação: o custo escondido que a tela faz a lead sentir (§4) */
-  hemorrhage: string;
+  hemorrhage: L10n;
   /** frame aspiracional SUAVE — "o que muda quando isso para de vazar".
    *  NUNCA uma promessa quantificada (§0 regra 1). */
-  aspiration: string;
+  aspiration: L10n;
   /** nome da isca (material grátis) — exibido, mas SEM link de download */
-  iscaTitle: string;
+  iscaTitle: L10n;
   /** microcopy do passo de captura ("pra receber o [isca]...") */
-  iscaPromise: string;
+  iscaPromise: L10n;
 }
 
 export interface QuizContent {
   intro: {
-    tag: string;
-    title: string;
-    subtitle: string;
-    note: string;
-    start: string;
+    tag: L10n;
+    title: L10n;
+    subtitle: L10n;
+    note: L10n;
+    start: L10n;
   };
   questions: QuizQuestion[];
   results: QuizResultContent[];
   capture: {
-    eyebrow: string;
-    title: string;
-    nameLabel: string;
-    namePlaceholder: string;
-    phoneLabel: string;
-    phonePlaceholder: string;
-    submit: string;
-    sending: string;
-    micro: string;
-    phoneRequired: string;
-    captchaRequired: string;
-    error: string;
+    eyebrow: L10n;
+    title: L10n;
+    nameLabel: L10n;
+    namePlaceholder: L10n;
+    phoneLabel: L10n;
+    phonePlaceholder: L10n;
+    submit: L10n;
+    sending: L10n;
+    micro: L10n;
+    phoneRequired: L10n;
+    captchaRequired: L10n;
+    error: L10n;
   };
   handoff: {
-    title: string;
-    body: string;
+    title: L10n;
+    body: L10n;
   };
   ui: {
-    progress: string;
-    back: string;
-    resultEyebrow: string;
-    restart: string;
-    disclaimer: string;
+    progress: L10n;
+    back: L10n;
+    costLabel: L10n;
+    resultEyebrow: L10n;
+    restart: L10n;
+    disclaimer: L10n;
   };
 }
 
@@ -232,6 +240,7 @@ export function buildEnvelope(
   outcome: QuizOutcome,
   answers: Answer[],
   campaign: string | null,
+  lang: Lang,
 ): QuizEnvelope {
   return {
     icp: outcome.icp,
@@ -240,7 +249,9 @@ export function buildEnvelope(
     dominant_pain_slug: outcome.dominant.slug,
     secondary_pains: outcome.secondary.map((r) => r.key),
     temperature: outcome.temperature,
-    isca: outcome.dominant.iscaTitle,
+    // Nome da isca no idioma que ela viu (os `answers` já guardam o rótulo
+    // escolhido nesse idioma). O slug/key acima seguem invariantes pro back.
+    isca: outcome.dominant.iscaTitle[lang],
     isca_delivered: false,
     campaign,
     completed_at: new Date().toISOString(),

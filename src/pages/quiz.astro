@@ -71,21 +71,28 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
 )}`;
 ---
 
-<BaseLayout title={title} description={description} canonicalPath={pagePath} schema={schema}>
+<BaseLayout
+  title={title}
+  description={description}
+  titleKey="quiz.meta.title"
+  descriptionKey="quiz.meta.description"
+  canonicalPath={pagePath}
+  schema={schema}
+>
   <!-- ── Hero (dark teal) ─────────────────────────────────── -->
   <section class="quiz-hero">
     <div class="quiz-hero-bg"></div>
     <div class="container quiz-hero-content">
-      <div class="quiz-tag-hero">Diagnóstico gratuito</div>
+      <div class="quiz-tag-hero" data-i18n="quiz.hero.tag">Diagnóstico gratuito</div>
       <h1 class="quiz-h1">
-        Onde a sua agenda está vazando?<br />
-        <span class="quiz-h1-accent">Descubra em 2 minutos.</span>
+        <span data-i18n="quiz.hero.h1_line1">Onde a sua agenda está vazando?</span><br />
+        <span class="quiz-h1-accent" data-i18n="quiz.hero.h1_accent">Descubra em 2 minutos.</span>
       </h1>
-      <p class="quiz-hero-sub">
+      <p class="quiz-hero-sub" data-i18n="quiz.hero.sub">
         Mês bom e mês ruim, sem conseguir prever. Antes de achar que é falta de paciente, vale olhar onde eles estão
         se perdendo no caminho.
       </p>
-      <p class="quiz-tldr">
+      <p class="quiz-tldr" data-i18n="quiz.hero.tldr">
         Este diagnóstico faz 6 perguntas sobre o seu dia a dia: como chega o paciente, o que acontece no primeiro
         contato, de onde vêm as indicações. No fim, ele nomeia o buraco que mais esvazia a sua agenda hoje e te entrega
         um material pra começar a fechar. Leva uns 2 minutos e é de graça.
@@ -103,39 +110,39 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── Conteúdo de apoio (camada indexável) ─────────────── -->
   <section class="quiz-content">
     <div class="container quiz-prose">
-      <h2>Por que a agenda de psicóloga oscila tanto?</h2>
-      <p>
+      <h2 data-i18n="quiz.content.h2_1">Por que a agenda de psicóloga oscila tanto?</h2>
+      <p data-i18n="quiz.content.p_1">
         Na maioria das vezes a demanda existe. O paciente chega por indicação, vê o Instagram, manda mensagem no
         WhatsApp. O que falha é o caminho entre esse primeiro contato e a sessão confirmada. Uma mensagem que demora
         a ser respondida, uma primeira sessão que ninguém confirma, uma agenda que depende só de quem indica. Cada um
         desses pontos é um lugar por onde a agenda vaza, e quase sempre passa despercebido até o mês virar.
       </p>
 
-      <h2>Como saber onde você está perdendo paciente?</h2>
-      <p>
+      <h2 data-i18n="quiz.content.h2_2">Como saber onde você está perdendo paciente?</h2>
+      <p data-i18n="quiz.content.p_2">
         Olhando para o seu próprio dia a dia, não para uma média de mercado. Quem responde o primeiro contato? Quanto
         tempo a pessoa espera? Quantos pacientes novos chegam por mês e de onde vêm? O diagnóstico faz essas perguntas
         e devolve, em uma frase, qual buraco está pesando mais agora. Quando a dor tem nome, fica mais fácil decidir
         o que olhar primeiro.
       </p>
 
-      <h2>O problema é falta de paciente ou o caminho até a sessão?</h2>
-      <p>
+      <h2 data-i18n="quiz.content.h2_3">O problema é falta de paciente ou o caminho até a sessão?</h2>
+      <p data-i18n="quiz.content.p_3">
         Você não perde paciente por falta de competência clínica. Perde no caminho, entre o contato e a consulta
         confirmada. É por isso que captar mais gente, sem arrumar esse caminho, costuma não resolver: entra mais
         contato e continua vazando na mesma porta. O diagnóstico separa as duas coisas, se o aperto está na chegada
         de paciente novo ou na perda do que já chegou.
       </p>
 
-      <h2>O que você recebe no fim do diagnóstico?</h2>
-      <p>
+      <h2 data-i18n="quiz.content.h2_4">O que você recebe no fim do diagnóstico?</h2>
+      <p data-i18n="quiz.content.p_4">
         Primeiro, o nome do buraco principal e o que ele custa por mês na sua agenda. Depois, se você deixar seu
         WhatsApp, um material gratuito feito pra essa dor específica: um guia, um roteiro ou um checklist pra começar
         a fechar esse buraco com as próprias mãos. O material chega pelo WhatsApp, sem preço e sem compromisso.
       </p>
 
-      <h2>Isso serve pra consultório solo e pra clínica?</h2>
-      <p>
+      <h2 data-i18n="quiz.content.h2_5">Isso serve pra consultório solo e pra clínica?</h2>
+      <p data-i18n="quiz.content.p_5">
         Serve para os dois. As primeiras perguntas entendem se você atende sozinha, sem recepção, ou se tem uma equipe
         cuidando dos primeiros contatos. A partir daí, o resultado fala com a sua realidade. Quem atende sozinha tem
         dores diferentes de quem coordena uma clínica, e o diagnóstico respeita essa diferença em vez de tratar todo
@@ -147,12 +154,12 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── FAQ (indexável + FAQPage schema) ─────────────────── -->
   <section class="quiz-faq">
     <div class="container quiz-prose">
-      <h2 class="quiz-faq-title">Perguntas frequentes</h2>
+      <h2 class="quiz-faq-title" data-i18n="quiz.faq.title">Perguntas frequentes</h2>
       {
-        faqs.map((f) => (
+        faqs.map((f, i) => (
           <details class="quiz-faq-item">
-            <summary>{f.question}</summary>
-            <p>{f.answer}</p>
+            <summary data-i18n={`quiz.faq.items.${i}.q`}>{f.question}</summary>
+            <p data-i18n={`quiz.faq.items.${i}.a`}>{f.answer}</p>
           </details>
         ))
       }
@@ -162,10 +169,8 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── Links internos ───────────────────────────────────── -->
   <section class="quiz-related">
     <div class="container quiz-prose">
-      <p>
-        Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada?{" "}
-        <a href="/">Veja como funciona o processo</a>. Se você atende sozinha e quer ver a conta em números,{" "}
-        <a href="/calculadora/">use a calculadora de custo da agenda vazia</a>.
+      <p data-i18n-html="quiz.related_html">
+        Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada? <a href="/">Veja como funciona o processo</a>. Se você atende sozinha e quer ver a conta em números, <a href="/calculadora/">use a calculadora de custo da agenda vazia</a>.
       </p>
     </div>
   </section>
@@ -173,10 +178,10 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── CTA final (espelha a home) ───────────────────────── -->
   <section class="quiz-cta-final">
     <div class="container quiz-cta-inner">
-      <h2>Primeiro passo: uma conversa. Só isso.</h2>
-      <p>Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
+      <h2 data-i18n="quiz.cta.title">Primeiro passo: uma conversa. Só isso.</h2>
+      <p data-i18n="quiz.cta.desc">Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
       <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-light">
-        <span>Agendar diagnóstico gratuito</span>
+        <span data-i18n="quiz.cta.btn">AGENDAR DIAGNÓSTICO</span>
         <span class="icon-circle">
           <svg
             width="15"

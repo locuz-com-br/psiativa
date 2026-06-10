@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FormIsland from "../components/forms/FormIsland";
+import { DISCOVERY_FORM, FORM_SOURCES } from "../config/forms.config";
+import "../styles/forms.css";
+---
+
+<BaseLayout
+  title="Diagnóstico PsiAtiva"
+  description="Diagnóstico da PsiAtiva para a sua clínica de psicologia."
+  canonicalPath="/diagnostico"
+  hideNavAndFooter={true}
+  hideWhatsAppFab={true}
+  noindex={true}
+>
+  <main class="nf-page">
+    <FormIsland
+      client:only="react"
+      content={DISCOVERY_FORM}
+      source={FORM_SOURCES.discovery.source}
+      page={FORM_SOURCES.discovery.page}
+    />
+  </main>
+</BaseLayout>

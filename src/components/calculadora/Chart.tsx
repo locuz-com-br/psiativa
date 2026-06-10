@@ -1,6 +1,7 @@
 "use client";
 
 import { formatBRL } from "../../lib/calculadora";
+import type { Lang } from "../../lib/useSiteLang";
 
 interface ChartProps {
   curvaSem: number[];
@@ -9,7 +10,33 @@ interface ChartProps {
   labelCom: string;
   gap: number;
   autoQualified: boolean;
+  lang: Lang;
 }
+
+// Copy interno do gráfico (rótulos/aria). labelSem/labelCom chegam já
+// resolvidos pela island; aqui ficam só os textos próprios do SVG.
+const CHART_COPY = {
+  pt: {
+    title: "Faturamento acumulado: com método vs. sem método",
+    months: "MESES",
+    moneyOnTable: "Dinheiro na mesa",
+    thousands: (n: string) => `R$ ${n} mil`,
+    ariaAuto: (n: number) =>
+      `Gráfico de faturamento acumulado em ${n} meses. Com e sem um processo de captação, suas curvas ficam próximas. A diferença é pequena.`,
+    aria: (n: number, com: string, sem: string, g: string) =>
+      `Gráfico de faturamento acumulado em ${n} meses. Com um processo de captação a curva chega a ${com}; sem processo, a ${sem}. A diferença no ciclo é de ${g}.`,
+  },
+  en: {
+    title: "Cumulative revenue: with a method vs. without",
+    months: "MONTHS",
+    moneyOnTable: "Money on the table",
+    thousands: (n: string) => `R$ ${n}k`,
+    ariaAuto: (n: number) =>
+      `Cumulative revenue chart over ${n} months. With and without an acquisition process, your curves stay close. The difference is small.`,
+    aria: (n: number, com: string, sem: string, g: string) =>
+      `Cumulative revenue chart over ${n} months. With an acquisition process the curve reaches ${com}; without one, ${sem}. The difference over the cycle is ${g}.`,
+  },
+};
 
 // ── ViewBox geometry ──────────────────────────────────────────
 const W = 720;
@@ -30,16 +57,17 @@ function niceCeil(v: number): number {
   return step * pow;
 }
 
-function compactBRL(v: number): string {
+function compactBRL(v: number, c: (typeof CHART_COPY)[Lang]): string {
   if (v >= 1000) {
     const milhares = v / 1000;
     const n = milhares >= 10 ? Math.round(milhares) : Math.round(milhares * 10) / 10;
-    return `R$ ${n.toLocaleString("pt-BR")} mil`;
+    return c.thousands(n.toLocaleString("pt-BR"));
   }
   return formatBRL(v);
 }
 
-export default function Chart({ curvaSem, curvaCom, labelSem, labelCom, gap, autoQualified }: ChartProps) {
+export default function Chart({ curvaSem, curvaCom, labelSem, labelCom, gap, autoQualified, lang }: ChartProps) {
+  const c = CHART_COPY[lang];
   const n = Math.max(curvaCom.length, curvaSem.length, 2);
   const maxY = niceCeil(Math.max(1, ...curvaCom, ...curvaSem));
 
@@ -61,10 +89,8 @@ export default function Chart({ curvaSem, curvaCom, labelSem, labelCom, gap, aut
   const endSem = curvaSem[curvaSem.length - 1] ?? 0;
 
   const ariaLabel = autoQualified
-    ? `Gráfico de faturamento acumulado em ${n} meses. Com e sem um processo de captação, suas curvas ficam próximas. A diferença é pequena.`
-    : `Gráfico de faturamento acumulado em ${n} meses. Com um processo de captação a curva chega a ${formatBRL(
-        endCom,
-      )}; sem processo, a ${formatBRL(endSem)}. A diferença no ciclo é de ${formatBRL(gap)}.`;
+    ? c.ariaAuto(n)
+    : c.aria(n, formatBRL(endCom), formatBRL(endSem), formatBRL(gap));
 
   return (
     <figure style={{ margin: 0 }}>
@@ -75,7 +101,7 @@ export default function Chart({ curvaSem, curvaCom, labelSem, labelCom, gap, aut
         aria-label={ariaLabel}
         style={{ display: "block", height: "auto", overflow: "visible" }}
       >
-        <title>Faturamento acumulado: com método vs. sem método</title>
+        <title>{c.title}</title>
         <desc>{ariaLabel}</desc>
 
         {/* Gridlines + rótulos do eixo Y */}
@@ -83,7 +109,7 @@ export default function Chart({ curvaSem, curvaCom, labelSem, labelCom, gap, aut
           <g key={`y${i}`}>
             <line x1={PAD.left} y1={yAt(t)} x2={W - PAD.right} y2={yAt(t)} style={{ stroke: "var(--color-border)" }} strokeWidth={1} />
             <text x={PAD.left - 12} y={yAt(t) + 4} textAnchor="end" fontSize={14} style={AXIS_TEXT}>
-              {compactBRL(t)}
+              {compactBRL(t, c)}
             </text>
           </g>
         ))}
@@ -95,7 +121,7 @@ export default function Chart({ curvaSem, curvaCom, labelSem, labelCom, gap, aut
           </text>
         ))}
         <text x={PAD.left + plotW / 2} y={H - 6} textAnchor="middle" fontSize={13} letterSpacing="0.04em" style={AXIS_TEXT}>
-          MESES
+          {c.months}
         </text>
 
         {/* Área do gap = dinheiro deixado na mesa */}
@@ -151,7 +177,7 @@ export default function Chart({ curvaSem, curvaCom, labelSem, labelCom, gap, aut
         {!autoQualified && gap > 0 && (
           <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
             <span style={{ width: 16, height: 16, background: "var(--yellow)", opacity: 0.32, borderRadius: 3, display: "inline-block" }} />
-            Dinheiro na mesa
+            {c.moneyOnTable}
           </span>
         )}
       </figcaption>

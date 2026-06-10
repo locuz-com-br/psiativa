@@ -1,8 +1,16 @@
 /**
  * i18n Engine
  * Swaps text content of elements with [data-i18n] attributes.
+ * Swaps innerHTML of elements with [data-i18n-html] (rich runs: inline
+ *   <strong>/<a> that textContent would flatten — authored static strings
+ *   only, never user input).
  * Swaps placeholder of elements with [data-i18n-placeholder] attributes.
  * Auto-detects locale from navigator.language, persists via localStorage.
+ *
+ * React islands can't be reached by these DOM queries (they hydrate after
+ * this runs and re-render from their own state), so every apply also fires
+ * a `site-lang-change` CustomEvent that islands subscribe to via the
+ * useSiteLang() hook. Keep the event name in sync with src/lib/useSiteLang.ts.
  */
 
 // @ts-nocheck
@@ -21,6 +29,15 @@ function applyTranslations(lang: Lang) {
     const entry = getNestedValue(translations, key);
     if (entry && typeof entry === 'object' && lang in entry) {
       el.textContent = (entry as Record<string, string>)[lang];
+    }
+  });
+
+  // Rich content (preserves inline <strong>/<a> — authored strings only)
+  document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-html')!;
+    const entry = getNestedValue(translations, key);
+    if (entry && typeof entry === 'object' && lang in entry) {
+      el.innerHTML = (entry as Record<string, string>)[lang];
     }
   });
 
@@ -49,6 +66,9 @@ function applyTranslations(lang: Lang) {
   document.querySelectorAll('.lang-toggle-flag').forEach((el) => {
     (el as HTMLImageElement).src = lang === 'pt' ? 'https://flagcdn.com/w20/br.png' : 'https://flagcdn.com/w20/us.png';
   });
+
+  // Notify React islands (they manage their own copy — see useSiteLang.ts).
+  window.dispatchEvent(new CustomEvent('site-lang-change', { detail: lang }));
 }
 
 function detectDefaultLang(): Lang {

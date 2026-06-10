@@ -26,6 +26,7 @@ import {
   type RevealPayload,
 } from "../../lib/calculadora";
 import Chart from "./Chart";
+import { pick, useSiteLang, type Lang } from "../../lib/useSiteLang";
 
 // Vite substitui estes acessos estáticos em build. Acesso dinâmico não
 // é substituído — por isso referenciamos a chave literalmente.
@@ -33,9 +34,128 @@ const WEBHOOK_URL = (import.meta.env.PUBLIC_N8N_CAPTURE_WEBHOOK as string | unde
 const DEV_MOCK = import.meta.env.DEV && import.meta.env.PUBLIC_CALC_DEV_MOCK === "true";
 const HCAPTCHA_KEY = SITE_CONFIG.analytics.hcaptchaSiteKey || "";
 
+// ── Copy bilíngue da island (resolvida por useSiteLang) ─────────
+// A engine DOM-swap (src/scripts/i18n.ts) não alcança a island; aqui a copy
+// é { pt, en } escolhida por `lang`. Rótulos de config (FIELDS/options) e
+// SELO_PROJECAO/DISCLAIMER/POV vêm de calculadora.config.ts via pick().
+const COPY = {
+  pt: {
+    eyebrowPerfil: "Como você atende hoje?",
+    eyebrowProduto: "Que estrutura você consideraria?",
+    eyebrowNumeros: "Seus números",
+    statSem: (m: number) => `Sem um processo, no ritmo de hoje (${m} meses)`,
+    statCom: (m: number) => `Com um processo de captação, cenário (${m} meses)`,
+    labelSem: "Sem método",
+    labelCom: "Com método",
+    autoqualStrong: "No seu cenário, a conta já fecha bem.",
+    autoqualBody:
+      "Pelos seus próprios números, você talvez não precise de um processo de captação agora, e a gente prefere te dizer isso com clareza. ",
+    gapLabel: (m: number) => `A diferença no ciclo de ${m} meses`,
+    gapSub: "é o que fica na mesa: faturamento que entraria com constância e hoje depende de quando alguém indica.",
+    band: (piso: string, teto: string) =>
+      `Dependendo da retenção, sua projeção com método fica entre ${piso} e ${teto} no ciclo.`,
+    ctaCopyAuto: "Quer conversar mesmo assim? Posso te mostrar a leitura completa.",
+    ctaCopyGap: "Quer ver quanto custaria capturar essa diferença?",
+    ctaBtn: "Ver a conta completa",
+    ctaMicro: "Sem preço de tabela aqui. O panorama vai pro seu WhatsApp.",
+    captureTitle: "Vou te mostrar a leitura e te mando o panorama no WhatsApp.",
+    nameLabel: "Seu nome",
+    namePlaceholder: "Como te chamo?",
+    phoneLabel: "Seu WhatsApp",
+    phonePlaceholder: "(11) 99999-9999",
+    errPhone: "Me deixa seu WhatsApp pra eu te enviar.",
+    errCaptcha: "Confirme o desafio de segurança antes de enviar.",
+    errGeneric: "Algo não funcionou no envio. Tenta de novo em instantes.",
+    sending: "Enviando...",
+    submitBtn: "Ver minha leitura",
+    captureMicro: "Seu contato fica só com a PsiAtiva. Sem disparo em massa.",
+    revealEyebrow: "A conta de capturar esse faturamento",
+    revealInvest: "Investimento PsiAtiva",
+    aPartirDe: (v: string) => `a partir de ${v}`,
+    revealRoi: "Retorno sobre o investimento",
+    revealPayback: "Tempo de retorno",
+    paybackMonths: (m: number) => `~${m} meses`,
+    paybackOver: (m: number) => `acima de ${m} meses`,
+    midiaLabel: "Verba de mídia (vai pro Google/Meta, não pra PsiAtiva, não reembolsável):",
+    midiaValue: (mes: string, ciclo: number, total: string) => `${mes}/mês × ${ciclo} = ${total}`,
+    desembolsoLabel: "Desembolso transparente no ciclo (investimento + mídia):",
+    garantiaLabel: "Sua segurança:",
+    revealFoot:
+      "O valor exato e as formas de pagamento a gente vê numa conversa, no seu momento. O retorno aqui é sobre o investimento PsiAtiva. A mídia aparece à parte pra você ver o caixa completo.",
+    handoffStrong: "Pronto.",
+    handoffBody: "Seus números estão comigo. Te mando o panorama completo no seu WhatsApp, com calma, no seu momento.",
+    decrease: "Diminuir",
+    increase: "Aumentar",
+    roi: (v: number) => `${v.toFixed(1).replace(".", ",")}×`,
+  },
+  en: {
+    eyebrowPerfil: "How do you practice today?",
+    eyebrowProduto: "What structure would you consider?",
+    eyebrowNumeros: "Your numbers",
+    statSem: (m: number) => `Without a process, at today's pace (${m} months)`,
+    statCom: (m: number) => `With an acquisition process, scenario (${m} months)`,
+    labelSem: "Without a method",
+    labelCom: "With a method",
+    autoqualStrong: "In your scenario, the math already works well.",
+    autoqualBody:
+      "By your own numbers, you may not need an acquisition process right now, and we'd rather tell you that clearly. ",
+    gapLabel: (m: number) => `The difference over the ${m}-month cycle`,
+    gapSub: "is what gets left on the table: revenue that would come in steadily and today depends on when someone refers you.",
+    band: (piso: string, teto: string) =>
+      `Depending on retention, your projection with a method lands between ${piso} and ${teto} over the cycle.`,
+    ctaCopyAuto: "Want to talk anyway? I can show you the full read.",
+    ctaCopyGap: "Want to see what it would cost to capture that difference?",
+    ctaBtn: "See the full math",
+    ctaMicro: "No list price here. The overview goes to your WhatsApp.",
+    captureTitle: "I'll show you the read and send the overview to your WhatsApp.",
+    nameLabel: "Your name",
+    namePlaceholder: "What should I call you?",
+    phoneLabel: "Your WhatsApp",
+    phonePlaceholder: "(11) 99999-9999",
+    errPhone: "Leave me your WhatsApp so I can send it to you.",
+    errCaptcha: "Confirm the security challenge before sending.",
+    errGeneric: "Something went wrong sending. Try again in a moment.",
+    sending: "Sending...",
+    submitBtn: "See my read",
+    captureMicro: "Your contact stays only with PsiAtiva. No mass messaging.",
+    revealEyebrow: "The math of capturing that revenue",
+    revealInvest: "PsiAtiva investment",
+    aPartirDe: (v: string) => `from ${v}`,
+    revealRoi: "Return on investment",
+    revealPayback: "Payback time",
+    paybackMonths: (m: number) => `~${m} months`,
+    paybackOver: (m: number) => `over ${m} months`,
+    midiaLabel: "Media budget (goes to Google/Meta, not to PsiAtiva, non-refundable):",
+    midiaValue: (mes: string, ciclo: number, total: string) => `${mes}/mo × ${ciclo} = ${total}`,
+    desembolsoLabel: "Transparent outlay over the cycle (investment + media):",
+    garantiaLabel: "Your safety net:",
+    revealFoot:
+      "The exact figure and payment terms we go over in a conversation, in your own time. The return here is on the PsiAtiva investment. Media is shown separately so you see the full cash picture.",
+    handoffStrong: "Done.",
+    handoffBody: "I've got your numbers. I'll send the full overview to your WhatsApp, calmly, in your own time.",
+    decrease: "Decrease",
+    increase: "Increase",
+    roi: (v: number) => `${v.toFixed(1)}×`,
+  },
+};
+
 type Status = "idle" | "sending" | "sent" | "error" | "captcha_required" | "phone_required";
 
 export default function CalculadoraIsland() {
+  const lang = useSiteLang();
+  const c = COPY[lang];
+  // Opções de config resolvidas pro idioma (Segmented recebe strings puras).
+  const perfilOptions = PERFIL_OPTIONS.map((o) => ({
+    value: o.value,
+    label: pick(o.label, lang),
+    helper: o.helper ? pick(o.helper, lang) : undefined,
+  }));
+  const produtoOptions = PRODUTO_OPTIONS.map((o) => ({
+    value: o.value,
+    label: pick(o.label, lang),
+    helper: o.helper ? pick(o.helper, lang) : undefined,
+  }));
+
   const [perfil, setPerfil] = useState<Perfil>("autonomo");
   const [produto, setProduto] = useState<Produto>("p7k");
   const [inputs, setInputs] = useState<CalcInputs>({ ...DEFAULT_INPUTS });
@@ -141,18 +261,18 @@ export default function CalculadoraIsland() {
       <div className="calc-card">
         <div className="calc-block-grid">
           <div>
-            <span className="calc-eyebrow">Como você atende hoje?</span>
+            <span className="calc-eyebrow">{c.eyebrowPerfil}</span>
             <Segmented
-              options={PERFIL_OPTIONS}
+              options={perfilOptions}
               value={perfil}
               onChange={(v) => setPerfil(v as Perfil)}
               name="perfil"
             />
           </div>
           <div>
-            <span className="calc-eyebrow">Que estrutura você consideraria?</span>
+            <span className="calc-eyebrow">{c.eyebrowProduto}</span>
             <Segmented
-              options={PRODUTO_OPTIONS}
+              options={produtoOptions}
               value={produto}
               onChange={(v) => setProduto(v as Produto)}
               name="produto"
@@ -163,53 +283,45 @@ export default function CalculadoraIsland() {
 
       {/* ── Entradas (Bloco A — público) ─────────────────────── */}
       <div className="calc-card">
-        <span className="calc-eyebrow">Seus números</span>
+        <span className="calc-eyebrow">{c.eyebrowNumeros}</span>
         <div className="calc-grid-inputs">
           {FIELDS.map((f) => (
-            <Field key={f.key} def={f} value={inputs[f.key]} onChange={(v, blur) => setField(f.key, v, blur)} />
+            <Field key={f.key} def={f} value={inputs[f.key]} onChange={(v, blur) => setField(f.key, v, blur)} lang={lang} />
           ))}
         </div>
-        <p className="calc-seal">{SELO_PROJECAO}</p>
+        <p className="calc-seal">{pick(SELO_PROJECAO, lang)}</p>
       </div>
 
       {/* ── Projeção + gráfico (Bloco A — público) ───────────── */}
       <div className="calc-card">
         <div className="calc-stats">
-          <Stat
-            label={`Sem um processo, no ritmo de hoje (${ciclo} meses)`}
-            value={formatBRL(proj.projecaoSem)}
-            muted
-          />
-          <Stat label={`Com um processo de captação, cenário (${ciclo} meses)`} value={formatBRL(proj.projecaoCom)} />
+          <Stat label={c.statSem(ciclo)} value={formatBRL(proj.projecaoSem)} muted />
+          <Stat label={c.statCom(ciclo)} value={formatBRL(proj.projecaoCom)} />
         </div>
 
         <div className="calc-chart-wrap">
           <Chart
             curvaSem={proj.curvaSem}
             curvaCom={proj.curvaCom}
-            labelSem="Sem método"
-            labelCom="Com método"
+            labelSem={c.labelSem}
+            labelCom={c.labelCom}
             gap={proj.gap}
             autoQualified={proj.autoQualified}
+            lang={lang}
           />
         </div>
 
         {proj.autoQualified ? (
           <div className="calc-autoqual">
-            <strong>No seu cenário, a conta já fecha bem.</strong> Pelos seus próprios números, você talvez não
-            precise de um processo de captação agora, e a gente prefere te dizer isso com clareza. {POV}
+            <strong>{c.autoqualStrong}</strong> {c.autoqualBody}
+            {pick(POV, lang)}
           </div>
         ) : (
           <div className="calc-gap-hero">
-            <span className="calc-gap-label">A diferença no ciclo de {ciclo} meses</span>
+            <span className="calc-gap-label">{c.gapLabel(ciclo)}</span>
             <span className="calc-gap-value">{formatBRL(proj.gap)}</span>
-            <span className="calc-gap-sub">
-              é o que fica na mesa: faturamento que entraria com constância e hoje depende de quando alguém indica.
-            </span>
-            <span className="calc-band">
-              Dependendo da retenção, sua projeção com método fica entre {formatBRL(proj.piso)} e{" "}
-              {formatBRL(proj.teto)} no ciclo.
-            </span>
+            <span className="calc-gap-sub">{c.gapSub}</span>
+            <span className="calc-band">{c.band(formatBRL(proj.piso), formatBRL(proj.teto))}</span>
           </div>
         )}
       </div>
@@ -217,25 +329,21 @@ export default function CalculadoraIsland() {
       {/* ── Porta de captura → revelação gated ───────────────── */}
       {!done && !showCapture && (
         <div className="calc-card calc-cta-card">
-          <p className="calc-cta-copy">
-            {proj.autoQualified
-              ? "Quer conversar mesmo assim? Posso te mostrar a leitura completa."
-              : "Quer ver quanto custaria capturar essa diferença?"}
-          </p>
+          <p className="calc-cta-copy">{proj.autoQualified ? c.ctaCopyAuto : c.ctaCopyGap}</p>
           <button type="button" className="calc-btn" onClick={() => setShowCapture(true)}>
-            Ver a conta completa
+            {c.ctaBtn}
           </button>
-          <span className="calc-cta-micro">Sem preço de tabela aqui. O panorama vai pro seu WhatsApp.</span>
+          <span className="calc-cta-micro">{c.ctaMicro}</span>
         </div>
       )}
 
       {!done && showCapture && (
         <div className="calc-card">
-          <h3 className="calc-capture-title">Vou te mostrar a leitura e te mando o panorama no WhatsApp.</h3>
+          <h3 className="calc-capture-title">{c.captureTitle}</h3>
           <form className="calc-capture" onSubmit={handleSubmit}>
             <div className="calc-field">
               <label htmlFor="calc-name" className="calc-label">
-                Seu nome
+                {c.nameLabel}
               </label>
               <input
                 id="calc-name"
@@ -243,13 +351,13 @@ export default function CalculadoraIsland() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.currentTarget.value)}
-                placeholder="Como te chamo?"
+                placeholder={c.namePlaceholder}
                 autoComplete="name"
               />
             </div>
             <div className="calc-field">
               <label htmlFor="calc-phone" className="calc-label">
-                Seu WhatsApp
+                {c.phoneLabel}
               </label>
               <PhoneInput
                 id="calc-phone"
@@ -257,7 +365,7 @@ export default function CalculadoraIsland() {
                 defaultCountry="BR"
                 value={phone}
                 onChange={setPhone}
-                placeholder="(11) 99999-9999"
+                placeholder={c.phonePlaceholder}
                 className="calc-phone"
               />
             </div>
@@ -267,39 +375,34 @@ export default function CalculadoraIsland() {
                 <HCaptcha
                   ref={captchaRef}
                   sitekey={HCAPTCHA_KEY}
-                  onVerify={(t) => setCaptchaToken(t)}
+                  onVerify={(token) => setCaptchaToken(token)}
                   onExpire={() => setCaptchaToken(null)}
                 />
               </div>
             )}
 
-            {status === "phone_required" && <p className="calc-msg-error">Me deixa seu WhatsApp pra eu te enviar.</p>}
-            {status === "captcha_required" && (
-              <p className="calc-msg-error">Confirme o desafio de segurança antes de enviar.</p>
-            )}
-            {status === "error" && (
-              <p className="calc-msg-error">Algo não funcionou no envio. Tenta de novo em instantes.</p>
-            )}
+            {status === "phone_required" && <p className="calc-msg-error">{c.errPhone}</p>}
+            {status === "captcha_required" && <p className="calc-msg-error">{c.errCaptcha}</p>}
+            {status === "error" && <p className="calc-msg-error">{c.errGeneric}</p>}
 
             <button type="submit" className="calc-btn" disabled={status === "sending"}>
-              {status === "sending" ? "Enviando..." : "Ver minha leitura"}
+              {status === "sending" ? c.sending : c.submitBtn}
             </button>
-            <span className="calc-cta-micro">Seu contato fica só com a PsiAtiva. Sem disparo em massa.</span>
+            <span className="calc-cta-micro">{c.captureMicro}</span>
           </form>
         </div>
       )}
 
       {/* ── Revelação gated (Bloco B + C) ────────────────────── */}
-      {reveal && <RevealBlock reveal={reveal} gap={proj.gap} ciclo={ciclo} />}
+      {reveal && <RevealBlock reveal={reveal} gap={proj.gap} ciclo={ciclo} lang={lang} />}
 
       {handoffOnly && (
         <div className="calc-card calc-handoff">
-          <strong>Pronto.</strong> Seus números estão comigo. Te mando o panorama completo no seu WhatsApp, com calma,
-          no seu momento.
+          <strong>{c.handoffStrong}</strong> {c.handoffBody}
         </div>
       )}
 
-      <p className="calc-disclaimer">{DISCLAIMER}</p>
+      <p className="calc-disclaimer">{pick(DISCLAIMER, lang)}</p>
     </div>
   );
 }
@@ -339,19 +442,22 @@ function Field({
   def,
   value,
   onChange,
+  lang,
 }: {
   def: FieldDef;
   value: number;
   onChange: (value: number, clampMin: boolean) => void;
+  lang: Lang;
 }) {
   const id = `calc-${def.key}`;
+  const cc = COPY[lang];
   return (
     <div className="calc-field">
       <label htmlFor={id} className="calc-label">
-        {def.label}
+        {pick(def.label, lang)}
       </label>
       <div className="calc-input-row">
-        <button type="button" className="calc-step" aria-label="Diminuir" onClick={() => onChange(value - def.step, true)}>
+        <button type="button" className="calc-step" aria-label={cc.decrease} onClick={() => onChange(value - def.step, true)}>
           −
         </button>
         <div className="calc-input-box">
@@ -372,13 +478,13 @@ function Field({
             }}
             onBlur={(e) => onChange(Number(e.currentTarget.value) || def.min, true)}
           />
-          {def.suffix && <span className="calc-affix calc-affix-suffix">{def.suffix}</span>}
+          {def.suffix && <span className="calc-affix calc-affix-suffix">{pick(def.suffix, lang)}</span>}
         </div>
-        <button type="button" className="calc-step" aria-label="Aumentar" onClick={() => onChange(value + def.step, true)}>
+        <button type="button" className="calc-step" aria-label={cc.increase} onClick={() => onChange(value + def.step, true)}>
           +
         </button>
       </div>
-      {def.helper && <span className="calc-help">{def.helper}</span>}
+      {def.helper && <span className="calc-help">{pick(def.helper, lang)}</span>}
     </div>
   );
 }
@@ -392,53 +498,49 @@ function Stat({ label, value, muted }: { label: string; value: string; muted?: b
   );
 }
 
-function RevealBlock({ reveal, gap, ciclo }: { reveal: RevealPayload; gap: number; ciclo: number }) {
+function RevealBlock({ reveal, gap, ciclo, lang }: { reveal: RevealPayload; gap: number; ciclo: number; lang: Lang }) {
+  const c = COPY[lang];
   return (
     <div className="calc-card calc-reveal">
-      <span className="calc-eyebrow">A conta de capturar esse faturamento</span>
+      <span className="calc-eyebrow">{c.revealEyebrow}</span>
 
       <div className="calc-reveal-grid">
         <div className="calc-reveal-item">
-          <span className="calc-reveal-k">Investimento PsiAtiva</span>
-          <span className="calc-reveal-v">a partir de {formatBRL(reveal.investimentoAPartirDe)}</span>
+          <span className="calc-reveal-k">{c.revealInvest}</span>
+          <span className="calc-reveal-v">{c.aPartirDe(formatBRL(reveal.investimentoAPartirDe))}</span>
         </div>
         <div className="calc-reveal-item">
-          <span className="calc-reveal-k">Retorno sobre o investimento</span>
-          <span className="calc-reveal-v calc-reveal-hi">{reveal.roi.toFixed(1).replace(".", ",")}×</span>
+          <span className="calc-reveal-k">{c.revealRoi}</span>
+          <span className="calc-reveal-v calc-reveal-hi">{c.roi(reveal.roi)}</span>
           <span className="calc-reveal-note">
             {formatBRL(gap)} ÷ {formatBRL(reveal.investimentoAPartirDe)}
           </span>
         </div>
         <div className="calc-reveal-item">
-          <span className="calc-reveal-k">Tempo de retorno</span>
+          <span className="calc-reveal-k">{c.revealPayback}</span>
           <span className="calc-reveal-v">
-            {reveal.paybackMeses ? `~${reveal.paybackMeses} meses` : `acima de ${ciclo} meses`}
+            {reveal.paybackMeses ? c.paybackMonths(reveal.paybackMeses) : c.paybackOver(ciclo)}
           </span>
         </div>
       </div>
 
       <div className="calc-reveal-line">
         <span>
-          Verba de mídia (vai pro Google/Meta, não pra PsiAtiva, não reembolsável):{" "}
-          <strong>
-            {formatBRL(reveal.midiaMes)}/mês × {ciclo} = {formatBRL(reveal.midiaCiclo)}
-          </strong>
+          {c.midiaLabel}{" "}
+          <strong>{c.midiaValue(formatBRL(reveal.midiaMes), ciclo, formatBRL(reveal.midiaCiclo))}</strong>
         </span>
         <span>
-          Desembolso transparente no ciclo (investimento + mídia): <strong>{formatBRL(reveal.desembolsoTotal)}</strong>
+          {c.desembolsoLabel} <strong>{formatBRL(reveal.desembolsoTotal)}</strong>
         </span>
       </div>
 
       {reveal.garantia && (
         <p className="calc-reveal-guarantee">
-          <strong>Sua segurança:</strong> {reveal.garantia}
+          <strong>{c.garantiaLabel}</strong> {reveal.garantia}
         </p>
       )}
 
-      <p className="calc-reveal-foot">
-        O valor exato e as formas de pagamento a gente vê numa conversa, no seu momento. O retorno aqui é sobre o
-        investimento PsiAtiva. A mídia aparece à parte pra você ver o caixa completo.
-      </p>
+      <p className="calc-reveal-foot">{c.revealFoot}</p>
     </div>
   );
 }

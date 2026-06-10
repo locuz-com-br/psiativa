@@ -13,6 +13,7 @@ import {
   type Answer,
   type QuizOutcome,
 } from "../../lib/quiz";
+import { pick, useSiteLang } from "../../lib/useSiteLang";
 
 // Vite substitui estes acessos estáticos em build. Acesso dinâmico não é
 // substituído — por isso referenciamos a chave literalmente (igual à calc).
@@ -40,6 +41,7 @@ const prefersReducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export default function QuizIsland() {
+  const lang = useSiteLang();
   const [phase, setPhase] = useState<Phase>("intro");
   const [qIndex, setQIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
@@ -121,7 +123,7 @@ export default function QuizIsland() {
     }
     setStatus("sending");
 
-    const envelope = buildEnvelope(outcome, answersArray, campaign);
+    const envelope = buildEnvelope(outcome, answersArray, campaign, lang);
     const payload = {
       source: CAPTURE.source,
       page: CAPTURE.page,
@@ -187,12 +189,12 @@ export default function QuizIsland() {
         {/* ── Intro ─────────────────────────────────────────── */}
         {phase === "intro" && (
           <div className="quiz-intro">
-            <span className="quiz-tag">{QUIZ.intro.tag}</span>
-            <h2 className="quiz-intro-title">{QUIZ.intro.title}</h2>
-            <p className="quiz-intro-sub">{QUIZ.intro.subtitle}</p>
-            <p className="quiz-intro-note">{QUIZ.intro.note}</p>
+            <span className="quiz-tag">{pick(QUIZ.intro.tag, lang)}</span>
+            <h2 className="quiz-intro-title">{pick(QUIZ.intro.title, lang)}</h2>
+            <p className="quiz-intro-sub">{pick(QUIZ.intro.subtitle, lang)}</p>
+            <p className="quiz-intro-note">{pick(QUIZ.intro.note, lang)}</p>
             <button type="button" className="quiz-btn" onClick={() => setPhase("quiz")}>
-              {QUIZ.intro.start}
+              {pick(QUIZ.intro.start, lang)}
             </button>
           </div>
         )}
@@ -201,27 +203,27 @@ export default function QuizIsland() {
         {phase === "quiz" && q && (
           <div className="quiz-question">
             <span className="quiz-step-label">
-              {QUIZ.ui.progress.replace("{n}", String(qIndex + 1)).replace("{total}", String(total))}
+              {pick(QUIZ.ui.progress, lang).replace("{n}", String(qIndex + 1)).replace("{total}", String(total))}
             </span>
-            <h2 className="quiz-prompt">{q.prompt}</h2>
-            {q.helper && <p className="quiz-helper">{q.helper}</p>}
-            <div className="quiz-options" role="group" aria-label={q.prompt}>
+            <h2 className="quiz-prompt">{pick(q.prompt, lang)}</h2>
+            {q.helper && <p className="quiz-helper">{pick(q.helper, lang)}</p>}
+            <div className="quiz-options" role="group" aria-label={pick(q.prompt, lang)}>
               {q.options.map((o) => (
                 <button
                   key={o.id}
                   type="button"
                   className="quiz-option"
                   aria-pressed={selectedId === o.id}
-                  onClick={() => selectOption(q.id, o.id, o.label)}
+                  onClick={() => selectOption(q.id, o.id, pick(o.label, lang))}
                 >
                   <span className="quiz-option-radio" aria-hidden="true" />
-                  <span className="quiz-option-label">{o.label}</span>
+                  <span className="quiz-option-label">{pick(o.label, lang)}</span>
                 </button>
               ))}
             </div>
             {qIndex > 0 && (
               <button type="button" className="quiz-back" onClick={goBack}>
-                ← {QUIZ.ui.back}
+                ← {pick(QUIZ.ui.back, lang)}
               </button>
             )}
           </div>
@@ -230,30 +232,30 @@ export default function QuizIsland() {
         {/* ── Resultado + captura ───────────────────────────── */}
         {phase === "result" && outcome && (
           <div className="quiz-result">
-            <span className="quiz-eyebrow">{QUIZ.ui.resultEyebrow}</span>
-            <h2 className="quiz-result-pain">{outcome.dominant.painName}</h2>
-            <p className="quiz-result-echo">{outcome.dominant.echo}</p>
+            <span className="quiz-eyebrow">{pick(QUIZ.ui.resultEyebrow, lang)}</span>
+            <h2 className="quiz-result-pain">{pick(outcome.dominant.painName, lang)}</h2>
+            <p className="quiz-result-echo">{pick(outcome.dominant.echo, lang)}</p>
 
             <div className="quiz-result-cost">
-              <span className="quiz-result-cost-label">O que isso custa</span>
-              <p>{outcome.dominant.hemorrhage}</p>
+              <span className="quiz-result-cost-label">{pick(QUIZ.ui.costLabel, lang)}</span>
+              <p>{pick(outcome.dominant.hemorrhage, lang)}</p>
             </div>
 
             <div className="quiz-result-aspiration">
-              <p>{outcome.dominant.aspiration}</p>
+              <p>{pick(outcome.dominant.aspiration, lang)}</p>
             </div>
 
             {/* Captura — a isca fica atrás do telefone (sem link de download) */}
             {!done ? (
               <div className="quiz-capture-card">
-                <span className="quiz-eyebrow">{QUIZ.capture.eyebrow}</span>
+                <span className="quiz-eyebrow">{pick(QUIZ.capture.eyebrow, lang)}</span>
                 <p className="quiz-capture-title">
-                  {QUIZ.capture.title.replace("{isca}", outcome.dominant.iscaPromise)}
+                  {pick(QUIZ.capture.title, lang).replace("{isca}", pick(outcome.dominant.iscaPromise, lang))}
                 </p>
                 <form className="quiz-capture" onSubmit={handleSubmit}>
                   <div className="quiz-field">
                     <label htmlFor="quiz-name" className="quiz-label">
-                      {QUIZ.capture.nameLabel}
+                      {pick(QUIZ.capture.nameLabel, lang)}
                     </label>
                     <input
                       id="quiz-name"
@@ -261,13 +263,13 @@ export default function QuizIsland() {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.currentTarget.value)}
-                      placeholder={QUIZ.capture.namePlaceholder}
+                      placeholder={pick(QUIZ.capture.namePlaceholder, lang)}
                       autoComplete="name"
                     />
                   </div>
                   <div className="quiz-field">
                     <label htmlFor="quiz-phone" className="quiz-label">
-                      {QUIZ.capture.phoneLabel}
+                      {pick(QUIZ.capture.phoneLabel, lang)}
                     </label>
                     <PhoneInput
                       id="quiz-phone"
@@ -275,7 +277,7 @@ export default function QuizIsland() {
                       defaultCountry="BR"
                       value={phone}
                       onChange={setPhone}
-                      placeholder={QUIZ.capture.phonePlaceholder}
+                      placeholder={pick(QUIZ.capture.phonePlaceholder, lang)}
                       className="quiz-phone"
                     />
                   </div>
@@ -291,31 +293,31 @@ export default function QuizIsland() {
                     </div>
                   )}
 
-                  {status === "phone_required" && <p className="quiz-msg-error">{QUIZ.capture.phoneRequired}</p>}
-                  {status === "captcha_required" && <p className="quiz-msg-error">{QUIZ.capture.captchaRequired}</p>}
-                  {status === "error" && <p className="quiz-msg-error">{QUIZ.capture.error}</p>}
+                  {status === "phone_required" && <p className="quiz-msg-error">{pick(QUIZ.capture.phoneRequired, lang)}</p>}
+                  {status === "captcha_required" && <p className="quiz-msg-error">{pick(QUIZ.capture.captchaRequired, lang)}</p>}
+                  {status === "error" && <p className="quiz-msg-error">{pick(QUIZ.capture.error, lang)}</p>}
 
                   <button type="submit" className="quiz-btn" disabled={status === "sending"}>
-                    {status === "sending" ? QUIZ.capture.sending : QUIZ.capture.submit}
+                    {status === "sending" ? pick(QUIZ.capture.sending, lang) : pick(QUIZ.capture.submit, lang)}
                   </button>
-                  <span className="quiz-micro">{QUIZ.capture.micro}</span>
+                  <span className="quiz-micro">{pick(QUIZ.capture.micro, lang)}</span>
                 </form>
               </div>
             ) : (
               <div className="quiz-handoff">
-                <strong>{QUIZ.handoff.title}</strong>
-                <p>{QUIZ.handoff.body.replace("{isca}", outcome.dominant.iscaTitle)}</p>
+                <strong>{pick(QUIZ.handoff.title, lang)}</strong>
+                <p>{pick(QUIZ.handoff.body, lang).replace("{isca}", pick(outcome.dominant.iscaTitle, lang))}</p>
               </div>
             )}
 
             <button type="button" className="quiz-restart" onClick={restart}>
-              {QUIZ.ui.restart}
+              {pick(QUIZ.ui.restart, lang)}
             </button>
           </div>
         )}
       </div>
 
-      {phase === "result" && <p className="quiz-disclaimer">{QUIZ.ui.disclaimer}</p>}
+      {phase === "result" && <p className="quiz-disclaimer">{pick(QUIZ.ui.disclaimer, lang)}</p>}
     </div>
   );
 }
