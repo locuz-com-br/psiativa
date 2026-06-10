@@ -34,10 +34,19 @@ Section on/off toggles: `src/config/site.config.ts` → `sections`.
   hero typewriter words, SEO/og, and `WHATSAPP_LINK` (derived; carries the prefilled
   diagnostic message).
 - `src/constants/links.ts` — all hrefs, derived from `site.config.ts`.
-- `src/scripts/i18n.ts` — the i18n engine. Swaps `data-i18n` (textContent), `data-i18n-placeholder`
-  (input placeholders), and `data-i18n-content` (an element's `content` attr — used to localize
-  `<title>`/meta) by browser/localStorage lang. Loaded globally in `BaseLayout`, so it runs on every page.
-- `src/data/translations.json` — **all home-page copy, PT + EN** (source of truth).
+- `src/scripts/i18n.ts` — the i18n engine. Swaps `data-i18n` (textContent), `data-i18n-html`
+  (innerHTML — for runs with inline `<strong>`/`<a>` that textContent would flatten; authored
+  strings only), `data-i18n-placeholder` (input placeholders), and `data-i18n-content` (an element's
+  `content` attr — used to localize `<title>`/meta) by browser/localStorage lang. Also fires a
+  `site-lang-change` CustomEvent on every apply so React islands can react. Loaded globally in
+  `BaseLayout`, so it runs on every page.
+- `src/lib/useSiteLang.ts` — React hook + `pick()` helper so client islands localize their **own**
+  `{pt,en}` copy (the DOM-swap engine can't reach island-rendered text). Reads the `site-lang`
+  localStorage key and subscribes to the `site-lang-change` event. Used by the calc + quiz islands
+  (the `/diagnostico` forms island is still PT-only — localizing it follows the same pattern).
+- `src/data/translations.json` — **static-layer copy for home + `/indicacao` + `/quiz` + `/calculadora`,
+  PT + EN** (source of truth for everything the DOM-swap engine localizes). Island copy lives separately
+  (`data/quiz.json`, `config/calculadora.config.ts`, in-island COPY maps).
 - `src/layouts/BaseLayout.astro` — `<head>`/meta/SEO wrapper (renders `SEOHead`, `Navbar`, `Footer`).
   Optional `titleKey`/`descriptionKey` props localize `<title>`+description client-side (SSR stays PT);
   optional `navbar={{items,cta,logoHref}}` overrides the nav per page. `src/components/seo/SEOHead.astro`
@@ -56,14 +65,30 @@ Section on/off toggles: `src/config/site.config.ts` → `sections`.
   via `indicacao.meta.*` (`titleKey`/`descriptionKey` props); navbar is page-specific (`navbar` prop).
 - `calculadora.astro` + `components/calculadora/` + `lib/calculadora.ts` + `config/calculadora.config.ts`
   — **Calculadora de Custo da Inação** (solo-ICP SEO + lead magnet; cohort projection + gated reveal).
-  Front-end done; **NOT live yet** (offer-guardian sign-off + shared n8n webhook + real CRP pending — see
-  the calc **pre-deploy gates** in `CLAUDE.md` and `plans/calculadora-capture-contract.md`). Home links via
-  `CalcCTA.astro` (`source='roi_calculator'`). Locked numbers live server-side in the webhook, never in the bundle.
+  **Bilingual (PT default + EN toggle):** static layer via `calculadora.*` keys in `translations.json`;
+  island copy is `{pt,en}` in `calculadora.config.ts` + a local `COPY` map (and `Chart.tsx`), resolved by
+  `useSiteLang()`/`pick()`. Front-end done; **NOT live yet** (offer-guardian sign-off + shared n8n webhook
+  + real CRP pending — see the calc **pre-deploy gates** in `CLAUDE.md` and `plans/calculadora-capture-contract.md`).
+  Home links via `CalcCTA.astro` (`source='roi_calculator'`). Locked numbers live server-side in the webhook,
+  never in the bundle.
 - `quiz.astro` + `components/quiz/` + `lib/quiz.ts` + `data/quiz.json` — Diagnóstico de 2 Minutos
   (self-diagnosis quiz; the only deliverable that serves BOTH ICPs — questions profile, result is single-ICP;
-  isca funnel, no offer). Shares the n8n capture webhook with the calc (`source='quiz_diagnostico'`).
-  Front-end done; **NOT live yet** (n8n flow + isca PDFs + copy agent passes pending — see the quiz
-  **pre-deploy gates** in `CLAUDE.md`).
+  isca funnel, no offer). **Bilingual (PT default + EN toggle):** static layer via `quiz.*` keys in
+  `translations.json`; island copy is `{pt,en}` throughout `data/quiz.json`, resolved by `useSiteLang()`/`pick()`
+  (logic fields — ids/weights/icp/pains/slug — stay monolingual). Shares the n8n capture webhook with the calc
+  (`source='quiz_diagnostico'`). Front-end done; **NOT live yet** (n8n flow + isca PDFs + copy agent passes
+  pending — see the quiz **pre-deploy gates** in `CLAUDE.md`).
+- `diagnostico.astro` + `components/forms/` + `lib/forms.ts` + `config/forms.config.ts` + `data/forms/<slug>.json`
+  — **native forms engine** (`/diagnostico`), generalized from `/quiz` to replace the Formbricks **link**
+  survey. JSON-driven, linear, core Q&A types (single/multi-select, short/long text, rating, statement,
+  consent + contact step); one `FormIsland` renders any `data/forms/*.json`. Shares the n8n capture webhook
+  (`source='discovery_survey'`). `data/forms/discovery.json` is a **SCAFFOLD** — real content is the Formbricks
+  transcription (`plans/native-forms/plan.md` §6a). Front-end done; **NOT live yet** (content + n8n branch +
+  copy agent passes pending). DEV preview: `PUBLIC_FORMS_DEV_MOCK=true`. **i18n: still PT-only** — localizing
+  `FormIsland` follows the `/quiz` `{pt,en}` + `useSiteLang()`/`pick()` pattern. The Formbricks **app** survey
+  (`leonardo-lima.astro` + `components/external/FormbricksAppSurvey`, `@formbricks/js`) **stays** (MVP only).
+- `diagnostico-leonardo-lima.astro`, `leonardo-lima.astro` — per-prospect Formbricks survey pages
+  (`noindex`). The link survey migrates to `/diagnostico`; the app survey stays on Formbricks.
 - `blog/index.astro`, `blog/[slug].astro` — blog over content collection `src/content/blog/`.
 - `[slug].astro` — generic pages over `src/content/pages/` (termos, privacidade, cookies, example).
 - `404.astro`, `sitemap.xml.ts`.

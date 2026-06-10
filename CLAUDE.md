@@ -27,6 +27,27 @@ Exceptions: `FAQ.astro` and `index.astro` inject the PT value as their own fallb
 (`getTranslation()`), so they never drift. `Testimonials.astro` renders empty
 fallbacks (filled at runtime from `translations.json`).
 
+## ⚠️ i18n has TWO mechanisms — static (DOM-swap) AND React islands
+
+`src/scripts/i18n.ts` only localizes **static HTML**. It queries `[data-i18n]` (textContent),
+`[data-i18n-html]` (innerHTML — for runs with inline `<strong>`/`<a>` that textContent would
+flatten; authored strings only), `[data-i18n-placeholder]`, and `[data-i18n-content]`
+(`<title>`/meta) and swaps them from `translations.json`. It **cannot reach React islands** —
+they hydrate after it runs and re-render from their own state.
+
+So islands localize themselves: their copy is **`{pt,en}` pairs** resolved by `useSiteLang()` +
+`pick()` (`src/lib/useSiteLang.ts`), which reads the `site-lang` localStorage key and reacts to
+the **`site-lang-change` CustomEvent** the engine fires on every toggle. SSR/first render = PT
+(canonical), then it swaps. Island copy lives in `data/quiz.json`, `calculadora.config.ts`, and
+in-island `COPY` maps (NOT `translations.json`). **Only display strings are `{pt,en}`** — logic
+fields (ids, weights, `icp`/`pains`, `slug`, min/max) stay monolingual, and the envelope/payload
+records the language she actually saw.
+
+When you add a string to a localized page: static → `data-i18n` key in `translations.json` + the
+hardcoded PT fallback (same dual-copy rule); island → `{pt,en}` in the island's data/config +
+`pick(x, lang)`. `/quiz` + `/calculadora` are fully bilingual; **`/diagnostico` (forms island) is
+still PT-only** — localizing `FormIsland` follows this same pattern.
+
 ## ⚠️ Dead data files — do not edit expecting a change
 
 Only **`translations.json`** (3 imports), **`faq.json`** (2), and
@@ -83,7 +104,7 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
   sections (`#para-quem`, `#diferenca`, …) instead of the home anchors. Distinct deliverable;
   don't bundle it with home-page work.
 - **`src/pages/calculadora.astro`** + `src/components/calculadora/*` + `src/lib/calculadora.ts`
-  + `src/config/calculadora.config.ts` = the **Calculadora de Custo da Inação** (`/calculadora`,
+  + `src/config/calculadora.config.ts` = the **Calculadora de Custo da Inação** (`/calculadora`, bilingual PT/EN,
   Sprint 6). A SEPARATE **solo-ICP (Perfil B)** SEO + lead-magnet deliverable — deliberately NOT
   clínica-framed, so it doesn't cannibalize the home (see `plans/seo-briefing-roi-calculator.md`).
   Static indexable layer (H1/TL;DR/question-H2s/cohort block/FAQ + WebApplication/FAQPage/Breadcrumb
@@ -96,7 +117,7 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
   numbers, the live webhook, and a real CRP for `personAuthorSchema`. Its copy follows the same voice rules
   (no em/en dashes, hemorrhage framing) as the home.
 - **`src/pages/quiz.astro`** + `src/components/quiz/*` + `src/lib/quiz.ts` + `src/config/quiz.config.ts`
-  + `src/data/quiz.json` = the **Diagnóstico de 2 Minutos** (`/quiz`). A self-diagnosis lead funnel: the
+  + `src/data/quiz.json` = the **Diagnóstico de 2 Minutos** (`/quiz`, bilingual PT/EN). A self-diagnosis lead funnel: the
   prospect ranks her own dominant business pain, sees it named back with its hidden cost, and leaves her
   WhatsApp to claim a free *isca*. **The one place BOTH ICPs share a deliverable** (the carved-out exception
   to the never-mix rule): the *questions profile* the ICP (`autonoma` vs `clinica`); each *result is
@@ -121,3 +142,32 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
      the humanizer rules so far; the agents have not been run).
 
   Plan: `plans/quiz-diagnostico/plan.md`.
+- **`src/pages/diagnostico.astro`** + `src/components/forms/*` + `src/lib/forms.ts` + `src/config/forms.config.ts`
+  + `src/data/forms/<slug>.json` = the **native forms engine** (`/diagnostico`), generalized from `/quiz` to
+  replace the Formbricks **link** survey. **Schema-driven and reusable:** one `FormIsland` renders any
+  `data/forms/*.json`; adding a validated survey = **1 JSON + 1 page + 1 `FORM_SOURCES` entry + 1 n8n branch,
+  NO engine edits**. The operating model is "Formbricks for MVP/unvalidated surveys → native once validated."
+  Core Q&A types only (decision): `single_select` (auto-advances), `multi_select`, `open_text`/`long_text`,
+  `rating` (number/star/NPS), `statement`, `consent`, + the name/phone `ContactStep` as the LAST step.
+  **Linear** (no branching; a `showIf` hook is left in the schema, unused). **Single-ICP per form** — the
+  discovery survey is clínica-framed; the both-ICP exception is ONLY `/quiz`, never blend here. **No offer
+  anywhere** (no price/garantia/prazo); copy follows the same voice rules (no em/en dashes, hemorrhage framing).
+  Capture POSTs to the **shared** `PUBLIC_N8N_CAPTURE_WEBHOOK` with `source='discovery_survey'` (distinct from
+  `roi_calculator`/`quiz_diagnostico`); `leads_master` is now the **6th producer** — mind the schema fan-out
+  across all append nodes. DEV-only `PUBLIC_FORMS_DEV_MOCK` logs the payload (tree-shaken from prod). ⚠️ **Gotcha:**
+  `FormIsland` is `client:only`, so its `content` prop is **serialized into the page HTML** — keep internal
+  notes / secrets / offer numbers OUT of the JSON (the `_comment` in `data/forms/*.json` is stripped in
+  `forms.config.ts` for exactly this reason). `data/forms/discovery.json` is a **SCAFFOLD** (exercises every
+  field type); the real content is the Formbricks transcription. **Formbricks decommission is partial:** keep
+  `@formbricks/js` + `FormbricksAppSurvey` + `leonardo-lima.astro` (the **app** survey, MVP only); retire the
+  **link** bits (`FormbricksLinkSurvey`, `formbricks.linkSurveyId`, `PUBLIC_FORMBRICKS_LINK_SURVEY_ID`,
+  `.survey-iframe-shell`) only AFTER the native discovery survey is validated in prod. **Pre-deploy gates
+  (front-end is done; `/diagnostico` is NOT live until all three close):**
+  1. **Transcribe** the validated Formbricks survey questions into `src/data/forms/discovery.json` (needs
+     Formbricks cloud access — the real critical path; the engine is content-blind).
+  2. Build the **n8n `source='discovery_survey'` branch** on the shared webhook (hCaptcha server-verify →
+     `check_only` dedup → `leads_master` insert with the `survey` jsonb → Renata handoff). Best run via the
+     `psiativa-n8n-editor` agent (different repo/session).
+  3. Run the discovery-survey copy through **voice-auditor + CFP-light + offer-guardian** before publish.
+
+  Plan + capture contract: `plans/native-forms/plan.md`.
