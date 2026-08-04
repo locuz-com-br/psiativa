@@ -40,6 +40,14 @@ Section on/off toggles: `src/config/site.config.ts` → `sections`.
   `content` attr — used to localize `<title>`/meta) by browser/localStorage lang. Also fires a
   `site-lang-change` CustomEvent on every apply so React islands can react. Loaded globally in
   `BaseLayout`, so it runs on every page.
+- **Bilingual MDX content pages (third i18n mechanism).** Long legal/app docs do NOT go in
+  `translations.json`: that file is statically imported by `i18n.ts` and shipped on **every** page, so
+  legal-doc-sized copy there is a site-wide payload regression. Instead the MDX authors both languages
+  inside `<div data-lang-block="pt">` / `<div data-lang-block="en">`, and `[...slug].astro` shows one:
+  an inline script (same detection as `i18n.ts`, then follows the `site-lang-change` event) sets
+  `data-content-lang` on `<html>`, and CSS hides the other block. Both languages ship in the HTML, so
+  no-JS readers and crawlers still get PT, and there is no fallback-vs-JSON drift to keep in sync.
+  Used by `apps/n8n*`; pages without lang blocks are unaffected.
 - `src/lib/useSiteLang.ts` — React hook + `pick()` helper so client islands localize their **own**
   `{pt,en}` copy (the DOM-swap engine can't reach island-rendered text). Reads the `site-lang`
   localStorage key and subscribes to the `site-lang-change` event. Used by the calc + quiz islands
@@ -90,7 +98,15 @@ Section on/off toggles: `src/config/site.config.ts` → `sections`.
 - `diagnostico-leonardo-lima.astro`, `leonardo-lima.astro` — per-prospect Formbricks survey pages
   (`noindex`). The link survey migrates to `/diagnostico`; the app survey stays on Formbricks.
 - `blog/index.astro`, `blog/[slug].astro` — blog over content collection `src/content/blog/`.
-- `[slug].astro` — generic pages over `src/content/pages/` (termos, privacidade, cookies, example).
+- `[...slug].astro` — generic pages over `src/content/pages/` (termos, privacidade, cookies, example,
+  `privacidade/dm-triggers`, `apps/n8n*`). Also owns the **bilingual content-page mechanism** (see below)
+  and the prose styles (headings, tables, code, links) those pages inherit.
+- `apps/n8n.mdx` + `apps/n8n/{privacidade,termos}.mdx` — the **Google OAuth verification set** for the
+  self-hosted n8n app (`n8n.psiativa.com.br`), submitted on the PsiAtiva Google Cloud consent screen:
+  `/apps/n8n` (app homepage), `/apps/n8n/privacidade`, `/apps/n8n/termos`. Bilingual PT+EN. Google requires
+  the homepage and the privacy-policy URL to be **distinct**, both on the verified domain, reachable without
+  login, with the homepage linking to the policy. Pre-submission gate, open decisions and the claims ledger:
+  `plans/google-oauth-verification/submission-checklist.md`.
 - `404.astro`, `sitemap.xml.ts`.
 
 ## Brand factory (read-only context — do not edit to fit this page)
