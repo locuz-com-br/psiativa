@@ -1,0 +1,141 @@
+---
+title: "n8n (aplicativo interno)"
+description: "Página oficial do aplicativo n8n operado pela PsiAtiva: o que ele automatiza, quem o utiliza e por que solicita acesso a dados de contas Google."
+publishedAt: 2026-08-03
+---
+
+<div data-lang-block="pt">
+
+# n8n na PsiAtiva
+
+Página oficial do aplicativo **n8n** operado pela PsiAtiva em `https://n8n.psiativa.com.br`. Aqui descrevemos o que o aplicativo faz, quem o utiliza e por que ele solicita acesso a dados de contas Google.
+
+[Política de Privacidade do aplicativo](/apps/n8n/privacidade) · [Termos de Uso do aplicativo](/apps/n8n/termos)
+
+## 1. O que é este aplicativo
+
+O n8n é uma ferramenta de automação de fluxos de trabalho de código aberto. A PsiAtiva mantém uma **instância própria e autohospedada** dessa ferramenta, em contêiner Docker sob nosso controle, publicada exclusivamente em `https://n8n.psiativa.com.br`.
+
+Trata-se de um **aplicativo interno de retaguarda**. Ele não é um produto oferecido ao público, não tem cadastro aberto e não pode ser usado por terceiros. O acesso exige autenticação e é concedido apenas a operadores autorizados.
+
+Operado por 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brasil.
+
+## 2. O que o aplicativo faz
+
+Os fluxos em execução nesta instância cuidam da retaguarda operacional da PsiAtiva e da NewCar:
+
+- **Recebe formulários do nosso site** (diagnóstico, quiz e calculadora) por webhook, valida o envio e verifica se aquele contato já existe.
+- **Organiza e completa as fichas de contato** de profissionais que pediram informação sobre nossos serviços, a partir de dados públicos e do que a própria pessoa informou.
+- **Envia e responde mensagens** no WhatsApp e no Instagram, sempre em resposta a uma interação iniciada pela pessoa.
+- **Registra e atualiza o andamento de cada atendimento** em planilhas do Google Sheets, que funcionam como nosso painel operacional.
+- **Cria e atualiza compromissos no Google Agenda** quando uma conversa é marcada, remarcada ou cancelada.
+- **Envia avisos internos** para nossa equipe (Discord e Telegram) quando um fluxo falha ou quando um atendimento precisa de atenção humana.
+- **Executa rotinas de manutenção**, como cópias de segurança dos próprios fluxos e publicação de páginas estáticas.
+
+Nenhum desses fluxos atende pacientes nem trata dados clínicos. Os registros são de **profissionais e empresas** interessados nos nossos serviços, em contexto comercial.
+
+## 3. Por que solicitamos acesso a dados do Google
+
+O aplicativo pede autorização de conta Google apenas para as duas funções acima que dependem do Google: o painel operacional em planilhas e a agenda de compromissos. Cada permissão solicitada tem uma função direta:
+
+| Permissão (escopo) | O que ela permite | Por que o aplicativo precisa dela |
+|---|---|---|
+| `https://www.googleapis.com/auth/spreadsheets` | Ler e escrever o conteúdo de planilhas do Google Sheets na conta autorizada | Gravar cada novo contato como uma linha, ler a fila de atendimento e atualizar o andamento de cada registro |
+| `https://www.googleapis.com/auth/drive.file` | Acesso apenas aos arquivos que o aplicativo cria ou que o operador seleciona explicitamente | Localizar a planilha de trabalho no seletor de arquivos, sem alcançar o restante do Drive |
+| `https://www.googleapis.com/auth/calendar` e `https://www.googleapis.com/auth/calendar.events` | Ler, criar e atualizar eventos na agenda da conta autorizada | Criar o compromisso quando uma conversa é marcada, e atualizar ou cancelar quando a data muda |
+
+Não solicitamos acesso a Gmail, a contatos, a fotos nem ao conteúdo geral do Drive. Os dados obtidos por essas permissões são usados **somente** para operar as funções descritas acima, conforme a [Política de Privacidade do aplicativo](/apps/n8n/privacidade).
+
+## 4. Quais contas Google se conectam ao aplicativo
+
+Hoje, apenas contas corporativas do próprio operador se conectam ao aplicativo: as contas administrativas dos domínios `psiativa.com.br`, `newcar.rio.br` e `newcarsantacruz.com.br`, todas sob nosso controle.
+
+O aplicativo **não** oferece login para clientes ou visitantes, e nenhuma conta Google de terceiros está conectada. Se isso mudar, a Política de Privacidade será atualizada antes de qualquer nova conexão.
+
+## 5. Como revogar o acesso
+
+O titular de qualquer conta conectada pode encerrar o acesso a qualquer momento em [myaccount.google.com/permissions](https://myaccount.google.com/permissions), removendo o aplicativo da lista de acessos de terceiros. A revogação interrompe imediatamente qualquer leitura ou escrita futura. Para pedir também a exclusão dos dados já armazenados, veja a seção de retenção e exclusão da [Política de Privacidade](/apps/n8n/privacidade).
+
+## 6. Privacidade e termos
+
+- [Política de Privacidade do aplicativo](/apps/n8n/privacidade): quais dados do Google acessamos, como usamos, onde guardamos, com quem compartilhamos e como excluímos.
+- [Termos de Uso do aplicativo](/apps/n8n/termos): quem pode usar, condições de uso e responsabilidades.
+
+## 7. Contato
+
+- **Assuntos gerais:** `contato@psiativa.com.br`
+- **Privacidade e proteção de dados:** `privacidade@psiativa.com.br`
+- **Operador:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brasil
+- **Site institucional:** [psiativa.com.br](/)
+
+_Última atualização: 3 de agosto de 2026._
+
+</div>
+
+<div data-lang-block="en">
+
+# n8n at PsiAtiva
+
+Official page for the **n8n** application operated by PsiAtiva at `https://n8n.psiativa.com.br`. This page describes what the application does, who uses it, and why it requests access to Google account data.
+
+[Application Privacy Policy](/apps/n8n/privacidade) · [Application Terms of Use](/apps/n8n/termos)
+
+## 1. What this application is
+
+n8n is an open source workflow automation tool. PsiAtiva runs its **own self hosted instance** of it, inside a Docker container under our control, published exclusively at `https://n8n.psiativa.com.br`.
+
+This is an **internal back office application**. It is not a product offered to the public, it has no open sign up, and it cannot be used by third parties. Access requires authentication and is granted only to authorized operators.
+
+Operated by 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), Brazilian company registration (CNPJ) 51.525.875/0001-48, Brazil.
+
+## 2. What the application does
+
+The workflows running on this instance handle back office operations for PsiAtiva and NewCar:
+
+- **Receives form submissions from our website** (assessment, quiz and calculator) through webhooks, validates each submission and checks whether that contact already exists.
+- **Organizes and completes contact records** for professionals who asked for information about our services, based on public data and on what the person provided.
+- **Sends and answers messages** on WhatsApp and Instagram, always in reply to an interaction the person started.
+- **Records and updates the status of each conversation** in Google Sheets spreadsheets, which serve as our operational dashboard.
+- **Creates and updates appointments in Google Calendar** when a conversation is booked, rescheduled or cancelled.
+- **Sends internal alerts** to our team (Discord and Telegram) when a workflow fails or when a conversation needs human attention.
+- **Runs maintenance routines**, such as backing up the workflows themselves and publishing static pages.
+
+None of these workflows serve patients or handle clinical data. The records belong to **professionals and businesses** interested in our services, in a commercial context.
+
+## 3. Why we request access to Google data
+
+The application requests Google account authorization only for the two functions above that depend on Google: the spreadsheet based operational dashboard and the appointment calendar. Each requested permission has a direct purpose:
+
+| Permission (scope) | What it allows | Why the application needs it |
+|---|---|---|
+| `https://www.googleapis.com/auth/spreadsheets` | Read and write Google Sheets spreadsheet content in the authorized account | Write each new contact as a row, read the work queue, and update the status of each record |
+| `https://www.googleapis.com/auth/drive.file` | Access only to files the application creates or that the operator explicitly selects | Locate the working spreadsheet in the file picker, without reaching the rest of the Drive |
+| `https://www.googleapis.com/auth/calendar` and `https://www.googleapis.com/auth/calendar.events` | Read, create and update events in the authorized account's calendar | Create the appointment when a conversation is booked, and update or cancel it when the date changes |
+
+We do not request access to Gmail, contacts, photos or general Drive content. Data obtained through these permissions is used **solely** to operate the functions described above, as stated in the [Application Privacy Policy](/apps/n8n/privacidade).
+
+## 4. Which Google accounts connect to the application
+
+Today, only the operator's own business accounts connect to the application: the administrative accounts of the `psiativa.com.br`, `newcar.rio.br` and `newcarsantacruz.com.br` domains, all under our control.
+
+The application does **not** offer login to clients or visitors, and no third party Google account is connected. If that changes, the Privacy Policy will be updated before any new connection is made.
+
+## 5. How to revoke access
+
+The owner of any connected account can end access at any time at [myaccount.google.com/permissions](https://myaccount.google.com/permissions), by removing the application from the list of third party access. Revoking stops any future read or write immediately. To also request deletion of data already stored, see the retention and deletion section of the [Privacy Policy](/apps/n8n/privacidade).
+
+## 6. Privacy and terms
+
+- [Application Privacy Policy](/apps/n8n/privacidade): what Google data we access, how we use it, where we store it, with whom we share it, and how we delete it.
+- [Application Terms of Use](/apps/n8n/termos): who may use it, conditions of use and responsibilities.
+
+## 7. Contact
+
+- **General matters:** `contato@psiativa.com.br`
+- **Privacy and data protection:** `privacidade@psiativa.com.br`
+- **Operator:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brazil
+- **Company website:** [psiativa.com.br](/)
+
+_Last updated: August 3, 2026._
+
+</div>

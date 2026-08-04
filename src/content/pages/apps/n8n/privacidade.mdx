@@ -1,0 +1,265 @@
+---
+title: "Política de Privacidade do aplicativo n8n"
+description: "Como o aplicativo n8n da PsiAtiva acessa, usa, armazena, compartilha e exclui dados de contas Google, e como revogar o acesso."
+publishedAt: 2026-08-03
+---
+
+<div data-lang-block="pt">
+
+# Política de Privacidade do aplicativo n8n
+
+**Última atualização:** 3 de agosto de 2026
+
+Esta Política descreve como o aplicativo **n8n** operado pela PsiAtiva em `https://n8n.psiativa.com.br` acessa, usa, armazena, compartilha e exclui dados obtidos de contas Google, além dos demais dados que ele trata. Ela se aplica especificamente a esse aplicativo. O que o aplicativo é e o que ele faz está descrito na [página do aplicativo](/apps/n8n).
+
+Para a política geral do site institucional, veja [psiativa.com.br/privacidade](/privacidade).
+
+## 1. Quem opera o aplicativo
+
+O aplicativo é operado por **51.525.875 JUAN PABLO DOS SANTOS SILVA** (nome fantasia **PsiAtiva**), CNPJ 51.525.875/0001-48, no Brasil. A PsiAtiva é uma consultoria de gestão e presença digital voltada a profissionais e clínicas de psicologia. A mesma instância também executa fluxos de retaguarda da NewCar, empresa do mesmo operador.
+
+O n8n é um aplicativo **interno**: não há cadastro aberto, não há acesso público e nenhum cliente ou visitante faz login nele.
+
+## 2. Quais dados de contas Google o aplicativo acessa
+
+O aplicativo acessa dados de contas Google **apenas** das contas corporativas do próprio operador que autorizaram a conexão, nos domínios `psiativa.com.br`, `newcar.rio.br` e `newcarsantacruz.com.br`. Nenhuma conta Google de terceiros está conectada.
+
+| Permissão (escopo) | Dados do Google acessados | Como o aplicativo os acessa |
+|---|---|---|
+| `https://www.googleapis.com/auth/spreadsheets` | Conteúdo das planilhas de trabalho: nome, telefone, e-mail, cidade, perfil profissional, origem do contato, andamento do atendimento, datas e anotações operacionais | Leitura e escrita de linhas e colunas, por chamadas à API do Google Sheets |
+| `https://www.googleapis.com/auth/drive.file` | Identificador, nome e metadados apenas dos arquivos criados pelo aplicativo ou selecionados explicitamente pelo operador | Leitura de metadados para localizar a planilha de trabalho no seletor de arquivos |
+| `https://www.googleapis.com/auth/calendar` e `https://www.googleapis.com/auth/calendar.events` | Eventos da agenda: título, descrição, data e hora de início e fim, status e endereços de e-mail dos participantes convidados | Leitura, criação, atualização e cancelamento de eventos, por chamadas à API do Google Agenda |
+
+O aplicativo também armazena o **token de autorização (OAuth)** e o identificador da conta que concedeu o acesso, necessários para manter a conexão ativa.
+
+O aplicativo **não** acessa Gmail, contatos, fotos, conteúdo geral do Drive, histórico de navegação nem dados de localização.
+
+## 3. Para que usamos esses dados
+
+Usamos os dados obtidos das APIs do Google exclusivamente para prover e melhorar as funções visíveis do próprio aplicativo:
+
+| Finalidade | Dados envolvidos |
+|---|---|
+| Registrar cada novo contato recebido pelo site ou pelo WhatsApp como uma linha no painel operacional | Conteúdo de planilhas |
+| Ler a fila de atendimento e evitar registros duplicados | Conteúdo de planilhas |
+| Atualizar o andamento de cada atendimento e as anotações da equipe | Conteúdo de planilhas |
+| Localizar a planilha correta de trabalho | Metadados de arquivo (`drive.file`) |
+| Criar, remarcar e cancelar compromissos das conversas agendadas | Eventos de agenda |
+| Manter a conexão autorizada ativa entre execuções | Token de autorização |
+
+**Não** usamos dados do Google para publicidade, criação de perfis de anúncio, venda ou aluguel de dados, tomada de decisão automatizada com efeitos jurídicos, nem para treinar ou aperfeiçoar modelos de inteligência artificial, próprios ou de terceiros.
+
+## 4. Uso limitado (Google API Services User Data Policy)
+
+O uso e a transferência, pela PsiAtiva, de informações recebidas das APIs do Google para qualquer outro aplicativo obedecem à [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), incluindo os requisitos de **Uso Limitado (Limited Use)**.
+
+Em termos práticos, isso significa que:
+
+- Os dados são usados apenas para prover ou melhorar as funções do aplicativo descritas na seção 3.
+- Os dados não são transferidos a terceiros, exceto quando necessário para prover essas funções, por exigência legal, ou como parte de operação de fusão ou aquisição, com aviso prévio.
+- Os dados não são usados para publicidade nem vendidos.
+- Nenhuma pessoa lê esses dados, salvo quando: a pessoa titular consentir de forma específica; for necessário por segurança, para investigar abuso ou responder a incidente; a lei exigir; ou os dados estiverem agregados e anonimizados para operação interna.
+
+## 5. Onde e como armazenamos
+
+- A instância do n8n roda em **contêiner Docker sob controle exclusivo do operador**, no Brasil, com banco de dados interno próprio (SQLite) no volume da aplicação.
+- As credenciais de conexão, incluindo os tokens do Google, ficam **cifradas em repouso** pelo mecanismo de criptografia de credenciais do próprio n8n.
+- O acesso à interface do aplicativo é servido por túnel Cloudflare com **TLS (HTTPS)** e exige autenticação. Não há acesso anônimo.
+- O conteúdo das planilhas e dos eventos **permanece no Google**. O aplicativo lê e escreve sob demanda e não mantém cópia integral desses dados. Registros de execução podem conter trechos dos dados processados naquele momento, conforme a seção 7.
+
+## 6. Com quem compartilhamos
+
+**Não vendemos, alugamos nem cedemos dados obtidos das APIs do Google.** Eles não são compartilhados com anunciantes, corretores de dados nem provedores de inteligência artificial.
+
+Os únicos terceiros envolvidos são a infraestrutura necessária para o aplicativo funcionar, atuando sob nossa instrução:
+
+- **Google LLC**, como origem e destino dos próprios dados (Sheets, Drive e Agenda).
+- **Cloudflare, Inc.**, que provê DNS, TLS e o túnel de acesso à instância, tratando metadados de conexão em trânsito.
+
+Podemos ainda divulgar dados quando houver obrigação legal, ordem de autoridade competente ou necessidade de apurar incidente de segurança.
+
+## 7. Por quanto tempo guardamos e como excluímos
+
+| Item | Retenção | Como excluir |
+|---|---|---|
+| Token de autorização do Google | Enquanto a conexão estiver ativa | Revogar em [myaccount.google.com/permissions](https://myaccount.google.com/permissions) ou remover a credencial dentro do aplicativo. A remoção apaga o token do nosso banco |
+| Registros de execução dos fluxos (podem conter trechos dos dados processados) | Expurgo automático em janela contínua, limitada a 14 dias | Pedido por e-mail para expurgo antecipado |
+| Conteúdo de planilhas e eventos de agenda | Permanece no Google, sob controle da conta titular | Exclusão feita diretamente no Google Sheets ou no Google Agenda pela conta titular |
+| Fichas de contato de profissionais interessados | Enquanto durar o interesse comercial e os prazos legais aplicáveis | Pedido para `privacidade@psiativa.com.br` |
+
+**Revogação encerra o acesso.** Após a revogação, o aplicativo não consegue mais ler nem escrever nada na conta, e os tokens correspondentes deixam de ser válidos.
+
+Para pedir a exclusão de dados armazenados por nós, escreva para `privacidade@psiativa.com.br` com o assunto "Exclusão de dados: aplicativo n8n". Respondemos no prazo legal.
+
+## 8. Segurança
+
+Adotamos medidas técnicas e organizacionais proporcionais à sensibilidade dos dados tratados:
+
+- Autenticação obrigatória na interface do aplicativo, sem cadastro público e sem acesso anônimo.
+- Credenciais cifradas em repouso e nunca expostas na interface após serem salvas.
+- Transporte exclusivamente por HTTPS e túnel dedicado, sem porta de administração aberta na internet.
+- Princípio do menor privilégio nas permissões solicitadas: usamos `drive.file` em vez de acesso completo ao Drive, e não pedimos escopos de Gmail ou de contatos.
+- Verificação em duas etapas ativa nas contas Google que autorizam o aplicativo.
+- Acesso restrito a operadores autorizados, com credenciais individuais.
+
+Nenhum sistema é totalmente infalível, mas tratamos incidentes com a seriedade que a LGPD exige e comunicamos os titulares e a autoridade quando for o caso.
+
+## 9. Dados de terceiros e LGPD
+
+Além dos dados de contas Google, o aplicativo trata dados de **profissionais e empresas que nos procuraram** por formulários do site, WhatsApp ou Instagram: nome, telefone, e-mail, cidade, dados profissionais públicos e o conteúdo da própria interação.
+
+Esse tratamento é de natureza **comercial**, entre empresa e profissional. Não coletamos dados de pacientes, dados de saúde nem dados sensíveis por esses canais, e pedimos que não sejam enviados. Não há relação terapêutica, sigilo clínico ou prontuário envolvidos.
+
+Nos termos da Lei nº 13.709/2018 (LGPD), o titular pode solicitar confirmação de tratamento, acesso, correção, anonimização, exclusão, portabilidade, informação sobre compartilhamentos e revogação de consentimento, pelo e-mail `privacidade@psiativa.com.br`.
+
+- **Encarregado pelo Tratamento de Dados (DPO):** Juan Santos
+- **E-mail:** `privacidade@psiativa.com.br`
+
+O titular também pode contatar a Autoridade Nacional de Proteção de Dados (ANPD).
+
+## 10. Menores de idade
+
+O aplicativo é uma ferramenta interna de uso profissional e não se destina a menores de 18 anos. Não coletamos intencionalmente dados de menores por esses fluxos.
+
+## 11. Alterações desta Política
+
+Podemos atualizar esta Política. A versão vigente estará sempre nesta página, com a data de "Última atualização". **Se mudarmos a forma como o aplicativo acessa, usa ou compartilha dados de contas Google, atualizaremos esta página antes que a mudança entre em vigor** e avisaremos os titulares das contas conectadas pelo e-mail de contato da conta.
+
+## 12. Contato
+
+- **Privacidade e proteção de dados:** `privacidade@psiativa.com.br`
+- **Assuntos gerais:** `contato@psiativa.com.br`
+- **Operador:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brasil
+- **Página do aplicativo:** [psiativa.com.br/apps/n8n](/apps/n8n) · **Termos de Uso:** [psiativa.com.br/apps/n8n/termos](/apps/n8n/termos)
+
+</div>
+
+<div data-lang-block="en">
+
+# Privacy Policy for the n8n application
+
+**Last updated:** August 3, 2026
+
+This Policy describes how the **n8n** application operated by PsiAtiva at `https://n8n.psiativa.com.br` accesses, uses, stores, shares and deletes data obtained from Google accounts, as well as the other data it handles. It applies specifically to that application. What the application is and what it does is described on the [application page](/apps/n8n).
+
+For the general policy of our company website, see [psiativa.com.br/privacidade](/privacidade).
+
+## 1. Who operates the application
+
+The application is operated by **51.525.875 JUAN PABLO DOS SANTOS SILVA** (trading as **PsiAtiva**), Brazilian company registration (CNPJ) 51.525.875/0001-48, in Brazil. PsiAtiva is a management and digital presence consultancy serving psychology professionals and clinics. The same instance also runs back office workflows for NewCar, a company belonging to the same operator.
+
+n8n is an **internal** application: there is no open sign up, no public access, and no client or visitor logs into it.
+
+## 2. What Google account data the application accesses
+
+The application accesses Google account data **only** from the operator's own business accounts that authorized the connection, on the `psiativa.com.br`, `newcar.rio.br` and `newcarsantacruz.com.br` domains. No third party Google account is connected.
+
+| Permission (scope) | Google data accessed | How the application accesses it |
+|---|---|---|
+| `https://www.googleapis.com/auth/spreadsheets` | Working spreadsheet content: name, phone, email, city, professional profile, contact source, conversation status, dates and operational notes | Reading and writing rows and columns through Google Sheets API calls |
+| `https://www.googleapis.com/auth/drive.file` | Identifier, name and metadata only of files created by the application or explicitly selected by the operator | Reading metadata to locate the working spreadsheet in the file picker |
+| `https://www.googleapis.com/auth/calendar` and `https://www.googleapis.com/auth/calendar.events` | Calendar events: title, description, start and end date and time, status, and email addresses of invited attendees | Reading, creating, updating and cancelling events through Google Calendar API calls |
+
+The application also stores the **OAuth authorization token** and the identifier of the account that granted access, which are required to keep the connection active.
+
+The application does **not** access Gmail, contacts, photos, general Drive content, browsing history or location data.
+
+## 3. How we use this data
+
+We use data obtained from Google APIs exclusively to provide and improve the user facing features of the application itself:
+
+| Purpose | Data involved |
+|---|---|
+| Record each new contact received through the website or WhatsApp as a row in the operational dashboard | Spreadsheet content |
+| Read the work queue and avoid duplicate records | Spreadsheet content |
+| Update the status of each conversation and the team's notes | Spreadsheet content |
+| Locate the correct working spreadsheet | File metadata (`drive.file`) |
+| Create, reschedule and cancel appointments for booked conversations | Calendar events |
+| Keep the authorized connection active between runs | Authorization token |
+
+We do **not** use Google data for advertising, ad profiling, selling or renting data, automated decision making with legal effects, or to train or improve artificial intelligence models, whether our own or third party.
+
+## 4. Limited Use (Google API Services User Data Policy)
+
+PsiAtiva's use and transfer of information received from Google APIs to any other app will adhere to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the **Limited Use** requirements.
+
+In practice this means:
+
+- Data is used only to provide or improve the application features described in section 3.
+- Data is not transferred to third parties, except as necessary to provide those features, to comply with applicable law, or as part of a merger or acquisition with prior notice.
+- Data is not used for advertising and is not sold.
+- No human reads this data, except when: the user gives specific consent; it is necessary for security purposes, to investigate abuse or respond to an incident; the law requires it; or the data is aggregated and anonymized for internal operations.
+
+## 5. Where and how we store it
+
+- The n8n instance runs in a **Docker container under the operator's exclusive control**, in Brazil, with its own internal database (SQLite) on the application volume.
+- Connection credentials, including Google tokens, are **encrypted at rest** by n8n's own credential encryption mechanism.
+- Access to the application interface is served through a Cloudflare tunnel with **TLS (HTTPS)** and requires authentication. There is no anonymous access.
+- Spreadsheet content and calendar events **remain in Google**. The application reads and writes on demand and keeps no full copy of that data. Execution logs may contain excerpts of the data processed at that moment, as described in section 7.
+
+## 6. Who we share it with
+
+**We do not sell, rent or trade data obtained from Google APIs.** It is not shared with advertisers, data brokers or artificial intelligence providers.
+
+The only third parties involved are the infrastructure required for the application to run, acting on our instruction:
+
+- **Google LLC**, as the source and destination of the data itself (Sheets, Drive and Calendar).
+- **Cloudflare, Inc.**, which provides DNS, TLS and the access tunnel to the instance, handling connection metadata in transit.
+
+We may also disclose data where required by law, by order of a competent authority, or where necessary to investigate a security incident.
+
+## 7. How long we keep it and how we delete it
+
+| Item | Retention | How to delete |
+|---|---|---|
+| Google authorization token | While the connection remains active | Revoke at [myaccount.google.com/permissions](https://myaccount.google.com/permissions) or remove the credential inside the application. Removal deletes the token from our database |
+| Workflow execution logs (may contain excerpts of processed data) | Automatic rolling pruning, capped at 14 days | Email request for earlier purging |
+| Spreadsheet content and calendar events | Remains in Google, under the account owner's control | Deleted directly in Google Sheets or Google Calendar by the account owner |
+| Contact records of interested professionals | For as long as the commercial interest and applicable legal periods last | Request to `privacidade@psiativa.com.br` |
+
+**Revoking ends access.** After revocation the application can no longer read or write anything in the account, and the corresponding tokens stop being valid.
+
+To request deletion of data stored by us, write to `privacidade@psiativa.com.br` with the subject "Data deletion: n8n application". We reply within the legal deadline.
+
+## 8. Security
+
+We apply technical and organizational measures proportionate to the sensitivity of the data handled:
+
+- Mandatory authentication on the application interface, with no public sign up and no anonymous access.
+- Credentials encrypted at rest and never displayed in the interface after being saved.
+- Transport exclusively over HTTPS and a dedicated tunnel, with no administration port exposed to the internet.
+- Least privilege in the permissions requested: we use `drive.file` instead of full Drive access, and we do not request Gmail or contacts scopes.
+- Two step verification enabled on the Google accounts that authorize the application.
+- Access restricted to authorized operators, with individual credentials.
+
+No system is completely infallible, but we treat incidents with the seriousness Brazilian data protection law requires, notifying data subjects and the authority where applicable.
+
+## 9. Third party data and Brazilian data protection law
+
+Besides Google account data, the application handles data of **professionals and businesses who contacted us** through website forms, WhatsApp or Instagram: name, phone, email, city, public professional data and the content of the interaction itself.
+
+This processing is **commercial** in nature, between a company and a professional. We do not collect patient data, health data or sensitive data through these channels, and we ask that such data not be sent. No therapeutic relationship, clinical confidentiality or medical record is involved.
+
+Under Brazilian Law 13.709/2018 (LGPD), data subjects may request confirmation of processing, access, correction, anonymization, deletion, portability, information about sharing, and withdrawal of consent, by writing to `privacidade@psiativa.com.br`.
+
+- **Data Protection Officer (DPO):** Juan Santos
+- **Email:** `privacidade@psiativa.com.br`
+
+Data subjects may also contact the Brazilian National Data Protection Authority (ANPD).
+
+## 10. Minors
+
+The application is an internal professional tool and is not directed to anyone under 18. We do not knowingly collect data of minors through these workflows.
+
+## 11. Changes to this Policy
+
+We may update this Policy. The current version will always be on this page, with the "Last updated" date. **If we change how the application accesses, uses or shares Google account data, we will update this page before the change takes effect** and notify the owners of connected accounts at the account's contact email.
+
+## 12. Contact
+
+- **Privacy and data protection:** `privacidade@psiativa.com.br`
+- **General matters:** `contato@psiativa.com.br`
+- **Operator:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brazil
+- **Application page:** [psiativa.com.br/apps/n8n](/apps/n8n) · **Terms of Use:** [psiativa.com.br/apps/n8n/termos](/apps/n8n/termos)
+
+</div>
