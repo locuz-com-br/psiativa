@@ -27,6 +27,28 @@ const schema = breadcrumbSchema([
   schema={schema}
   noindex={Boolean(page.data.noindex) || page.id === 'example'}
 >
+  <!--
+    Bilingual content pages (e.g. /apps/n8n): the MDX authors both languages inside
+    [data-lang-block="pt"|"en"] wrappers and this picks the active one. It reuses the
+    site toggle: same detection as src/scripts/i18n.ts, then follows the
+    `site-lang-change` event that engine fires. Runs inline, before the article is
+    parsed, so the page never paints the wrong language. Pages without lang blocks
+    are unaffected.
+  -->
+  <script is:inline>
+    (function () {
+      function detect() {
+        var saved = localStorage.getItem('site-lang');
+        if (saved === 'pt' || saved === 'en') return saved;
+        return (navigator.language || '').toLowerCase().startsWith('pt') ? 'pt' : 'en';
+      }
+      function apply(lang) {
+        document.documentElement.setAttribute('data-content-lang', lang);
+      }
+      apply(detect());
+      window.addEventListener('site-lang-change', function (e) { apply(e.detail); });
+    })();
+  </script>
   <article class="page-content container">
     <Content />
   </article>
@@ -43,7 +65,9 @@ const schema = breadcrumbSchema([
   :global(.page-content h1) {
     font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: 0.5rem;
-    color: var(--color-primary);
+    /* was var(--color-primary), which global.css never defines (h1 silently
+       inherited body color on every content page) */
+    color: var(--text-heading);
   }
   
   :global(.page-content p:first-of-type) {
@@ -74,5 +98,65 @@ const schema = breadcrumbSchema([
   :global(.page-content li) {
     margin-bottom: 0.5rem;
     line-height: 1.6;
+  }
+
+  /* Bilingual pages: PT is canonical, EN reveals when the site toggle says so.
+     Both languages ship in the HTML, so no-JS readers and crawlers still get PT. */
+  :global(.page-content [data-lang-block="en"]) {
+    display: none;
+  }
+
+  :global(html[data-content-lang="en"] .page-content [data-lang-block="en"]) {
+    display: block;
+  }
+
+  :global(html[data-content-lang="en"] .page-content [data-lang-block="pt"]) {
+    display: none;
+  }
+
+  /* Tables (scope/retention matrices in the legal + app pages) */
+  :global(.page-content table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  :global(.page-content th),
+  :global(.page-content td) {
+    border: 1px solid var(--color-border);
+    padding: 0.65rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  :global(.page-content th) {
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  :global(.page-content code) {
+    background: var(--color-bg-alt);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    word-break: break-word;
+  }
+
+  :global(.page-content a) {
+    color: var(--text-heading);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Narrow screens: let wide tables scroll instead of blowing out the page */
+  @media (max-width: 640px) {
+    :global(.page-content table) {
+      display: block;
+      overflow-x: auto;
+    }
   }
 </style>
