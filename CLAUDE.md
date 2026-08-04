@@ -48,6 +48,13 @@ hardcoded PT fallback (same dual-copy rule); island → `{pt,en}` in the island'
 `pick(x, lang)`. `/quiz` + `/calculadora` are fully bilingual; **`/diagnostico` (forms island) is
 still PT-only** — localizing `FormIsland` follows this same pattern.
 
+## ⚠️ MDX tables need `remark-gfm` (wired in `astro.config.mjs`)
+
+Astro does not apply GFM to `.mdx` here by default. Before this was wired, every markdown table in
+`src/content/pages/**` shipped as literal `|` pipe text, including the live `/privacidade/dm-triggers`
+policy already submitted to Meta. `astro.config.mjs` now sets `markdown.remarkPlugins: [remarkGfm]`
+(`remark-gfm` is an explicit dependency). Don't remove it: `/apps/n8n*` and `dm-triggers` depend on tables.
+
 ## ⚠️ Dead data files — do not edit expecting a change
 
 Only **`translations.json`** (3 imports), **`faq.json`** (2), and
@@ -90,6 +97,15 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
 
 ## Scope boundaries
 
+- **`src/content/pages/apps/n8n*`** = the **Google OAuth verification set** for the self-hosted n8n app
+  (`/apps/n8n` homepage + `/apps/n8n/privacidade` + `/apps/n8n/termos`). **LIVE, and the app was APPROVED by
+  Google on 2026-08-03** — these are published, reviewed compliance documents, not marketing
+  copy: they are read by a Google reviewer, and every sentence is a claim that must stay true of the running
+  container (scopes requested, retention window, encryption, who connects). **Do not "improve" the voice
+  here** and do not merge them into the site-wide `/privacidade` or `/termos`, which serve a different
+  audience. Google requires the homepage URL and the policy URL to stay **distinct**, both without login.
+  Before editing, read `plans/google-oauth-verification/submission-checklist.md` §3 (claims ledger). They are
+  **bilingual via `data-lang-block`**, not `translations.json` (see CONTEXT.md).
 - **`sources/`** is the ICM knowledge factory (read-only context). Never edit
   `sources/knowledge/**` or `sources/workspace/psiativa/_config/**` to fit this page —
   they're the brand factory; override locally instead.
