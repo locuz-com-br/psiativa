@@ -1,0 +1,192 @@
+---
+/**
+ * WhatsApp click beacon — the consent-free, identifier-free click COUNTER.
+ *
+ * WHY THIS EXISTS SEPARATELY FROM `Analytics.astro` — read before merging them.
+ *
+ * `Analytics.astro` already fires a `whatsapp_click` GA4 event, but its `trackEvent()`
+ * returns early unless cookie consent is `"granted"`. That makes it structurally unable
+ * to answer the one question this beacon exists for:
+ *
+ *     "How many people click the WhatsApp CTA and never send a message?"
+ *
+ * The numerator (clicks) would be consent-gated and client-side; the denominator
+ * (conversations that actually arrived) is counted server-side in `db_sales.sessions`
+ * and is 100% complete. Dividing one by the other compares two different populations
+ * and yields a ratio that is wrong in a way that LOOKS meaningful — it undercounts
+ * clicks, so the gap reads SMALLER than it really is.
+ *
+ * So this beacon is deliberately NOT gated on consent. It is allowed to be ungated
+ * because it carries no personal data at all:
+ *
+ *   - no cookie, no localStorage, no sessionStorage
+ *   - no visitor id, no device id, no fingerprint
+ *   - referrer is reduced to its HOSTNAME (a full referrer URL can carry query strings)
+ *   - the phone number is NOT collected here — this counts clicks, nothing else
+ *   - the receiving n8n workflow MUST discard the IP (see the webhook contract)
+ *
+ * That last line is load-bearing: an IP would make the payload personal data under LGPD
+ * and this whole design would need consent, at which point it measures nothing again.
+ *
+ * ── Two implementation details that are easy to "simplify" back into bugs ────────────
+ *
+ * 1. `sendBeacon` with `Content-Type: application/json` triggers a CORS PREFLIGHT.
+ *    `text/plain` is a CORS-simple request and does not. The n8n Webhook node must
+ *    therefore accept `text/plain` and JSON-parse the RAW body — it will not populate
+ *    `body` as an object for you.
+ *
+ * 2. Nothing here may delay or intercept the handoff. No `preventDefault`, no
+ *    `setTimeout`, no `await`. A `wa.me` click navigates away or opens a tab, which is
+ *    exactly the unload race `navigator.sendBeacon` was designed for. The whole body is
+ *    wrapped in try/catch: a beacon must never be able to break the CTA it measures.
+ *
+ * NOTE ON CSP: this ships as `is:inline` to match the house style in `Analytics.astro`,
+ * and there is currently no CSP on this project (`public/.htaccess` sets no headers).
+ * If a strict `script-src 'self'` is ever added, this script dies SILENTLY while the
+ * page renders perfectly — move it to `public/` as a static file and audit the BUILT
+ * html, not the source.
+ */
+interface Props {
+  /** n8n webhook URL. Empty = beacon disabled (renders nothing). */
+  endpoint?: string;
+  /** Stable label for this site, so one endpoint can serve several LPs. */
+  siteId?: string;
+}
+
+const { endpoint = "", siteId = "" } = Astro.props;
+---
+
+{
+  endpoint && (
+    <script is:inline define:vars={{ endpoint, siteId }}>
+      (() => {
+  "use strict";
+
+  const WA_HOSTS = new Set(["wa.me", "api.whatsapp.com", "web.whatsapp.com"]);
+  const CAMPAIGN_KEYS = [
+    "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term",
+    "fbclid", "gclid", "ttclid",
+  ];
+  const DEDUPE_MS = 1500;
+
+  let lastKey = "";
+  let lastAt = 0;
+
+  const viewportBucket = () => {
+    const w = window.innerWidth || 0;
+    if (w < 640) return "sm";
+    if (w < 1024) return "md";
+    return "lg";
+  };
+
+  // Hostname only. A full referrer URL can carry query strings that are none of our business.
+  const referrerHost = () => {
+    if (!document.referrer) return "direct";
+    try {
+      const r = new URL(document.referrer);
+      return r.hostname === window.location.hostname ? "internal" : r.hostname;
+    } catch {
+      return "unknown";
+    }
+  };
+
+  const campaign = () => {
+    const out = {};
+    try {
+      const params = new URLSearchParams(window.location.search);
+      for (const key of CAMPAIGN_KEYS) {
+        const value = params.get(key);
+        if (value) out[key] = value.slice(0, 120);
+      }
+    } catch {
+      // A malformed query string must not cost us the click.
+    }
+    return out;
+  };
+
+  const send = (payload) => {
+    let body;
+    try {
+      body = JSON.stringify(payload);
+    } catch {
+      return;
+    }
+
+    try {
+      // text/plain keeps this a CORS-simple request — no preflight to lose in the unload race.
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
+        if (navigator.sendBeacon(endpoint, blob)) return;
+      }
+      // Fallback for browsers without sendBeacon: keepalive survives the navigation.
+      fetch(endpoint, {
+        method: "POST",
+        body,
+        keepalive: true,
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      }).catch(() => {});
+    } catch {
+      // Swallowed on purpose — see the header comment.
+    }
+  };
+
+  // Capture phase, so a handler that stops propagation cannot hide the click from us.
+  document.addEventListener(
+    "click",
+    (event) => {
+      try {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const anchor = target.closest("a");
+        if (!anchor || !anchor.getAttribute("href")) return;
+
+        let url;
+        try {
+          url = new URL(anchor.href, window.location.href);
+        } catch {
+          return;
+        }
+
+        const isWhatsApp =
+          url.protocol === "whatsapp:" || WA_HOSTS.has(url.hostname);
+        if (!isWhatsApp) return;
+
+        // Same resolution order as Analytics.astro, so cta_location is comparable
+        // between the GA4 event and this beacon.
+        const section = anchor.closest("section");
+        const ctaLocation =
+          anchor.dataset.analyticsLocation ||
+          (section && section.id) ||
+          (anchor.closest("nav") ? "navbar" : "") ||
+          (anchor.closest("footer") ? "footer" : "") ||
+          "page";
+
+        // A double-click on the same CTA is one intent, not two.
+        const now = Date.now();
+        const key = ctaLocation + "|" + window.location.pathname;
+        if (key === lastKey && now - lastAt < DEDUPE_MS) return;
+        lastKey = key;
+        lastAt = now;
+
+        send({
+          event: "whatsapp_click",
+          site: siteId || window.location.hostname,
+          path: window.location.pathname,
+          cta_location: ctaLocation,
+          referrer_host: referrerHost(),
+          viewport: viewportBucket(),
+          ts: new Date().toISOString(),
+          ...campaign(),
+        });
+      } catch {
+        // Never let measurement break the CTA.
+      }
+    },
+    true,
+  );
+      })();
+    </script>
+  )
+}

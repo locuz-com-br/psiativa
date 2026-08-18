@@ -109,6 +109,12 @@ export const SITE_CONFIG = {
     gtmId:
       import.meta.env.PUBLIC_GTM_ID || "GTM-TFTX34PC",
     clarityId: import.meta.env.PUBLIC_CLARITY_ID || "",
+    // Consent-free WhatsApp click counter (n8n webhook) — see ClickBeacon.astro.
+    // Carries NO personal data, so it is deliberately NOT gated on cookie consent;
+    // that is the only way its count is comparable with server-side db_sales.sessions.
+    // Empty = beacon renders nothing.
+    beaconEndpoint: import.meta.env.PUBLIC_BEACON_ENDPOINT || "",
+    beaconSiteId: import.meta.env.PUBLIC_BEACON_SITE_ID || "psiativa-lp",
   },
 
   // Formbricks surveys

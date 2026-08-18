@@ -3,6 +3,7 @@ import { SITE_CONFIG } from '../config/site.config';
 import SEOHead from '../components/seo/SEOHead.astro';
 import Analytics from '../components/analytics/Analytics.astro';
 import CookieConsent from '../components/analytics/CookieConsent.astro';
+import ClickBeacon from '../components/analytics/ClickBeacon.astro';
 
 interface NavItem {
   href: string;
@@ -120,6 +121,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       )
     }
+    {/*
+      Rendered UNCONDITIONALLY and outside `hasAnalytics` on purpose: this counts
+      WhatsApp CTA clicks with no cookie and no identifier, so it must keep working
+      when the visitor declines analytics consent. Gating it would make its count a
+      fraction of reality and destroy the comparison against db_sales.sessions.
+    */}
+    <ClickBeacon
+      endpoint={SITE_CONFIG.analytics.beaconEndpoint}
+      siteId={SITE_CONFIG.analytics.beaconSiteId}
+    />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
