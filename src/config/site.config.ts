@@ -106,6 +106,8 @@ export const SITE_CONFIG = {
     googleAnalyticsId:
       import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID ||
       import.meta.env.PUBLIC_GA_ID || "",
+    gtmId:
+      import.meta.env.PUBLIC_GTM_ID || "GTM-TFTX34PC",
     clarityId: import.meta.env.PUBLIC_CLARITY_ID || "",
   },
 
