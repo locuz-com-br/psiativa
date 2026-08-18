@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "build:clean": "rm -rf dist .astro && astro build",
+    "deploy:check": "node scripts/deploy-ftp.mjs",
+    "deploy": "node scripts/deploy-ftp.mjs --publish",
+    "deploy:prune": "node scripts/deploy-ftp.mjs --publish --prune",
+    "deploy:status": "node scripts/deploy-ftp.mjs --verify"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
@@ -27,6 +32,8 @@
     "@types/react-dom": "^19.2.3",
     "@types/three": "^0.183.1",
     "astro": "^6.1.5",
+    "basic-ftp": "^5.3.1",
+    "dotenv": "^16.6.1",
     "typescript": "^5.7.0"
   }
 }
