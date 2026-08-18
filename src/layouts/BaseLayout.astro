@@ -4,6 +4,7 @@ import SEOHead from '../components/seo/SEOHead.astro';
 import Analytics from '../components/analytics/Analytics.astro';
 import CookieConsent from '../components/analytics/CookieConsent.astro';
 import ClickBeacon from '../components/analytics/ClickBeacon.astro';
+import MetaPixel from '../components/analytics/MetaPixel.astro';
 
 interface NavItem {
   href: string;
@@ -130,6 +131,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ClickBeacon
       endpoint={SITE_CONFIG.analytics.beaconEndpoint}
       siteId={SITE_CONFIG.analytics.beaconSiteId}
+    />
+    {/*
+      Consent-GATED, unlike ClickBeacon: the Pixel sets _fbp/_fbc and builds ad
+      audiences, so it is personal data and fbevents.js is not fetched until the
+      visitor accepts.
+    */}
+    <MetaPixel
+      pixelIds={SITE_CONFIG.analytics.metaPixelIds}
+      capiEndpoint={SITE_CONFIG.analytics.metaCapiEndpoint}
     />
   </head>
   <body>

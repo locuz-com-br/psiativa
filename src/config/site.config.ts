@@ -115,6 +115,27 @@ export const SITE_CONFIG = {
     // Empty = beacon renders nothing.
     beaconEndpoint: import.meta.env.PUBLIC_BEACON_ENDPOINT || "",
     beaconSiteId: import.meta.env.PUBLIC_BEACON_SITE_ID || "psiativa-lp",
+    // Meta Pixel / Dataset IDs (public by design — they ship in the bundle).
+    // Supports several datasets because PsiAtiva runs more than one ad account.
+    // NOTE: one shared pixel assigned to both ad accounts is the better setup —
+    // two pixels split attribution, and each dataset only ever sees part of the
+    // traffic. Kept multi-capable because the accounts may live in different
+    // Business Managers, where sharing is not possible.
+    // Accepts PUBLIC_META_PIXEL_ID plus PUBLIC_META_PIXEL_ID_1..._5; blanks drop out.
+    metaPixelIds: [
+      import.meta.env.PUBLIC_META_PIXEL_ID,
+      import.meta.env.PUBLIC_META_PIXEL_ID_1,
+      import.meta.env.PUBLIC_META_PIXEL_ID_2,
+      import.meta.env.PUBLIC_META_PIXEL_ID_3,
+      import.meta.env.PUBLIC_META_PIXEL_ID_4,
+      import.meta.env.PUBLIC_META_PIXEL_ID_5,
+    ]
+      .map((id) => String(id || "").trim())
+      .filter((id) => id.length > 0)
+      .join(","),
+    // n8n webhook that forwards conversions to the Graph API. The CAPI ACCESS TOKEN
+    // lives in n8n's own env and must NEVER appear here or in any PUBLIC_ variable.
+    metaCapiEndpoint: import.meta.env.PUBLIC_META_CAPI_ENDPOINT || "",
   },
 
   // Formbricks surveys

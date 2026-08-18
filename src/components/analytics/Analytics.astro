@@ -108,7 +108,9 @@ const {
             name === "_gid" ||
             name === "_gat" ||
             name === "_clck" ||
-            name === "_clsk"
+            name === "_clsk" ||
+            name === "_fbp" ||
+            name === "_fbc"
           )
         );
 
@@ -129,16 +131,20 @@ const {
     const updateVendorConsent = (value) => {
       const granted = value === "granted";
 
+      // One consent decision covers analytics AND advertising: the banner names
+      // Google Analytics, Clarity and the Meta Pixel, and says both purposes out
+      // loud. Leaving ad_* pinned to "denied" while a Meta Pixel runs would make
+      // these signals lie about what the site actually does.
       window.gtag("consent", "update", {
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
+        ad_storage: granted ? "granted" : "denied",
+        ad_user_data: granted ? "granted" : "denied",
+        ad_personalization: granted ? "granted" : "denied",
         analytics_storage: granted ? "granted" : "denied",
       });
 
       if (window.clarity) {
         window.clarity("consentv2", {
-          ad_Storage: "denied",
+          ad_Storage: granted ? "granted" : "denied",
           analytics_Storage: granted ? "granted" : "denied",
         });
         if (!granted) window.clarity("consent", false);

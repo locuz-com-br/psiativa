@@ -1,0 +1,246 @@
+---
+/**
+ * Meta Pixel + the browser half of the Conversions API (CAPI) handshake.
+ *
+ * ── WHY THIS IS GATED WHEN ClickBeacon IS NOT ───────────────────────────────────────
+ *
+ * `ClickBeacon.astro` is ungated because it carries no personal data. NONE of that
+ * reasoning transfers here. The Pixel sets `_fbp`/`_fbc`, builds retargeting audiences,
+ * and sends the visitor's IP and user agent to Meta. That is advertising data about an
+ * identifiable person, so it loads ONLY after the visitor accepts, and `fbevents.js` is
+ * never fetched before then.
+ *
+ * The two must stay separate paths for the same reason: merging the CAPI call into the
+ * beacon would attach an IP and cookies to the anonymous click count, which is exactly
+ * what makes that count usable without consent.
+ *
+ * ── DEDUPLICATION ───────────────────────────────────────────────────────────────────
+ *
+ * Every conversion fires TWICE on purpose: once from the browser (`fbq`) and once from
+ * the server (CAPI, out of n8n). Meta collapses them when BOTH of these match:
+ *
+ *   - `event_name`  ("Contact")
+ *   - `event_id`    (the uuid minted here and posted to the CAPI endpoint)
+ *
+ * If the ids drift, every conversion is counted twice and the campaign optimises against
+ * inflated numbers. The id is minted once per click and used by both legs.
+ *
+ * ── WHY SERVER-SIDE AT ALL ──────────────────────────────────────────────────────────
+ *
+ * iOS/ITP and ad blockers drop a large share of browser Pixel events. The server leg is
+ * not a nicety; it is what keeps the conversion signal alive.
+ */
+interface Props {
+  /** Comma-separated Meta Pixel / Dataset IDs. Empty = renders nothing. */
+  pixelIds?: string;
+  /** n8n webhook that forwards to the Graph API. Empty = browser-only, no CAPI. */
+  capiEndpoint?: string;
+}
+
+const { pixelIds = "", capiEndpoint = "" } = Astro.props;
+---
+
+{
+  pixelIds && (
+    <script is:inline define:vars={{ pixelIds, capiEndpoint }}>
+      (() => {
+  "use strict";
+
+  const PIXEL_IDS = String(pixelIds || "")
+    .split(",")
+    .map((id) => id.trim())
+    .filter((id) => id.length > 0);
+  if (PIXEL_IDS.length === 0) return;
+
+  const STORAGE_KEY = "psiativa-analytics-consent-v1";
+  const CONSENT_EVENT = "psiativa:consent-change";
+  const WA_HOSTS = new Set(["wa.me", "api.whatsapp.com", "web.whatsapp.com"]);
+  const DEDUPE_MS = 1500;
+
+  let pixelLoaded = false;
+  let lastKey = "";
+  let lastAt = 0;
+
+  const consentGranted = () => {
+    try {
+      return localStorage.getItem(STORAGE_KEY) === "granted";
+    } catch {
+      return false;
+    }
+  };
+
+  const readCookie = (name) => {
+    try {
+      const match = document.cookie.match(
+        new RegExp("(?:^|; )" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "=([^;]*)"),
+      );
+      return match ? decodeURIComponent(match[1]) : "";
+    } catch {
+      return "";
+    }
+  };
+
+  // _fbc is normally written by the pixel from ?fbclid=. If the visitor lands and clicks
+  // before the pixel gets there, rebuild it in Meta's documented shape so the click is
+  // still attributable to the ad that paid for it.
+  const clickId = () => {
+    const existing = readCookie("_fbc");
+    if (existing) return existing;
+    try {
+      const fbclid = new URLSearchParams(window.location.search).get("fbclid");
+      if (fbclid) return "fb.1." + Date.now() + "." + fbclid;
+    } catch {
+      // fall through
+    }
+    return "";
+  };
+
+  const newEventId = () => {
+    try {
+      if (crypto && typeof crypto.randomUUID === "function") return crypto.randomUUID();
+    } catch {
+      // fall through
+    }
+    return "evt-" + Date.now() + "-" + Math.random().toString(16).slice(2, 10);
+  };
+
+  const loadPixel = () => {
+    if (pixelLoaded || !consentGranted()) return;
+    pixelLoaded = true;
+
+    // Meta's standard loader.
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      t.dataset.psiativaMetaPixel = "true";
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+
+    // Several datasets: PsiAtiva runs more than one ad account. Once each id is
+    // init'd, a plain fbq("track", …) fans the event out to ALL of them, which is
+    // what we want here (both accounts should see the same site conversions).
+    for (const id of PIXEL_IDS) window.fbq("init", id);
+    window.fbq("track", "PageView");
+  };
+
+  // The server leg. Carries only what CAPI needs to match; the IP is added server-side
+  // and must not be sent from here.
+  const sendCapi = (eventName, eventId, custom) => {
+    if (!capiEndpoint || !consentGranted()) return;
+
+    let body;
+    try {
+      body = JSON.stringify({
+        event_name: eventName,
+        event_id: eventId,
+        pixel_ids: PIXEL_IDS,
+        event_time: Math.floor(Date.now() / 1000),
+        event_source_url: window.location.href,
+        action_source: "website",
+        fbp: readCookie("_fbp"),
+        fbc: clickId(),
+        user_agent: navigator.userAgent,
+        custom_data: custom || {},
+      });
+    } catch {
+      return;
+    }
+
+    try {
+      // text/plain keeps this a CORS-simple request, same reasoning as ClickBeacon.
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
+        if (navigator.sendBeacon(capiEndpoint, blob)) return;
+      }
+      fetch(capiEndpoint, {
+        method: "POST",
+        body,
+        keepalive: true,
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      }).catch(() => {});
+    } catch {
+      // Never let tracking break the CTA.
+    }
+  };
+
+  const trackContact = (ctaLocation) => {
+    if (!consentGranted()) return;
+
+    const eventId = newEventId();
+    const custom = { cta_location: ctaLocation, content_name: "whatsapp_cta" };
+
+    try {
+      if (window.fbq) {
+        // The eventID here MUST equal the event_id posted to CAPI, or Meta counts twice.
+        window.fbq("track", "Contact", custom, { eventID: eventId });
+      }
+    } catch {
+      // fall through to the server leg regardless
+    }
+
+    sendCapi("Contact", eventId, custom);
+  };
+
+  document.addEventListener(
+    "click",
+    (event) => {
+      try {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const anchor = target.closest("a");
+        if (!anchor || !anchor.getAttribute("href")) return;
+
+        let url;
+        try {
+          url = new URL(anchor.href, window.location.href);
+        } catch {
+          return;
+        }
+
+        if (url.protocol !== "whatsapp:" && !WA_HOSTS.has(url.hostname)) return;
+
+        const section = anchor.closest("section");
+        const ctaLocation =
+          anchor.dataset.analyticsLocation ||
+          (section && section.id) ||
+          (anchor.closest("nav") ? "navbar" : "") ||
+          (anchor.closest("footer") ? "footer" : "") ||
+          "page";
+
+        const now = Date.now();
+        const key = ctaLocation + "|" + window.location.pathname;
+        if (key === lastKey && now - lastAt < DEDUPE_MS) return;
+        lastKey = key;
+        lastAt = now;
+
+        trackContact(ctaLocation);
+      } catch {
+        // Never let tracking break the CTA.
+      }
+    },
+    true,
+  );
+
+  // Load now if consent already stored, otherwise wait for the banner decision.
+  loadPixel();
+  window.addEventListener(CONSENT_EVENT, (event) => {
+    const value = event && event.detail && event.detail.analytics;
+    if (value === "granted") loadPixel();
+  });
+      })();
+    </script>
+  )
+}
