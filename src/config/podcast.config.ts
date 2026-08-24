@@ -10,8 +10,8 @@
 export const PODCAST = {
   name: "PsiAtiva",
   description:
-    "Um espaço para falar sobre Psicologia de forma leve, humana e sem complicações — " +
-    "emoções, relacionamentos, comportamento e saúde mental.",
+    "Um espaço para falar sobre Psicologia de forma leve, humana e sem complicações. " +
+    "Emoções, relacionamentos, comportamento e saúde mental.",
   basePath: "/podcast/",
   rss: "https://anchor.fm/s/c24416d8/podcast/rss",
   apple: "https://podcasts.apple.com/us/podcast/psiativa/id1679960852",

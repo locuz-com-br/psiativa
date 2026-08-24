@@ -12,7 +12,7 @@ guid: "6486704f-2cad-45c4-908c-837a30e8b66b"
 words: 1531
 hubOnly: false
 ---
-> **Nota editorial da PsiAtiva.** Duas correções ao áudio: Hanscarl Leuner, citado no episódio, era psiquiatra **alemão** (1919–1996), não americano. E *Inteligência Emocional*, de Daniel Goleman, foi publicado originalmente em **1995**.
+> **Nota editorial da PsiAtiva.** Duas correções ao áudio: Hanscarl Leuner, citado no episódio, era psiquiatra **alemão** (1919-1996), não americano. E *Inteligência Emocional*, de Daniel Goleman, foi publicado originalmente em **1995**.
 
 ## Transcrição
 
