@@ -65,7 +65,15 @@ const schemas = [
         <audio controls preload="none" src={ep.data.audioUrl}></audio>
 
         <div class="ep-links">
-          <a href={PODCAST.apple} target="_blank" rel="noopener">Seguir no Apple Podcasts</a>
+          <a class="ep-badge" href={PODCAST.apple} target="_blank" rel="noopener">
+            <img
+              src={PODCAST.badge.apple}
+              alt={PODCAST.badge.appleAlt}
+              width={PODCAST.badge.appleWidth}
+              height={PODCAST.badge.appleHeight}
+              loading="lazy"
+            />
+          </a>
           <a href={ep.data.spotifyUrl} target="_blank" rel="noopener">Ouvir no Spotify</a>
         </div>
       </div>
@@ -149,7 +157,10 @@ const schemas = [
     line-height: 1.7;
   }
   audio { width: 100%; margin-bottom: 1.1rem; }
-  .ep-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .ep-links { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
+  /* ⛔ Apple: badge sem borda, fundo, sombra, filtro ou transform. */
+  .ep-badge { display: inline-flex; align-items: center; }
+  .ep-badge img { display: block; width: auto; height: 41px; }
   .ep-links a {
     color: var(--secondary);
     font-family: var(--font-ui);

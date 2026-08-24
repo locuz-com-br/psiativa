@@ -12,7 +12,7 @@ guid: "8e09a272-b437-4800-a92b-01d3b695ccc8"
 words: 1729
 hubOnly: false
 ---
-> **Nota editorial da PsiAtiva.** A fala sobre terapia neste episódio descreve possibilidades gerais do processo terapêutico, não um resultado assegurado. Cada processo é individual e nenhum resultado pode ser previsto ou garantido (Resolução CFP nº 06/2019).
+> **Nota editorial da PsiAtiva.** A fala sobre terapia neste episódio descreve possibilidades gerais do processo terapêutico. Cada processo é individual, e nenhum resultado pode ser previsto ou garantido (Resolução CFP nº 06/2019).
 
 ## Transcrição
 
