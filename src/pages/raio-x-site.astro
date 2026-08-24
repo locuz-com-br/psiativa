@@ -1,0 +1,229 @@
+---
+// ─────────────────────────────────────────────────────────────
+// /raio-x-site — Raio-X do Site (Sprint 17a, Fase 5.1 + 5.2)
+// Camada indexável (SEO) + island interativa.
+// ─────────────────────────────────────────────────────────────
+// ICP: **entrada ICP-neutra, resultado single-ICP** (padrão do /quiz).
+// O texto que ranqueia fala com "você" e com "seu site": a URL não sabe se
+// quem digitou tem recepção ou atende sozinha. ⛔ Não reintroduza sinais de
+// clínica aqui: é isso que separa esta página da home (clínica) e da
+// /calculadora (solo). Decisão de 2026-08-24 (linha 86 do plano do sprint).
+//
+// 5.2 — ESTÁTICO PRIMEIRO: todo o conteúdo indexável abaixo é renderizado no
+// servidor. A island hidrata depois (`client:visible`) e não carrega nada que
+// precise ranquear. Um resultado renderizado no cliente é invisível pro
+// crawler, e a página existe justamente pra ser encontrada.
+//
+// ⛔ SEM `offers` / `price` no schema. Nenhum número da PsiAtiva nesta página.
+import { SITE_CONFIG } from "../config/site.config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AuditSiteIsland from "../components/audit-site/AuditSiteIsland.tsx";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  organizationSchema,
+  webApplicationSchema,
+} from "../lib/schema";
+
+const title = "Raio-X do Site: o que o site do psicólogo deixa escapar";
+const description =
+  "Leitura automática e gratuita do seu site em 5 pontos: clareza, contato, cuidado, confiança e próximo passo. Veja o que a paciente encontra antes de te chamar.";
+const pagePath = "/raio-x-site/";
+
+const faqs = [
+  {
+    question: "O raio-x é gratuito?",
+    answer:
+      "Sim. A leitura é aberta e não pede cadastro para começar. Você digita o endereço do site e recebe a nota com os 5 pontos.",
+  },
+  {
+    question: "Como a nota é calculada?",
+    answer:
+      "São 5 pontos, 20 cada. A leitura verifica cada ponto e cita a evidência que encontrou no seu site. A soma é aritmética, feita em código, para que a mesma leitura sempre dê a mesma nota.",
+  },
+  {
+    question: "O que exatamente vocês olham?",
+    answer:
+      "Só o que está público no seu site: se dá para entender quem você atende, se existe um caminho clicável para te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é o próximo passo.",
+  },
+  {
+    question: "Depoimento de paciente conta como sinal de confiança?",
+    answer:
+      "Não, e essa é uma escolha deliberada. A Resolução CFP 06/2019 veda depoimento de paciente na divulgação profissional. Sinal verificável aqui é CRP, formação e abordagem. A ferramenta nunca vai sugerir que você publique depoimento.",
+  },
+  {
+    question: "Serve para clínica e para quem atende sozinha?",
+    answer:
+      "Serve para as duas. A leitura olha o site, e o site é o mesmo endereço nos dois casos. O que muda é a conversa depois, que acompanha o seu contexto.",
+  },
+  {
+    question: "O valor estimado é uma promessa de faturamento?",
+    answer:
+      "Não. É uma estimativa conservadora a partir dos números que você mesma informa, e aparece sempre como um piso, com a expressão a partir de. Não substitui uma conversa.",
+  },
+];
+
+const schema = [
+  organizationSchema(),
+  webApplicationSchema({
+    name: "Raio-X do Site da PsiAtiva",
+    description,
+    path: pagePath,
+  }),
+  faqPageSchema(faqs),
+  breadcrumbSchema([
+    { name: "Início", path: "/" },
+    { name: "Raio-X do Site", path: pagePath },
+  ]),
+];
+
+const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+  "Olá! Fiz o raio-x do meu site no site da PsiAtiva e gostaria de entender melhor o resultado.",
+)}`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  titleKey="raioX.meta.title"
+  descriptionKey="raioX.meta.description"
+  canonicalPath={pagePath}
+  schema={schema}
+>
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section class="rx-hero">
+    <div class="rx-hero-bg"></div>
+    <div class="container rx-hero-content">
+      <div class="rx-tag" data-i18n="raioX.hero.tag">Ferramenta gratuita</div>
+      <h1 class="rx-h1">
+        <span data-i18n="raioX.hero.h1_line1">O que o seu site deixa escapar?</span><br />
+        <span class="rx-h1-accent" data-i18n="raioX.hero.h1_accent">Descubra em um minuto.</span>
+      </h1>
+      <p class="rx-hero-sub" data-i18n="raioX.hero.sub">
+        A paciente chega no seu site, lê por alguns segundos e decide se te chama ou fecha a aba. Quando ela fecha,
+        você nunca fica sabendo.
+      </p>
+      <p class="rx-tldr" data-i18n="raioX.hero.tldr">
+        O Raio-X lê o seu site em 5 pontos: se dá para entender quem você atende, se existe um caminho clicável para
+        te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é
+        o próximo passo. Cada ponto vale 20. No fim, com os seus números de sessão, ele estima quanto atendimento
+        deixa de acontecer por mês por causa do ponto mais fraco.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── A ferramenta (island) ────────────────────────────── -->
+  <section class="rx-tool">
+    <div class="container rx-tool-inner">
+      <AuditSiteIsland client:visible />
+    </div>
+  </section>
+
+  <!-- ── Conteúdo de apoio (camada indexável) ─────────────── -->
+  <section class="rx-content">
+    <div class="container rx-prose">
+      <!-- POV / IAT do briefing de SEO. É o ÚNICO contraste da página:
+           a regra de voz permite um deliberado, e este é ele. -->
+      <p class="rx-pov" data-i18n="raioX.pov">
+        Seu site não precisa ser bonito. Precisa ser encontrável, entendível e clicável.
+      </p>
+
+      <h2 data-i18n="raioX.content.h2_1">O que a paciente procura no site de um psicólogo?</h2>
+      <p data-i18n="raioX.content.p_1">
+        Ela procura três coisas, nessa ordem: se você atende o que ela tem, se dá para confiar em você, e como falar
+        com você agora. Um site bonito que não responde essas três perguntas em poucos segundos perde a pessoa que já
+        estava decidida a procurar ajuda.
+      </p>
+
+      <h2 data-i18n="raioX.content.h2_2">Por que o contato é o ponto mais caro?</h2>
+      <p data-i18n="raioX.content.p_2">
+        Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um
+        número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável
+        resolve isso, e a maioria dos sites de consultório ainda não tem.
+      </p>
+
+      <h2 data-i18n="raioX.content.h2_3">O que conta como sinal de confiança, dentro da ética</h2>
+      <p data-i18n="raioX.content.p_3">
+        CRP visível, formação, abordagem e o que você de fato atende. A Resolução CFP 06/2019 veda depoimento de
+        paciente na divulgação profissional, então o Raio-X nunca conta depoimento como prova e nunca recomenda que
+        você publique um. A confiança aqui vem do que é verificável sobre você.
+      </p>
+
+      <h2 data-i18n="raioX.content.h2_4">Como a nota de 0 a 100 é montada</h2>
+      <p data-i18n="raioX.content.p_4">
+        São 5 pontos, 20 cada. A leitura decide ponto a ponto e cita a evidência que encontrou. A soma fica com o
+        código, para que a mesma página sempre dê a mesma nota. O resultado também mostra qual modelo fez a leitura,
+        porque o julgamento varia entre modelos enquanto a aritmética se mantém.
+      </p>
+
+      <h2 data-i18n="raioX.content.h2_5">De onde vem a estimativa em reais</h2>
+      <p data-i18n="raioX.content.p_5">
+        Do seu próprio ticket e da sua agenda de hoje, cruzados com uma leitura conservadora de quanto escapa pelo
+        ponto mais fraco. Só o ponto mais fraco entra na conta, os outros não somam. O mês é contado como 4 semanas e
+        o valor arredonda para baixo. Se o seu ponto mais fraco passou, o Raio-X não mostra número nenhum, porque
+        não teria um número honesto para mostrar.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FAQ (indexável, espelha o faqPageSchema) ─────────── -->
+  <section class="rx-faq">
+    <div class="container rx-prose">
+      <h2 data-i18n="raioX.faq.title">Perguntas frequentes</h2>
+      {
+        faqs.map((f, i) => (
+          <details class="rx-faq-item">
+            <summary data-i18n={`raioX.faq.q_${i + 1}`}>{f.question}</summary>
+            <p data-i18n={`raioX.faq.a_${i + 1}`}>{f.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ── CTA final ───────────────────────────────────────── -->
+  <section class="rx-cta">
+    <div class="container rx-cta-inner">
+      <h2 data-i18n="raioX.cta.title">Prefere que eu olhe com você?</h2>
+      <p data-i18n="raioX.cta.desc">
+        O raio-x automático mostra o que está escapando. A conversa mostra o que fazer com isso, no seu contexto e no
+        seu tempo.
+      </p>
+      <a class="rx-cta-btn" href={whatsappLink} target="_blank" rel="noopener noreferrer">
+        <span data-i18n="raioX.cta.btn">Falar no WhatsApp</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .rx-hero { position: relative; padding: 5rem 0 3rem; overflow: hidden; }
+  .rx-hero-bg { position: absolute; inset: 0; background: var(--color-hero-bg, #0d3b3f); z-index: 0; }
+  .rx-hero-content { position: relative; z-index: 1; max-width: 52rem; }
+  .rx-tag { display: inline-block; padding: 0.3rem 0.75rem; border-radius: 999px; background: rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.8rem; letter-spacing: 0.03em; }
+  .rx-h1 { margin: 1rem 0 0; font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1.15; color: #fff; }
+  .rx-h1-accent { color: var(--color-accent, #7fd1c1); }
+  .rx-hero-sub { margin: 1rem 0 0; font-size: 1.1rem; line-height: 1.6; color: rgba(255, 255, 255, 0.86); }
+  .rx-tldr { margin: 1.25rem 0 0; font-size: 1rem; line-height: 1.65; color: rgba(255, 255, 255, 0.72); }
+
+  .rx-tool { padding: 2.5rem 0; background: var(--color-surface, #f2f7f7); }
+  .rx-tool-inner { max-width: 44rem; }
+
+  .rx-content, .rx-faq { padding: 3rem 0; }
+  .rx-faq { background: var(--color-surface, #f2f7f7); }
+  .rx-prose { max-width: 44rem; }
+  .rx-prose h2 { margin: 2rem 0 0.65rem; font-size: clamp(1.25rem, 2.5vw, 1.6rem); line-height: 1.3; color: var(--text-heading); }
+  .rx-prose h2:first-child { margin-top: 0; }
+  .rx-pov { margin: 0 0 2rem; padding-left: 1rem; border-left: 3px solid var(--primary); font-size: 1.1rem; line-height: 1.55; font-weight: 600; color: var(--text-heading); }
+  .rx-prose p { margin: 0; font-size: 1rem; line-height: 1.7; color: var(--text-primary); }
+
+  .rx-faq-item { border-bottom: 1px solid var(--color-border); padding: 0.9rem 0; }
+  .rx-faq-item summary { cursor: pointer; font-weight: 600; color: var(--text-heading); }
+  .rx-faq-item p { margin: 0.6rem 0 0; }
+
+  .rx-cta { padding: 3.5rem 0; }
+  .rx-cta-inner { max-width: 44rem; text-align: center; }
+  .rx-cta h2 { font-size: clamp(1.4rem, 3vw, 2rem); color: var(--text-heading); margin: 0; }
+  .rx-cta p { margin: 0.75rem 0 1.5rem; font-size: 1.05rem; line-height: 1.6; color: var(--text-primary); }
+  .rx-cta-btn { display: inline-block; padding: 0.85rem 1.75rem; border-radius: 10px; background: var(--primary); color: #fff; font-weight: 600; text-decoration: none; }
+</style>

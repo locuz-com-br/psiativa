@@ -157,6 +157,12 @@
     "btn": { "pt": "Fazer o diagnóstico", "en": "Take the diagnostic" }
   },
 
+  "auditSiteCta": {
+    "label": { "pt": "Ferramenta gratuita", "en": "Free tool" },
+    "title": { "pt": "O que o site da sua clínica deixa escapar?", "en": "What does your clinic's site let slip away?" },
+    "desc": { "pt": "A paciente lê o site por alguns segundos e decide se chama a recepção ou fecha a aba. O raio-x lê os 5 pontos que ela olha e mostra qual está custando agenda. Leva 1 minuto, sem cadastro.", "en": "A patient reads the site for a few seconds and decides whether to contact the front desk or close the tab. The X-ray reads the 5 points she looks at and shows which one is costing you schedule. Takes 1 minute, no sign-up." },
+    "btn": { "pt": "Fazer o raio-x do site", "en": "Run the site X-ray" }
+  },
   "cases": {
     "label": { "pt": "Resultados", "en": "Results" },
     "title_1": { "pt": "Números que", "en": "Numbers that" },
@@ -301,6 +307,52 @@
     }
   },
 
+  "raioX": {
+    "pov": { "pt": "Seu site não precisa ser bonito. Precisa ser encontrável, entendível e clicável.", "en": "Your site does not need to be pretty. It needs to be findable, understandable and clickable." },
+    "meta": {
+      "title": { "pt": "Raio-X do Site: o que o site do psicólogo deixa escapar | PsiAtiva", "en": "Site X-ray: what a psychologist's site lets slip away | PsiAtiva" },
+      "description": { "pt": "Leitura automática e gratuita do seu site em 5 pontos: clareza, contato, cuidado, confiança e próximo passo. Veja o que a paciente encontra antes de te chamar.", "en": "A free, automatic read of your site across 5 points: clarity, contact, care, trust and next step. See what a patient finds before she reaches out." }
+    },
+    "hero": {
+      "tag": { "pt": "Ferramenta gratuita", "en": "Free tool" },
+      "h1_line1": { "pt": "O que o seu site deixa escapar?", "en": "What does your site let slip away?" },
+      "h1_accent": { "pt": "Descubra em um minuto.", "en": "Find out in one minute." },
+      "sub": { "pt": "A paciente chega no seu site, lê por alguns segundos e decide se te chama ou fecha a aba. Quando ela fecha, você nunca fica sabendo.", "en": "A patient lands on your site, reads for a few seconds and decides whether to reach out or close the tab. When she closes it, you never find out." },
+      "tldr": { "pt": "O Raio-X lê o seu site em 5 pontos: se dá para entender quem você atende, se existe um caminho clicável para te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é o próximo passo. Cada ponto vale 20. No fim, com os seus números de sessão, ele estima quanto atendimento deixa de acontecer por mês por causa do ponto mais fraco.", "en": "The X-ray reads your site across 5 points: whether it is clear who you see, whether there is a clickable way to reach you, whether the page looks cared for, whether verifiable signals of who you are appear, and whether the next step is clear. Each point is worth 20. At the end, using your session numbers, it estimates how much care stops happening each month because of the weakest point." }
+    },
+    "content": {
+      "h2_1": { "pt": "O que a paciente procura no site de um psicólogo?", "en": "What does a patient look for on a psychologist's site?" },
+      "p_1": { "pt": "Ela procura três coisas, nessa ordem: se você atende o que ela tem, se dá para confiar em você, e como falar com você agora. Um site bonito que não responde essas três perguntas em poucos segundos perde a pessoa que já estava decidida a procurar ajuda.", "en": "She looks for three things, in this order: whether you treat what she has, whether you can be trusted, and how to talk to you right now. A beautiful site that does not answer those three questions within seconds loses the person who had already decided to seek help." },
+      "h2_2": { "pt": "Por que o contato é o ponto mais caro?", "en": "Why is contact the most expensive point?" },
+      "p_2": { "pt": "Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável resolve isso, e a maioria dos sites de consultório ainda não tem.", "en": "Because it fails after the person is already convinced. She read, she liked it, she wanted to book, and then she has to copy a number from the footer, open WhatsApp and type it in. Every extra step is a chance to give up. A clickable link solves this, and most practice sites still do not have one." },
+      "h2_3": { "pt": "O que conta como sinal de confiança, dentro da ética", "en": "What counts as a trust signal, within the ethics code" },
+      "p_3": { "pt": "CRP visível, formação, abordagem e o que você de fato atende. A Resolução CFP 06/2019 veda depoimento de paciente na divulgação profissional, então o Raio-X nunca conta depoimento como prova e nunca recomenda que você publique um. A confiança aqui vem do que é verificável sobre você.", "en": "A visible license number, training, approach and what you actually treat. CFP Resolution 06/2019 forbids patient testimonials in professional publicity, so the X-ray never counts a testimonial as proof and never recommends that you publish one. Trust here comes from what is verifiable about you." },
+      "h2_4": { "pt": "Como a nota de 0 a 100 é montada", "en": "How the 0 to 100 score is built" },
+      "p_4": { "pt": "São 5 pontos, 20 cada. A leitura decide ponto a ponto e cita a evidência que encontrou. A soma fica com o código, para que a mesma página sempre dê a mesma nota. O resultado também mostra qual modelo fez a leitura, porque o julgamento varia entre modelos enquanto a aritmética se mantém.", "en": "There are 5 points, 20 each. The read decides point by point and cites the evidence it found. The sum is left to the code, so the same page always gets the same score. The result also shows which model did the read, because judgement varies between models while arithmetic holds steady." },
+      "h2_5": { "pt": "De onde vem a estimativa em reais", "en": "Where the estimate in reais comes from" },
+      "p_5": { "pt": "Do seu próprio ticket e da sua agenda de hoje, cruzados com uma leitura conservadora de quanto escapa pelo ponto mais fraco. Só o ponto mais fraco entra na conta, os outros não somam. O mês é contado como 4 semanas e o valor arredonda para baixo. Se o seu ponto mais fraco passou, o Raio-X não mostra número nenhum, porque não teria um número honesto para mostrar.", "en": "From your own session price and today's schedule, crossed with a conservative read of how much escapes through the weakest point. Only the weakest point enters the math, the others do not add up. A month counts as 4 weeks and the figure rounds down. If your weakest point passed, the X-ray shows no figure at all, because it would not have an honest one to show." }
+    },
+    "faq": {
+      "title": { "pt": "Perguntas frequentes", "en": "Frequently asked questions" },
+      "q_1": { "pt": "O raio-x é gratuito?", "en": "Is the X-ray free?" },
+      "a_1": { "pt": "Sim. A leitura é aberta e não pede cadastro para começar. Você digita o endereço do site e recebe a nota com os 5 pontos.", "en": "Yes. The read is open and does not ask you to sign up to start. You type the site address and get the score with the 5 points." },
+      "q_2": { "pt": "Como a nota é calculada?", "en": "How is the score calculated?" },
+      "a_2": { "pt": "São 5 pontos, 20 cada. A leitura verifica cada ponto e cita a evidência que encontrou no seu site. A soma é aritmética, feita em código, para que a mesma leitura sempre dê a mesma nota.", "en": "There are 5 points, 20 each. The read checks each point and cites the evidence it found on your site. The sum is arithmetic, done in code, so the same read always gives the same score." },
+      "q_3": { "pt": "O que exatamente vocês olham?", "en": "What exactly do you look at?" },
+      "a_3": { "pt": "Só o que está público no seu site: se dá para entender quem você atende, se existe um caminho clicável para te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é o próximo passo.", "en": "Only what is public on your site: whether it is clear who you see, whether there is a clickable way to reach you, whether the page looks cared for, whether verifiable signals of who you are appear, and whether the next step is clear." },
+      "q_4": { "pt": "Depoimento de paciente conta como sinal de confiança?", "en": "Does a patient testimonial count as a trust signal?" },
+      "a_4": { "pt": "Não, e essa é uma escolha deliberada. A Resolução CFP 06/2019 veda depoimento de paciente na divulgação profissional. Sinal verificável aqui é CRP, formação e abordagem. A ferramenta nunca vai sugerir que você publique depoimento.", "en": "No, and that is a deliberate choice. CFP Resolution 06/2019 forbids patient testimonials in professional publicity. A verifiable signal here is your license number, training and approach. The tool will never suggest that you publish a testimonial." },
+      "q_5": { "pt": "Serve para clínica e para quem atende sozinha?", "en": "Does it work for a clinic and for someone practising alone?" },
+      "a_5": { "pt": "Serve para as duas. A leitura olha o site, e o site é o mesmo endereço nos dois casos. O que muda é a conversa depois, que acompanha o seu contexto.", "en": "It works for both. The read looks at the site, and the site is the same address in either case. What changes is the conversation afterwards, which follows your context." },
+      "q_6": { "pt": "O valor estimado é uma promessa de faturamento?", "en": "Is the estimated figure a promise of revenue?" },
+      "a_6": { "pt": "Não. É uma estimativa conservadora a partir dos números que você mesma informa, e aparece sempre como um piso, com a expressão a partir de. Não substitui uma conversa.", "en": "No. It is a conservative estimate from the numbers you enter yourself, and it always appears as a floor, with the wording starting from. It does not replace a conversation." }
+    },
+    "cta": {
+      "title": { "pt": "Prefere que eu olhe com você?", "en": "Would you rather I look at it with you?" },
+      "desc": { "pt": "O raio-x automático mostra o que está escapando. A conversa mostra o que fazer com isso, no seu contexto e no seu tempo.", "en": "The automatic X-ray shows what is slipping away. The conversation shows what to do about it, in your context and in your own time." },
+      "btn": { "pt": "Falar no WhatsApp", "en": "Talk on WhatsApp" }
+    }
+  },
   "quiz": {
     "meta": {
       "title": { "pt": "Diagnóstico: onde a sua agenda está vazando? | PsiAtiva", "en": "Diagnostic: where is your schedule leaking? | PsiAtiva" },
