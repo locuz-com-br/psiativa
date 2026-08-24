@@ -234,12 +234,18 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
     for Podcasters counts. The inner `d3ctxlq1ktw2nl.cloudfront.net` URL plays identically and counts **nowhere** —
     using it makes every on-site play invisible to the show's own stats. Players are `preload="none"` so page loads
     do not fire phantom downloads.
-  - ⛔ **Apple badge rules** (marketing.services.apple/apple-podcasts-identity-guidelines): never recreate, recolor,
-    rotate, animate, or add shadow/glow; never use the Apple mark alone; min 30px height; clear space ≥ 1/10 of badge
-    height; **never self-translate the badge**. The shipped file is the official **USGB-EN (English)** artwork — Apple
-    publishes a PT-BR badge, and swapping it is a one-line path change in `podcast.config.ts`. The official SVG embeds
-    a 2048×2048 PNG (482 KB) that renders at 41px; it ships **unaltered** because resampling would be "changing the
-    artwork". One request, cached.
+  - ⛔ **Artes de marca vivem em `knowledge/sources/assets/` (o storage), NÃO no repo do site.** Só o arquivo que a
+    página realmente usa é copiado para `public/images/external/<marca>/`. Isso derrubou o deploy de 7,6 MB para 672 KB.
+    Ao trocar de arte, copie do storage — não baixe de novo.
+  - ⛔ **Apple** (marketing.services.apple/apple-podcasts-identity-guidelines): never recreate, recolor, rotate,
+    animate, or add shadow/glow; never use the Apple mark alone; min 30px height; clear space ≥ 1/10 of badge height;
+    **never self-translate the badge**. Shipped: the official **BR-PT** artwork (*"Ouça no Apple Podcasts"*), which
+    matches the page language — the USGB-EN file is the wrong one for this site and stays in storage. The official SVG
+    embeds a 2048×2048 PNG (482 KB) rendering at 41px; it ships **unaltered** because resampling would be "changing
+    the artwork". One request, cached.
+  - ⛔ **Spotify** (developer.spotify.com/documentation/design): min **70px wide** on screen (26px tall renders ~95px);
+    clear space ≥ **1/2 the logo height** (13px); official green/black/white variants only, never recolored. The
+    `1rem` / `1.25rem` flex gap is sized to satisfy Apple (4.1px) and Spotify (13px) at once — do not tighten it.
   - **`hubOnly: true`** (ep00 73 words, ep06 a third-party text attributed to Cortella with uncertain authorship)
     = playable on the hub, **no page, never in the sitemap**. Thin content + a copyright question, not an oversight.
   - **CRP 12/19699 renders on every episode page**, not only the hub — Art. 2º, Res. CFP 06/2019 requires name + CRP
@@ -249,6 +255,4 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
     `../podcast/CFP-AUDIT.md`; transcripts + manifest live in `../podcast/`.
   - ⚠️ **KNOWN GAP — the podcast pages are PT-only.** No `data-i18n` keys and no `{pt,en}` island copy, so they do not
     localize on the EN toggle (same status as `/diagnostico`). Accepted deliberately; not scheduled.
-  - ⚠️ **Pending:** official **Spotify** badge asset (currently a text link, so Apple has artwork and Spotify does
-    not); and `public/images/external/apple/` carries **6.9 MB of unreferenced files** (the 2048px icon PNG and the
-    Blk lockup SVG) that ship to FTP for nothing — delete or keep deliberately.
+  - ⚠️ **Pending:** nothing on assets. Apple BR-PT + Spotify green both ship official and compliant.
