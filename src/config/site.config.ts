@@ -87,6 +87,7 @@ export const SITE_CONFIG = {
     ctaFinal: true,
     calcCta: true,
     quizCta: true,
+    auditSiteCta: true,
     cases: true,
     contact: true,
     faq: true,
@@ -96,13 +97,26 @@ export const SITE_CONFIG = {
   // ── Analytics & Integrations ───────────────
   analytics: {
     web3formsKey: "",
-    // hCaptcha SITE key (public — safe in the bundle). The matching SECRET lives
-    // server-side in n8n (HCAPTCHA_SECRET), never here. They must come from the
-    // SAME hCaptcha site or siteverify returns `sitekey-secret-mismatch`.
-    // Fallback is hCaptcha's test sitekey (only passes against the test secret) —
-    // production builds MUST set PUBLIC_HCAPTCHA_SITE_KEY.
+    // hCaptcha SITE keys (public — safe in the bundle). The matching SECRET lives
+    // server-side in n8n (HCAPTCHA_SECRET), never here.
+    //
+    // ⛔ hCaptcha issues ONE secret per ACCOUNT, not one per site (established
+    // 2026-08-23; the older "same site" comment here was wrong and caused a
+    // sitekey to be provisioned under a secret's name). Both keys below verify
+    // against the same HCAPTCHA_SECRET. A key from a DIFFERENT account is what
+    // makes siteverify return `sitekey-secret-mismatch`.
+    //
+    // Empty is a real state, not a bug: the islands guard on
+    // `HCAPTCHA_KEY && !captchaToken`, so an unset key SKIPS the widget rather
+    // than blocking the form. Production builds MUST set both.
+
+    /** /quiz + /calculadora. */
     hcaptchaSiteKey:
       import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "",
+    /** /raio-x-site — dedicated key so the Raio-X can be blocked or rotated
+     *  without taking the quiz and calculadora down with it. */
+    hcaptchaSiteKeyRaiox:
+      import.meta.env.PUBLIC_HCAPTCHA_SITEKEY_RAIOX || "",
     googleAnalyticsId:
       import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID ||
       import.meta.env.PUBLIC_GA_ID || "",

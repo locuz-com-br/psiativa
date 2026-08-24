@@ -10,6 +10,7 @@ export async function GET() {
     { loc: "/blog/", lastmod: new Date() },
     { loc: "/calculadora/", lastmod: new Date() },
     { loc: "/quiz/", lastmod: new Date() },
+    { loc: "/raio-x-site/", lastmod: new Date() },
     ...pages.map((page) => ({
       loc: `/${page.id}/`,
       lastmod: page.data.publishedAt ?? new Date(),
