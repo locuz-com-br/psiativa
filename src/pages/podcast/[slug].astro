@@ -74,7 +74,15 @@ const schemas = [
               loading="lazy"
             />
           </a>
-          <a href={ep.data.spotifyUrl} target="_blank" rel="noopener">Ouvir no Spotify</a>
+          <a class="ep-badge spotify" href={ep.data.spotifyUrl} target="_blank" rel="noopener" aria-label="Ouvir no Spotify">
+            <img
+              src={PODCAST.badge.spotify}
+              alt={PODCAST.badge.spotifyAlt}
+              width={PODCAST.badge.spotifyWidth}
+              height={PODCAST.badge.spotifyHeight}
+              loading="lazy"
+            />
+          </a>
         </div>
       </div>
     </header>
@@ -157,10 +165,12 @@ const schemas = [
     line-height: 1.7;
   }
   audio { width: 100%; margin-bottom: 1.1rem; }
+  /* gap 1.25rem atende Apple (>=4.1px) e Spotify (>=13px). */
   .ep-links { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
   /* ⛔ Apple: badge sem borda, fundo, sombra, filtro ou transform. */
   .ep-badge { display: inline-flex; align-items: center; }
   .ep-badge img { display: block; width: auto; height: 41px; }
+  .ep-badge.spotify img { height: 26px; }
   .ep-links a {
     color: var(--secondary);
     font-family: var(--font-ui);

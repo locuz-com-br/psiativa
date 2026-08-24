@@ -50,7 +50,14 @@ const schemas = [
               height={PODCAST.badge.appleHeight}
             />
           </a>
-          <a class="pod-btn" href={PODCAST.spotifyShow} target="_blank" rel="noopener">Ouvir no Spotify</a>
+          <a class="pod-badge spotify" href={PODCAST.spotifyShow} target="_blank" rel="noopener" aria-label="Ouvir no Spotify">
+            <img
+              src={PODCAST.badge.spotify}
+              alt={PODCAST.badge.spotifyAlt}
+              width={PODCAST.badge.spotifyWidth}
+              height={PODCAST.badge.spotifyHeight}
+            />
+          </a>
           <a class="pod-btn ghost" href={PODCAST.rss} target="_blank" rel="noopener">RSS</a>
         </div>
         <p class="pod-note">Você pode ouvir todos os episódios aqui. Seguir no Apple ou no Spotify avisa você quando sai episódio novo.</p>
@@ -162,7 +169,8 @@ const schemas = [
     font-size: 1.08rem;
     line-height: 1.7;
   }
-  .pod-links { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
+  /* gap 1rem atende Apple (>=4.1px) e Spotify (>=13px) de espaco livre. */
+  .pod-links { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
   .pod-btn {
     padding: 0.7rem 1.15rem;
     border: 1px solid var(--color-border);
@@ -186,6 +194,7 @@ const schemas = [
      Espaco livre >= 1/10 da altura (41px -> 4.1px); o gap de 0.7rem cobre. */
   .pod-badge { display: inline-flex; align-items: center; }
   .pod-badge img { display: block; width: auto; height: 41px; }
+  .pod-badge.spotify img { height: 26px; }
   .pod-note {
     margin-top: 1rem;
     color: var(--color-text-muted);

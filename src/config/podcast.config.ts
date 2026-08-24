@@ -21,22 +21,32 @@ export const PODCAST = {
   language: "pt-BR",
 
   /**
-   * Badge oficial da Apple. ⛔ Regras da Apple Podcasts Identity Guidelines
-   * (marketing.services.apple/apple-podcasts-identity-guidelines):
-   *   - nunca recriar, recolorir, girar, animar ou aplicar sombra/brilho no badge;
+   * Artes OFICIAIS, copiadas de knowledge/sources/assets/ (o storage).
+   * ⛔ Só entra em public/ o arquivo que a página realmente usa.
+   *
+   * APPLE — apple-podcasts-identity-guidelines:
+   *   - nunca recriar, recolorir, girar, animar ou aplicar sombra/brilho;
    *   - nunca usar a maçã sozinha no lugar do badge;
-   *   - altura minima 30px em tela; espaco livre >= 1/10 da altura do badge;
-   *   - nunca traduzir o badge por conta propria. A Apple publica versoes
-   *     localizadas: este arquivo e o USGB-EN (ingles). Para PT-BR, baixar o
-   *     badge traduzido da Apple e trocar so o caminho abaixo.
-   * O SVG oficial embute um PNG 2048x2048 (482 KB) — pesado para 41px, mas
-   * reamostrar seria "alterar a arte". Fica como veio: 1 request, cacheado.
+   *   - altura mínima 30px em tela; espaço livre >= 1/10 da altura (41px -> 4.1px);
+   *   - ⛔ nunca traduzir o badge por conta própria. Este é o BR-PT oficial da Apple.
+   *   O SVG oficial embute um PNG 2048x2048 (482 KB) para renderizar a 41px.
+   *   Fica como veio: reamostrar seria "alterar a arte". 1 request, cacheado.
+   *
+   * SPOTIFY — developer.spotify.com/documentation/design:
+   *   - largura mínima 70px em tela (a 26px de altura dá ~95px);
+   *   - espaço livre >= 1/2 da altura do logo (26px -> 13px);
+   *   - só as variantes oficiais (verde/preto/branco). Nunca recolorir.
+   *   O gap de 1rem (16px) atende Apple (4.1px) e Spotify (13px) ao mesmo tempo.
    */
   badge: {
-    apple: "/images/external/apple/Apple_Podcast_Listen_on_Badge_RGB_USGB-EN_CI_111825.svg",
-    appleAlt: "Listen on Apple Podcasts",
+    apple: "/images/external/apple/Apple_Podcast_Listen_on_Badge_RGB_BR-PT_CI_111825.svg",
+    appleAlt: "Ouça no Apple Podcasts",
     appleWidth: 129,
     appleHeight: 41,
+    spotify: "/images/external/spotify/Full_Logo_Green_RGB.svg",
+    spotifyAlt: "Spotify",
+    spotifyWidth: 95,
+    spotifyHeight: 26,
   },
   category: "Social Sciences",
 
