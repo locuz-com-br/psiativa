@@ -1,0 +1,247 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { PODCAST } from "../../config/podcast.config";
+import { podcastEpisodeSchema, breadcrumbSchema } from "../../lib/schema";
+
+export async function getStaticPaths() {
+  // hubOnly: raso demais para indexar (ep00) ou texto de terceiro (ep06).
+  // Esses continuam tocáveis no hub, mas sem página própria.
+  const all = (await getCollection("podcast", ({ data }) => !data.hubOnly)).sort(
+    (a, b) => a.data.publishedAt.valueOf() - b.data.publishedAt.valueOf(),
+  );
+  return all.map((ep, i) => ({
+    params: { slug: ep.id },
+    props: { ep, prev: all[i - 1] ?? null, next: all[i + 1] ?? null },
+  }));
+}
+
+const { ep, prev, next } = Astro.props;
+const { Content } = await render(ep);
+const path = `${PODCAST.basePath}${ep.id}/`;
+const published = ep.data.publishedAt.toLocaleDateString("pt-BR", {
+  day: "2-digit", month: "long", year: "numeric", timeZone: "UTC",
+});
+
+const schemas = [
+  podcastEpisodeSchema(
+    {
+      title: ep.data.title,
+      description: ep.data.description,
+      path,
+      publishedAt: ep.data.publishedAt,
+      durationISO: ep.data.durationISO,
+      audioUrl: ep.data.audioUrl,
+      episodeNumber: ep.data.episodeNumber,
+      guid: ep.data.guid,
+    },
+    { name: PODCAST.name, path: PODCAST.basePath },
+  ),
+  breadcrumbSchema([
+    { name: "Início", path: "/" },
+    { name: "Podcast", path: PODCAST.basePath },
+    { name: ep.data.title, path },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${ep.data.title} — Podcast ${PODCAST.name}`}
+  description={ep.data.description}
+  canonicalPath={path}
+  ogType="article"
+  image={PODCAST.cover}
+  schema={schemas}
+>
+  <article class="ep">
+    <header class="ep-header">
+      <div class="container ep-inner">
+        <a class="back-link" href={PODCAST.basePath}>← Podcast {PODCAST.name}</a>
+        <p class="ep-eyebrow">Episódio {String(ep.data.episodeNumber).padStart(2, "0")}</p>
+        <h1>{ep.data.title}</h1>
+        <p class="ep-meta">{published} · {ep.data.duration}</p>
+        <p class="ep-desc">{ep.data.description}</p>
+
+        <audio controls preload="none" src={ep.data.audioUrl}></audio>
+
+        <div class="ep-links">
+          <a href={PODCAST.apple} target="_blank" rel="noopener">Seguir no Apple Podcasts</a>
+          <a href={ep.data.spotifyUrl} target="_blank" rel="noopener">Ouvir no Spotify</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container ep-body">
+      <Content />
+    </div>
+
+    <div class="container">
+      <aside class="ep-host">
+        <p class="ep-eyebrow">Apresentado por</p>
+        <p class="ep-host-name">{PODCAST.host.name}</p>
+        <p class="ep-host-role">{PODCAST.host.role} · {PODCAST.host.crp}</p>
+        <div class="ep-host-links">
+          <a href={PODCAST.host.instagram} target="_blank" rel="noopener">Instagram</a>
+          <a href={PODCAST.host.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a href={PODCAST.host.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+          <a href={PODCAST.host.lattes} target="_blank" rel="noopener">Lattes</a>
+        </div>
+      </aside>
+
+      <nav class="ep-nav">
+        {prev ? (
+          <a class="ep-nav-link" href={`${PODCAST.basePath}${prev.id}/`}>
+            <span>Episódio anterior</span>{prev.data.title}
+          </a>
+        ) : <span />}
+        {next && (
+          <a class="ep-nav-link next" href={`${PODCAST.basePath}${next.id}/`}>
+            <span>Próximo episódio</span>{next.data.title}
+          </a>
+        )}
+      </nav>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .ep { background: var(--background); }
+  .ep-header {
+    padding: 8.5rem 0 2.5rem;
+    background: var(--background-subtle);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .ep-inner { max-width: 880px; }
+  .back-link {
+    display: inline-flex;
+    margin-bottom: 1.25rem;
+    color: var(--secondary);
+    font-family: var(--font-ui);
+    font-weight: 700;
+  }
+  .ep-eyebrow {
+    margin-bottom: 0.35rem;
+    color: var(--secondary);
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .ep-header h1 {
+    margin-bottom: 0.5rem;
+    color: var(--text-heading);
+    font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+    line-height: 1.13;
+  }
+  .ep-meta {
+    margin-bottom: 1.1rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .ep-desc {
+    max-width: 62ch;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1.06rem;
+    line-height: 1.7;
+  }
+  audio { width: 100%; margin-bottom: 1.1rem; }
+  .ep-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .ep-links a {
+    color: var(--secondary);
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .ep-body { max-width: 820px; padding-top: 2.75rem; padding-bottom: 2.5rem; }
+  :global(.ep-body h2) {
+    margin-bottom: 1.1rem;
+    color: var(--text-heading);
+    font-size: 1.5rem;
+    letter-spacing: 0;
+  }
+  :global(.ep-body p) {
+    margin-bottom: 1.3rem;
+    color: var(--text-secondary);
+    font-size: 1.06rem;
+    line-height: 1.8;
+  }
+  :global(.ep-body blockquote) {
+    margin: 0 0 2.25rem;
+    padding: 1.15rem 1.4rem;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    background: var(--background-subtle);
+  }
+  :global(.ep-body blockquote p) {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.97rem;
+    line-height: 1.65;
+  }
+
+  .ep-host {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 1.5rem 1.7rem;
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-card);
+    background: var(--background-subtle);
+  }
+  .ep-host-name { color: var(--text-heading); font-size: 1.2rem; font-weight: 700; }
+  .ep-host-role {
+    margin-bottom: 0.8rem;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: 0.93rem;
+    font-weight: 600;
+  }
+  .ep-host-links { display: flex; flex-wrap: wrap; gap: 1.1rem; }
+  .ep-host-links a {
+    color: var(--secondary);
+    font-family: var(--font-ui);
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .ep-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    max-width: 820px;
+    margin: 2rem auto 0;
+    padding-bottom: 5rem;
+  }
+  .ep-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    max-width: 20rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    color: var(--text-heading);
+    font-family: var(--font-ui);
+    font-weight: 700;
+    transition: var(--transition-fast);
+  }
+  .ep-nav-link.next { text-align: right; }
+  .ep-nav-link:hover { border-color: var(--color-border-hover); }
+  .ep-nav-link span {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+</style>
