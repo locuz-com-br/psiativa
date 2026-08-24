@@ -31,4 +31,23 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { pages, blog };
+const podcast = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/podcast' }),
+  schema: z.object({
+    title: z.string(),
+    episodeTitle: z.string(),
+    description: z.string(),
+    publishedAt: z.coerce.date(),
+    duration: z.string(),
+    durationISO: z.string(),
+    episodeNumber: z.number(),
+    audioUrl: z.string().url(),
+    spotifyUrl: z.string().url(),
+    guid: z.string(),
+    words: z.number(),
+    /** Curto demais / texto de terceiro: entra so no hub, sem pagina indexavel. */
+    hubOnly: z.boolean().default(false),
+  }),
+});
+
+export const collections = { pages, blog, podcast };

@@ -1,545 +1,1572 @@
 {
   "nav": {
-    "inicio": { "pt": "Início", "en": "Home" },
-    "sobre": { "pt": "Sobre", "en": "About" },
-    "funcionalidades": { "pt": "Como Funciona", "en": "How It Works" },
-    "depoimentos": { "pt": "Depoimentos", "en": "Testimonials" },
-    "resultados": { "pt": "Resultados", "en": "Results" },
-    "contato": { "pt": "Contato", "en": "Contact" },
-    "cta": { "pt": "Diagnóstico Gratuito", "en": "Free Diagnostic" }
+    "inicio": {
+      "pt": "Início",
+      "en": "Home"
+    },
+    "sobre": {
+      "pt": "Sobre",
+      "en": "About"
+    },
+    "funcionalidades": {
+      "pt": "Como Funciona",
+      "en": "How It Works"
+    },
+    "depoimentos": {
+      "pt": "Depoimentos",
+      "en": "Testimonials"
+    },
+    "resultados": {
+      "pt": "Resultados",
+      "en": "Results"
+    },
+    "contato": {
+      "pt": "Contato",
+      "en": "Contact"
+    },
+    "cta": {
+      "pt": "Diagnóstico Gratuito",
+      "en": "Free Diagnostic"
+    }
   },
-
   "hero": {
-    "tag_1": { "pt": "Psicologia", "en": "Psychology" },
-    "tag_2": { "pt": "Captação Ética", "en": "Ethical Acquisition" },
-    "tag_3": { "pt": "Agenda Previsível", "en": "Predictable Schedule" },
-    "title_1": { "pt": "Processo de captação", "en": "Patient acquisition process" },
-    "title_2": { "pt": "para clínicas de psicologia.", "en": "for psychology clinics." },
+    "tag_1": {
+      "pt": "Psicologia",
+      "en": "Psychology"
+    },
+    "tag_2": {
+      "pt": "Captação Ética",
+      "en": "Ethical Acquisition"
+    },
+    "tag_3": {
+      "pt": "Agenda Previsível",
+      "en": "Predictable Schedule"
+    },
+    "title_1": {
+      "pt": "Processo de captação",
+      "en": "Patient acquisition process"
+    },
+    "title_2": {
+      "pt": "para clínicas de psicologia.",
+      "en": "for psychology clinics."
+    },
     "subtitle": {
       "pt": "Sua clínica perde paciente entre o primeiro contato e a sessão confirmada, por falta de processo. A PsiAtiva fecha esse buraco com método clínico e sem pressão.",
       "en": "Your clinic loses patients between the first contact and the confirmed session, for lack of process. PsiAtiva closes that gap with clinical method and no pressure."
     },
-    "cta_primary": { "pt": "AGENDAR DIAGNÓSTICO", "en": "BOOK A DIAGNOSTIC" }
+    "cta_primary": {
+      "pt": "AGENDAR DIAGNÓSTICO",
+      "en": "BOOK A DIAGNOSTIC"
+    }
   },
-
   "partners": {
-    "title": { "pt": "Clínicas que confiam no processo", "en": "Clinics that trust the process" },
-    "impact_prefix": { "pt": "MAIS DE", "en": "MORE THAN" },
-    "impact_number": { "pt": "500 PACIENTES", "en": "500 PATIENTS" },
-    "impact_suffix": { "pt": "RECUPERADOS", "en": "RECOVERED" }
+    "title": {
+      "pt": "Clínicas que confiam no processo",
+      "en": "Clinics that trust the process"
+    },
+    "impact_prefix": {
+      "pt": "MAIS DE",
+      "en": "MORE THAN"
+    },
+    "impact_number": {
+      "pt": "500 PACIENTES",
+      "en": "500 PATIENTS"
+    },
+    "impact_suffix": {
+      "pt": "RECUPERADOS",
+      "en": "RECOVERED"
+    }
   },
-
   "about": {
-    "label": { "pt": "Por que a PsiAtiva?", "en": "Why PsiAtiva?" },
-    "title": { "pt": "Você não perde paciente por falta de competência. Perde no caminho entre o contato e a sessão.", "en": "You don't lose patients for lack of skill. You lose them on the way from contact to session." },
+    "label": {
+      "pt": "Por que a PsiAtiva?",
+      "en": "Why PsiAtiva?"
+    },
+    "title": {
+      "pt": "Você não perde paciente por falta de competência. Perde no caminho entre o contato e a sessão.",
+      "en": "You don't lose patients for lack of skill. You lose them on the way from contact to session."
+    },
     "desc": {
       "pt": "Todo mês, alguns pacientes somem entre a primeira mensagem e a sessão marcada. Esse trecho entre os dois pontos quase nunca tem dono na clínica. A PsiAtiva é a assessoria que cuida dele com método clínico e previsibilidade, sem descaracterizar o seu atendimento.",
       "en": "Every month, a few patients vanish between the first message and the booked session. That stretch between the two points rarely has an owner inside the clinic. PsiAtiva is the consultancy that takes care of it, with clinical method and predictability, without stripping away your practice's identity."
     },
-    "check_1": { "pt": "Captação estruturada do primeiro contato à confirmação", "en": "Structured acquisition, from first contact to confirmation" },
-    "check_2": { "pt": "Respeito à identidade do seu atendimento", "en": "Respect for your practice's identity" },
-    "check_3": { "pt": "Agenda mais previsível, sem depender só de indicação", "en": "A more predictable schedule, without relying on referrals alone" },
-    "check_4": { "pt": "Implementação acompanhada de perto, mês a mês", "en": "Hands-on implementation, followed month by month" },
-    "cta": { "pt": "Veja como funciona", "en": "See how it works" }
+    "check_1": {
+      "pt": "Captação estruturada do primeiro contato à confirmação",
+      "en": "Structured acquisition, from first contact to confirmation"
+    },
+    "check_2": {
+      "pt": "Respeito à identidade do seu atendimento",
+      "en": "Respect for your practice's identity"
+    },
+    "check_3": {
+      "pt": "Agenda mais previsível, sem depender só de indicação",
+      "en": "A more predictable schedule, without relying on referrals alone"
+    },
+    "check_4": {
+      "pt": "Implementação acompanhada de perto, mês a mês",
+      "en": "Hands-on implementation, followed month by month"
+    },
+    "cta": {
+      "pt": "Veja como funciona",
+      "en": "See how it works"
+    }
   },
-
   "features": {
-    "label": { "pt": "O que resolvemos", "en": "What we solve" },
-    "title_1": { "pt": "Três problemas.", "en": "Three problems." },
-    "title_2": { "pt": "Um processo.", "en": "One process." },
-    "f1_title": { "pt": "Agenda previsível", "en": "Predictable schedule" },
+    "label": {
+      "pt": "O que resolvemos",
+      "en": "What we solve"
+    },
+    "title_1": {
+      "pt": "Três problemas.",
+      "en": "Three problems."
+    },
+    "title_2": {
+      "pt": "Um processo.",
+      "en": "One process."
+    },
+    "f1_title": {
+      "pt": "Agenda previsível",
+      "en": "Predictable schedule"
+    },
     "f1_desc": {
       "pt": "Cada semana com buraco na agenda é dinheiro que não volta. O GAP, nosso Gerador de Agenda Previsível, organiza a captação para novos pacientes chegarem de forma constante, sem depender só de indicação.",
       "en": "Every week with a gap in the schedule is money that doesn't come back. The GAP, our Predictable Schedule Engine, organizes acquisition so new patients arrive steadily, without relying on referrals alone."
     },
-    "f2_title": { "pt": "Menos faltas e cancelamentos", "en": "Fewer no-shows and cancellations" },
+    "f2_title": {
+      "pt": "Menos faltas e cancelamentos",
+      "en": "Fewer no-shows and cancellations"
+    },
     "f2_desc": {
       "pt": "Paciente que marca e não aparece custa caro: o horário fica vazio e não volta. Nosso protocolo de confirmação em camadas reduz o no-show e segura a sua agenda.",
       "en": "A patient who books and doesn't show up costs you: the slot sits empty and never comes back. Our layered confirmation protocol cuts no-shows and holds your schedule together."
     },
-    "f3_title": { "pt": "Captação estruturada", "en": "Structured acquisition" },
+    "f3_title": {
+      "pt": "Captação estruturada",
+      "en": "Structured acquisition"
+    },
     "f3_desc": {
       "pt": "Todo dia chega contato no WhatsApp que pergunta o preço e some. A PsiAtiva instala scripts de acolhimento e confirmação que transformam esse interesse em sessão agendada, sem soar invasivo.",
       "en": "Every day a contact reaches your WhatsApp, asks the price, and disappears. PsiAtiva installs welcome and confirmation scripts that turn that interest into a booked session, without sounding intrusive."
     }
   },
-
   "testimonials": {
-    "label": { "pt": "Depoimentos", "en": "Testimonials" },
-    "title_1": { "pt": "O que dizem as", "en": "What" },
-    "title_2": { "pt": "clínicas parceiras", "en": "partner clinics say" },
+    "label": {
+      "pt": "Depoimentos",
+      "en": "Testimonials"
+    },
+    "title_1": {
+      "pt": "O que dizem as",
+      "en": "What"
+    },
+    "title_2": {
+      "pt": "clínicas parceiras",
+      "en": "partner clinics say"
+    },
     "t1_quote": {
       "pt": "Antes da PsiAtiva, minha agenda oscilava semana a semana. Hoje consigo planejar o mês com tranquilidade, e o processo respeita a forma como eu atendo.",
       "en": "Before PsiAtiva, my schedule swung from week to week. Now I can plan the month calmly, and the process respects the way I work."
     },
-    "t1_name": { "pt": "Dra. Marina Oliveira", "en": "Dr. Marina Oliveira" },
-    "t1_role": { "pt": "Psicóloga Clínica | Clínica Espaço Mente", "en": "Clinical Psychologist | Espaço Mente Clinic" },
+    "t1_name": {
+      "pt": "Dra. Marina Oliveira",
+      "en": "Dr. Marina Oliveira"
+    },
+    "t1_role": {
+      "pt": "Psicóloga Clínica | Clínica Espaço Mente",
+      "en": "Clinical Psychologist | Espaço Mente Clinic"
+    },
     "t2_quote": {
       "pt": "Eu tinha medo de que organizar a captação tirasse o cuidado do atendimento. Foi o contrário: hoje minha recepção acolhe melhor, e o paciente sente isso desde a primeira mensagem.",
       "en": "I was afraid that organizing acquisition would take the care out of how I practice. It was the opposite: now my front desk welcomes people better, and patients feel it from the very first message."
     },
-    "t2_name": { "pt": "Dra. Fernanda Lopes", "en": "Dr. Fernanda Lopes" },
-    "t2_role": { "pt": "Diretora Clínica | Instituto Psicológico Vida", "en": "Clinical Director | Instituto Psicológico Vida" },
+    "t2_name": {
+      "pt": "Dra. Fernanda Lopes",
+      "en": "Dr. Fernanda Lopes"
+    },
+    "t2_role": {
+      "pt": "Diretora Clínica | Instituto Psicológico Vida",
+      "en": "Clinical Director | Instituto Psicológico Vida"
+    },
     "t3_quote": {
       "pt": "O no-show era meu maior problema. Com o protocolo de confirmação da PsiAtiva, cortei as faltas pela metade em dois meses. É simples, e minha equipe adotou sem resistência.",
       "en": "No-shows were my biggest problem. With PsiAtiva's confirmation protocol, I cut absences in half in two months. It's simple, and my team adopted it without resistance."
     },
-    "t3_name": { "pt": "Dr. Ricardo Almeida", "en": "Dr. Ricardo Almeida" },
-    "t3_role": { "pt": "Psicólogo | Clínica Equilíbrio", "en": "Psychologist | Clínica Equilíbrio" },
+    "t3_name": {
+      "pt": "Dr. Ricardo Almeida",
+      "en": "Dr. Ricardo Almeida"
+    },
+    "t3_role": {
+      "pt": "Psicólogo | Clínica Equilíbrio",
+      "en": "Psychologist | Clínica Equilíbrio"
+    },
     "t4_quote": {
       "pt": "Já tinha contratado ajuda antes e me senti empurrando uma coisa que não era a minha cara. Com a PsiAtiva foi diferente: construímos juntos um processo com a identidade da minha clínica.",
       "en": "I had hired help before and felt like I was pushing something that wasn't me. With PsiAtiva it was different: we built a process together that carries my clinic's identity."
     },
-    "t4_name": { "pt": "Dra. Juliana Martins", "en": "Dr. Juliana Martins" },
-    "t4_role": { "pt": "Psicóloga Infantil | Núcleo Crescer", "en": "Child Psychologist | Núcleo Crescer" }
+    "t4_name": {
+      "pt": "Dra. Juliana Martins",
+      "en": "Dr. Juliana Martins"
+    },
+    "t4_role": {
+      "pt": "Psicóloga Infantil | Núcleo Crescer",
+      "en": "Child Psychologist | Núcleo Crescer"
+    }
   },
-
   "func": {
-    "label": { "pt": "Como Funciona", "en": "How It Works" },
-    "title_1": { "pt": "O GAP em", "en": "The GAP in" },
-    "title_2": { "pt": "5 etapas", "en": "5 steps" },
-    "c1_title": { "pt": "Diagnóstico", "en": "Diagnostic" },
+    "label": {
+      "pt": "Como Funciona",
+      "en": "How It Works"
+    },
+    "title_1": {
+      "pt": "O GAP em",
+      "en": "The GAP in"
+    },
+    "title_2": {
+      "pt": "5 etapas",
+      "en": "5 steps"
+    },
+    "c1_title": {
+      "pt": "Diagnóstico",
+      "en": "Diagnostic"
+    },
     "c1_desc": {
       "pt": "Mapeamos onde sua clínica perde paciente, do Google ao WhatsApp. Os gargalos entre o primeiro contato e a sessão confirmada ficam claros.",
       "en": "We map where your clinic loses patients, from Google to WhatsApp. The bottlenecks between first contact and confirmed session become clear."
     },
-    "c2_title": { "pt": "Ativação", "en": "Activation" },
+    "c2_title": {
+      "pt": "Ativação",
+      "en": "Activation"
+    },
     "c2_desc": {
       "pt": "Ativamos sua presença no Google e publicamos uma página de captação profissional. Sua recepção recebe scripts de acolhimento prontos para usar.",
       "en": "We activate your Google presence and publish a professional acquisition page. Your front desk gets welcome scripts ready to use."
     },
-    "c3_title": { "pt": "Captação", "en": "Acquisition" },
+    "c3_title": {
+      "pt": "Captação",
+      "en": "Acquisition"
+    },
     "c3_desc": {
       "pt": "Estruturamos a captação por intenção: quem procura ajuda agora encontra a sua clínica primeiro. A indicação deixa de ser o seu único canal.",
       "en": "We structure intent-based acquisition: people looking for help right now find your clinic first. Referrals stop being your only channel."
     },
-    "c4_title": { "pt": "Rotina", "en": "Routine" },
+    "c4_title": {
+      "pt": "Rotina",
+      "en": "Routine"
+    },
     "c4_desc": {
       "pt": "Implementamos confirmação em camadas e reativação de contatos. O acompanhamento roda mesmo quando você está em sessão.",
       "en": "We set up layered confirmations and contact reactivation. The follow-up runs even while you're in session."
     },
-    "c5_title": { "pt": "Otimização", "en": "Optimization" },
+    "c5_title": {
+      "pt": "Otimização",
+      "en": "Optimization"
+    },
     "c5_desc": {
       "pt": "Acompanhamos os números e ajustamos o processo mês a mês. Você vê exatamente quantos contatos chegam, agendam e comparecem.",
       "en": "We track the numbers and adjust the process month by month. You see exactly how many contacts arrive, schedule, and show up."
     }
   },
-
   "integrations": {
-    "label": { "pt": "Integrações", "en": "Integrations" },
-    "title_1": { "pt": "Conecta-se com os", "en": "Connects with the" },
-    "title_2": { "pt": "sistemas que você já usa", "en": "systems you already use" },
+    "label": {
+      "pt": "Integrações",
+      "en": "Integrations"
+    },
+    "title_1": {
+      "pt": "Conecta-se com os",
+      "en": "Connects with the"
+    },
+    "title_2": {
+      "pt": "sistemas que você já usa",
+      "en": "systems you already use"
+    },
     "desc": {
       "pt": "Integração com os sistemas que sua clínica já utiliza no dia a dia.",
       "en": "Integration with the systems your clinic already uses daily."
     }
   },
-
   "cta": {
-    "label": { "pt": "Pronta para ativar sua clínica?", "en": "Ready to activate your clinic?" },
-    "title_1": { "pt": "Cada semana sem processo ", "en": "Every week without process " },
-    "title_2": { "pt": "é paciente que não volta", "en": "is a patient who won't return" },
-    "btn": { "pt": "Agendar Diagnóstico pelo WhatsApp", "en": "Book a Diagnostic via WhatsApp" },
-    "btn_secondary": { "pt": "Preencher Formulário", "en": "Fill Out Form" }
+    "label": {
+      "pt": "Pronta para ativar sua clínica?",
+      "en": "Ready to activate your clinic?"
+    },
+    "title_1": {
+      "pt": "Cada semana sem processo ",
+      "en": "Every week without process "
+    },
+    "title_2": {
+      "pt": "é paciente que não volta",
+      "en": "is a patient who won't return"
+    },
+    "btn": {
+      "pt": "Agendar Diagnóstico pelo WhatsApp",
+      "en": "Book a Diagnostic via WhatsApp"
+    },
+    "btn_secondary": {
+      "pt": "Preencher Formulário",
+      "en": "Fill Out Form"
+    }
   },
-
   "calcCta": {
-    "label": { "pt": "Calculadora gratuita", "en": "Free calculator" },
-    "title": { "pt": "Quanto a agenda vazia custa à sua clínica?", "en": "How much does an empty schedule cost your clinic?" },
-    "desc": { "pt": "Faça a conta com os seus números: valor da sessão, retenção e quantos pacientes novos entram hoje. Leva 1 minuto, sem cadastro.", "en": "Run the numbers with your own data: session price, retention, and how many new patients arrive today. Takes 1 minute, no sign-up." },
-    "btn": { "pt": "Abrir a calculadora", "en": "Open the calculator" }
+    "label": {
+      "pt": "Calculadora gratuita",
+      "en": "Free calculator"
+    },
+    "title": {
+      "pt": "Quanto a agenda vazia custa à sua clínica?",
+      "en": "How much does an empty schedule cost your clinic?"
+    },
+    "desc": {
+      "pt": "Faça a conta com os seus números: valor da sessão, retenção e quantos pacientes novos entram hoje. Leva 1 minuto, sem cadastro.",
+      "en": "Run the numbers with your own data: session price, retention, and how many new patients arrive today. Takes 1 minute, no sign-up."
+    },
+    "btn": {
+      "pt": "Abrir a calculadora",
+      "en": "Open the calculator"
+    }
   },
-
   "quizCta": {
-    "label": { "pt": "Diagnóstico gratuito", "en": "Free diagnostic" },
-    "title": { "pt": "Onde a agenda da sua clínica está vazando?", "en": "Where is your clinic's schedule leaking?" },
-    "desc": { "pt": "Responda 6 perguntas sobre o seu dia a dia e descubra em 2 minutos qual buraco esvazia sua agenda. De graça, sem cadastro.", "en": "Answer 6 questions about your day-to-day and find out in 2 minutes which gap is draining your schedule. Free, no sign-up." },
-    "btn": { "pt": "Fazer o diagnóstico", "en": "Take the diagnostic" }
+    "label": {
+      "pt": "Diagnóstico gratuito",
+      "en": "Free diagnostic"
+    },
+    "title": {
+      "pt": "Onde a agenda da sua clínica está vazando?",
+      "en": "Where is your clinic's schedule leaking?"
+    },
+    "desc": {
+      "pt": "Responda 6 perguntas sobre o seu dia a dia e descubra em 2 minutos qual buraco esvazia sua agenda. De graça, sem cadastro.",
+      "en": "Answer 6 questions about your day-to-day and find out in 2 minutes which gap is draining your schedule. Free, no sign-up."
+    },
+    "btn": {
+      "pt": "Fazer o diagnóstico",
+      "en": "Take the diagnostic"
+    }
   },
-
   "auditSiteCta": {
-    "label": { "pt": "Ferramenta gratuita", "en": "Free tool" },
-    "title": { "pt": "O que a paciente vê no site da sua clínica?", "en": "What does a patient see on your clinic’s site?" },
-    "desc": { "pt": "A paciente lê o site por alguns segundos e decide se chama a recepção ou fecha a aba. O raio-x lê os 5 pontos que ela olha e mostra qual está custando agenda. Leva 1 minuto, sem cadastro.", "en": "A patient reads the site for a few seconds and decides whether to contact the front desk or close the tab. The X-ray reads the 5 points she looks at and shows which one is costing you schedule. Takes 1 minute, no sign-up." },
-    "btn": { "pt": "Fazer o raio-x do site", "en": "Run the site X-ray" }
+    "label": {
+      "pt": "Ferramenta gratuita",
+      "en": "Free tool"
+    },
+    "title": {
+      "pt": "O que a paciente vê no site da sua clínica?",
+      "en": "What does a patient see on your clinic’s site?"
+    },
+    "desc": {
+      "pt": "A paciente lê o site por alguns segundos e decide se chama a recepção ou fecha a aba. O raio-x lê os 5 pontos que ela olha e mostra qual está custando agenda. Leva 1 minuto, sem cadastro.",
+      "en": "A patient reads the site for a few seconds and decides whether to contact the front desk or close the tab. The X-ray reads the 5 points she looks at and shows which one is costing you schedule. Takes 1 minute, no sign-up."
+    },
+    "btn": {
+      "pt": "Fazer o raio-x do site",
+      "en": "Run the site X-ray"
+    }
   },
   "cases": {
-    "label": { "pt": "Resultados", "en": "Results" },
-    "title_1": { "pt": "Números que", "en": "Numbers that" },
-    "title_2": { "pt": "falam por si", "en": "speak for themselves" },
-    "stat_1_value": { "pt": "-52%", "en": "-52%" },
-    "stat_1_desc": { "pt": "Redução média de faltas e cancelamentos nas clínicas parceiras", "en": "Average reduction in no-shows and cancellations in partner clinics" },
-    "stat_2_value": { "pt": "+3x", "en": "+3x" },
-    "stat_2_desc": { "pt": "Mais pacientes agendados pelo WhatsApp com processo estruturado", "en": "More patients scheduled via WhatsApp with a structured process" },
-    "stat_3_value": { "pt": "14 dias", "en": "14 days" },
-    "stat_3_desc": { "pt": "Para ver os primeiros resultados após a ativação do processo", "en": "To see the first results after the process goes live" },
-    "stat_4_value": { "pt": "93%", "en": "93%" },
-    "stat_4_desc": { "pt": "Das clínicas renovam a parceria após o primeiro ciclo", "en": "Of clinics renew the partnership after the first cycle" },
-    "cta": { "pt": "AGENDAR DIAGNÓSTICO", "en": "BOOK A DIAGNOSTIC" }
+    "label": {
+      "pt": "Resultados",
+      "en": "Results"
+    },
+    "title_1": {
+      "pt": "Números que",
+      "en": "Numbers that"
+    },
+    "title_2": {
+      "pt": "falam por si",
+      "en": "speak for themselves"
+    },
+    "stat_1_value": {
+      "pt": "-52%",
+      "en": "-52%"
+    },
+    "stat_1_desc": {
+      "pt": "Redução média de faltas e cancelamentos nas clínicas parceiras",
+      "en": "Average reduction in no-shows and cancellations in partner clinics"
+    },
+    "stat_2_value": {
+      "pt": "+3x",
+      "en": "+3x"
+    },
+    "stat_2_desc": {
+      "pt": "Mais pacientes agendados pelo WhatsApp com processo estruturado",
+      "en": "More patients scheduled via WhatsApp with a structured process"
+    },
+    "stat_3_value": {
+      "pt": "14 dias",
+      "en": "14 days"
+    },
+    "stat_3_desc": {
+      "pt": "Para ver os primeiros resultados após a ativação do processo",
+      "en": "To see the first results after the process goes live"
+    },
+    "stat_4_value": {
+      "pt": "93%",
+      "en": "93%"
+    },
+    "stat_4_desc": {
+      "pt": "Das clínicas renovam a parceria após o primeiro ciclo",
+      "en": "Of clinics renew the partnership after the first cycle"
+    },
+    "cta": {
+      "pt": "AGENDAR DIAGNÓSTICO",
+      "en": "BOOK A DIAGNOSTIC"
+    }
   },
-
   "faq": {
-    "label": { "pt": "Dúvidas Frequentes", "en": "Frequently Asked Questions" },
-    "title_1": { "pt": "Perguntas que", "en": "Questions" },
-    "title_2": { "pt": "você provavelmente tem", "en": "you probably have" },
-    "q1": { "pt": "Isso não vai parecer antiético para meus pacientes?", "en": "Won't this seem unethical to my patients?" },
+    "label": {
+      "pt": "Dúvidas Frequentes",
+      "en": "Frequently Asked Questions"
+    },
+    "title_1": {
+      "pt": "Perguntas que",
+      "en": "Questions"
+    },
+    "title_2": {
+      "pt": "você provavelmente tem",
+      "en": "you probably have"
+    },
+    "q1": {
+      "pt": "Isso não vai parecer antiético para meus pacientes?",
+      "en": "Won't this seem unethical to my patients?"
+    },
     "a1": {
       "pt": "Não. O que fazemos é organizar o processo entre o primeiro contato e a sessão confirmada. É presença com critério, sem pressão. O paciente encontra um caminho mais claro para falar com a clínica.",
       "en": "No. What we do is organize the process between first contact and confirmed session. It's presence with judgment, without pressure. The patient finds a clearer path to reach the clinic."
     },
-    "q2": { "pt": "Já tentei com uma assessoria genérica e não funcionou. Por que seria diferente?", "en": "I tried a generic advisory service before and it didn't work. Why would this be different?" },
+    "q2": {
+      "pt": "Já tentei com uma assessoria genérica e não funcionou. Por que seria diferente?",
+      "en": "I tried a generic advisory service before and it didn't work. Why would this be different?"
+    },
     "a2": {
       "pt": "A PsiAtiva trabalha o processo completo: primeira resposta, confirmação em camadas e acompanhamento dos números da agenda. Em muitas clínicas, o gargalo está depois da visibilidade: no que acontece quando o paciente faz contato.",
       "en": "PsiAtiva works the full process: first reply, layered confirmation, and tracking of your schedule numbers. In many clinics, the bottleneck sits past visibility: in what happens once the patient makes contact."
     },
-    "q3": { "pt": "Minha recepcionista não vai dar conta de mais coisas.", "en": "My receptionist won't be able to handle more tasks." },
+    "q3": {
+      "pt": "Minha recepcionista não vai dar conta de mais coisas.",
+      "en": "My receptionist won't be able to handle more tasks."
+    },
     "a3": {
       "pt": "O objetivo é justamente simplificar a rotina da recepção. Com scripts prontos e confirmação padronizada, ela ganha um roteiro para seguir e trabalha com menos improviso e menos sobrecarga.",
       "en": "The goal is precisely to simplify the reception routine. With ready-made scripts and standardized confirmations, your receptionist gets a clear playbook and works with less improvisation and less overload."
     },
-    "q4": { "pt": "Quando começo a perceber movimento?", "en": "When do I start noticing movement?" },
+    "q4": {
+      "pt": "Quando começo a perceber movimento?",
+      "en": "When do I start noticing movement?"
+    },
     "a4": {
       "pt": "A primeira mudança costuma aparecer na clareza do atendimento: menos improviso, mais registro e mais previsibilidade sobre onde a agenda trava. A partir daí, a evolução depende do cenário da clínica e dos canais ativos.",
       "en": "The first change usually shows up in the clarity of service: less improvisation, more records, and more visibility into where the schedule gets stuck. From there, progress depends on the clinic's context and active channels."
     },
-    "q5": { "pt": "E se minha agenda já está cheia em alguns horários?", "en": "What if my schedule is already full at certain times?" },
+    "q5": {
+      "pt": "E se minha agenda já está cheia em alguns horários?",
+      "en": "What if my schedule is already full at certain times?"
+    },
     "a5": {
       "pt": "Ótimo. Isso mostra que o seu desafio é de previsibilidade: manter a agenda constante. O GAP organiza a captação para preencher os buracos e reduzir a oscilação da agenda, no seu ritmo.",
       "en": "Great. That shows your challenge is predictability: keeping the schedule steady. The GAP organizes acquisition to fill the gaps and reduce the swings in your schedule, at your own pace."
     },
-    "q6": { "pt": "Preciso criar conteúdo nas redes sociais?", "en": "Do I need to create social media content?" },
+    "q6": {
+      "pt": "Preciso criar conteúdo nas redes sociais?",
+      "en": "Do I need to create social media content?"
+    },
     "a6": {
       "pt": "É opcional. A PsiAtiva trabalha com captação por intenção: o paciente que já está procurando ajuda agora. Rede social funciona como complemento, e o processo roda mesmo sem post toda semana.",
       "en": "It's optional. PsiAtiva works with intent-based acquisition: the patient who is already looking for help right now. Social media works as a complement, and the process runs even without posting every week."
     },
-    "q7": { "pt": "Qual o investimento?", "en": "What's the investment?" },
+    "q7": {
+      "pt": "Qual o investimento?",
+      "en": "What's the investment?"
+    },
     "a7": {
       "pt": "Depende do momento da sua clínica e do tamanho do buraco entre contato e sessão confirmada. O caminho certo é conversar primeiro, mapear a situação e entender qual passo faz sentido antes de falar de proposta.",
       "en": "It depends on your clinic's current moment and the size of the gap between contact and confirmed session. The right path is to talk first, map the situation, and understand which step makes sense before discussing a proposal."
     }
   },
-
   "contact": {
-    "label": { "pt": "Contato", "en": "Contact" },
-    "title_1": { "pt": "Vamos conversar", "en": "Let's talk" },
-    "title_2": { "pt": "sobre sua clínica", "en": "about your clinic" },
+    "label": {
+      "pt": "Contato",
+      "en": "Contact"
+    },
+    "title_1": {
+      "pt": "Vamos conversar",
+      "en": "Let's talk"
+    },
+    "title_2": {
+      "pt": "sobre sua clínica",
+      "en": "about your clinic"
+    },
     "desc": {
       "pt": "Agende um diagnóstico gratuito de 30 minutos. A gente mapeia onde sua clínica perde paciente e mostra o que muda quando existe processo.",
       "en": "Schedule a free 30-minute diagnostic. We map where your clinic loses patients and show what changes once there's a process."
     },
-    "email_label": { "pt": "E-mail", "en": "Email" },
-    "whatsapp_label": { "pt": "WhatsApp", "en": "WhatsApp" },
-    "hours_label": { "pt": "Atendimento", "en": "Hours" },
-    "hours_value": { "pt": "Seg a Sex, das 9h às 18h", "en": "Mon to Fri, 9am to 6pm" },
-    "form_name": { "pt": "Nome *", "en": "Name *" },
-    "form_name_placeholder": { "pt": "Seu nome completo", "en": "Your full name" },
-    "form_email": { "pt": "E-mail *", "en": "Email *" },
-    "form_email_placeholder": { "pt": "seu@email.com", "en": "your@email.com" },
-    "form_phone": { "pt": "Telefone", "en": "Phone" },
-    "form_phone_placeholder": { "pt": "(11) 99999-9999", "en": "+1 (555) 000-0000" },
-    "form_company": { "pt": "Nome da Clínica", "en": "Clinic Name" },
-    "form_company_placeholder": { "pt": "Nome da sua clínica ou consultório", "en": "Your clinic or practice name" },
-    "form_message": { "pt": "Mensagem *", "en": "Message *" },
-    "form_message_placeholder": { "pt": "Conte um pouco sobre o momento da sua clínica...", "en": "Tell us about your clinic's current situation..." },
-    "form_captcha_required": { "pt": "Por favor, resolva o captcha de segurança antes de enviar.", "en": "Please complete the security captcha before sending." },
-    "form_submit": { "pt": "Enviar Mensagem →", "en": "Send Message →" },
-    "form_sending": { "pt": "Enviando...", "en": "Sending..." },
-    "form_success": { "pt": "Mensagem enviada! Retornaremos em até 24h.", "en": "Message sent! We'll respond within 24h." },
-    "form_error": { "pt": "Algo deu errado. Por favor, tente novamente.", "en": "Something went wrong. Please try again." }
-  },
-
-  "footer": {
-    "tagline": { "pt": "Captação ética e previsível para clínicas de psicologia.", "en": "Ethical and predictable patient acquisition for psychology clinics." },
-    "col_product": { "pt": "Processo", "en": "Process" },
-    "col_company": { "pt": "PsiAtiva", "en": "PsiAtiva" },
-    "col_resources": { "pt": "Recursos", "en": "Resources" },
-    "link_features": { "pt": "Como Funciona", "en": "How It Works" },
-    "link_integrations": { "pt": "O GAP", "en": "The GAP" },
-    "link_cases": { "pt": "Resultados", "en": "Results" },
-    "link_about": { "pt": "Sobre", "en": "About" },
-    "link_testimonials": { "pt": "Depoimentos", "en": "Testimonials" },
-    "link_contact": { "pt": "Contato", "en": "Contact" },
-    "link_blog": { "pt": "Blog", "en": "Blog" },
-    "link_terms": { "pt": "Termos de Uso", "en": "Terms of Use" },
-    "link_privacy": { "pt": "Privacidade", "en": "Privacy" },
-    "copyright": { "pt": "Todos os direitos reservados.", "en": "All rights reserved." }
-  },
-
-  "calculadora": {
-    "meta": {
-      "title": { "pt": "Calculadora: quanto a agenda vazia custa ao psicólogo | PsiAtiva", "en": "Calculator: what an empty schedule costs a psychologist | PsiAtiva" },
-      "description": { "pt": "Simule, com os seus próprios números, quanto sua agenda inconstante deixa de faturar por mês, e o que muda com um processo de captação. Projeção baseada nos seus dados.", "en": "See, with your own numbers, how much your inconsistent schedule leaves on the table each month, and what changes with a patient-acquisition process. A projection based on your data." }
+    "email_label": {
+      "pt": "E-mail",
+      "en": "Email"
     },
-    "hero": {
-      "tag": { "pt": "Ferramenta gratuita", "en": "Free tool" },
-      "h1_line1": { "pt": "Quanto a agenda vazia custa ao seu consultório?", "en": "What does an empty schedule cost your practice?" },
-      "h1_accent": { "pt": "Descubra com os seus números.", "en": "Find out with your own numbers." },
-      "sub": { "pt": "Mês bom e mês ruim, sem conseguir prever. Quando a agenda depende de quando alguém indica, falta constância para planejar o mês.", "en": "A good month, then a bad one, with no way to see it coming. When your schedule depends on when someone refers you, there is no steadiness to plan the month around." },
-      "tldr": { "pt": "Uma agenda inconstante custa, em faturamento, o que poderia entrar de pacientes novos retidos ao longo do ciclo. Esta calculadora usa o seu ticket, a sua retenção e quantas entradas você já tem hoje para projetar, com os seus números, quanto fica na mesa a cada mês sem um processo de captação.", "en": "An inconsistent schedule costs you, in revenue, what new retained patients would bring in over the cycle. This calculator uses your session price, your retention and how many new patients you already get today to project, with your own numbers, how much is left on the table each month without an acquisition process." }
+    "whatsapp_label": {
+      "pt": "WhatsApp",
+      "en": "WhatsApp"
     },
-    "content": {
-      "h2_1": { "pt": "Como calcular quanto você deixa de faturar com a agenda vazia?", "en": "How do you calculate what an empty schedule costs you in revenue?" },
-      "p_1": { "pt": "Some o faturamento que entraria se cada mês trouxesse alguns pacientes novos que continuam com você por vários meses. A conta certa acompanha esse acúmulo de quem entra e fica ao longo do tempo. A diferença entre o seu ritmo de hoje e um ritmo com captação ativa é o que fica na mesa.", "en": "Add up the revenue that would come in if every month brought a few new patients who stay with you for several months. The right math follows that build-up of who comes in and stays over time. The gap between your pace today and a pace with active acquisition is what gets left on the table." },
-      "h2_2": { "pt": "Por que \"pacientes × sessões\" subestima? O modelo de coorte", "en": "Why does \"patients × sessions\" underestimate? The cohort model" },
-      "p_2_html": { "pt": "Multiplicar pacientes novos × ticket × meses trata cada paciente como se viesse uma vez e sumisse. Na psicologia, quem entra costuma continuar por vários meses. O jeito honesto de projetar é por <strong>coorte</strong>: a cada mês entra um grupo novo de pacientes que se soma aos que já estão em acompanhamento, ponderado pela retenção. Por isso a projeção aparece como uma <strong>banda</strong>: o piso conta cada paciente uma única vez; o teto considera todos ficando o ciclo inteiro; e o número real fica entre os dois, posicionado pela retenção que você ajusta. Com retenção alta, sua projeção se aproxima do teto. Com retenção baixa, do piso. A calculadora faz essa conta com os seus números, sem usar média de mercado.", "en": "Multiplying new patients × session price × months treats every patient as if they came once and vanished. In psychology, the people who come in usually stay for several months. The honest way to project is by <strong>cohort</strong>: every month a new group of patients comes in and adds to the ones already in treatment, weighted by retention. That is why the projection shows up as a <strong>band</strong>: the floor counts each patient only once; the ceiling assumes everyone stays the whole cycle; and the real number sits between the two, placed by the retention you set. With high retention, your projection moves toward the ceiling. With low retention, toward the floor. The calculator runs this math with your own numbers, without using a market average." },
-      "h2_3": { "pt": "Com método vs. sem método: o que muda no seu cenário?", "en": "With a method vs. without one: what changes in your scenario?" },
-      "p_3": { "pt": "A curva de baixo usa as entradas que você já tem hoje, normalmente poucas e dependentes de indicação. A de cima usa um cenário com captação ativa, que você ajusta. O espaço entre as duas é o faturamento que poderia estar entrando com constância. Se as duas curvas ficam coladas, a ferramenta te diz: a sua conta já está boa.", "en": "The lower curve uses the new patients you already get today, usually few and dependent on referrals. The upper one uses a scenario with active acquisition, which you adjust. The space between the two is the revenue that could be coming in steadily. If the two curves sit right on top of each other, the tool tells you so: your math already works." },
-      "h2_4": { "pt": "Quanto custa capturar esse faturamento?", "en": "How much does it cost to capture that revenue?" },
-      "p_4": { "pt": "Depende do seu perfil e do nível de estrutura. A leitura completa (investimento a partir de um valor, verba de mídia e o retorno sobre o seu cenário) aparece quando você deixa o contato. O valor exato e as formas de pagamento saem de uma conversa, no seu momento.", "en": "It depends on your profile and your level of structure. The full read (investment starting from a figure, media budget and the return on your scenario) appears once you leave your contact. The exact figure and payment terms come out of a conversation, in your own time." },
-      "h2_5": { "pt": "Isso é garantia de faturamento?", "en": "Is this a revenue guarantee?" },
-      "p_5_html": { "pt": "Não. A calculadora projeta a partir dos seus dados: o seu ticket, a sua retenção, as suas entradas. <strong>A conta é sua, não nossa.</strong> Se a sua projeção sem um processo já é boa, a ferramenta mostra isso e você não precisa da gente.", "en": "No. The calculator projects from your data: your session price, your retention, your new patients. <strong>The math is yours, not ours.</strong> If your projection without a process is already good, the tool shows that and you don't need us." }
+    "hours_label": {
+      "pt": "Atendimento",
+      "en": "Hours"
     },
-    "faq": {
-      "title": { "pt": "Perguntas frequentes", "en": "Frequently asked questions" },
-      "items": [
-        { "q": { "pt": "A calculadora promete que vou faturar isso?", "en": "Does the calculator promise I'll make this much?" }, "a": { "pt": "Não. Ela projeta a partir dos seus números: ticket, sessões, entradas atuais e retenção. A meta de verdade é definida junto, numa conversa.", "en": "No. It projects from your numbers: session price, sessions, current new patients and retention. The real target is set together, in a conversation." } },
-        { "q": { "pt": "De onde vêm os valores?", "en": "Where do the numbers come from?" }, "a": { "pt": "Dos seus: o valor que você cobra por sessão, quantas sessões por mês, quantos pacientes novos entram hoje e por quanto tempo eles continuam com você.", "en": "From yours: the price you charge per session, how many sessions per month, how many new patients come in today and how long they stay with you." } },
-        { "q": { "pt": "Preciso pagar para usar?", "en": "Do I have to pay to use it?" }, "a": { "pt": "Não. A calculadora é aberta e gratuita.", "en": "No. The calculator is open and free." } },
-        { "q": { "pt": "Serve para clínica também?", "en": "Does it work for a clinic too?" }, "a": { "pt": "Sim. Troque o perfil no topo da ferramenta. Mas o conteúdo aqui fala com quem atende sozinha, a psicóloga de consultório solo.", "en": "Yes. Switch the profile at the top of the tool. But the content here speaks to those who practice on their own, the solo-practice psychologist." } },
-        { "q": { "pt": "E se a minha conta já estiver boa?", "en": "And what if my math is already good?" }, "a": { "pt": "A ferramenta mostra isso. Se a sua projeção sem um processo de captação já é boa, você não precisa de processo agora, e a gente prefere te dizer isso.", "en": "The tool shows that. If your projection without an acquisition process is already good, you don't need a process right now, and we'd rather tell you so." } }
-      ]
+    "hours_value": {
+      "pt": "Seg a Sex, das 9h às 18h",
+      "en": "Mon to Fri, 9am to 6pm"
     },
-    "related_html": { "pt": "Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada? <a href=\"/\">Veja como funciona o processo</a>. E se o site for parte do problema, comece pela <a href=\"/analise-de-site-para-psicologo/\">leitura do seu site</a>.", "en": "Want to understand how PsiAtiva structures intent-based acquisition, from first contact to confirmed session? <a href=\"/\">See how the process works</a>. And if the site is part of the problem, start with the <a href=\"/analise-de-site-para-psicologo/\">read of your site</a>." },
-    "cta": {
-      "title": { "pt": "Primeiro passo: uma conversa. Só isso.", "en": "First step: a conversation. That's it." },
-      "desc": { "pt": "Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.", "en": "No strings attached. We look at your scenario and tell you honestly whether a process makes sense right now." },
-      "btn": { "pt": "AGENDAR DIAGNÓSTICO", "en": "BOOK A DIAGNOSTIC" }
+    "form_name": {
+      "pt": "Nome *",
+      "en": "Name *"
+    },
+    "form_name_placeholder": {
+      "pt": "Seu nome completo",
+      "en": "Your full name"
+    },
+    "form_email": {
+      "pt": "E-mail *",
+      "en": "Email *"
+    },
+    "form_email_placeholder": {
+      "pt": "seu@email.com",
+      "en": "your@email.com"
+    },
+    "form_phone": {
+      "pt": "Telefone",
+      "en": "Phone"
+    },
+    "form_phone_placeholder": {
+      "pt": "(11) 99999-9999",
+      "en": "+1 (555) 000-0000"
+    },
+    "form_company": {
+      "pt": "Nome da Clínica",
+      "en": "Clinic Name"
+    },
+    "form_company_placeholder": {
+      "pt": "Nome da sua clínica ou consultório",
+      "en": "Your clinic or practice name"
+    },
+    "form_message": {
+      "pt": "Mensagem *",
+      "en": "Message *"
+    },
+    "form_message_placeholder": {
+      "pt": "Conte um pouco sobre o momento da sua clínica...",
+      "en": "Tell us about your clinic's current situation..."
+    },
+    "form_captcha_required": {
+      "pt": "Por favor, resolva o captcha de segurança antes de enviar.",
+      "en": "Please complete the security captcha before sending."
+    },
+    "form_submit": {
+      "pt": "Enviar Mensagem →",
+      "en": "Send Message →"
+    },
+    "form_sending": {
+      "pt": "Enviando...",
+      "en": "Sending..."
+    },
+    "form_success": {
+      "pt": "Mensagem enviada! Retornaremos em até 24h.",
+      "en": "Message sent! We'll respond within 24h."
+    },
+    "form_error": {
+      "pt": "Algo deu errado. Por favor, tente novamente.",
+      "en": "Something went wrong. Please try again."
     }
   },
-
-  "raioX": {
-    "pov": { "pt": "O seu site não precisa de depoimento para transmitir confiança. Precisa do que dá para verificar: CRP, formação, abordagem e um caminho claro para te chamar.", "en": "Your site does not need testimonials to build trust. It needs what can be verified: your license number, training, approach, and a clear way to reach you." },
-    "related_html": { "pt": "Antes de a paciente chegar no seu site, ela precisa te encontrar: veja <a href=\"/blog/aparecer-no-google-psicologa/\">como aparecer no Google como psicóloga</a>. Se o site já está de pé e a agenda segue irregular, o quiz ajuda a <a href=\"/quiz/\">descobrir onde a agenda está vazando</a>. E para ver o processo inteiro, <a href=\"/\">como a PsiAtiva estrutura a captação por intenção</a>.", "en": "Before a patient reaches your site, she has to find you: see <a href=\"/blog/aparecer-no-google-psicologa/\">how to show up on Google as a psychologist</a>. If the site is already up and the schedule is still irregular, the quiz helps you <a href=\"/quiz/\">find where the schedule is leaking</a>. And to see the whole process, <a href=\"/\">how PsiAtiva structures intent-based outreach</a>." },
+  "footer": {
+    "tagline": {
+      "pt": "Captação ética e previsível para clínicas de psicologia.",
+      "en": "Ethical and predictable patient acquisition for psychology clinics."
+    },
+    "col_product": {
+      "pt": "Processo",
+      "en": "Process"
+    },
+    "col_company": {
+      "pt": "PsiAtiva",
+      "en": "PsiAtiva"
+    },
+    "col_resources": {
+      "pt": "Recursos",
+      "en": "Resources"
+    },
+    "link_features": {
+      "pt": "Como Funciona",
+      "en": "How It Works"
+    },
+    "link_integrations": {
+      "pt": "O GAP",
+      "en": "The GAP"
+    },
+    "link_cases": {
+      "pt": "Resultados",
+      "en": "Results"
+    },
+    "link_about": {
+      "pt": "Sobre",
+      "en": "About"
+    },
+    "link_testimonials": {
+      "pt": "Depoimentos",
+      "en": "Testimonials"
+    },
+    "link_contact": {
+      "pt": "Contato",
+      "en": "Contact"
+    },
+    "link_blog": {
+      "pt": "Blog",
+      "en": "Blog"
+    },
+    "link_podcast": {
+      "pt": "Podcast",
+      "en": "Podcast"
+    },
+    "link_terms": {
+      "pt": "Termos de Uso",
+      "en": "Terms of Use"
+    },
+    "link_privacy": {
+      "pt": "Privacidade",
+      "en": "Privacy"
+    },
+    "copyright": {
+      "pt": "Todos os direitos reservados.",
+      "en": "All rights reserved."
+    }
+  },
+  "calculadora": {
     "meta": {
-      "title": { "pt": "Análise gratuita do site do psicólogo em 1 minuto | PsiAtiva", "en": "Free website review for psychologists in 1 minute | PsiAtiva" },
-      "description": { "pt": "Leitura gratuita do site do psicólogo em 5 pontos: clareza, contato, cuidado, confiança e próximo passo. Veja o que a paciente vê antes de te chamar.", "en": "A free read of a psychologist’s site across 5 points: clarity, contact, care, trust and next step. See what a patient sees before reaching out." }
+      "title": {
+        "pt": "Calculadora: quanto a agenda vazia custa ao psicólogo | PsiAtiva",
+        "en": "Calculator: what an empty schedule costs a psychologist | PsiAtiva"
+      },
+      "description": {
+        "pt": "Simule, com os seus próprios números, quanto sua agenda inconstante deixa de faturar por mês, e o que muda com um processo de captação. Projeção baseada nos seus dados.",
+        "en": "See, with your own numbers, how much your inconsistent schedule leaves on the table each month, and what changes with a patient-acquisition process. A projection based on your data."
+      }
     },
     "hero": {
-      "tag": { "pt": "Ferramenta gratuita", "en": "Free tool" },
-      "h1_line1": { "pt": "O que o seu site deixa escapar?", "en": "What does your site let slip away?" },
-      "h1_accent": { "pt": "Análise gratuita para psicólogos, em um minuto.", "en": "A free review for psychologists, in one minute." },
-      "sub": { "pt": "A paciente chega no seu site, lê por alguns segundos e decide se te chama ou fecha a aba. Quando ela fecha, você nunca fica sabendo.", "en": "A patient lands on your site, reads for a few seconds and decides whether to reach out or close the tab. When she closes it, you never find out." },
-      "tldr": { "pt": "O Raio-X do Site é uma leitura automática e gratuita do site de um psicólogo em cinco pontos: clareza, contato, cuidado, confiança e próximo passo. Cada ponto vale 20. Em um minuto ele mostra qual deles está fazendo a paciente fechar a aba antes de te chamar.", "en": "The Raio-X do Site is a free, automatic read of a psychologist’s site across five points: clarity, contact, care, trust and next step. Each point is worth 20. In one minute it shows which one is making a patient close the tab before reaching out." }
+      "tag": {
+        "pt": "Ferramenta gratuita",
+        "en": "Free tool"
+      },
+      "h1_line1": {
+        "pt": "Quanto a agenda vazia custa ao seu consultório?",
+        "en": "What does an empty schedule cost your practice?"
+      },
+      "h1_accent": {
+        "pt": "Descubra com os seus números.",
+        "en": "Find out with your own numbers."
+      },
+      "sub": {
+        "pt": "Mês bom e mês ruim, sem conseguir prever. Quando a agenda depende de quando alguém indica, falta constância para planejar o mês.",
+        "en": "A good month, then a bad one, with no way to see it coming. When your schedule depends on when someone refers you, there is no steadiness to plan the month around."
+      },
+      "tldr": {
+        "pt": "Uma agenda inconstante custa, em faturamento, o que poderia entrar de pacientes novos retidos ao longo do ciclo. Esta calculadora usa o seu ticket, a sua retenção e quantas entradas você já tem hoje para projetar, com os seus números, quanto fica na mesa a cada mês sem um processo de captação.",
+        "en": "An inconsistent schedule costs you, in revenue, what new retained patients would bring in over the cycle. This calculator uses your session price, your retention and how many new patients you already get today to project, with your own numbers, how much is left on the table each month without an acquisition process."
+      }
     },
     "content": {
-      "h2_1": { "pt": "O que a paciente procura no site de um psicólogo?", "en": "What does a patient look for on a psychologist's site?" },
-      "p_1": { "pt": "Ela procura três coisas, nessa ordem: se você atende o que ela tem, se dá para confiar em você, e como falar com você agora. Um site bonito que não responde essas três perguntas em poucos segundos perde a pessoa que já estava decidida a procurar ajuda.", "en": "She looks for three things, in this order: whether you treat what she has, whether you can be trusted, and how to talk to you right now. A beautiful site that does not answer those three questions within seconds loses the person who had already decided to seek help." },
-      "h2_2": { "pt": "Por que o contato é o ponto mais caro?", "en": "Why is contact the most expensive point?" },
-      "p_2": { "pt": "Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável resolve isso, e a maioria dos sites de consultório ainda não tem.", "en": "Because it fails after the person is already convinced. She read, she liked it, she wanted to book, and then she has to copy a number from the footer, open WhatsApp and type it in. Every extra step is a chance to give up. A clickable link solves this, and most practice sites still do not have one." },
-      "p_2_html": { "pt": "Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável resolve isso, e a maioria dos sites de consultório ainda não tem. O link resolve a chegada. O que acontece depois que a mensagem cai no seu WhatsApp é outro assunto. Ele tem <a href=\"/blog/whatsapp-consultorio-solo/\">um guia próprio</a>.", "en": "Because it fails after the person is already convinced. She read, she liked it, she wanted to book, and then she has to copy a number from the footer, open WhatsApp and type it in. Every extra step is a chance to give up. A clickable link solves this, and most practice sites still do not have one. The link solves the arrival. What happens after the message lands in your WhatsApp is another matter. It has <a href=\"/blog/whatsapp-consultorio-solo/\">a guide of its own</a>." },
-      "h2_3": { "pt": "Confiança no site de um psicólogo se prova como?", "en": "How is trust proven on a psychologist’s site?" },
-      "p_3": { "pt": "Confiança no site de um psicólogo se prova por um caminho próprio. A maior parte dos guias de site para psicólogo lista depoimento de paciente como elemento de confiança. O Código de Ética Profissional do Psicólogo veda o uso de depoimento de quem foi atendido na divulgação de serviços, então seguir esse guia leva a psicóloga a publicar exatamente o que a profissão dela não permite. O que conta como sinal verificável é outro conjunto: número de CRP visível na página, formação, abordagem de trabalho, quais demandas ela atende e em que formato. São informações que a paciente consegue conferir sozinha antes de mandar a primeira mensagem. Por isso o Raio-X do Site pontua o item confiança sem nunca contar um depoimento, e nunca sugere que a psicóloga publique um. A regra da profissão é o critério da leitura, e ele vale ponto a ponto.", "en": "Trust on a psychologist’s site is proven along its own path. Most website guides for psychologists list patient testimonials as a trust element. The Psychologist’s Code of Professional Ethics forbids using the testimony of someone who was treated in the promotion of services, so following that guide ends with the psychologist publishing exactly what her profession does not permit. What counts as a verifiable signal is a different set: a license number visible on the page, training, approach to the work, which needs she treats and in what format. These are things a patient can check on her own before sending a first message. That is why the Raio-X do Site scores the trust item without ever counting a testimonial, and never suggests the psychologist publish one. The profession’s rule is the criterion of the read, and it applies point by point." },
-      "h2_4": { "pt": "Como a nota de 0 a 100 é montada?", "en": "How is the 0 to 100 score built?" },
-      "p_4": { "pt": "São 5 pontos, 20 cada. A leitura decide ponto a ponto e cita a evidência que encontrou. A soma fica com o código, para que a mesma página sempre dê a mesma nota. O resultado também mostra qual modelo fez a leitura, porque o julgamento varia entre modelos enquanto a aritmética se mantém.", "en": "There are 5 points, 20 each. The read decides point by point and cites the evidence it found. The sum is left to the code, so the same page always gets the same score. The result also shows which model did the read, because judgement varies between models while arithmetic holds steady." },
-      "h2_5": { "pt": "De onde vem a estimativa em reais?", "en": "Where does the estimate in reais come from?" },
-      "p_5": { "pt": "Do seu próprio ticket e da sua agenda de hoje, cruzados com uma leitura conservadora de quanto escapa pelo ponto mais fraco. Só o ponto mais fraco entra na conta, os outros não somam. O mês é contado como 4 semanas e o valor arredonda para baixo. Se o seu ponto mais fraco passou, o Raio-X não mostra número nenhum, porque não teria um número honesto para mostrar.", "en": "From your own session price and today's schedule, crossed with a conservative read of how much escapes through the weakest point. Only the weakest point enters the math, the others do not add up. A month counts as 4 weeks and the figure rounds down. If your weakest point passed, the X-ray shows no figure at all, because it would not have an honest one to show." }
+      "h2_1": {
+        "pt": "Como calcular quanto você deixa de faturar com a agenda vazia?",
+        "en": "How do you calculate what an empty schedule costs you in revenue?"
+      },
+      "p_1": {
+        "pt": "Some o faturamento que entraria se cada mês trouxesse alguns pacientes novos que continuam com você por vários meses. A conta certa acompanha esse acúmulo de quem entra e fica ao longo do tempo. A diferença entre o seu ritmo de hoje e um ritmo com captação ativa é o que fica na mesa.",
+        "en": "Add up the revenue that would come in if every month brought a few new patients who stay with you for several months. The right math follows that build-up of who comes in and stays over time. The gap between your pace today and a pace with active acquisition is what gets left on the table."
+      },
+      "h2_2": {
+        "pt": "Por que \"pacientes × sessões\" subestima? O modelo de coorte",
+        "en": "Why does \"patients × sessions\" underestimate? The cohort model"
+      },
+      "p_2_html": {
+        "pt": "Multiplicar pacientes novos × ticket × meses trata cada paciente como se viesse uma vez e sumisse. Na psicologia, quem entra costuma continuar por vários meses. O jeito honesto de projetar é por <strong>coorte</strong>: a cada mês entra um grupo novo de pacientes que se soma aos que já estão em acompanhamento, ponderado pela retenção. Por isso a projeção aparece como uma <strong>banda</strong>: o piso conta cada paciente uma única vez; o teto considera todos ficando o ciclo inteiro; e o número real fica entre os dois, posicionado pela retenção que você ajusta. Com retenção alta, sua projeção se aproxima do teto. Com retenção baixa, do piso. A calculadora faz essa conta com os seus números, sem usar média de mercado.",
+        "en": "Multiplying new patients × session price × months treats every patient as if they came once and vanished. In psychology, the people who come in usually stay for several months. The honest way to project is by <strong>cohort</strong>: every month a new group of patients comes in and adds to the ones already in treatment, weighted by retention. That is why the projection shows up as a <strong>band</strong>: the floor counts each patient only once; the ceiling assumes everyone stays the whole cycle; and the real number sits between the two, placed by the retention you set. With high retention, your projection moves toward the ceiling. With low retention, toward the floor. The calculator runs this math with your own numbers, without using a market average."
+      },
+      "h2_3": {
+        "pt": "Com método vs. sem método: o que muda no seu cenário?",
+        "en": "With a method vs. without one: what changes in your scenario?"
+      },
+      "p_3": {
+        "pt": "A curva de baixo usa as entradas que você já tem hoje, normalmente poucas e dependentes de indicação. A de cima usa um cenário com captação ativa, que você ajusta. O espaço entre as duas é o faturamento que poderia estar entrando com constância. Se as duas curvas ficam coladas, a ferramenta te diz: a sua conta já está boa.",
+        "en": "The lower curve uses the new patients you already get today, usually few and dependent on referrals. The upper one uses a scenario with active acquisition, which you adjust. The space between the two is the revenue that could be coming in steadily. If the two curves sit right on top of each other, the tool tells you so: your math already works."
+      },
+      "h2_4": {
+        "pt": "Quanto custa capturar esse faturamento?",
+        "en": "How much does it cost to capture that revenue?"
+      },
+      "p_4": {
+        "pt": "Depende do seu perfil e do nível de estrutura. A leitura completa (investimento a partir de um valor, verba de mídia e o retorno sobre o seu cenário) aparece quando você deixa o contato. O valor exato e as formas de pagamento saem de uma conversa, no seu momento.",
+        "en": "It depends on your profile and your level of structure. The full read (investment starting from a figure, media budget and the return on your scenario) appears once you leave your contact. The exact figure and payment terms come out of a conversation, in your own time."
+      },
+      "h2_5": {
+        "pt": "Isso é garantia de faturamento?",
+        "en": "Is this a revenue guarantee?"
+      },
+      "p_5_html": {
+        "pt": "Não. A calculadora projeta a partir dos seus dados: o seu ticket, a sua retenção, as suas entradas. <strong>A conta é sua, não nossa.</strong> Se a sua projeção sem um processo já é boa, a ferramenta mostra isso e você não precisa da gente.",
+        "en": "No. The calculator projects from your data: your session price, your retention, your new patients. <strong>The math is yours, not ours.</strong> If your projection without a process is already good, the tool shows that and you don't need us."
+      }
     },
     "faq": {
-      "title": { "pt": "Perguntas frequentes", "en": "Frequently asked questions" },
-      "q_1": { "pt": "O raio-x é gratuito?", "en": "Is the X-ray free?" },
-      "a_1": { "pt": "Sim. A leitura é aberta e não pede cadastro para começar. Você digita o endereço do site e recebe a nota com os 5 pontos.", "en": "Yes. The read is open and does not ask you to sign up to start. You type the site address and get the score with the 5 points." },
-      "q_2": { "pt": "Como a nota é calculada?", "en": "How is the score calculated?" },
-      "a_2": { "pt": "São 5 pontos, 20 cada. A leitura verifica cada ponto e cita a evidência que encontrou no seu site. A soma é aritmética, feita em código, para que a mesma leitura sempre dê a mesma nota.", "en": "There are 5 points, 20 each. The read checks each point and cites the evidence it found on your site. The sum is arithmetic, done in code, so the same read always gives the same score." },
-      "q_3": { "pt": "O que exatamente vocês olham?", "en": "What exactly do you look at?" },
-      "a_3": { "pt": "Só o que está público no seu site: se dá para entender quem você atende, se existe um caminho clicável para te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é o próximo passo.", "en": "Only what is public on your site: whether it is clear who you see, whether there is a clickable way to reach you, whether the page looks cared for, whether verifiable signals of who you are appear, and whether the next step is clear." },
-      "q_4": { "pt": "Depoimento de paciente conta como sinal de confiança?", "en": "Does a patient testimonial count as a trust signal?" },
-      "a_4": { "pt": "Não, e essa é uma escolha deliberada. O Código de Ética Profissional do Psicólogo veda o uso de depoimento de quem foi atendido na divulgação de serviços. Sinal verificável aqui é CRP, formação e abordagem. A ferramenta nunca vai sugerir que você publique depoimento.", "en": "No, and that is a deliberate choice. The Psychologist’s Code of Professional Ethics forbids using the testimony of someone who was treated in the promotion of services. A verifiable signal here is a license number, training and approach. The tool will never suggest you publish a testimonial." },
-      "q_5": { "pt": "A leitura muda se eu atendo sozinha ou tenho equipe?", "en": "Does the read change if I work alone or have a team?" },
-      "a_5": { "pt": "A leitura olha o site, e o endereço é o mesmo nos dois casos. A conversa depois acompanha o seu contexto.", "en": "The read looks at the site, and the address is the same in either case. The conversation afterwards follows your context." },
-      "q_6": { "pt": "De onde sai o valor que aparece no fim?", "en": "Where does the figure at the end come from?" },
-      "a_6": { "pt": "Do seu ticket, da sua agenda de hoje e do ponto mais fraco que a leitura encontrou no site. É uma estimativa conservadora e aparece sempre como um piso, com a expressão a partir de. Não substitui uma conversa.", "en": "From your session price, today’s schedule and the weakest point the read found on the site. It is a conservative estimate and always appears as a floor, with the phrase a partir de. It does not replace a conversation." }
+      "title": {
+        "pt": "Perguntas frequentes",
+        "en": "Frequently asked questions"
+      },
+      "items": [
+        {
+          "q": {
+            "pt": "A calculadora promete que vou faturar isso?",
+            "en": "Does the calculator promise I'll make this much?"
+          },
+          "a": {
+            "pt": "Não. Ela projeta a partir dos seus números: ticket, sessões, entradas atuais e retenção. A meta de verdade é definida junto, numa conversa.",
+            "en": "No. It projects from your numbers: session price, sessions, current new patients and retention. The real target is set together, in a conversation."
+          }
+        },
+        {
+          "q": {
+            "pt": "De onde vêm os valores?",
+            "en": "Where do the numbers come from?"
+          },
+          "a": {
+            "pt": "Dos seus: o valor que você cobra por sessão, quantas sessões por mês, quantos pacientes novos entram hoje e por quanto tempo eles continuam com você.",
+            "en": "From yours: the price you charge per session, how many sessions per month, how many new patients come in today and how long they stay with you."
+          }
+        },
+        {
+          "q": {
+            "pt": "Preciso pagar para usar?",
+            "en": "Do I have to pay to use it?"
+          },
+          "a": {
+            "pt": "Não. A calculadora é aberta e gratuita.",
+            "en": "No. The calculator is open and free."
+          }
+        },
+        {
+          "q": {
+            "pt": "Serve para clínica também?",
+            "en": "Does it work for a clinic too?"
+          },
+          "a": {
+            "pt": "Sim. Troque o perfil no topo da ferramenta. Mas o conteúdo aqui fala com quem atende sozinha, a psicóloga de consultório solo.",
+            "en": "Yes. Switch the profile at the top of the tool. But the content here speaks to those who practice on their own, the solo-practice psychologist."
+          }
+        },
+        {
+          "q": {
+            "pt": "E se a minha conta já estiver boa?",
+            "en": "And what if my math is already good?"
+          },
+          "a": {
+            "pt": "A ferramenta mostra isso. Se a sua projeção sem um processo de captação já é boa, você não precisa de processo agora, e a gente prefere te dizer isso.",
+            "en": "The tool shows that. If your projection without an acquisition process is already good, you don't need a process right now, and we'd rather tell you so."
+          }
+        }
+      ]
+    },
+    "related_html": {
+      "pt": "Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada? <a href=\"/\">Veja como funciona o processo</a>. E se o site for parte do problema, comece pela <a href=\"/analise-de-site-para-psicologo/\">leitura do seu site</a>.",
+      "en": "Want to understand how PsiAtiva structures intent-based acquisition, from first contact to confirmed session? <a href=\"/\">See how the process works</a>. And if the site is part of the problem, start with the <a href=\"/analise-de-site-para-psicologo/\">read of your site</a>."
     },
     "cta": {
-      "title": { "pt": "Quer olhar isso com a gente?", "en": "Want to look at this together?" },
-      "desc": { "pt": "O raio-x automático mostra o que está escapando. A conversa mostra o que fazer com isso, no seu contexto e no seu tempo.", "en": "The automatic X-ray shows what is slipping away. The conversation shows what to do about it, in your context and in your own time." },
-      "btn": { "pt": "Falar no WhatsApp", "en": "Talk on WhatsApp" }
+      "title": {
+        "pt": "Primeiro passo: uma conversa. Só isso.",
+        "en": "First step: a conversation. That's it."
+      },
+      "desc": {
+        "pt": "Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.",
+        "en": "No strings attached. We look at your scenario and tell you honestly whether a process makes sense right now."
+      },
+      "btn": {
+        "pt": "AGENDAR DIAGNÓSTICO",
+        "en": "BOOK A DIAGNOSTIC"
+      }
+    }
+  },
+  "raioX": {
+    "pov": {
+      "pt": "O seu site não precisa de depoimento para transmitir confiança. Precisa do que dá para verificar: CRP, formação, abordagem e um caminho claro para te chamar.",
+      "en": "Your site does not need testimonials to build trust. It needs what can be verified: your license number, training, approach, and a clear way to reach you."
+    },
+    "related_html": {
+      "pt": "Antes de a paciente chegar no seu site, ela precisa te encontrar: veja <a href=\"/blog/aparecer-no-google-psicologa/\">como aparecer no Google como psicóloga</a>. Se o site já está de pé e a agenda segue irregular, o quiz ajuda a <a href=\"/quiz/\">descobrir onde a agenda está vazando</a>. E para ver o processo inteiro, <a href=\"/\">como a PsiAtiva estrutura a captação por intenção</a>.",
+      "en": "Before a patient reaches your site, she has to find you: see <a href=\"/blog/aparecer-no-google-psicologa/\">how to show up on Google as a psychologist</a>. If the site is already up and the schedule is still irregular, the quiz helps you <a href=\"/quiz/\">find where the schedule is leaking</a>. And to see the whole process, <a href=\"/\">how PsiAtiva structures intent-based outreach</a>."
+    },
+    "meta": {
+      "title": {
+        "pt": "Análise gratuita do site do psicólogo em 1 minuto | PsiAtiva",
+        "en": "Free website review for psychologists in 1 minute | PsiAtiva"
+      },
+      "description": {
+        "pt": "Leitura gratuita do site do psicólogo em 5 pontos: clareza, contato, cuidado, confiança e próximo passo. Veja o que a paciente vê antes de te chamar.",
+        "en": "A free read of a psychologist’s site across 5 points: clarity, contact, care, trust and next step. See what a patient sees before reaching out."
+      }
+    },
+    "hero": {
+      "tag": {
+        "pt": "Ferramenta gratuita",
+        "en": "Free tool"
+      },
+      "h1_line1": {
+        "pt": "O que o seu site deixa escapar?",
+        "en": "What does your site let slip away?"
+      },
+      "h1_accent": {
+        "pt": "Análise gratuita para psicólogos, em um minuto.",
+        "en": "A free review for psychologists, in one minute."
+      },
+      "sub": {
+        "pt": "A paciente chega no seu site, lê por alguns segundos e decide se te chama ou fecha a aba. Quando ela fecha, você nunca fica sabendo.",
+        "en": "A patient lands on your site, reads for a few seconds and decides whether to reach out or close the tab. When she closes it, you never find out."
+      },
+      "tldr": {
+        "pt": "O Raio-X do Site é uma leitura automática e gratuita do site de um psicólogo em cinco pontos: clareza, contato, cuidado, confiança e próximo passo. Cada ponto vale 20. Em um minuto ele mostra qual deles está fazendo a paciente fechar a aba antes de te chamar.",
+        "en": "The Raio-X do Site is a free, automatic read of a psychologist’s site across five points: clarity, contact, care, trust and next step. Each point is worth 20. In one minute it shows which one is making a patient close the tab before reaching out."
+      }
+    },
+    "content": {
+      "h2_1": {
+        "pt": "O que a paciente procura no site de um psicólogo?",
+        "en": "What does a patient look for on a psychologist's site?"
+      },
+      "p_1": {
+        "pt": "Ela procura três coisas, nessa ordem: se você atende o que ela tem, se dá para confiar em você, e como falar com você agora. Um site bonito que não responde essas três perguntas em poucos segundos perde a pessoa que já estava decidida a procurar ajuda.",
+        "en": "She looks for three things, in this order: whether you treat what she has, whether you can be trusted, and how to talk to you right now. A beautiful site that does not answer those three questions within seconds loses the person who had already decided to seek help."
+      },
+      "h2_2": {
+        "pt": "Por que o contato é o ponto mais caro?",
+        "en": "Why is contact the most expensive point?"
+      },
+      "p_2": {
+        "pt": "Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável resolve isso, e a maioria dos sites de consultório ainda não tem.",
+        "en": "Because it fails after the person is already convinced. She read, she liked it, she wanted to book, and then she has to copy a number from the footer, open WhatsApp and type it in. Every extra step is a chance to give up. A clickable link solves this, and most practice sites still do not have one."
+      },
+      "p_2_html": {
+        "pt": "Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável resolve isso, e a maioria dos sites de consultório ainda não tem. O link resolve a chegada. O que acontece depois que a mensagem cai no seu WhatsApp é outro assunto. Ele tem <a href=\"/blog/whatsapp-consultorio-solo/\">um guia próprio</a>.",
+        "en": "Because it fails after the person is already convinced. She read, she liked it, she wanted to book, and then she has to copy a number from the footer, open WhatsApp and type it in. Every extra step is a chance to give up. A clickable link solves this, and most practice sites still do not have one. The link solves the arrival. What happens after the message lands in your WhatsApp is another matter. It has <a href=\"/blog/whatsapp-consultorio-solo/\">a guide of its own</a>."
+      },
+      "h2_3": {
+        "pt": "Confiança no site de um psicólogo se prova como?",
+        "en": "How is trust proven on a psychologist’s site?"
+      },
+      "p_3": {
+        "pt": "Confiança no site de um psicólogo se prova por um caminho próprio. A maior parte dos guias de site para psicólogo lista depoimento de paciente como elemento de confiança. O Código de Ética Profissional do Psicólogo veda o uso de depoimento de quem foi atendido na divulgação de serviços, então seguir esse guia leva a psicóloga a publicar exatamente o que a profissão dela não permite. O que conta como sinal verificável é outro conjunto: número de CRP visível na página, formação, abordagem de trabalho, quais demandas ela atende e em que formato. São informações que a paciente consegue conferir sozinha antes de mandar a primeira mensagem. Por isso o Raio-X do Site pontua o item confiança sem nunca contar um depoimento, e nunca sugere que a psicóloga publique um. A regra da profissão é o critério da leitura, e ele vale ponto a ponto.",
+        "en": "Trust on a psychologist’s site is proven along its own path. Most website guides for psychologists list patient testimonials as a trust element. The Psychologist’s Code of Professional Ethics forbids using the testimony of someone who was treated in the promotion of services, so following that guide ends with the psychologist publishing exactly what her profession does not permit. What counts as a verifiable signal is a different set: a license number visible on the page, training, approach to the work, which needs she treats and in what format. These are things a patient can check on her own before sending a first message. That is why the Raio-X do Site scores the trust item without ever counting a testimonial, and never suggests the psychologist publish one. The profession’s rule is the criterion of the read, and it applies point by point."
+      },
+      "h2_4": {
+        "pt": "Como a nota de 0 a 100 é montada?",
+        "en": "How is the 0 to 100 score built?"
+      },
+      "p_4": {
+        "pt": "São 5 pontos, 20 cada. A leitura decide ponto a ponto e cita a evidência que encontrou. A soma fica com o código, para que a mesma página sempre dê a mesma nota. O resultado também mostra qual modelo fez a leitura, porque o julgamento varia entre modelos enquanto a aritmética se mantém.",
+        "en": "There are 5 points, 20 each. The read decides point by point and cites the evidence it found. The sum is left to the code, so the same page always gets the same score. The result also shows which model did the read, because judgement varies between models while arithmetic holds steady."
+      },
+      "h2_5": {
+        "pt": "De onde vem a estimativa em reais?",
+        "en": "Where does the estimate in reais come from?"
+      },
+      "p_5": {
+        "pt": "Do seu próprio ticket e da sua agenda de hoje, cruzados com uma leitura conservadora de quanto escapa pelo ponto mais fraco. Só o ponto mais fraco entra na conta, os outros não somam. O mês é contado como 4 semanas e o valor arredonda para baixo. Se o seu ponto mais fraco passou, o Raio-X não mostra número nenhum, porque não teria um número honesto para mostrar.",
+        "en": "From your own session price and today's schedule, crossed with a conservative read of how much escapes through the weakest point. Only the weakest point enters the math, the others do not add up. A month counts as 4 weeks and the figure rounds down. If your weakest point passed, the X-ray shows no figure at all, because it would not have an honest one to show."
+      }
+    },
+    "faq": {
+      "title": {
+        "pt": "Perguntas frequentes",
+        "en": "Frequently asked questions"
+      },
+      "q_1": {
+        "pt": "O raio-x é gratuito?",
+        "en": "Is the X-ray free?"
+      },
+      "a_1": {
+        "pt": "Sim. A leitura é aberta e não pede cadastro para começar. Você digita o endereço do site e recebe a nota com os 5 pontos.",
+        "en": "Yes. The read is open and does not ask you to sign up to start. You type the site address and get the score with the 5 points."
+      },
+      "q_2": {
+        "pt": "Como a nota é calculada?",
+        "en": "How is the score calculated?"
+      },
+      "a_2": {
+        "pt": "São 5 pontos, 20 cada. A leitura verifica cada ponto e cita a evidência que encontrou no seu site. A soma é aritmética, feita em código, para que a mesma leitura sempre dê a mesma nota.",
+        "en": "There are 5 points, 20 each. The read checks each point and cites the evidence it found on your site. The sum is arithmetic, done in code, so the same read always gives the same score."
+      },
+      "q_3": {
+        "pt": "O que exatamente vocês olham?",
+        "en": "What exactly do you look at?"
+      },
+      "a_3": {
+        "pt": "Só o que está público no seu site: se dá para entender quem você atende, se existe um caminho clicável para te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é o próximo passo.",
+        "en": "Only what is public on your site: whether it is clear who you see, whether there is a clickable way to reach you, whether the page looks cared for, whether verifiable signals of who you are appear, and whether the next step is clear."
+      },
+      "q_4": {
+        "pt": "Depoimento de paciente conta como sinal de confiança?",
+        "en": "Does a patient testimonial count as a trust signal?"
+      },
+      "a_4": {
+        "pt": "Não, e essa é uma escolha deliberada. O Código de Ética Profissional do Psicólogo veda o uso de depoimento de quem foi atendido na divulgação de serviços. Sinal verificável aqui é CRP, formação e abordagem. A ferramenta nunca vai sugerir que você publique depoimento.",
+        "en": "No, and that is a deliberate choice. The Psychologist’s Code of Professional Ethics forbids using the testimony of someone who was treated in the promotion of services. A verifiable signal here is a license number, training and approach. The tool will never suggest you publish a testimonial."
+      },
+      "q_5": {
+        "pt": "A leitura muda se eu atendo sozinha ou tenho equipe?",
+        "en": "Does the read change if I work alone or have a team?"
+      },
+      "a_5": {
+        "pt": "A leitura olha o site, e o endereço é o mesmo nos dois casos. A conversa depois acompanha o seu contexto.",
+        "en": "The read looks at the site, and the address is the same in either case. The conversation afterwards follows your context."
+      },
+      "q_6": {
+        "pt": "De onde sai o valor que aparece no fim?",
+        "en": "Where does the figure at the end come from?"
+      },
+      "a_6": {
+        "pt": "Do seu ticket, da sua agenda de hoje e do ponto mais fraco que a leitura encontrou no site. É uma estimativa conservadora e aparece sempre como um piso, com a expressão a partir de. Não substitui uma conversa.",
+        "en": "From your session price, today’s schedule and the weakest point the read found on the site. It is a conservative estimate and always appears as a floor, with the phrase a partir de. It does not replace a conversation."
+      }
+    },
+    "cta": {
+      "title": {
+        "pt": "Quer olhar isso com a gente?",
+        "en": "Want to look at this together?"
+      },
+      "desc": {
+        "pt": "O raio-x automático mostra o que está escapando. A conversa mostra o que fazer com isso, no seu contexto e no seu tempo.",
+        "en": "The automatic X-ray shows what is slipping away. The conversation shows what to do about it, in your context and in your own time."
+      },
+      "btn": {
+        "pt": "Falar no WhatsApp",
+        "en": "Talk on WhatsApp"
+      }
     }
   },
   "quiz": {
     "meta": {
-      "title": { "pt": "Diagnóstico: onde a sua agenda está vazando? | PsiAtiva", "en": "Diagnostic: where is your schedule leaking? | PsiAtiva" },
-      "description": { "pt": "Responda 6 perguntas e descubra em 2 minutos qual buraco esvazia sua agenda hoje. De graça, sem cadastro, com um material pra começar a fechar esse buraco.", "en": "Answer 6 questions and find out in 2 minutes which hole is draining your schedule today. Free, no sign-up, with a resource to start closing that hole." }
+      "title": {
+        "pt": "Diagnóstico: onde a sua agenda está vazando? | PsiAtiva",
+        "en": "Diagnostic: where is your schedule leaking? | PsiAtiva"
+      },
+      "description": {
+        "pt": "Responda 6 perguntas e descubra em 2 minutos qual buraco esvazia sua agenda hoje. De graça, sem cadastro, com um material pra começar a fechar esse buraco.",
+        "en": "Answer 6 questions and find out in 2 minutes which hole is draining your schedule today. Free, no sign-up, with a resource to start closing that hole."
+      }
     },
     "hero": {
-      "tag": { "pt": "Diagnóstico gratuito", "en": "Free diagnostic" },
-      "h1_line1": { "pt": "Onde a sua agenda está vazando?", "en": "Where is your schedule leaking?" },
-      "h1_accent": { "pt": "Descubra em 2 minutos.", "en": "Find out in 2 minutes." },
-      "sub": { "pt": "Mês bom e mês ruim, sem conseguir prever. Antes de achar que é falta de paciente, vale olhar onde eles estão se perdendo no caminho.", "en": "A good month, then a bad one, with no way to see it coming. Before assuming it's a shortage of patients, it's worth looking at where they're getting lost along the way." },
-      "tldr": { "pt": "Este diagnóstico faz 6 perguntas sobre o seu dia a dia: como chega o paciente, o que acontece no primeiro contato, de onde vêm as indicações. No fim, ele nomeia o buraco que mais esvazia a sua agenda hoje e te entrega um material pra começar a fechar. Leva uns 2 minutos e é de graça.", "en": "This diagnostic asks 6 questions about your day to day: how patients reach you, what happens at first contact, where referrals come from. At the end, it names the hole that drains your schedule most today and hands you a resource to start closing it. It takes about 2 minutes and it's free." }
+      "tag": {
+        "pt": "Diagnóstico gratuito",
+        "en": "Free diagnostic"
+      },
+      "h1_line1": {
+        "pt": "Onde a sua agenda está vazando?",
+        "en": "Where is your schedule leaking?"
+      },
+      "h1_accent": {
+        "pt": "Descubra em 2 minutos.",
+        "en": "Find out in 2 minutes."
+      },
+      "sub": {
+        "pt": "Mês bom e mês ruim, sem conseguir prever. Antes de achar que é falta de paciente, vale olhar onde eles estão se perdendo no caminho.",
+        "en": "A good month, then a bad one, with no way to see it coming. Before assuming it's a shortage of patients, it's worth looking at where they're getting lost along the way."
+      },
+      "tldr": {
+        "pt": "Este diagnóstico faz 6 perguntas sobre o seu dia a dia: como chega o paciente, o que acontece no primeiro contato, de onde vêm as indicações. No fim, ele nomeia o buraco que mais esvazia a sua agenda hoje e te entrega um material pra começar a fechar. Leva uns 2 minutos e é de graça.",
+        "en": "This diagnostic asks 6 questions about your day to day: how patients reach you, what happens at first contact, where referrals come from. At the end, it names the hole that drains your schedule most today and hands you a resource to start closing it. It takes about 2 minutes and it's free."
+      }
     },
     "content": {
-      "h2_1": { "pt": "Por que a agenda de psicóloga oscila tanto?", "en": "Why does a psychologist's schedule swing so much?" },
-      "p_1": { "pt": "Na maioria das vezes a demanda existe. O paciente chega por indicação, vê o Instagram, manda mensagem no WhatsApp. O que falha é o caminho entre esse primeiro contato e a sessão confirmada. Uma mensagem que demora a ser respondida, uma primeira sessão que ninguém confirma, uma agenda que depende só de quem indica. Cada um desses pontos é um lugar por onde a agenda vaza, e quase sempre passa despercebido até o mês virar.", "en": "Most of the time the demand is there. The patient arrives through a referral, sees Instagram, sends a WhatsApp message. What breaks is the path between that first contact and the confirmed session. A message that takes too long to answer, a first session no one confirms, a schedule that depends only on who refers you. Each of these is a place where the schedule leaks, and it almost always goes unnoticed until the month is over." },
-      "h2_2": { "pt": "Como saber onde você está perdendo paciente?", "en": "How do you find out where you're losing patients?" },
-      "p_2": { "pt": "Olhando para o seu próprio dia a dia, não para uma média de mercado. Quem responde o primeiro contato? Quanto tempo a pessoa espera? Quantos pacientes novos chegam por mês e de onde vêm? O diagnóstico faz essas perguntas e devolve, em uma frase, qual buraco está pesando mais agora. Quando a dor tem nome, fica mais fácil decidir o que olhar primeiro.", "en": "By looking at your own day to day, not at a market average. Who answers the first contact? How long does the person wait? How many new patients arrive each month and where do they come from? The diagnostic asks these questions and gives back, in one sentence, which hole weighs the most right now. When the pain has a name, it's easier to decide what to look at first." },
-      "h2_3": { "pt": "O problema é falta de paciente ou o caminho até a sessão?", "en": "Is the problem a shortage of patients or the path to the session?" },
-      "p_3": { "pt": "Você não perde paciente por falta de competência clínica. Perde no caminho, entre o contato e a consulta confirmada. É por isso que captar mais gente, sem arrumar esse caminho, costuma não resolver: entra mais contato e continua vazando na mesma porta. O diagnóstico separa as duas coisas, se o aperto está na chegada de paciente novo ou na perda do que já chegou.", "en": "You don't lose patients for lack of clinical skill. You lose them on the way, between the contact and the confirmed appointment. That's why bringing in more people, without fixing that path, usually doesn't solve it: more contacts come in and it keeps leaking through the same door. The diagnostic separates the two, whether the squeeze is in new patients arriving or in losing the ones who already did." },
-      "h2_4": { "pt": "O que você recebe no fim do diagnóstico?", "en": "What do you get at the end of the diagnostic?" },
-      "p_4": { "pt": "Primeiro, o nome do buraco principal e o que ele custa por mês na sua agenda. Depois, se você deixar seu WhatsApp, um material gratuito feito pra essa dor específica: um guia, um roteiro ou um checklist pra começar a fechar esse buraco com as próprias mãos. O material chega pelo WhatsApp, sem preço e sem compromisso.", "en": "First, the name of the main hole and what it costs your schedule each month. Then, if you leave your WhatsApp, a free resource made for that specific pain: a guide, a script or a checklist to start closing that hole with your own hands. The resource arrives by WhatsApp, with no price and no strings attached." },
-      "h2_5": { "pt": "Isso serve pra consultório solo e pra clínica?", "en": "Is this for solo practices and clinics alike?" },
-      "p_5": { "pt": "Serve para os dois. As primeiras perguntas entendem se você atende sozinha, sem recepção, ou se tem uma equipe cuidando dos primeiros contatos. A partir daí, o resultado fala com a sua realidade. Quem atende sozinha tem dores diferentes de quem coordena uma clínica, e o diagnóstico respeita essa diferença em vez de tratar todo mundo igual.", "en": "It's for both. The first questions figure out whether you practice on your own, without a front desk, or have a team handling first contacts. From there, the result speaks to your reality. Someone practicing alone has different pains from someone running a clinic, and the diagnostic respects that difference instead of treating everyone the same." }
+      "h2_1": {
+        "pt": "Por que a agenda de psicóloga oscila tanto?",
+        "en": "Why does a psychologist's schedule swing so much?"
+      },
+      "p_1": {
+        "pt": "Na maioria das vezes a demanda existe. O paciente chega por indicação, vê o Instagram, manda mensagem no WhatsApp. O que falha é o caminho entre esse primeiro contato e a sessão confirmada. Uma mensagem que demora a ser respondida, uma primeira sessão que ninguém confirma, uma agenda que depende só de quem indica. Cada um desses pontos é um lugar por onde a agenda vaza, e quase sempre passa despercebido até o mês virar.",
+        "en": "Most of the time the demand is there. The patient arrives through a referral, sees Instagram, sends a WhatsApp message. What breaks is the path between that first contact and the confirmed session. A message that takes too long to answer, a first session no one confirms, a schedule that depends only on who refers you. Each of these is a place where the schedule leaks, and it almost always goes unnoticed until the month is over."
+      },
+      "h2_2": {
+        "pt": "Como saber onde você está perdendo paciente?",
+        "en": "How do you find out where you're losing patients?"
+      },
+      "p_2": {
+        "pt": "Olhando para o seu próprio dia a dia, não para uma média de mercado. Quem responde o primeiro contato? Quanto tempo a pessoa espera? Quantos pacientes novos chegam por mês e de onde vêm? O diagnóstico faz essas perguntas e devolve, em uma frase, qual buraco está pesando mais agora. Quando a dor tem nome, fica mais fácil decidir o que olhar primeiro.",
+        "en": "By looking at your own day to day, not at a market average. Who answers the first contact? How long does the person wait? How many new patients arrive each month and where do they come from? The diagnostic asks these questions and gives back, in one sentence, which hole weighs the most right now. When the pain has a name, it's easier to decide what to look at first."
+      },
+      "h2_3": {
+        "pt": "O problema é falta de paciente ou o caminho até a sessão?",
+        "en": "Is the problem a shortage of patients or the path to the session?"
+      },
+      "p_3": {
+        "pt": "Você não perde paciente por falta de competência clínica. Perde no caminho, entre o contato e a consulta confirmada. É por isso que captar mais gente, sem arrumar esse caminho, costuma não resolver: entra mais contato e continua vazando na mesma porta. O diagnóstico separa as duas coisas, se o aperto está na chegada de paciente novo ou na perda do que já chegou.",
+        "en": "You don't lose patients for lack of clinical skill. You lose them on the way, between the contact and the confirmed appointment. That's why bringing in more people, without fixing that path, usually doesn't solve it: more contacts come in and it keeps leaking through the same door. The diagnostic separates the two, whether the squeeze is in new patients arriving or in losing the ones who already did."
+      },
+      "h2_4": {
+        "pt": "O que você recebe no fim do diagnóstico?",
+        "en": "What do you get at the end of the diagnostic?"
+      },
+      "p_4": {
+        "pt": "Primeiro, o nome do buraco principal e o que ele custa por mês na sua agenda. Depois, se você deixar seu WhatsApp, um material gratuito feito pra essa dor específica: um guia, um roteiro ou um checklist pra começar a fechar esse buraco com as próprias mãos. O material chega pelo WhatsApp, sem preço e sem compromisso.",
+        "en": "First, the name of the main hole and what it costs your schedule each month. Then, if you leave your WhatsApp, a free resource made for that specific pain: a guide, a script or a checklist to start closing that hole with your own hands. The resource arrives by WhatsApp, with no price and no strings attached."
+      },
+      "h2_5": {
+        "pt": "Isso serve pra consultório solo e pra clínica?",
+        "en": "Is this for solo practices and clinics alike?"
+      },
+      "p_5": {
+        "pt": "Serve para os dois. As primeiras perguntas entendem se você atende sozinha, sem recepção, ou se tem uma equipe cuidando dos primeiros contatos. A partir daí, o resultado fala com a sua realidade. Quem atende sozinha tem dores diferentes de quem coordena uma clínica, e o diagnóstico respeita essa diferença em vez de tratar todo mundo igual.",
+        "en": "It's for both. The first questions figure out whether you practice on your own, without a front desk, or have a team handling first contacts. From there, the result speaks to your reality. Someone practicing alone has different pains from someone running a clinic, and the diagnostic respects that difference instead of treating everyone the same."
+      }
     },
     "faq": {
-      "title": { "pt": "Perguntas frequentes", "en": "Frequently asked questions" },
+      "title": {
+        "pt": "Perguntas frequentes",
+        "en": "Frequently asked questions"
+      },
       "items": [
-        { "q": { "pt": "O diagnóstico é gratuito?", "en": "Is the diagnostic free?" }, "a": { "pt": "É. São 6 perguntas rápidas e o resultado aparece na hora, sem custo.", "en": "It is. Six quick questions and the result appears right away, at no cost." } },
-        { "q": { "pt": "Preciso me cadastrar pra ver o resultado?", "en": "Do I have to sign up to see the result?" }, "a": { "pt": "Não. O resultado aparece assim que você responde. Você só deixa o WhatsApp no fim se quiser receber o material relacionado à sua dor.", "en": "No. The result appears as soon as you answer. You only leave your WhatsApp at the end if you want the resource related to your pain." } },
-        { "q": { "pt": "Quanto tempo leva?", "en": "How long does it take?" }, "a": { "pt": "Cerca de 2 minutos. São 6 perguntas sobre o seu dia a dia.", "en": "About 2 minutes. It's 6 questions about your day to day." } },
-        { "q": { "pt": "Serve pra quem atende sozinha?", "en": "Is it for those who practice on their own?" }, "a": { "pt": "Serve. As primeiras perguntas entendem se você atende sozinha ou tem equipe, e o resultado fala com a sua realidade, não com uma genérica.", "en": "It is. The first questions figure out whether you practice alone or have a team, and the result speaks to your reality, not to a generic one." } },
-        { "q": { "pt": "Isso é uma avaliação clínica?", "en": "Is this a clinical assessment?" }, "a": { "pt": "Não. É um diagnóstico do seu processo de captação e da sua agenda, pra começar uma conversa. Não é laudo nem avaliação psicológica.", "en": "No. It's a diagnostic of your acquisition process and your schedule, to start a conversation. It's not a report or a psychological assessment." } },
-        { "q": { "pt": "O que acontece depois que eu deixo meu WhatsApp?", "en": "What happens after I leave my WhatsApp?" }, "a": { "pt": "A gente te envia o material por lá e fica à disposição se você quiser conversar sobre o que apareceu. Seu contato fica só com a PsiAtiva, sem disparo em massa.", "en": "We send you the resource there and stay available if you'd like to talk about what came up. Your contact stays only with PsiAtiva, with no mass messaging." } }
+        {
+          "q": {
+            "pt": "O diagnóstico é gratuito?",
+            "en": "Is the diagnostic free?"
+          },
+          "a": {
+            "pt": "É. São 6 perguntas rápidas e o resultado aparece na hora, sem custo.",
+            "en": "It is. Six quick questions and the result appears right away, at no cost."
+          }
+        },
+        {
+          "q": {
+            "pt": "Preciso me cadastrar pra ver o resultado?",
+            "en": "Do I have to sign up to see the result?"
+          },
+          "a": {
+            "pt": "Não. O resultado aparece assim que você responde. Você só deixa o WhatsApp no fim se quiser receber o material relacionado à sua dor.",
+            "en": "No. The result appears as soon as you answer. You only leave your WhatsApp at the end if you want the resource related to your pain."
+          }
+        },
+        {
+          "q": {
+            "pt": "Quanto tempo leva?",
+            "en": "How long does it take?"
+          },
+          "a": {
+            "pt": "Cerca de 2 minutos. São 6 perguntas sobre o seu dia a dia.",
+            "en": "About 2 minutes. It's 6 questions about your day to day."
+          }
+        },
+        {
+          "q": {
+            "pt": "Serve pra quem atende sozinha?",
+            "en": "Is it for those who practice on their own?"
+          },
+          "a": {
+            "pt": "Serve. As primeiras perguntas entendem se você atende sozinha ou tem equipe, e o resultado fala com a sua realidade, não com uma genérica.",
+            "en": "It is. The first questions figure out whether you practice alone or have a team, and the result speaks to your reality, not to a generic one."
+          }
+        },
+        {
+          "q": {
+            "pt": "Isso é uma avaliação clínica?",
+            "en": "Is this a clinical assessment?"
+          },
+          "a": {
+            "pt": "Não. É um diagnóstico do seu processo de captação e da sua agenda, pra começar uma conversa. Não é laudo nem avaliação psicológica.",
+            "en": "No. It's a diagnostic of your acquisition process and your schedule, to start a conversation. It's not a report or a psychological assessment."
+          }
+        },
+        {
+          "q": {
+            "pt": "O que acontece depois que eu deixo meu WhatsApp?",
+            "en": "What happens after I leave my WhatsApp?"
+          },
+          "a": {
+            "pt": "A gente te envia o material por lá e fica à disposição se você quiser conversar sobre o que apareceu. Seu contato fica só com a PsiAtiva, sem disparo em massa.",
+            "en": "We send you the resource there and stay available if you'd like to talk about what came up. Your contact stays only with PsiAtiva, with no mass messaging."
+          }
+        }
       ]
     },
-    "related_html": { "pt": "Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada? <a href=\"/\">Veja como funciona o processo</a>. Se você atende sozinha e quer ver a conta em números, <a href=\"/calculadora/\">use a calculadora de custo da agenda vazia</a>. Se quiser olhar o site em si, dá para <a href=\"/analise-de-site-para-psicologo/\">ver o que o seu site mostra</a>.", "en": "Want to understand how PsiAtiva structures intent-based acquisition, from first contact to confirmed session? <a href=\"/\">See how the process works</a>. If you practice on your own and want to see the math in numbers, <a href=\"/calculadora/\">use the empty-schedule cost calculator</a>. If you want to look at the site itself, you can <a href=\"/analise-de-site-para-psicologo/\">see what your site shows</a>." },
+    "related_html": {
+      "pt": "Quer entender como a PsiAtiva estrutura a captação por intenção, do primeiro contato à sessão confirmada? <a href=\"/\">Veja como funciona o processo</a>. Se você atende sozinha e quer ver a conta em números, <a href=\"/calculadora/\">use a calculadora de custo da agenda vazia</a>. Se quiser olhar o site em si, dá para <a href=\"/analise-de-site-para-psicologo/\">ver o que o seu site mostra</a>.",
+      "en": "Want to understand how PsiAtiva structures intent-based acquisition, from first contact to confirmed session? <a href=\"/\">See how the process works</a>. If you practice on your own and want to see the math in numbers, <a href=\"/calculadora/\">use the empty-schedule cost calculator</a>. If you want to look at the site itself, you can <a href=\"/analise-de-site-para-psicologo/\">see what your site shows</a>."
+    },
     "cta": {
-      "title": { "pt": "Primeiro passo: uma conversa. Só isso.", "en": "First step: a conversation. That's it." },
-      "desc": { "pt": "Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.", "en": "No strings attached. We look at your scenario and tell you honestly whether a process makes sense right now." },
-      "btn": { "pt": "AGENDAR DIAGNÓSTICO", "en": "BOOK A DIAGNOSTIC" }
+      "title": {
+        "pt": "Primeiro passo: uma conversa. Só isso.",
+        "en": "First step: a conversation. That's it."
+      },
+      "desc": {
+        "pt": "Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.",
+        "en": "No strings attached. We look at your scenario and tell you honestly whether a process makes sense right now."
+      },
+      "btn": {
+        "pt": "AGENDAR DIAGNÓSTICO",
+        "en": "BOOK A DIAGNOSTIC"
+      }
     }
   },
-
   "not_found": {
-    "title": { "pt": "Página não encontrada", "en": "Page not found" },
-    "desc": { "pt": "Desculpe, não conseguimos encontrar a página que você está procurando.", "en": "Sorry, we couldn't find the page you're looking for." },
-    "btn": { "pt": "Voltar ao Início", "en": "Go to Home" }
+    "title": {
+      "pt": "Página não encontrada",
+      "en": "Page not found"
+    },
+    "desc": {
+      "pt": "Desculpe, não conseguimos encontrar a página que você está procurando.",
+      "en": "Sorry, we couldn't find the page you're looking for."
+    },
+    "btn": {
+      "pt": "Voltar ao Início",
+      "en": "Go to Home"
+    }
   },
-
   "indicacao": {
     "hero": {
-      "tag": { "pt": "Página de Indicação", "en": "Referral Page" },
-      "title_1": { "pt": "Você está perdendo pacientes", "en": "You're losing patients" },
-      "title_2": { "pt": "entre o primeiro contato e a sessão confirmada.", "en": "between the first contact and the confirmed session." },
-      "subtitle": { "pt": "O buraco está no processo entre esses dois momentos.", "en": "The gap is in the process between those two moments." },
-      "body1_pre": { "pt": "A PsiAtiva é a ", "en": "PsiAtiva is the " },
-      "body1_strong": { "pt": "assessoria de captação ética", "en": "ethical acquisition consultancy" },
-      "body1_post": { "pt": " especializada em psicologia clínica. A maioria das clínicas só percebe esse buraco quando o mês vira.", "en": " specialized in clinical psychology. Most clinics only notice this gap when the month turns." },
-      "body2_pre": { "pt": "A gente fecha o caminho que vai de quem te procura até o paciente sentado na sua sala. Esse caminho tem nome: ", "en": "We close the path from the person reaching out to the patient sitting in your office. This path has a name: " },
-      "body2_gap": { "pt": "GAP, o Gerador de Agenda Previsível", "en": "GAP, the Predictable Schedule Engine" },
-      "cta": { "pt": "AGENDAR DIAGNÓSTICO", "en": "BOOK A DIAGNOSTIC" }
+      "tag": {
+        "pt": "Página de Indicação",
+        "en": "Referral Page"
+      },
+      "title_1": {
+        "pt": "Você está perdendo pacientes",
+        "en": "You're losing patients"
+      },
+      "title_2": {
+        "pt": "entre o primeiro contato e a sessão confirmada.",
+        "en": "between the first contact and the confirmed session."
+      },
+      "subtitle": {
+        "pt": "O buraco está no processo entre esses dois momentos.",
+        "en": "The gap is in the process between those two moments."
+      },
+      "body1_pre": {
+        "pt": "A PsiAtiva é a ",
+        "en": "PsiAtiva is the "
+      },
+      "body1_strong": {
+        "pt": "assessoria de captação ética",
+        "en": "ethical acquisition consultancy"
+      },
+      "body1_post": {
+        "pt": " especializada em psicologia clínica. A maioria das clínicas só percebe esse buraco quando o mês vira.",
+        "en": " specialized in clinical psychology. Most clinics only notice this gap when the month turns."
+      },
+      "body2_pre": {
+        "pt": "A gente fecha o caminho que vai de quem te procura até o paciente sentado na sua sala. Esse caminho tem nome: ",
+        "en": "We close the path from the person reaching out to the patient sitting in your office. This path has a name: "
+      },
+      "body2_gap": {
+        "pt": "GAP, o Gerador de Agenda Previsível",
+        "en": "GAP, the Predictable Schedule Engine"
+      },
+      "cta": {
+        "pt": "AGENDAR DIAGNÓSTICO",
+        "en": "BOOK A DIAGNOSTIC"
+      }
     },
-
     "audience": {
-      "label": { "pt": "A quem isto se destina", "en": "Who this is for" },
-      "heading": { "pt": "Você foi indicada para ler isto.", "en": "You were referred to read this." },
-      "subtitle": { "pt": "Vale a pena se você se reconhece em um destes dois cenários.", "en": "It's worth it if you recognize yourself in one of these two scenarios." },
-      "signals_title": { "pt": "Sinais", "en": "Signs" },
-      "delivers_title": { "pt": "O que a parceria entrega", "en": "What the partnership delivers" },
-      "warranty_label": { "pt": "Garantia", "en": "Guarantee" },
-      "c1_tag": { "pt": "Cenário 1", "en": "Scenario 1" },
-      "c1_title": { "pt": "Você tem clínica com equipe", "en": "You run a clinic with a team" },
-      "c1_sub": { "pt": "2+ profissionais e ao menos uma recepção.", "en": "2+ professionals and at least a front desk." },
-      "c1_sig1": { "pt": "Semana cheia, semana morta, sem conseguir prever o mês", "en": "Full week, dead week, with no way to predict the month" },
-      "c1_sig2": { "pt": "Recepção que recebe mensagens mas não fecha o paciente", "en": "A front desk that gets messages but doesn't book the patient" },
-      "c1_sig3": { "pt": "No-show recorrente, especialmente em primeira sessão", "en": "Recurring no-shows, especially on the first session" },
-      "c1_sig4": { "pt": "Já tentou anunciar, veio contato, mas parou ali", "en": "You've tried ads, contacts came in, but it stopped there" },
-      "c1_sig5": { "pt": "A cidade tem clínicas menos qualificadas com agenda mais cheia que a sua", "en": "Less qualified clinics in town have fuller schedules than yours" },
-      "c1_delivers": { "pt": "Organização do caminho do primeiro contato à sessão confirmada: atendimento, follow-up, redução de no-show e presença online com ética.", "en": "Organizing the path from first contact to confirmed session: first response, follow-up, fewer no-shows, and an ethical online presence." },
-      "c1_meta_label": { "pt": "Meta", "en": "Goal" },
-      "c1_meta_value": { "pt": "+R$10.000 de faturamento em até 6 meses", "en": "+R$10,000 in revenue within 6 months" },
-      "c1_warranty_value": { "pt": "Se não bater, ficamos junto até bater, sem custo adicional", "en": "If we don't hit it, we stay until we do, at no extra cost" },
-      "c2_tag": { "pt": "Cenário 2", "en": "Scenario 2" },
-      "c2_title": { "pt": "Você atende sozinha", "en": "You practice on your own" },
-      "c2_sub": { "pt": "Consultório solo, sem equipe.", "en": "Solo practice, no team." },
-      "c2_sig1": { "pt": "Você sai da sessão e o WhatsApp já tem mensagem de quem foi para outra pessoa", "en": "You leave a session and your WhatsApp already has a message from someone who went elsewhere" },
-      "c2_sig2": { "pt": "Ninguém te encontra no Google, ou te encontra e o perfil está vazio", "en": "No one finds you on Google, or they do and the profile is empty" },
-      "c2_sig3": { "pt": "Cobra abaixo do que merece porque tem medo de perder paciente", "en": "You charge less than you deserve because you're afraid of losing patients" },
-      "c2_sig4": { "pt": "Depende 100% de indicação e a agenda oscila junto com a fonte", "en": "You depend 100% on referrals, and the schedule swings with the source" },
-      "c2_sig5": { "pt": "Quer aparecer online sem virar produtora de conteúdo", "en": "You want to show up online without becoming a content creator" },
-      "c2_delivers": { "pt": "Presença ética online (Google Meu Negócio, site simples, WhatsApp organizado) que funciona enquanto você atende.", "en": "An ethical online presence (Google Business Profile, a simple site, an organized WhatsApp) that works while you're in session." },
-      "c2_meta_label": { "pt": "Prazo", "en": "Timeline" },
-      "c2_meta_value": { "pt": "Processo ativo em até 45 dias", "en": "Process live within 45 days" },
-      "c2_warranty_value": { "pt": "Se os canais não gerarem contato, a gente ajusta sem custo até gerarem", "en": "If the channels don't generate contacts, we adjust at no cost until they do" }
+      "label": {
+        "pt": "A quem isto se destina",
+        "en": "Who this is for"
+      },
+      "heading": {
+        "pt": "Você foi indicada para ler isto.",
+        "en": "You were referred to read this."
+      },
+      "subtitle": {
+        "pt": "Vale a pena se você se reconhece em um destes dois cenários.",
+        "en": "It's worth it if you recognize yourself in one of these two scenarios."
+      },
+      "signals_title": {
+        "pt": "Sinais",
+        "en": "Signs"
+      },
+      "delivers_title": {
+        "pt": "O que a parceria entrega",
+        "en": "What the partnership delivers"
+      },
+      "warranty_label": {
+        "pt": "Garantia",
+        "en": "Guarantee"
+      },
+      "c1_tag": {
+        "pt": "Cenário 1",
+        "en": "Scenario 1"
+      },
+      "c1_title": {
+        "pt": "Você tem clínica com equipe",
+        "en": "You run a clinic with a team"
+      },
+      "c1_sub": {
+        "pt": "2+ profissionais e ao menos uma recepção.",
+        "en": "2+ professionals and at least a front desk."
+      },
+      "c1_sig1": {
+        "pt": "Semana cheia, semana morta, sem conseguir prever o mês",
+        "en": "Full week, dead week, with no way to predict the month"
+      },
+      "c1_sig2": {
+        "pt": "Recepção que recebe mensagens mas não fecha o paciente",
+        "en": "A front desk that gets messages but doesn't book the patient"
+      },
+      "c1_sig3": {
+        "pt": "No-show recorrente, especialmente em primeira sessão",
+        "en": "Recurring no-shows, especially on the first session"
+      },
+      "c1_sig4": {
+        "pt": "Já tentou anunciar, veio contato, mas parou ali",
+        "en": "You've tried ads, contacts came in, but it stopped there"
+      },
+      "c1_sig5": {
+        "pt": "A cidade tem clínicas menos qualificadas com agenda mais cheia que a sua",
+        "en": "Less qualified clinics in town have fuller schedules than yours"
+      },
+      "c1_delivers": {
+        "pt": "Organização do caminho do primeiro contato à sessão confirmada: atendimento, follow-up, redução de no-show e presença online com ética.",
+        "en": "Organizing the path from first contact to confirmed session: first response, follow-up, fewer no-shows, and an ethical online presence."
+      },
+      "c1_meta_label": {
+        "pt": "Meta",
+        "en": "Goal"
+      },
+      "c1_meta_value": {
+        "pt": "+R$10.000 de faturamento em até 6 meses",
+        "en": "+R$10,000 in revenue within 6 months"
+      },
+      "c1_warranty_value": {
+        "pt": "Se não bater, ficamos junto até bater, sem custo adicional",
+        "en": "If we don't hit it, we stay until we do, at no extra cost"
+      },
+      "c2_tag": {
+        "pt": "Cenário 2",
+        "en": "Scenario 2"
+      },
+      "c2_title": {
+        "pt": "Você atende sozinha",
+        "en": "You practice on your own"
+      },
+      "c2_sub": {
+        "pt": "Consultório solo, sem equipe.",
+        "en": "Solo practice, no team."
+      },
+      "c2_sig1": {
+        "pt": "Você sai da sessão e o WhatsApp já tem mensagem de quem foi para outra pessoa",
+        "en": "You leave a session and your WhatsApp already has a message from someone who went elsewhere"
+      },
+      "c2_sig2": {
+        "pt": "Ninguém te encontra no Google, ou te encontra e o perfil está vazio",
+        "en": "No one finds you on Google, or they do and the profile is empty"
+      },
+      "c2_sig3": {
+        "pt": "Cobra abaixo do que merece porque tem medo de perder paciente",
+        "en": "You charge less than you deserve because you're afraid of losing patients"
+      },
+      "c2_sig4": {
+        "pt": "Depende 100% de indicação e a agenda oscila junto com a fonte",
+        "en": "You depend 100% on referrals, and the schedule swings with the source"
+      },
+      "c2_sig5": {
+        "pt": "Quer aparecer online sem virar produtora de conteúdo",
+        "en": "You want to show up online without becoming a content creator"
+      },
+      "c2_delivers": {
+        "pt": "Presença ética online (Google Meu Negócio, site simples, WhatsApp organizado) que funciona enquanto você atende.",
+        "en": "An ethical online presence (Google Business Profile, a simple site, an organized WhatsApp) that works while you're in session."
+      },
+      "c2_meta_label": {
+        "pt": "Prazo",
+        "en": "Timeline"
+      },
+      "c2_meta_value": {
+        "pt": "Processo ativo em até 45 dias",
+        "en": "Process live within 45 days"
+      },
+      "c2_warranty_value": {
+        "pt": "Se os canais não gerarem contato, a gente ajusta sem custo até gerarem",
+        "en": "If the channels don't generate contacts, we adjust at no cost until they do"
+      }
     },
-
     "wna": {
-      "label": { "pt": "Não somos uma agência", "en": "We're not an agency" },
-      "heading": { "pt": "A diferença é onde a gente atua.", "en": "The difference is where we work." },
-      "subtitle": { "pt": "Anúncio sem processo é dinheiro jogado fora. A gente entra onde o anúncio termina.", "en": "An ad without a process is money thrown away. We pick up where the ad ends." },
-      "col_agency": { "pt": "Agência tradicional", "en": "Traditional agency" },
-      "col_us": { "pt": "PsiAtiva", "en": "PsiAtiva" },
-      "row1_left": { "pt": "Entrega contato bruto e para por aí", "en": "Delivers raw contacts and stops there" },
-      "row1_right": { "pt": "Trabalha o caminho inteiro até a sessão confirmada", "en": "Works the whole path to the confirmed session" },
-      "row2_left": { "pt": "Não conhece a rotina de uma clínica de psicologia", "en": "Doesn't know the routine of a psychology clinic" },
-      "row2_right": { "pt": "Especializada em psicologia, com filtro ético em cada passo", "en": "Specialized in psychology, with an ethical filter at every step" },
-      "row3_left": { "pt": "Mede impressões e cliques", "en": "Measures impressions and clicks" },
-      "row3_right": { "pt": "Mede paciente que sentou na sua sala", "en": "Measures patients who sat down in your office" },
-      "row4_left": { "pt": "Cobra por entrega de anúncio ou material", "en": "Charges for ads or materials delivered" },
-      "row4_right": { "pt": "Trabalha por meta de processo, com garantia", "en": "Works toward a process goal, with a guarantee" }
+      "label": {
+        "pt": "Não somos uma agência",
+        "en": "We're not an agency"
+      },
+      "heading": {
+        "pt": "A diferença é onde a gente atua.",
+        "en": "The difference is where we work."
+      },
+      "subtitle": {
+        "pt": "Anúncio sem processo é dinheiro jogado fora. A gente entra onde o anúncio termina.",
+        "en": "An ad without a process is money thrown away. We pick up where the ad ends."
+      },
+      "col_agency": {
+        "pt": "Agência tradicional",
+        "en": "Traditional agency"
+      },
+      "col_us": {
+        "pt": "PsiAtiva",
+        "en": "PsiAtiva"
+      },
+      "row1_left": {
+        "pt": "Entrega contato bruto e para por aí",
+        "en": "Delivers raw contacts and stops there"
+      },
+      "row1_right": {
+        "pt": "Trabalha o caminho inteiro até a sessão confirmada",
+        "en": "Works the whole path to the confirmed session"
+      },
+      "row2_left": {
+        "pt": "Não conhece a rotina de uma clínica de psicologia",
+        "en": "Doesn't know the routine of a psychology clinic"
+      },
+      "row2_right": {
+        "pt": "Especializada em psicologia, com filtro ético em cada passo",
+        "en": "Specialized in psychology, with an ethical filter at every step"
+      },
+      "row3_left": {
+        "pt": "Mede impressões e cliques",
+        "en": "Measures impressions and clicks"
+      },
+      "row3_right": {
+        "pt": "Mede paciente que sentou na sua sala",
+        "en": "Measures patients who sat down in your office"
+      },
+      "row4_left": {
+        "pt": "Cobra por entrega de anúncio ou material",
+        "en": "Charges for ads or materials delivered"
+      },
+      "row4_right": {
+        "pt": "Trabalha por meta de processo, com garantia",
+        "en": "Works toward a process goal, with a guarantee"
+      }
     },
-
     "how": {
-      "label": { "pt": "Como funciona, em 3 minutos", "en": "How it works, in 3 minutes" },
-      "heading_1": { "pt": "GAP, o ", "en": "GAP, the " },
-      "heading_2": { "pt": "Gerador de Agenda Previsível", "en": "Predictable Schedule Engine" },
-      "subtitle": { "pt": "Quatro etapas. Você não precisa entender em detalhe agora. O desenho mostra onde a sua agenda está vazando hoje.", "en": "Four steps. You don't need to understand them in detail now. The diagram shows where your schedule is leaking today." },
-      "step1_title": { "pt": "Consciência", "en": "Awareness" },
-      "step1_surface": { "pt": "Google · Instagram · busca local", "en": "Google · Instagram · local search" },
-      "step1_desc": { "pt": "O paciente percebe que você existe.", "en": "The patient realizes you exist." },
-      "step2_title": { "pt": "Ativação", "en": "Activation" },
-      "step2_surface": { "pt": "Perfil", "en": "Profile" },
-      "step2_desc": { "pt": "O seu perfil é confiável o suficiente para a pessoa entrar em contato.", "en": "Your profile is trustworthy enough for the person to reach out." },
-      "step3_title": { "pt": "Aquisição", "en": "Acquisition" },
-      "step3_surface": { "pt": "WhatsApp", "en": "WhatsApp" },
-      "step3_desc": { "pt": "O primeiro contato é recebido e respondido com processo.", "en": "The first contact is received and answered with a process." },
-      "step4_title": { "pt": "Confirmação", "en": "Confirmation" },
-      "step4_surface": { "pt": "Sessão", "en": "Session" },
-      "step4_desc": { "pt": "O contato vira sessão confirmada, com confirmação ativa e prevenção de no-show.", "en": "The contact becomes a confirmed session, with active confirmation and no-show prevention." },
-      "footnote": { "pt": "A gente diagnostica em qual dessas etapas a sua agenda está vazando. Fecha esse buraco antes de abrir o próximo.", "en": "We diagnose which of these stages your schedule is leaking at. We close that gap before opening the next one." }
+      "label": {
+        "pt": "Como funciona, em 3 minutos",
+        "en": "How it works, in 3 minutes"
+      },
+      "heading_1": {
+        "pt": "GAP, o ",
+        "en": "GAP, the "
+      },
+      "heading_2": {
+        "pt": "Gerador de Agenda Previsível",
+        "en": "Predictable Schedule Engine"
+      },
+      "subtitle": {
+        "pt": "Quatro etapas. Você não precisa entender em detalhe agora. O desenho mostra onde a sua agenda está vazando hoje.",
+        "en": "Four steps. You don't need to understand them in detail now. The diagram shows where your schedule is leaking today."
+      },
+      "step1_title": {
+        "pt": "Consciência",
+        "en": "Awareness"
+      },
+      "step1_surface": {
+        "pt": "Google · Instagram · busca local",
+        "en": "Google · Instagram · local search"
+      },
+      "step1_desc": {
+        "pt": "O paciente percebe que você existe.",
+        "en": "The patient realizes you exist."
+      },
+      "step2_title": {
+        "pt": "Ativação",
+        "en": "Activation"
+      },
+      "step2_surface": {
+        "pt": "Perfil",
+        "en": "Profile"
+      },
+      "step2_desc": {
+        "pt": "O seu perfil é confiável o suficiente para a pessoa entrar em contato.",
+        "en": "Your profile is trustworthy enough for the person to reach out."
+      },
+      "step3_title": {
+        "pt": "Aquisição",
+        "en": "Acquisition"
+      },
+      "step3_surface": {
+        "pt": "WhatsApp",
+        "en": "WhatsApp"
+      },
+      "step3_desc": {
+        "pt": "O primeiro contato é recebido e respondido com processo.",
+        "en": "The first contact is received and answered with a process."
+      },
+      "step4_title": {
+        "pt": "Confirmação",
+        "en": "Confirmation"
+      },
+      "step4_surface": {
+        "pt": "Sessão",
+        "en": "Session"
+      },
+      "step4_desc": {
+        "pt": "O contato vira sessão confirmada, com confirmação ativa e prevenção de no-show.",
+        "en": "The contact becomes a confirmed session, with active confirmation and no-show prevention."
+      },
+      "footnote": {
+        "pt": "A gente diagnostica em qual dessas etapas a sua agenda está vazando. Fecha esse buraco antes de abrir o próximo.",
+        "en": "We diagnose which of these stages your schedule is leaking at. We close that gap before opening the next one."
+      }
     },
-
     "nr1": {
-      "badge": { "pt": "Janela estrutural", "en": "Structural window" },
-      "heading": { "pt": "NR-1 2026: a demanda corporativa por psicólogos vai aumentar.", "en": "NR-1 2026: corporate demand for psychologists is set to rise." },
-      "p1": { "pt": "A partir de janeiro de 2026, empresas brasileiras passam a ser legalmente obrigadas a oferecer suporte psicológico aos colaboradores (atualização da NR-1).", "en": "From January 2026, Brazilian companies are legally required to offer psychological support to their employees (NR-1 update)." },
-      "p2": { "pt": "Ao longo de 2026, a demanda por psicólogos bem posicionados online vai aumentar. Quem aparece nas buscas de SST, RH e benefícios corporativos captura essa demanda primeiro.", "en": "Through 2026, demand for psychologists well positioned online will grow. Those who show up in searches for occupational health, HR, and corporate benefits capture that demand first." },
-      "emphasis": { "pt": "Quem não está pronto, perde a janela.", "en": "Those who aren't ready lose the window." }
+      "badge": {
+        "pt": "Janela estrutural",
+        "en": "Structural window"
+      },
+      "heading": {
+        "pt": "NR-1 2026: a demanda corporativa por psicólogos vai aumentar.",
+        "en": "NR-1 2026: corporate demand for psychologists is set to rise."
+      },
+      "p1": {
+        "pt": "A partir de janeiro de 2026, empresas brasileiras passam a ser legalmente obrigadas a oferecer suporte psicológico aos colaboradores (atualização da NR-1).",
+        "en": "From January 2026, Brazilian companies are legally required to offer psychological support to their employees (NR-1 update)."
+      },
+      "p2": {
+        "pt": "Ao longo de 2026, a demanda por psicólogos bem posicionados online vai aumentar. Quem aparece nas buscas de SST, RH e benefícios corporativos captura essa demanda primeiro.",
+        "en": "Through 2026, demand for psychologists well positioned online will grow. Those who show up in searches for occupational health, HR, and corporate benefits capture that demand first."
+      },
+      "emphasis": {
+        "pt": "Quem não está pronto, perde a janela.",
+        "en": "Those who aren't ready lose the window."
+      }
     },
-
     "next": {
-      "label": { "pt": "Próximo passo", "en": "Next step" },
-      "heading_pre": { "pt": "O primeiro passo é uma conversa de ", "en": "The first step is a " },
-      "heading_strong": { "pt": "20 minutos", "en": "20-minute" },
-      "heading_post": { "pt": ", sem compromisso.", "en": " conversation, no strings attached." },
-      "body": { "pt": "A ideia é entender o seu cenário e ver se faz sentido seguir. Se não fizer, a gente diz na própria conversa.", "en": "The idea is to understand your situation and see if it makes sense to continue. If it doesn't, we'll tell you right there." },
-      "cta": { "pt": "Diagnóstico gratuito pelo WhatsApp", "en": "Free diagnostic via WhatsApp" },
-      "fineprint": { "pt": "Mensagem pré-preenchida. Basta enviar pelo seu WhatsApp.", "en": "The message is pre-filled. Just send it from your WhatsApp." }
+      "label": {
+        "pt": "Próximo passo",
+        "en": "Next step"
+      },
+      "heading_pre": {
+        "pt": "O primeiro passo é uma conversa de ",
+        "en": "The first step is a "
+      },
+      "heading_strong": {
+        "pt": "20 minutos",
+        "en": "20-minute"
+      },
+      "heading_post": {
+        "pt": ", sem compromisso.",
+        "en": " conversation, no strings attached."
+      },
+      "body": {
+        "pt": "A ideia é entender o seu cenário e ver se faz sentido seguir. Se não fizer, a gente diz na própria conversa.",
+        "en": "The idea is to understand your situation and see if it makes sense to continue. If it doesn't, we'll tell you right there."
+      },
+      "cta": {
+        "pt": "Diagnóstico gratuito pelo WhatsApp",
+        "en": "Free diagnostic via WhatsApp"
+      },
+      "fineprint": {
+        "pt": "Mensagem pré-preenchida. Basta enviar pelo seu WhatsApp.",
+        "en": "The message is pre-filled. Just send it from your WhatsApp."
+      }
     },
-
     "who": {
-      "label": { "pt": "Quem é a PsiAtiva", "en": "Who PsiAtiva is" },
-      "body_pre": { "pt": "PsiAtiva é uma ", "en": "PsiAtiva is an " },
-      "body_strong": { "pt": "assessoria de captação focada exclusivamente em psicologia", "en": "acquisition consultancy focused exclusively on psychology" },
-      "body_post": { "pt": ". Trabalhamos com clínicas e psicólogas autônomas que querem agenda previsível sem abrir mão da identidade clínica.", "en": ". We work with clinics and solo psychologists who want a predictable schedule without giving up their clinical identity." },
-      "tagline": { "pt": "Processo de captação para clínicas de psicologia.", "en": "Patient acquisition process for psychology clinics." }
+      "label": {
+        "pt": "Quem é a PsiAtiva",
+        "en": "Who PsiAtiva is"
+      },
+      "body_pre": {
+        "pt": "PsiAtiva é uma ",
+        "en": "PsiAtiva is an "
+      },
+      "body_strong": {
+        "pt": "assessoria de captação focada exclusivamente em psicologia",
+        "en": "acquisition consultancy focused exclusively on psychology"
+      },
+      "body_post": {
+        "pt": ". Trabalhamos com clínicas e psicólogas autônomas que querem agenda previsível sem abrir mão da identidade clínica.",
+        "en": ". We work with clinics and solo psychologists who want a predictable schedule without giving up their clinical identity."
+      },
+      "tagline": {
+        "pt": "Processo de captação para clínicas de psicologia.",
+        "en": "Patient acquisition process for psychology clinics."
+      }
     },
-
     "faq": {
-      "label": { "pt": "FAQ curto", "en": "Quick FAQ" },
-      "title": { "pt": "Perguntas que provavelmente passaram pela sua cabeça.", "en": "Questions that have probably crossed your mind." },
-      "q1": { "pt": "Vocês são uma agência?", "en": "Are you an agency?" },
-      "a1": { "pt": "Não. Somos assessoria de processo. Agência traz contato. A gente trabalha o caminho inteiro até a sessão confirmada.", "en": "No. We're a process consultancy. An agency brings contacts. We work the whole path to the confirmed session." },
-      "q2": { "pt": "É um curso ou mentoria?", "en": "Is it a course or mentoring?" },
-      "a2": { "pt": "Não. É implementação real, junto com você ou com a sua equipe.", "en": "No. It's real implementation, alongside you or your team." },
-      "q3": { "pt": "Aceitam qualquer profissional?", "en": "Do you accept any professional?" },
-      "a3": { "pt": "Não. Trabalhamos com perfis que já têm uma base de pacientes (mesmo que pequena) e que cobram dentro ou perto do mínimo recomendado pelo CRP.", "en": "No. We work with professionals who already have a patient base (even a small one) and who charge at or near the CRP-recommended minimum." },
-      "q4": { "pt": "E a ética?", "en": "What about ethics?" },
-      "a4": { "pt": "Não usamos abordagens agressivas, follow-up frio nem promessa de 'explodir agenda'. Aparecer no Google e organizar o WhatsApp não é publicidade. É facilitar o acesso de quem já está te buscando.", "en": "We don't use aggressive tactics, cold follow-up, or promises to 'explode your schedule.' Showing up on Google and organizing your WhatsApp isn't advertising. It's making it easier for people already looking for you to reach you." },
-      "q5": { "pt": "Qual é o investimento?", "en": "What's the investment?" },
-      "a5": { "pt": "Conversamos sobre isso na primeira conversa, depois de entender o seu cenário. A garantia vem antes do preço: se não bater a meta combinada, a gente fica até bater, sem custo adicional.", "en": "We talk about that in the first conversation, after understanding your situation. The guarantee comes before the price: if we don't hit the agreed goal, we stay until we do, at no extra cost." }
+      "label": {
+        "pt": "FAQ curto",
+        "en": "Quick FAQ"
+      },
+      "title": {
+        "pt": "Perguntas que provavelmente passaram pela sua cabeça.",
+        "en": "Questions that have probably crossed your mind."
+      },
+      "q1": {
+        "pt": "Vocês são uma agência?",
+        "en": "Are you an agency?"
+      },
+      "a1": {
+        "pt": "Não. Somos assessoria de processo. Agência traz contato. A gente trabalha o caminho inteiro até a sessão confirmada.",
+        "en": "No. We're a process consultancy. An agency brings contacts. We work the whole path to the confirmed session."
+      },
+      "q2": {
+        "pt": "É um curso ou mentoria?",
+        "en": "Is it a course or mentoring?"
+      },
+      "a2": {
+        "pt": "Não. É implementação real, junto com você ou com a sua equipe.",
+        "en": "No. It's real implementation, alongside you or your team."
+      },
+      "q3": {
+        "pt": "Aceitam qualquer profissional?",
+        "en": "Do you accept any professional?"
+      },
+      "a3": {
+        "pt": "Não. Trabalhamos com perfis que já têm uma base de pacientes (mesmo que pequena) e que cobram dentro ou perto do mínimo recomendado pelo CRP.",
+        "en": "No. We work with professionals who already have a patient base (even a small one) and who charge at or near the CRP-recommended minimum."
+      },
+      "q4": {
+        "pt": "E a ética?",
+        "en": "What about ethics?"
+      },
+      "a4": {
+        "pt": "Não usamos abordagens agressivas, follow-up frio nem promessa de 'explodir agenda'. Aparecer no Google e organizar o WhatsApp não é publicidade. É facilitar o acesso de quem já está te buscando.",
+        "en": "We don't use aggressive tactics, cold follow-up, or promises to 'explode your schedule.' Showing up on Google and organizing your WhatsApp isn't advertising. It's making it easier for people already looking for you to reach you."
+      },
+      "q5": {
+        "pt": "Qual é o investimento?",
+        "en": "What's the investment?"
+      },
+      "a5": {
+        "pt": "Conversamos sobre isso na primeira conversa, depois de entender o seu cenário. A garantia vem antes do preço: se não bater a meta combinada, a gente fica até bater, sem custo adicional.",
+        "en": "We talk about that in the first conversation, after understanding your situation. The guarantee comes before the price: if we don't hit the agreed goal, we stay until we do, at no extra cost."
+      }
     },
-
     "nav": {
-      "inicio": { "pt": "Início", "en": "Home" },
-      "para_quem": { "pt": "Para quem", "en": "Who it's for" },
-      "diferenca": { "pt": "Diferença", "en": "Difference" },
-      "como_funciona": { "pt": "Como Funciona", "en": "How It Works" },
-      "nr1": { "pt": "NR-1 2026", "en": "NR-1 2026" },
-      "cta": { "pt": "Diagnóstico Gratuito", "en": "Free Diagnostic" }
+      "inicio": {
+        "pt": "Início",
+        "en": "Home"
+      },
+      "para_quem": {
+        "pt": "Para quem",
+        "en": "Who it's for"
+      },
+      "diferenca": {
+        "pt": "Diferença",
+        "en": "Difference"
+      },
+      "como_funciona": {
+        "pt": "Como Funciona",
+        "en": "How It Works"
+      },
+      "nr1": {
+        "pt": "NR-1 2026",
+        "en": "NR-1 2026"
+      },
+      "cta": {
+        "pt": "Diagnóstico Gratuito",
+        "en": "Free Diagnostic"
+      }
     },
-
     "meta": {
-      "title": { "pt": "Você foi indicada | PsiAtiva", "en": "You were referred | PsiAtiva" },
-      "description": { "pt": "Você foi indicada. A PsiAtiva é a assessoria de captação ética para clínicas e consultórios de psicologia. Diagnóstico gratuito pelo WhatsApp.", "en": "You were referred. PsiAtiva is the ethical patient-acquisition consultancy for psychology clinics and private practices. Free diagnostic via WhatsApp." }
+      "title": {
+        "pt": "Você foi indicada | PsiAtiva",
+        "en": "You were referred | PsiAtiva"
+      },
+      "description": {
+        "pt": "Você foi indicada. A PsiAtiva é a assessoria de captação ética para clínicas e consultórios de psicologia. Diagnóstico gratuito pelo WhatsApp.",
+        "en": "You were referred. PsiAtiva is the ethical patient-acquisition consultancy for psychology clinics and private practices. Free diagnostic via WhatsApp."
+      }
     }
   }
 }

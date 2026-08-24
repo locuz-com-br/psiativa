@@ -183,3 +183,69 @@ export function personAuthorSchema(input: PersonAuthorInput) {
     worksFor: { "@type": "Organization", name: SITE_CONFIG.name, url: siteUrl },
   };
 }
+
+interface PodcastEpisodeInput {
+  title: string;
+  description: string;
+  path: string;
+  publishedAt: Date | string;
+  durationISO: string;
+  audioUrl: string;
+  episodeNumber: number;
+  guid: string;
+}
+
+// PodcastSeries + PodcastEpisode: o programa e pessoal da psicologa (host),
+// republicado aqui. Por isso `author` = Person com CRP (E-E-A-T em saude) e
+// `publisher`/`provider` = PsiAtiva, que hospeda as paginas.
+export function podcastSeriesSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+  rss: string;
+  image: string;
+  author: { name: string; crp: string; url?: string };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "PodcastSeries",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    webFeed: input.rss,
+    image: input.image,
+    inLanguage: SITE_CONFIG.defaultLocale,
+    author: personAuthorSchema(input.author),
+    publisher: { "@type": "Organization", name: SITE_CONFIG.name, url: siteUrl },
+  };
+}
+
+export function podcastEpisodeSchema(
+  input: PodcastEpisodeInput,
+  series: { name: string; path: string },
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "PodcastEpisode",
+    name: input.title,
+    description: input.description,
+    url: absoluteUrl(input.path),
+    datePublished: isoDate(input.publishedAt),
+    episodeNumber: input.episodeNumber,
+    identifier: input.guid,
+    inLanguage: SITE_CONFIG.defaultLocale,
+    timeRequired: input.durationISO,
+    associatedMedia: {
+      "@type": "AudioObject",
+      contentUrl: input.audioUrl,
+      encodingFormat: "audio/mpeg",
+      duration: input.durationISO,
+    },
+    partOfSeries: {
+      "@type": "PodcastSeries",
+      name: series.name,
+      url: absoluteUrl(series.path),
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(input.path) },
+  };
+}
