@@ -187,3 +187,33 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
   3. Run the discovery-survey copy through **voice-auditor + CFP-light + offer-guardian** before publish.
 
   Plan + capture contract: `plans/native-forms/plan.md`.
+- **`src/pages/raio-x-site.astro`** + `src/components/audit-site/*` + `src/components/sections/AuditSiteCTA.astro`
+  + `src/lib/audit.ts` + `src/config/audit-site.config.ts` = the **Raio-X do Site** (`/raio-x-site`, bilingual PT/EN,
+  Sprint 17a Fase 5, built 2026-08-24). A free site audit: the visitor pastes her site URL, the engine scores it on a
+  5-point rubric (clareza · contato · percepção/cuidado · prova/confiança · próximo passo, 20 each), and the **R$ stays
+  locked** until she leaves name + WhatsApp. **ICP: neutral input, single-ICP result** — the `/quiz` exception, not the
+  home's clínica frame and not the calculadora's solo frame. A URL cannot know whether she has a front desk, so the
+  ranking layer says "você"/"seu site"; ⛔ do not reintroduce clinic signals into the indexable layer, that neutrality is
+  what keeps this page from cannibalizing the other two. The home CTA (`AuditSiteCTA`, after `QuizCTA`, gated by
+  `sections.auditSiteCta`) **is** clínica-framed.
+  - ⚠️ **Two round-trips, not one** — this is the only tool here that does not POST to `PUBLIC_N8N_CAPTURE_WEBHOOK`.
+    `/scan` verifies hCaptcha *before* the expensive fetch+LLM call; `/reveal` takes the phone and writes the lead.
+    They are two dedicated n8n webhooks (`PUBLIC_N8N_RAIOX_SCAN_WEBHOOK` / `PUBLIC_N8N_RAIOX_REVEAL_WEBHOOK`).
+    ⛔ The capture contract §1 and the engine's `TASKS.md` 6.2 still say to reuse the shared webhook — **they are stale**;
+    the island is wired to match the workflows' own validation code, not those docs.
+  - ⚠️ **Dedicated hCaptcha sitekey** (`PUBLIC_HCAPTCHA_SITEKEY_RAIOX` → `SITE_CONFIG.analytics.hcaptchaSiteKeyRaiox`),
+    separate from the quiz/calculadora key so this tool can be blocked or rotated alone. ⛔ hCaptcha issues **one secret
+    per ACCOUNT**, not per site: both sitekeys verify against the same server-side `HCAPTCHA_SECRET`. Do not recreate a
+    per-site secret, and ⛔ never put a secret in a `PUBLIC_*` var (a value starting `ES_` or `0x` is a secret, not a sitekey).
+  - ⛔ **`lib/audit.ts` deliberately does NOT compute the R$.** The impact is recomputed server-side and arrives ready in
+    `impacto.frase`; the escape rates are an unmeasured hypothesis and stay off the client. `impacto: null` is a **valid**
+    result (the dominant pain passed, or the loss fell under the relevance floor), not an error.
+  - ⛔ **CFP divergence, deliberate:** patient testimonials never count as *prova* and are never recommended as a fix.
+    CFP 06/2019 forbids it and this tool advises the psychologist. Do not "fix" it back toward `diagnostico-2min`.
+  - **Pre-deploy gates (front-end is done; the page is indexable and linked from the home, but NOT functional until these close):**
+    1. Fill the two webhook vars and **activate** both n8n workflows. Until then every visitor hits a refusal.
+    2. **5.6** SEO briefing pass (`psiativa-seo-briefer`) — anti-cannibalization vs. home, quiz and calculadora.
+    3. **5.7** Lock the public name via `psiativa-voice-auditor`. Copy is self-audited only; the route `/raio-x-site` is
+       provisional until this signs off, and changing it after publish costs a redirect.
+
+  Plan: `plans/sprint-17-presence-diagnostic-mini-tools.md` · contract: `plans/audit-site-capture-contract.md`.
