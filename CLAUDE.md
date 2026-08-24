@@ -217,3 +217,38 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
        provisional until this signs off, and changing it after publish costs a redirect.
 
   Plan: `plans/sprint-17-presence-diagnostic-mini-tools.md` · contract: `plans/audit-site-capture-contract.md`.
+- **`src/pages/podcast/*`** + `src/content/podcast/*.md` + `src/config/podcast.config.ts` + the `podcast` collection
+  + `podcastSeriesSchema`/`podcastEpisodeSchema` = the **Podcast PsiAtiva** hub (`/podcast`) + 8 episode pages
+  (built 2026-08-24). The show is the **personal podcast of the psychologist Loivani Venturin Körner (CRP 12/19699)**,
+  republished here under the shared "PsiAtiva" brand as agreed mutual promotion. It is **not** a PsiAtiva product page.
+  - ⚠️ **Audience is patients / the general public — NEITHER commercial ICP.** This is a third carved-out exception
+    alongside `/quiz` and `/raio-x-site`, and the widest one: the content speaks to people considering therapy, not to
+    clinic owners. ⛔ Do **not** apply hemorrhage framing, clinic-life signals (agenda oscilante, no-show, recepção), or
+    the *clínico* register here — the humanizer's ICP layers are built for selling to psychologists and do not apply.
+    Vocabulary compliance and the anti-AI layers **do** apply and were audited (zero forbidden terms in visible copy).
+  - ⛔ **No PsiAtiva commercial CTA anywhere on these pages**, and episode pages link to **zero** funnel pages
+    (asserted in the DOM, not just intended). Discovery is one footer link under "Recursos", beside Blog. That
+    asymmetry is deliberate: patient traffic will not convert on a B2B offer, and routing it into the funnel
+    would wreck sitewide conversion rate. Outbound CTAs go to Loivani (Instagram / LinkedIn / WhatsApp / Lattes).
+  - ⛔ **`audioUrl` MUST stay on the `anchor.fm/s/c24416d8/podcast/play/…` endpoint.** That redirect is what Spotify
+    for Podcasters counts. The inner `d3ctxlq1ktw2nl.cloudfront.net` URL plays identically and counts **nowhere** —
+    using it makes every on-site play invisible to the show's own stats. Players are `preload="none"` so page loads
+    do not fire phantom downloads.
+  - ⛔ **Apple badge rules** (marketing.services.apple/apple-podcasts-identity-guidelines): never recreate, recolor,
+    rotate, animate, or add shadow/glow; never use the Apple mark alone; min 30px height; clear space ≥ 1/10 of badge
+    height; **never self-translate the badge**. The shipped file is the official **USGB-EN (English)** artwork — Apple
+    publishes a PT-BR badge, and swapping it is a one-line path change in `podcast.config.ts`. The official SVG embeds
+    a 2048×2048 PNG (482 KB) that renders at 41px; it ships **unaltered** because resampling would be "changing the
+    artwork". One request, cached.
+  - **`hubOnly: true`** (ep00 73 words, ep06 a third-party text attributed to Cortella with uncertain authorship)
+    = playable on the hub, **no page, never in the sitemap**. Thin content + a copyright question, not an oversight.
+  - **CRP 12/19699 renders on every episode page**, not only the hub — Art. 2º, Res. CFP 06/2019 requires name + CRP
+    in professional advertising, and republishing here makes these pages exactly that.
+  - Two **editorial notes** ship as blockquotes: ep03 (a therapy claim that edged toward *previsão taxativa de
+    resultado*) and ep08 (Hanscarl Leuner was German, not American; Goleman's book is 1995). Full audit:
+    `../podcast/CFP-AUDIT.md`; transcripts + manifest live in `../podcast/`.
+  - ⚠️ **KNOWN GAP — the podcast pages are PT-only.** No `data-i18n` keys and no `{pt,en}` island copy, so they do not
+    localize on the EN toggle (same status as `/diagnostico`). Accepted deliberately; not scheduled.
+  - ⚠️ **Pending:** official **Spotify** badge asset (currently a text link, so Apple has artwork and Spotify does
+    not); and `public/images/external/apple/` carries **6.9 MB of unreferenced files** (the 2048px icon PNG and the
+    Blk lockup SVG) that ship to FTP for nothing — delete or keep deliberately.
