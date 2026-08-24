@@ -1,6 +1,6 @@
 ---
 // ─────────────────────────────────────────────────────────────
-// /raio-x-site — Raio-X do Site (Sprint 17a, Fase 5.1 + 5.2)
+// /analise-de-site-para-psicologo — Raio-X do Site (Sprint 17a, Fase 5.1 + 5.2)
 // Camada indexável (SEO) + island interativa.
 // ─────────────────────────────────────────────────────────────
 // ICP: **entrada ICP-neutra, resultado single-ICP** (padrão do /quiz).
@@ -19,47 +19,54 @@ import { SITE_CONFIG } from "../config/site.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AuditSiteIsland from "../components/audit-site/AuditSiteIsland.tsx";
 import {
+  articleSchema,
   breadcrumbSchema,
   faqPageSchema,
   organizationSchema,
   webApplicationSchema,
 } from "../lib/schema";
 
-const title = "Raio-X do Site: o que o site do psicólogo deixa escapar";
+const title = "Análise gratuita do site do psicólogo em 1 minuto";
 const description =
-  "Leitura automática e gratuita do seu site em 5 pontos: clareza, contato, cuidado, confiança e próximo passo. Veja o que a paciente encontra antes de te chamar.";
-const pagePath = "/raio-x-site/";
+  "Leitura gratuita do site do psicólogo em 5 pontos: clareza, contato, cuidado, confiança e próximo passo. Veja o que a paciente vê antes de te chamar.";
+const pagePath = "/analise-de-site-para-psicologo/";
 
 const faqs = [
   {
-    question: "O raio-x é gratuito?",
+    question:
+      "O raio-x é gratuito?",
     answer:
       "Sim. A leitura é aberta e não pede cadastro para começar. Você digita o endereço do site e recebe a nota com os 5 pontos.",
   },
   {
-    question: "Como a nota é calculada?",
+    question:
+      "Como a nota é calculada?",
     answer:
       "São 5 pontos, 20 cada. A leitura verifica cada ponto e cita a evidência que encontrou no seu site. A soma é aritmética, feita em código, para que a mesma leitura sempre dê a mesma nota.",
   },
   {
-    question: "O que exatamente vocês olham?",
+    question:
+      "O que exatamente vocês olham?",
     answer:
       "Só o que está público no seu site: se dá para entender quem você atende, se existe um caminho clicável para te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é o próximo passo.",
   },
   {
-    question: "Depoimento de paciente conta como sinal de confiança?",
+    question:
+      "Depoimento de paciente conta como sinal de confiança?",
     answer:
-      "Não, e essa é uma escolha deliberada. A Resolução CFP 06/2019 veda depoimento de paciente na divulgação profissional. Sinal verificável aqui é CRP, formação e abordagem. A ferramenta nunca vai sugerir que você publique depoimento.",
+      "Não, e essa é uma escolha deliberada. O Código de Ética Profissional do Psicólogo veda o uso de depoimento de quem foi atendido na divulgação de serviços. Sinal verificável aqui é CRP, formação e abordagem. A ferramenta nunca vai sugerir que você publique depoimento.",
   },
   {
-    question: "Serve para clínica e para quem atende sozinha?",
+    question:
+      "A leitura muda se eu atendo sozinha ou tenho equipe?",
     answer:
-      "Serve para as duas. A leitura olha o site, e o site é o mesmo endereço nos dois casos. O que muda é a conversa depois, que acompanha o seu contexto.",
+      "A leitura olha o site, e o endereço é o mesmo nos dois casos. A conversa depois acompanha o seu contexto.",
   },
   {
-    question: "O valor estimado é uma promessa de faturamento?",
+    question:
+      "De onde sai o valor que aparece no fim?",
     answer:
-      "Não. É uma estimativa conservadora a partir dos números que você mesma informa, e aparece sempre como um piso, com a expressão a partir de. Não substitui uma conversa.",
+      "Do seu ticket, da sua agenda de hoje e do ponto mais fraco que a leitura encontrou no site. É uma estimativa conservadora e aparece sempre como um piso, com a expressão a partir de. Não substitui uma conversa.",
   },
 ];
 
@@ -71,6 +78,12 @@ const schema = [
     path: pagePath,
   }),
   faqPageSchema(faqs),
+  articleSchema({
+    title,
+    description,
+    path: pagePath,
+    publishedAt: "2026-08-24",
+  }),
   breadcrumbSchema([
     { name: "Início", path: "/" },
     { name: "Raio-X do Site", path: pagePath },
@@ -97,17 +110,16 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
       <div class="rx-tag" data-i18n="raioX.hero.tag">Ferramenta gratuita</div>
       <h1 class="rx-h1">
         <span data-i18n="raioX.hero.h1_line1">O que o seu site deixa escapar?</span><br />
-        <span class="rx-h1-accent" data-i18n="raioX.hero.h1_accent">Descubra em um minuto.</span>
+        <span class="rx-h1-accent" data-i18n="raioX.hero.h1_accent">Análise gratuita para psicólogos, em um minuto.</span>
       </h1>
       <p class="rx-hero-sub" data-i18n="raioX.hero.sub">
         A paciente chega no seu site, lê por alguns segundos e decide se te chama ou fecha a aba. Quando ela fecha,
         você nunca fica sabendo.
       </p>
       <p class="rx-tldr" data-i18n="raioX.hero.tldr">
-        O Raio-X lê o seu site em 5 pontos: se dá para entender quem você atende, se existe um caminho clicável para
-        te chamar, se a página parece cuidada, se aparecem sinais verificáveis de quem você é, e se fica claro qual é
-        o próximo passo. Cada ponto vale 20. No fim, com os seus números de sessão, ele estima quanto atendimento
-        deixa de acontecer por mês por causa do ponto mais fraco.
+        O Raio-X do Site é uma leitura automática e gratuita do site de um psicólogo em cinco pontos: clareza,
+        contato, cuidado, confiança e próximo passo. Cada ponto vale 20. Em um minuto ele mostra qual deles está
+        fazendo a paciente fechar a aba antes de te chamar.
       </p>
     </div>
   </section>
@@ -125,7 +137,8 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
       <!-- POV / IAT do briefing de SEO. É o ÚNICO contraste da página:
            a regra de voz permite um deliberado, e este é ele. -->
       <p class="rx-pov" data-i18n="raioX.pov">
-        Seu site não precisa ser bonito. Precisa ser encontrável, entendível e clicável.
+        O seu site não precisa de depoimento para transmitir confiança. Precisa do que dá para verificar: CRP,
+        formação, abordagem e um caminho claro para te chamar.
       </p>
 
       <h2 data-i18n="raioX.content.h2_1">O que a paciente procura no site de um psicólogo?</h2>
@@ -136,32 +149,44 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
       </p>
 
       <h2 data-i18n="raioX.content.h2_2">Por que o contato é o ponto mais caro?</h2>
-      <p data-i18n="raioX.content.p_2">
-        Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um
-        número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável
-        resolve isso, e a maioria dos sites de consultório ainda não tem.
+      <p data-i18n-html="raioX.content.p_2_html">
+        Porque ele falha depois que a pessoa já se convenceu. Ela leu, gostou, quis marcar, e aí precisa copiar um número do rodapé, abrir o WhatsApp e digitar. Cada passo a mais é uma chance de desistir. Um link clicável resolve isso, e a maioria dos sites de consultório ainda não tem. O link resolve a chegada. O que acontece depois que a mensagem cai no seu WhatsApp é outro assunto. Ele tem <a href="/blog/whatsapp-consultorio-solo/">um guia próprio</a>.
       </p>
 
-      <h2 data-i18n="raioX.content.h2_3">O que conta como sinal de confiança, dentro da ética</h2>
+      <h2 data-i18n="raioX.content.h2_3">Confiança no site de um psicólogo se prova como?</h2>
       <p data-i18n="raioX.content.p_3">
-        CRP visível, formação, abordagem e o que você de fato atende. A Resolução CFP 06/2019 veda depoimento de
-        paciente na divulgação profissional, então o Raio-X nunca conta depoimento como prova e nunca recomenda que
-        você publique um. A confiança aqui vem do que é verificável sobre você.
+        Confiança no site de um psicólogo se prova por um caminho próprio. A maior parte dos guias de site para
+        psicólogo lista depoimento de paciente como elemento de confiança. O Código de Ética Profissional do Psicólogo
+        veda o uso de depoimento de quem foi atendido na divulgação de serviços, então seguir esse guia leva a
+        psicóloga a publicar exatamente o que a profissão dela não permite. O que conta como sinal verificável é outro
+        conjunto: número de CRP visível na página, formação, abordagem de trabalho, quais demandas ela atende e em que
+        formato. São informações que a paciente consegue conferir sozinha antes de mandar a primeira mensagem. Por
+        isso o Raio-X do Site pontua o item confiança sem nunca contar um depoimento, e nunca sugere que a psicóloga
+        publique um. A regra da profissão é o critério da leitura, e ele vale ponto a ponto.
       </p>
 
-      <h2 data-i18n="raioX.content.h2_4">Como a nota de 0 a 100 é montada</h2>
+      <h2 data-i18n="raioX.content.h2_4">Como a nota de 0 a 100 é montada?</h2>
       <p data-i18n="raioX.content.p_4">
         São 5 pontos, 20 cada. A leitura decide ponto a ponto e cita a evidência que encontrou. A soma fica com o
         código, para que a mesma página sempre dê a mesma nota. O resultado também mostra qual modelo fez a leitura,
         porque o julgamento varia entre modelos enquanto a aritmética se mantém.
       </p>
 
-      <h2 data-i18n="raioX.content.h2_5">De onde vem a estimativa em reais</h2>
+      <h2 data-i18n="raioX.content.h2_5">De onde vem a estimativa em reais?</h2>
       <p data-i18n="raioX.content.p_5">
         Do seu próprio ticket e da sua agenda de hoje, cruzados com uma leitura conservadora de quanto escapa pelo
         ponto mais fraco. Só o ponto mais fraco entra na conta, os outros não somam. O mês é contado como 4 semanas e
         o valor arredonda para baixo. Se o seu ponto mais fraco passou, o Raio-X não mostra número nenhum, porque
         não teria um número honesto para mostrar.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Link interno (satélite → vizinhas + pilar) ───────── -->
+  <section class="rx-related">
+    <div class="container rx-prose">
+      <p data-i18n-html="raioX.related_html">
+        Antes de a paciente chegar no seu site, ela precisa te encontrar: veja <a href="/blog/aparecer-no-google-psicologa/">como aparecer no Google como psicóloga</a>. Se o site já está de pé e a agenda segue irregular, o quiz ajuda a <a href="/quiz/">descobrir onde a agenda está vazando</a>. E para ver o processo inteiro, <a href="/">como a PsiAtiva estrutura a captação por intenção</a>.
       </p>
     </div>
   </section>
@@ -184,7 +209,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── CTA final ───────────────────────────────────────── -->
   <section class="rx-cta">
     <div class="container rx-cta-inner">
-      <h2 data-i18n="raioX.cta.title">Prefere que eu olhe com você?</h2>
+      <h2 data-i18n="raioX.cta.title">Quer olhar isso com a gente?</h2>
       <p data-i18n="raioX.cta.desc">
         O raio-x automático mostra o que está escapando. A conversa mostra o que fazer com isso, no seu contexto e no
         seu tempo.
@@ -209,7 +234,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   .rx-tool { padding: 2.5rem 0; background: var(--color-surface, #f2f7f7); }
   .rx-tool-inner { max-width: 44rem; }
 
-  .rx-content, .rx-faq { padding: 3rem 0; }
+  .rx-content, .rx-faq, .rx-related { padding: 3rem 0; }
   .rx-faq { background: var(--color-surface, #f2f7f7); }
   .rx-prose { max-width: 44rem; }
   .rx-prose h2 { margin: 2rem 0 0.65rem; font-size: clamp(1.25rem, 2.5vw, 1.6rem); line-height: 1.3; color: var(--text-heading); }

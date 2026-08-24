@@ -113,7 +113,7 @@ export const SITE_CONFIG = {
     /** /quiz + /calculadora. */
     hcaptchaSiteKey:
       import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY || "",
-    /** /raio-x-site — dedicated key so the Raio-X can be blocked or rotated
+    /** /analise-de-site-para-psicologo — dedicated key so the Raio-X can be blocked or rotated
      *  without taking the quiz and calculadora down with it. */
     hcaptchaSiteKeyRaiox:
       import.meta.env.PUBLIC_HCAPTCHA_SITEKEY_RAIOX || "",
