@@ -12,6 +12,7 @@ import FAQ from '../components/sections/FAQ.astro';
 import CTA from '../components/sections/CTA.astro';
 import CalcCTA from '../components/sections/CalcCTA.astro';
 import QuizCTA from '../components/sections/QuizCTA.astro';
+import AuditSiteCTA from '../components/sections/AuditSiteCTA.astro';
 import Contact from '../components/sections/Contact.astro';
 import faqData from '../data/faq.json';
 import translations from '../data/translations.json';
@@ -49,6 +50,7 @@ const homeSchema = [
   {s.functionalities && <Process />}
   {s.cases && <Results />}
   {s.quizCta && <QuizCTA />}
+  {s.auditSiteCta && <AuditSiteCTA />}
   {s.testimonials && <Testimonials />}
   {s.faq && <FAQ />}
   {s.ctaFinal && <CTA />}
