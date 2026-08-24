@@ -222,7 +222,23 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
 </BaseLayout>
 
 <style>
-  .rx-hero { position: relative; padding: 5rem 0 3rem; overflow: hidden; }
+  /* Espelha o hero da home (`Hero.astro`): sobe 72px para ficar POR TRÁS da navbar
+     flutuante, de modo que o fundo escuro chegue ao topo da viewport em vez de deixar
+     a faixa clara do body aparecendo acima dele.
+     ⚠️ `position: relative` desloca só a PINTURA, não o fluxo. Na home isso não incomoda
+     porque o que vem depois do hero é da cor do body; aqui a seção seguinte (`.rx-tool`)
+     tem fundo `--color-surface`, então os 72px deixados no fluxo virariam uma faixa clara
+     ENTRE o hero escuro e o bloco tonalizado. O `margin-bottom: -72px` devolve esse espaço.
+     Contas (viewport 1440): topo pintado 64 → -8 · conteúdo segue em 144 (padding 80 + 72)
+     · altura 511 → 583 · `.rx-tool` permanece em 575. */
+  .rx-hero {
+    position: relative;
+    top: -72px;
+    margin-bottom: -72px;
+    min-height: 583px;
+    padding: 152px 0 3rem;
+    overflow: hidden;
+  }
   .rx-hero-bg { position: absolute; inset: 0; background: var(--color-hero-bg, #0d3b3f); z-index: 0; }
   .rx-hero-content { position: relative; z-index: 1; max-width: 52rem; }
   .rx-tag { display: inline-block; padding: 0.3rem 0.75rem; border-radius: 999px; background: rgba(255, 255, 255, 0.12); color: #fff; font-size: 0.8rem; letter-spacing: 0.03em; }
