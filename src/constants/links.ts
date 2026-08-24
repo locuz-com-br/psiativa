@@ -49,6 +49,7 @@ export const CONTACT = {
 // ── Legal / Misc ─────────────────────────────
 export const LEGAL = {
   blog: SITE_CONFIG.legal.blog,
+  podcast: SITE_CONFIG.legal.podcast,
   terms: SITE_CONFIG.legal.terms,
   privacy: SITE_CONFIG.legal.privacy,
   cookies: SITE_CONFIG.legal.cookies,

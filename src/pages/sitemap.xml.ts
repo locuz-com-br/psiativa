@@ -4,6 +4,8 @@ import { SITE_CONFIG } from "../config/site.config";
 export async function GET() {
   const pages = await getCollection("pages", ({ id, data }) => id !== "example" && !data.noindex);
   const posts = await getCollection("blog", ({ data }) => !data.draft);
+  // hubOnly nao tem pagina propria — nunca entra no sitemap.
+  const episodes = await getCollection("podcast", ({ data }) => !data.hubOnly);
 
   const urls = [
     { loc: "/", lastmod: new Date() },
@@ -11,6 +13,7 @@ export async function GET() {
     { loc: "/calculadora/", lastmod: new Date() },
     { loc: "/quiz/", lastmod: new Date() },
     { loc: "/analise-de-site-para-psicologo/", lastmod: new Date() },
+    { loc: "/podcast/", lastmod: new Date() },
     ...pages.map((page) => ({
       loc: `/${page.id}/`,
       lastmod: page.data.publishedAt ?? new Date(),
@@ -18,6 +21,10 @@ export async function GET() {
     ...posts.map((post) => ({
       loc: `/blog/${post.id}/`,
       lastmod: post.data.updatedAt ?? post.data.publishedAt,
+    })),
+    ...episodes.map((ep) => ({
+      loc: `/podcast/${ep.id}/`,
+      lastmod: ep.data.publishedAt,
     })),
   ];
 
