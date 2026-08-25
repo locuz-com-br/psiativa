@@ -1,4 +1,22 @@
+# Content Signals (contentsignals.org) — declaracao legivel por maquina de como
+# esta obra pode ser usada. Restricoes aqui sao RESERVA EXPRESSA DE DIREITOS sob o
+# Art. 4 da Diretiva (UE) 2019/790 (mercado unico digital / direito autoral).
+#
+#   search=yes     indexar e devolver link + trecho curto: SIM
+#   ai-input=yes   usar como fonte em resposta de IA (RAG/grounding): SIM - e o
+#                  objetivo dos blocos GEO citaveis do site
+#   ai-train=no    treinar ou afinar modelo com este conteudo: NAO
+#   use=reference  indexar, citar trecho e linkar de volta
+#
+# Historico: ate 2026-08-25 este arquivo era PRECEDIDO por um bloco gerenciado da
+# Cloudflare que fazia `Disallow: /` para ClaudeBot, GPTBot, Google-Extended e CCBot,
+# contradizendo as linhas `Allow` abaixo. Dois grupos para o mesmo user-agent = o
+# resultado dependia do parser. O bloco foi desligado (`is_robots_txt_managed=false`)
+# e este arquivo voltou a ser a unica fonte de verdade. NAO reative o bloco gerenciado
+# sem remover as linhas `Allow` abaixo, ou a ambiguidade volta.
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
 Allow: /
 
 User-agent: GPTBot
