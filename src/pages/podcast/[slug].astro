@@ -35,7 +35,18 @@ const schemas = [
       episodeNumber: ep.data.episodeNumber,
       guid: ep.data.guid,
     },
-    { name: PODCAST.name, path: PODCAST.basePath },
+    {
+      name: PODCAST.name,
+      path: PODCAST.basePath,
+      // Autoria atribuivel em pagina de saude mental (E-E-A-T). Parceira externa:
+      // Person + CRP, sem vinculo empregaticio declarado com a PsiAtiva.
+      author: {
+        name: PODCAST.host.name,
+        crp: PODCAST.host.crp,
+        url: PODCAST.host.linkedin,
+        sameAs: [PODCAST.host.instagram, PODCAST.host.linkedin, PODCAST.host.lattes],
+      },
+    },
   ),
   breadcrumbSchema([
     { name: "Início", path: "/" },
@@ -52,6 +63,7 @@ const schemas = [
   ogType="article"
   image={PODCAST.cover}
   schema={schemas}
+  hideWhatsAppFab
 >
   <article class="ep">
     <header class="ep-header">

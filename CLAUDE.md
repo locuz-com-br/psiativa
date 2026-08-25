@@ -226,8 +226,11 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
     clinic owners. ⛔ Do **not** apply hemorrhage framing, clinic-life signals (agenda oscilante, no-show, recepção), or
     the *clínico* register here — the humanizer's ICP layers are built for selling to psychologists and do not apply.
     Vocabulary compliance and the anti-AI layers **do** apply and were audited (zero forbidden terms in visible copy).
-  - ⛔ **No PsiAtiva commercial CTA anywhere on these pages**, and episode pages link to **zero** funnel pages
-    (asserted in the DOM, not just intended). Discovery is one footer link under "Recursos", beside Blog. That
+  - ⛔ **No PsiAtiva commercial CTA anywhere on these pages**, and episode pages link to **zero** funnel pages.
+    ⚠️ Until 2026-08-24 this was true of the **article body only**: `BaseLayout` shipped the sitewide WhatsApp
+    FAB on all 9 URLs, prefilled with *"gostaria de agendar o diagnóstico gratuito da minha clínica"* — a
+    **Perfil A** sales message shown to patients. Both podcast pages now pass `hideWhatsAppFab`, so the rule
+    is **enforced by code**, not merely by the absence of body links. Do not remove that prop. Discovery is one footer link under "Recursos", beside Blog. That
     asymmetry is deliberate: patient traffic will not convert on a B2B offer, and routing it into the funnel
     would wreck sitewide conversion rate. Outbound CTAs go to Loivani (Instagram / LinkedIn / WhatsApp / Lattes).
   - ⛔ **`audioUrl` MUST stay on the `anchor.fm/s/c24416d8/podcast/play/…` endpoint.** That redirect is what Spotify
@@ -255,4 +258,20 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
     `../podcast/CFP-AUDIT.md`; transcripts + manifest live in `../podcast/`.
   - ⚠️ **KNOWN GAP — the podcast pages are PT-only.** No `data-i18n` keys and no `{pt,en}` island copy, so they do not
     localize on the EN toggle (same status as `/diagnostico`). Accepted deliberately; not scheduled.
-  - ⚠️ **Pending:** nothing on assets. Apple BR-PT + Spotify green both ship official and compliant.
+  - ✅ **SEO gate CLOSED 2026-08-24** (`psiativa-seo-auditor` → `psiativa-seo-briefer`, retroactive).
+    Query cannibalization measured at **zero** (the two corpora are lexically disjoint). **Entity collision was
+    real and is fixed:** `Organization` and `PodcastSeries` both asserted the bare string `"PsiAtiva"` across 9
+    URLs. Now `Organization` carries `@id` `/#organization`, `PodcastSeries` carries `@id` `/podcast/#series`
+    plus `sameAs` → Apple/Spotify, and the hub `<h1>` reads **`Podcast PsiAtiva`**, never the bare brand.
+    ⛔ **Do not rename `PODCAST.name`** — `"PsiAtiva"` is the show's real registered name on Apple and Spotify;
+    renaming breaks entity matching with the RSS feed. Disambiguation comes from `@id`/`sameAs`, not the name.
+    ⛔ **`personAuthorSchema` no longer hard-codes `worksFor`** (now opt-in via `worksForPsiAtiva`). Declaring
+    that a CRP-registered psychologist works for PsiAtiva was factually false — she is an external partner —
+    and it made the domain read as a clinical practice, which `seo/briefings/brief-cluster-perfil-b-solo.md` §5
+    explicitly forbids. Episode pages now emit `author` + `publisher`, closing the authorship gap on 8 health
+    pages. Full reasoning + the de-indexing trigger (GSC reads **2026-09-23** and **2026-11-22**):
+    `seo/briefings/brief-podcast-anticanibalizacao.md`.
+  - ⚠️ **Pending:** episodes carry **1 heading over ~27 paragraphs** — the GEO/heading spec in the briefing §6.2
+    is not applied (content work). `/podcast/` receives **18** inbound internal links vs **3** each for
+    `/calculadora/` and `/quiz/`; the briefed fix is to **raise the commercial pages**, never to demote the
+    podcast. Nothing pending on assets: Apple BR-PT + Spotify green both ship official and compliant.

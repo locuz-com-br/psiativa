@@ -19,7 +19,16 @@ const schemas = [
     path: PODCAST.basePath,
     rss: PODCAST.rss,
     image: PODCAST.cover,
-    author: { name: PODCAST.host.name, crp: PODCAST.host.crp, url: PODCAST.host.linkedin },
+    // Programa PESSOAL da host, republicado aqui. Sem `worksForPsiAtiva`:
+    // ela e parceira externa, nao quadro da PsiAtiva.
+    author: {
+      name: PODCAST.host.name,
+      crp: PODCAST.host.crp,
+      url: PODCAST.host.linkedin,
+      sameAs: [PODCAST.host.instagram, PODCAST.host.linkedin, PODCAST.host.lattes],
+    },
+    // Ancora a serie no programa real (Apple/Spotify), separando-a da Organization.
+    sameAs: [PODCAST.apple, PODCAST.spotifyShow],
   }),
   breadcrumbSchema([
     { name: "Início", path: "/" },
@@ -33,13 +42,14 @@ const schemas = [
   description={PODCAST.description}
   canonicalPath={PODCAST.basePath}
   schema={schemas}
+  hideWhatsAppFab
 >
   <header class="pod-hero">
     <div class="container pod-hero-inner">
       <img class="pod-cover" src={PODCAST.cover} alt={`Capa do podcast ${PODCAST.name}`} width="200" height="200" loading="eager" />
       <div class="pod-hero-text">
         <p class="pod-eyebrow">Podcast</p>
-        <h1>{PODCAST.name}</h1>
+        <h1>Podcast {PODCAST.name}</h1>
         <p class="pod-lead">{PODCAST.description}</p>
         <div class="pod-links">
           <a class="pod-badge" href={PODCAST.apple} target="_blank" rel="noopener">

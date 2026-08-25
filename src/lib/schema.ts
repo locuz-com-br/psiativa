@@ -33,6 +33,7 @@ export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": absoluteUrl("/#organization"),
     name: SITE_CONFIG.name,
     url: siteUrl,
     logo: absoluteUrl(SITE_CONFIG.logos.favicon),
@@ -161,6 +162,15 @@ interface PersonAuthorInput {
   /** registro profissional, ex.: "CRP 05/12345" */
   crp: string;
   url?: string;
+  /**
+   * So marque `true` para quem realmente integra a PsiAtiva. Convidado/parceiro
+   * externo NAO tem `worksFor`: afirmar vinculo de um CRP com a PsiAtiva faz o
+   * dominio ser lido como pratica clinica, nao como consultoria B2B
+   * (brief-cluster-perfil-b-solo.md §5).
+   */
+  worksForPsiAtiva?: boolean;
+  /** perfis oficiais do autor — resolve a Person para uma entidade externa */
+  sameAs?: string[];
 }
 
 // Autor com CRP = sinal E-E-A-T (briefing §5). Opcional: só emitir quando
@@ -180,7 +190,10 @@ export function personAuthorSchema(input: PersonAuthorInput) {
         name: "Conselho Federal de Psicologia (CFP)",
       },
     },
-    worksFor: { "@type": "Organization", name: SITE_CONFIG.name, url: siteUrl },
+    ...(input.sameAs?.length ? { sameAs: input.sameAs } : {}),
+    ...(input.worksForPsiAtiva
+      ? { worksFor: { "@id": absoluteUrl("/#organization") } }
+      : {}),
   };
 }
 
@@ -204,25 +217,33 @@ export function podcastSeriesSchema(input: {
   path: string;
   rss: string;
   image: string;
-  author: { name: string; crp: string; url?: string };
+  author: { name: string; crp: string; url?: string; sameAs?: string[] };
+  /** perfis oficiais do PROGRAMA (Apple/Spotify) — ancora a serie a uma entidade externa */
+  sameAs?: string[];
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "PodcastSeries",
+    "@id": absoluteUrl(`${input.path}#series`),
     name: input.name,
     description: input.description,
     url: absoluteUrl(input.path),
     webFeed: input.rss,
     image: input.image,
     inLanguage: SITE_CONFIG.defaultLocale,
+    ...(input.sameAs?.length ? { sameAs: input.sameAs } : {}),
     author: personAuthorSchema(input.author),
-    publisher: { "@type": "Organization", name: SITE_CONFIG.name, url: siteUrl },
+    publisher: { "@id": absoluteUrl("/#organization") },
   };
 }
 
 export function podcastEpisodeSchema(
   input: PodcastEpisodeInput,
-  series: { name: string; path: string },
+  series: {
+    name: string;
+    path: string;
+    author?: { name: string; crp: string; url?: string; sameAs?: string[] };
+  },
 ) {
   return {
     "@context": "https://schema.org",
@@ -241,8 +262,11 @@ export function podcastEpisodeSchema(
       encodingFormat: "audio/mpeg",
       duration: input.durationISO,
     },
+    ...(series.author ? { author: personAuthorSchema(series.author) } : {}),
+    publisher: { "@id": absoluteUrl("/#organization") },
     partOfSeries: {
       "@type": "PodcastSeries",
+      "@id": absoluteUrl(`${series.path}#series`),
       name: series.name,
       url: absoluteUrl(series.path),
     },

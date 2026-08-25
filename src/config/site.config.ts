@@ -165,8 +165,8 @@ export const SITE_CONFIG = {
 
   // ── Legal Page Slugs ───────────────────────
   legal: {
-    blog: "/blog",
-    podcast: "/podcast",
+    blog: "/blog/",
+    podcast: "/podcast/",
     terms: "/termos",
     privacy: "/privacidade",
     cookies: "/cookies",
