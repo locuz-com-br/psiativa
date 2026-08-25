@@ -206,7 +206,11 @@ export default function FormIsland({ content, source, page }: Props) {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
-      if (res.ok) finish();
+      // O n8n responde 200 mesmo nos ramos de recusa (payload/captcha/source
+      // inválidos), com { ok: false } no corpo. Sem ler o corpo, a recusa
+      // vira tela de sucesso e o lead se perde em silêncio.
+      const data = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+      if (res.ok && data?.ok !== false) finish();
       else setStatus("error");
     } catch (err) {
       console.error("[forms] erro no envio:", err);

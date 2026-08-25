@@ -156,7 +156,11 @@ export default function QuizIsland() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
-      if (res.ok) {
+      // O n8n responde 200 mesmo nos ramos de recusa (payload/captcha/source
+      // inválidos), com { ok: false } no corpo. Sem ler o corpo, a recusa
+      // vira tela de sucesso e o lead se perde em silêncio.
+      const data = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+      if (res.ok && data?.ok !== false) {
         setStatus("sent");
         setDone(true);
         captchaRef.current?.resetCaptcha();

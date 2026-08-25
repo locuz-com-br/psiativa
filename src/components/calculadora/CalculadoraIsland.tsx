@@ -232,8 +232,11 @@ export default function CalculadoraIsland() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
+      // O n8n responde 200 mesmo nos ramos de recusa (payload/captcha/source
+      // inválidos), com { ok: false } no corpo. Sem ler o corpo, a recusa
+      // vira tela de sucesso e o lead se perde em silêncio.
       const data = (await res.json().catch(() => null)) as RevealPayload | null;
-      if (res.ok) {
+      if (res.ok && data?.ok !== false) {
         setStatus("sent");
         if (data && data.ok && typeof data.investimentoAPartirDe === "number") {
           setReveal(data); // números travados, computados no servidor
