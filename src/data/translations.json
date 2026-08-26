@@ -586,6 +586,22 @@
       "pt": "PsiAtiva",
       "en": "PsiAtiva"
     },
+    "col_tools": {
+      "pt": "Ferramentas",
+      "en": "Tools"
+    },
+    "link_calculadora": {
+      "pt": "Calculadora de agenda",
+      "en": "Schedule calculator"
+    },
+    "link_quiz": {
+      "pt": "Diagnóstico de agenda",
+      "en": "Schedule diagnostic"
+    },
+    "link_audit_site": {
+      "pt": "Análise de site",
+      "en": "Website review"
+    },
     "col_resources": {
       "pt": "Recursos",
       "en": "Resources"

@@ -55,6 +55,13 @@ export const LEGAL = {
   cookies: SITE_CONFIG.legal.cookies,
 } as const;
 
+// ── Tools (ativos de conversão) ──────────────
+export const TOOLS = {
+  calculadora: SITE_CONFIG.tools.calculadora,
+  quiz: SITE_CONFIG.tools.quiz,
+  analiseDeSite: SITE_CONFIG.tools.analiseDeSite,
+} as const;
+
 // ── Aggregated export ────────────────────────
 const LINKS = {
   pages: PAGES,
@@ -62,6 +69,7 @@ const LINKS = {
   socials: SOCIALS,
   contact: CONTACT,
   legal: LEGAL,
+  tools: TOOLS,
 } as const;
 
 export default LINKS;

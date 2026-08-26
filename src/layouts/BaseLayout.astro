@@ -20,6 +20,10 @@ interface Props {
   descriptionKey?: string;
   hideNavAndFooter?: boolean;
   hideWhatsAppFab?: boolean;
+  /** Suprime os links do funil (Calculadora · Quiz · Análise de site) no rodapé.
+   *  Usado pelas páginas do `/podcast/`, que falam com PACIENTE, não com as ICPs
+   *  comerciais — ver brief-podcast-anticanibalizacao.md §6.3/§7. */
+  hideFunnelLinks?: boolean;
   canonicalPath?: string;
   ogType?: "website" | "article";
   image?: string;
@@ -41,6 +45,7 @@ const {
   descriptionKey,
   hideNavAndFooter = false,
   hideWhatsAppFab = hideNavAndFooter,
+  hideFunnelLinks = false,
   canonicalPath,
   ogType = "website",
   image,
@@ -165,6 +170,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <Footer
         minimal={footerType === "minimal"}
         showCookiePreferences={hasAnalytics}
+        hideFunnelLinks={hideFunnelLinks}
       />
     )}
     {SITE_CONFIG.sections.whatsappFab && !hideWhatsAppFab && <WhatsAppFab />}

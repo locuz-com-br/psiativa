@@ -6,11 +6,18 @@ import LINKS from "../../constants/links";
 interface Props {
   minimal?: boolean;
   showCookiePreferences?: boolean;
+  /** Suprime a coluna "Ferramentas" (páginas do funil PsiAtiva).
+   *  ⛔ `/podcast/` é um beco sem saída POR DECISÃO: nenhum link para
+   *  /calculadora/, /quiz/ ou /analise-de-site-para-psicologo/ pode aparecer lá,
+   *  no corpo OU no chrome (seo/briefings/brief-podcast-anticanibalizacao.md §6.3
+   *  e §7). Mesmo precedente do `hideWhatsAppFab`. Não "consertar" removendo. */
+  hideFunnelLinks?: boolean;
 }
 
 const {
   minimal = false,
   showCookiePreferences = false,
+  hideFunnelLinks = false,
 } = Astro.props;
 const year = new Date().getFullYear();
 
@@ -123,6 +130,29 @@ const socialEntries = [
             </li>
           </ul>
         </div>
+
+        {!hideFunnelLinks && (
+        <div class="footer-column">
+          <h4 class="footer-column-title" data-i18n="footer.col_tools">
+            Ferramentas
+          </h4>
+          <ul>
+            <li>
+              <a href={LINKS.tools.calculadora} data-i18n="footer.link_calculadora"
+                >Calculadora de agenda</a>
+            </li>
+            <li>
+              <a href={LINKS.tools.quiz} data-i18n="footer.link_quiz"
+                >Diagnóstico de agenda</a>
+            </li>
+            <li>
+              <a
+                href={LINKS.tools.analiseDeSite}
+                data-i18n="footer.link_audit_site">Análise de site</a>
+            </li>
+          </ul>
+        </div>
+        )}
 
         <div class="footer-column">
           <h4 class="footer-column-title" data-i18n="footer.col_resources">
@@ -260,7 +290,8 @@ const socialEntries = [
 
   .footer-columns {
     display: flex;
-    gap: 4rem;
+    flex-wrap: wrap;
+    gap: 3rem;
   }
 
   .footer-column-title {

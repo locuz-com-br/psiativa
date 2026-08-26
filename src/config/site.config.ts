@@ -171,6 +171,17 @@ export const SITE_CONFIG = {
     privacy: "/privacidade",
     cookies: "/cookies",
   },
+
+  // ── Tool Page Slugs ────────────────────────
+  // Linkadas no rodapé sitewide de propósito: sem isso cada ferramenta recebe
+  // 3 links internos contra 18 de /blog/ e /podcast/ (medido em
+  // seo/reports/audit-podcast-cannibalizacao-2026-08-24.md). A correção é
+  // subir as comerciais, nunca rebaixar o podcast.
+  tools: {
+    calculadora: "/calculadora/",
+    quiz: "/quiz/",
+    analiseDeSite: "/analise-de-site-para-psicologo/",
+  },
 } as const;
 
 // ── Derived values (do not edit) ─────────────
