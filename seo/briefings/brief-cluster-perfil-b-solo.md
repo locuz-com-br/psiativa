@@ -23,10 +23,10 @@ A home de `psiativa.com.br` é **100% Perfil A — Clínica** (conversão/marca)
 
 | # | Página | Pergunta-alvo | Intenção | GAP | Status |
 |---|---|---|---|---|---|
-| **P** | **Pilar** | *Como ter agenda previsível sendo psicóloga autônoma (sem depender de indicação)* | Informacional/comercial | Consciência→Ativação | a briefar (§4) |
-| S1 | Satélite | *Agenda de psicólogo vazia: por que acontece e o que fazer* | Informacional (how-to) | Consciência | a briefar (§4) |
-| S2 | Satélite | *Como não perder paciente no WhatsApp enquanto você atende* | Informacional (how-to) | Consciência | a briefar (§4) |
-| S3 | Satélite | *Como aparecer no Google como psicóloga (sem virar influencer)* | Informacional/comercial | Ativação | a briefar (§4) |
+| **P** | **Pilar** | *Como ter agenda previsível sendo psicóloga autônoma (sem depender de indicação)* | Informacional/comercial | Consciência→Ativação | ✅ **NO AR** `/blog/agenda-previsivel-psicologa-autonoma/` |
+| S1 | Satélite | *Agenda de psicólogo vazia: por que acontece e o que fazer* | Informacional (how-to) | Consciência | ✅ **NO AR** `/blog/agenda-vazia-psicologa/` |
+| S2 | Satélite | *Como não perder paciente no WhatsApp enquanto você atende* | Informacional (how-to) | Consciência | ✅ **NO AR** `/blog/whatsapp-consultorio-solo/` |
+| S3 | Satélite | *Como aparecer no Google como psicóloga (sem virar influencer)* | Informacional/comercial | Ativação | ✅ **NO AR** `/blog/aparecer-no-google-psicologa/` |
 | ★ | **Calculadora** (interativo) | *Quanto a agenda vazia custa* | Ferramenta/informacional | Consciência | **briefado** ✓ |
 | ★ | **Quiz** (interativo) | *Qual é a sua maior dor de agenda* | Diagnóstico | Consciência | plano ✓ |
 
@@ -45,6 +45,18 @@ Dores cobertas (de [`icp-consultorio-solo.md`](../../../../_config/icp-consultor
 | "responder WhatsApp / perder paciente" | **S2** | — |
 | "aparecer no Google / perfil/ Maps" | **S3** | (produto GBP) |
 | marca / "PsiAtiva" / clínica / conversão | **home** | cluster linka pra cima |
+
+> **Estado em 2026-08-25 (⛔ leia antes de "construir o pilar"):** o **lote 1 inteiro está no ar** —
+> 1 pilar + 3 satélites. Uma nota de sessão anterior afirmava "4 satélites e **nenhum pilar**": era
+> **erro de contagem** (4 = 1 pilar + 3 satélites), e ninguém tinha checado `src/content/blog/`.
+> Os 4 gaps reais contra o §4 foram fechados e deployados em 2026-08-25: bloco citável 122 → **151**
+> palavras (piso §3 = 134), H2 *"Quanto isso muda no seu faturamento?"* + link → Calculadora, CTA
+> → Quiz, e os cruzamentos do §6.3 do brief do podcast (S1 → Calculadora; S1/S2/S3 → Quiz).
+> A coluna **"Ferramentas"** no rodapé sitewide levou `/calculadora/`, `/quiz/` e
+> `/analise-de-site-para-psicologo/` de **3 para 18 páginas** inbound cada — e é **suprimida** nas 9
+> URLs do `/podcast/` via `hideFunnelLinks`, porque o §6.3/§7 daquele brief proíbe link de funil lá
+> **no chrome também**. Verificado no HTML servido. Próximo: **lote 2** (VPS/precificação,
+> sobrecarga) só depois de tração do lote 1.
 
 **Regra:** todo satélite/calculadora/quiz **linka para o pilar** (âncora descritiva) e o **pilar linka para a home** como destino de conversão (satélite→pilar→pilar-de-conversão). Cada página tem **canonical próprio**. S1 e a Calculadora são adjacentes — **S1 = causas + o que fazer; Calculadora = simule o seu número** — cruzar link, jamais sobrepor a query.
 
