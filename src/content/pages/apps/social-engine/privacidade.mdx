@@ -1,0 +1,279 @@
+---
+title: "Política de Privacidade do aplicativo social-engine"
+description: "Como o aplicativo social-engine da PsiAtiva acessa, usa, armazena, compartilha e exclui dados de plataformas de redes sociais (Meta, Google/YouTube, TikTok), e como revogar o acesso."
+publishedAt: 2026-08-30
+---
+
+<div data-lang-block="pt">
+
+# Política de Privacidade do aplicativo social-engine
+
+**Última atualização:** 30 de agosto de 2026
+
+Esta Política descreve como o aplicativo **social-engine** operado pela PsiAtiva em `https://social.psiativa.com.br` acessa, usa, armazena, compartilha e exclui dados obtidos de plataformas de redes sociais (Meta/Instagram/Facebook, Google/YouTube e TikTok), além dos demais dados que ele trata. Ela se aplica especificamente a esse aplicativo. O que o aplicativo é e o que ele faz está descrito na [página do aplicativo](/apps/social-engine).
+
+Para a política geral do site institucional, veja [psiativa.com.br/privacidade](/privacidade).
+
+## 1. Quem opera o aplicativo
+
+O aplicativo é operado por **51.525.875 JUAN PABLO DOS SANTOS SILVA** (nome fantasia **PsiAtiva**), CNPJ 51.525.875/0001-48, no Brasil. A PsiAtiva é uma consultoria de gestão e presença digital voltada a profissionais e clínicas de psicologia. A mesma instância autohospedada também gerencia o agendamento e a publicação de postagens para as demais marcas do mesmo grupo econômico (Juan Silva Design, Locuz, NewCar e Zoku).
+
+O social-engine é um aplicativo **interno**: não há cadastro aberto, não há acesso público e nenhum cliente ou visitante faz login nele.
+
+## 2. Quais dados de plataformas o aplicativo acessa
+
+O aplicativo acessa dados de redes sociais **apenas** das contas corporativas e perfis profissionais do próprio operador que autorizaram a conexão. Nenhuma conta de terceiros está conectada.
+
+| Plataforma / Permissão (escopo) | Dados acessados | Como o aplicativo os acessa |
+|---|---|---|
+| Meta (Instagram): `instagram_business_basic` | ID da conta, nome de usuário (@handle) e foto de perfil da conta profissional | Leitura de perfil por chamadas à Meta Graph API |
+| Meta (Instagram): `instagram_business_content_publish` | Mídia (imagem JPEG ou vídeo), texto de legenda e metadados de agendamento enviados pelo operador | Envio de URL de mídia pública (`cdn.psiativa.com.br`), criação de contêiner de mídia e publicação via Meta Graph API |
+| Meta (Facebook): `pages_manage_posts` | Texto do post, mídia e data de publicação para Páginas administradas | Criação e publicação de posts via Meta Graph API |
+| Meta (Facebook): `pages_read_engagement` e `pages_show_list` | Lista de Páginas do Facebook gerenciadas, identificadores e métricas agregadas de engajamento do post | Leitura de metadados e status de publicação via Meta Graph API |
+| Google (YouTube): `https://www.googleapis.com/auth/youtube.upload` | Arquivos de vídeo, títulos, descrições, tags e status de privacidade definidos pelo operador | Upload de vídeo e criação de metadados via YouTube Data API v3 (`videos.insert`) |
+| Google (YouTube): `https://www.googleapis.com/auth/youtube.readonly` | Título, ID do canal, miniaturas e status dos vídeos publicados | Leitura de metadados do canal e verificação de upload via YouTube Data API v3 (`channels.list`) |
+| TikTok: `video.publish` | Arquivos de vídeo, legenda e opções de privacidade fornecidas pelo operador | Envio e publicação de vídeo via TikTok Content Posting API (Direct Post) |
+
+O aplicativo também armazena os **tokens de autorização (OAuth)** e os identificadores das contas conectadas, estritamente necessários para manter as conexões ativas e autenticar as publicações agendadas.
+
+O aplicativo **não** acessa dados pessoais de seguidores, mensagens privadas não relacionadas a publicações, lista de contatos pessoais, histórico de navegação nem dados de geolocalização.
+
+## 3. Para que usamos esses dados
+
+Usamos os dados obtidos das APIs das plataformas exclusivamente para prover e executar as funções operacionais do próprio aplicativo:
+
+| Finalidade | Dados envolvidos |
+|---|---|
+| Identificar e exibir os perfis conectados para seleção pelo operador no painel | Nome de usuário, ID da conta, foto de perfil, nomes de Páginas e canais |
+| Publicar imagens, vídeos e legendas nas datas e horários agendados | Arquivos de mídia, textos de legenda e configurações de publicação |
+| Validar a entrega e acompanhar o status das publicações realizadas | Identificador da postagem e status retornado pelas APIs |
+| Manter as conexões autorizadas ativas e renovar tokens de autenticação | Tokens de autorização (OAuth) |
+
+**Não** usamos dados das plataformas para publicidade direcionada de terceiros, criação de perfis de anúncio, venda ou aluguel de dados, tomada de decisão automatizada com efeitos jurídicos, nem para treinar ou aperfeiçoar modelos de inteligência artificial, próprios ou de terceiros.
+
+## 4. Conformidade com políticas de plataformas e uso limitado
+
+O uso e a transferência, pela PsiAtiva, de informações recebidas de APIs parceiras obedecem rigorosamente aos termos de desenvolvedor de cada plataforma:
+
+- **Meta Platform Terms e Developer Policies:** Cumprimos todas as exigências da Meta para aplicativos de agendamento e gerenciamento de conteúdo, garantindo o princípio do menor privilégio e o tratamento seguro de credenciais.
+- **Google API Services User Data Policy:** O tratamento de dados recebidos de APIs do Google obedece à [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), incluindo os requisitos de **Uso Limitado (Limited Use)**.
+- **TikTok Developer Terms of Service:** As operações de publicação observam as normas de integridade de conteúdo e segurança da API do TikTok.
+
+Em termos práticos, isso significa que:
+
+- Os dados são usados apenas para prover as funções de agendamento e publicação descritas na seção 3.
+- Os dados não são transferidos a terceiros, exceto quando estritamente necessário para prover essas funções, por exigência legal, ou como parte de operação societária, com aviso prévio.
+- Os dados não são usados para publicidade de terceiros nem comercializados.
+- Nenhuma pessoa lê esses dados, salvo quando: o titular consentir de forma específica; for necessário por segurança para investigar incidentes; a lei exigir; ou os dados estiverem agregados e anonimizados para fins estatísticos internos.
+
+## 5. Onde e como armazenamos
+
+- A instância do social-engine roda em **contêiner Docker sob controle exclusivo do operador**, no Brasil, com banco de dados interno no volume seguro da aplicação.
+- As credenciais de conexão e tokens OAuth ficam **cifrados em repouso** (criptografia AES-256 / mecanismos de segurança do Postiz).
+- O acesso à interface é servido por túnel Cloudflare com **TLS (HTTPS)** e exige autenticação individual. Não há portas de administração expostas diretamente na internet nem acesso anônimo.
+- Os arquivos de mídia destinados à publicação pública residem em armazenamento seguro com entrega via CDN sob o domínio `cdn.psiativa.com.br`.
+
+## 6. Com quem compartilhamos
+
+**Não vendemos, alugamos nem cedemos dados obtidos das APIs das plataformas.** Eles não são compartilhados com corretores de dados nem provedores de modelos de inteligência artificial.
+
+Os únicos terceiros envolvidos são os provedores de infraestrutura e as próprias plataformas de destino, atuando sob nossa instrução:
+
+- **Meta Platforms, Inc.** (Instagram, Facebook, Threads), como destino das publicações e origem da autenticação.
+- **Google LLC** (YouTube), como destino das publicações de vídeo e Shorts.
+- **TikTok Inc.**, como destino das publicações de vídeo.
+- **Cloudflare, Inc.**, que provê DNS, TLS, proteção de borda e túnel seguro de acesso.
+
+Podemos ainda divulgar dados quando houver obrigação legal, ordem de autoridade competente ou necessidade de apurar incidente de segurança.
+
+## 7. Por quanto tempo guardamos e como excluímos
+
+| Item | Retenção | Como excluir |
+|---|---|---|
+| Tokens de autorização OAuth (Meta, Google, TikTok) | Enquanto a conexão estiver ativa | Revogar diretamente na plataforma de origem (Meta, Google ou TikTok) ou remover a conexão dentro do painel do aplicativo. A remoção apaga o token do nosso banco |
+| Registros de execução e logs de publicação | Expurgo automático em janela contínua de até 14 a 30 dias | Pedido por e-mail para expurgo antecipado |
+| Mídias e postagens publicadas | Permanecem nas plataformas de destino sob controle da conta titular | Exclusão feita diretamente na respectiva rede social ou remoção do arquivo de mídia no CDN |
+
+**Revogação encerra o acesso.** Após a revogação, o aplicativo não consegue mais ler dados nem publicar nas contas, e os tokens correspondentes deixam de ser válidos.
+
+Para pedir a exclusão de dados mantidos pela PsiAtiva, escreva para `privacidade@psiativa.com.br` com o assunto "Exclusão de dados: aplicativo social-engine". Respondemos no prazo legal.
+
+## 8. Segurança
+
+Adotamos medidas técnicas e organizacionais proporcionais à sensibilidade dos dados tratados:
+
+- Autenticação obrigatória na interface do aplicativo, sem cadastro público e sem acesso anônimo.
+- Credenciais cifradas em repouso e nunca expostas na interface após serem salvas.
+- Transporte exclusivamente por HTTPS e túnel dedicado, sem porta de administração aberta na internet.
+- Princípio do menor privilégio nas permissões solicitadas, restringindo os escopos estritamente às ações de publicação e identificação.
+- Verificação em duas etapas ativa nas contas que autorizam o aplicativo.
+- Acesso restrito a operadores autorizados, com credenciais individuais.
+
+Nenhum sistema é totalmente infalível, mas tratamos incidentes com a seriedade que a LGPD exige e comunicamos os titulares e a autoridade quando for o caso.
+
+## 9. Dados de terceiros e LGPD
+
+A PsiAtiva é uma consultoria de gestão e presença digital voltada a profissionais e clínicas de psicologia. O social-engine é uma ferramenta de publicação de conteúdo educativo e institucional das marcas do grupo.
+
+Eventuais dados pessoais decorrentes de interações públicas nas postagens (como comentários públicos ou menções) têm natureza **comercial e profissional**. Não coletamos nem tratamos dados de pacientes, dados de saúde nem dados sensíveis por meio deste aplicativo. Não há relação terapêutica, sigilo clínico ou prontuário médico envolvidos.
+
+Nos termos da Lei nº 13.709/2018 (LGPD), o titular pode solicitar confirmação de tratamento, acesso, correção, anonimização, exclusão, portabilidade, informação sobre compartilhamentos e revogação de consentimento, pelo e-mail `privacidade@psiativa.com.br`.
+
+- **Encarregado pelo Tratamento de Dados (DPO):** Juan Santos
+- **E-mail:** `privacidade@psiativa.com.br`
+
+O titular também pode contatar a Autoridade Nacional de Proteção de Dados (ANPD).
+
+## 10. Menores de idade
+
+O aplicativo é uma ferramenta interna de uso profissional e não se destina a menores de 18 anos. Não coletamos intencionalmente dados de menores por estes fluxos.
+
+## 11. Alterações desta Política
+
+Podemos atualizar esta Política. A versão vigente estará sempre nesta página, com a data de "Última atualização". Se alterarmos substancialmente as permissões ou a finalidade de uso dos dados, atualizaremos esta página antes que as mudanças entrem em vigor.
+
+## 12. Contato
+
+- **Privacidade e proteção de dados:** `privacidade@psiativa.com.br`
+- **Assuntos gerais:** `contato@psiativa.com.br`
+- **Operador:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brasil
+- **Página do aplicativo:** [psiativa.com.br/apps/social-engine](/apps/social-engine) · **Termos de Uso:** [psiativa.com.br/apps/social-engine/termos](/apps/social-engine/termos)
+
+</div>
+
+<div data-lang-block="en">
+
+# Privacy Policy for the social-engine application
+
+**Last updated:** August 30, 2026
+
+This Policy describes how the **social-engine** application operated by PsiAtiva at `https://social.psiativa.com.br` accesses, uses, stores, shares, and deletes data obtained from social media platforms (Meta/Instagram/Facebook, Google/YouTube, and TikTok), as well as other data it handles. It applies specifically to that application. What the application is and what it does is described on the [application page](/apps/social-engine).
+
+For the general policy of our company website, see [psiativa.com.br/privacidade](/privacidade).
+
+## 1. Who operates the application
+
+The application is operated by **51.525.875 JUAN PABLO DOS SANTOS SILVA** (trading as **PsiAtiva**), Brazilian company registration (CNPJ) 51.525.875/0001-48, in Brazil. PsiAtiva is a management and digital presence consultancy serving psychology professionals and clinics. The same self-hosted instance also handles post scheduling and publishing for the operator's group brands (Juan Silva Design, Locuz, NewCar, and Zoku).
+
+social-engine is an **internal** application: there is no open sign-up, no public access, and no client or visitor logs into it.
+
+## 2. What platform data the application accesses
+
+The application accesses social media account data **only** from the operator's own corporate accounts and professional profiles that authorized the connection. No third-party account is connected.
+
+| Platform / Permission (scope) | Data accessed | How the application accesses it |
+|---|---|---|
+| Meta (Instagram): `instagram_business_basic` | Account ID, username (@handle), and profile picture of the professional account | Profile read calls via Meta Graph API |
+| Meta (Instagram): `instagram_business_content_publish` | Media (JPEG image or video), caption text, and scheduling metadata provided by operator | Sending public media URL (`cdn.psiativa.com.br`), creating media container, and publishing via Meta Graph API |
+| Meta (Facebook): `pages_manage_posts` | Post text, media, and publishing schedule for managed Pages | Post creation and publishing via Meta Graph API |
+| Meta (Facebook): `pages_read_engagement` and `pages_show_list` | List of managed Facebook Pages, identifiers, and aggregate post engagement metrics | Metadata read and publication status calls via Meta Graph API |
+| Google (YouTube): `https://www.googleapis.com/auth/youtube.upload` | Video files, titles, descriptions, tags, and privacy status set by operator | Video upload and metadata creation via YouTube Data API v3 (`videos.insert`) |
+| Google (YouTube): `https://www.googleapis.com/auth/youtube.readonly` | Channel title, channel ID, thumbnails, and status of uploaded videos | Channel metadata read and upload verification via YouTube Data API v3 (`channels.list`) |
+| TikTok: `video.publish` | Video files, caption, and privacy settings provided by operator | Video upload and publishing via TikTok Content Posting API (Direct Post) |
+
+The application also stores **OAuth authorization tokens** and identifiers of connected accounts, strictly necessary to keep connections active and authenticate scheduled publishing calls.
+
+The application does **not** access follower personal data, private direct messages unrelated to posts, personal contact lists, browsing history, or geolocation data.
+
+## 3. How we use this data
+
+We use data obtained from platform APIs exclusively to provide and execute the operational functions of the application itself:
+
+| Purpose | Data involved |
+|---|---|
+| Identify and display connected profiles for operator selection on the dashboard | Username, account ID, profile picture, Page and channel names |
+| Publish images, videos, and captions at scheduled dates and times | Media files, caption text, and publishing configurations |
+| Verify delivery and monitor the status of published posts | Post identifier and status returned by APIs |
+| Keep authorized connections active and refresh authentication tokens | OAuth authorization tokens |
+
+We do **not** use platform data for third-party targeted advertising, ad profiling, selling or renting data, automated decision-making with legal effects, or to train or improve artificial intelligence models, whether our own or third party.
+
+## 4. Platform policy compliance and limited use
+
+PsiAtiva's use and transfer of information received from partner APIs adheres strictly to each platform's developer terms:
+
+- **Meta Platform Terms and Developer Policies:** We comply with all Meta requirements for content management and scheduling applications, enforcing the principle of least privilege and secure credential handling.
+- **Google API Services User Data Policy:** Treatment of data received from Google APIs adheres to the [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), including the **Limited Use** requirements.
+- **TikTok Developer Terms of Service:** Publishing operations adhere to TikTok platform content integrity and security rules.
+
+In practice, this means:
+
+- Data is used only to provide the scheduling and publishing functions described in section 3.
+- Data is not transferred to third parties, except as strictly necessary to provide these functions, to comply with applicable law, or as part of a corporate transaction with prior notice.
+- Data is not used for third-party advertising and is not sold.
+- No human reads this data, except when: the account owner gives specific consent; it is necessary for security purposes to investigate incidents; the law requires it; or the data is aggregated and anonymized for internal technical statistics.
+
+## 5. Where and how we store it
+
+- The social-engine instance runs in a **Docker container under the operator's exclusive control**, in Brazil, with its own internal database on the application's secure volume.
+- Connection credentials and OAuth tokens are **encrypted at rest** (AES-256 encryption / native application security mechanisms).
+- Access to the interface is served through a Cloudflare tunnel with **TLS (HTTPS)** and requires individual authentication. There are no administration ports exposed to the public internet and no anonymous access.
+- Public media files intended for publication reside in secure storage served via CDN under the domain `cdn.psiativa.com.br`.
+
+## 6. Who we share it with
+
+**We do not sell, rent, or trade data obtained from platform APIs.** It is not shared with data brokers or artificial intelligence providers.
+
+The only third parties involved are essential infrastructure providers and destination platforms acting under our instruction:
+
+- **Meta Platforms, Inc.** (Instagram, Facebook, Threads), as publication destination and authentication origin.
+- **Google LLC** (YouTube), as publication destination for videos and Shorts.
+- **TikTok Inc.**, as publication destination for short videos.
+- **Cloudflare, Inc.**, which provides DNS, TLS, edge security, and access tunneling.
+
+We may also disclose data where required by law, by court order, or where necessary to investigate a security incident.
+
+## 7. How long we keep it and how we delete it
+
+| Item | Retention | How to delete |
+|---|---|---|
+| OAuth authorization tokens (Meta, Google, TikTok) | While connection remains active | Revoke directly on the origin platform (Meta, Google, or TikTok) or remove connection in the application panel. Removal deletes the token from our database |
+| Execution logs and publishing records | Automatic rolling pruning within 14 to 30 days | Email request for earlier purging |
+| Published media and posts | Remains on destination platforms under account owner control | Deleted directly on the respective social network or removed from CDN storage |
+
+**Revoking ends access.** After revocation, the application can no longer read data or publish to accounts, and the corresponding tokens cease to be valid.
+
+To request deletion of data held by PsiAtiva, write to `privacidade@psiativa.com.br` with the subject "Data deletion: social-engine application". We reply within the statutory deadline.
+
+## 8. Security
+
+We apply technical and organizational measures proportionate to the sensitivity of the data handled:
+
+- Mandatory authentication on the application interface, with no public sign-up and no anonymous access.
+- Credentials encrypted at rest and never exposed in the interface after saving.
+- Transport exclusively over HTTPS and dedicated tunnel, with no administration port exposed to the internet.
+- Least privilege principle in requested permissions, restricting scopes strictly to publication and identification actions.
+- Two-step verification active on accounts authorizing the application.
+- Access restricted to authorized operators with individual credentials.
+
+No system is completely infallible, but we treat incidents with the seriousness required by data protection laws, notifying data subjects and authorities where applicable.
+
+## 9. Third-party data and data protection law (LGPD)
+
+PsiAtiva is a management and digital presence consultancy serving psychology professionals and clinics. social-engine is an internal publishing tool for educational and brand content of the group's companies.
+
+Any personal data arising from public interactions on posts (such as public comments or mentions) is strictly **commercial and professional** in nature. We do not collect or process patient data, health data, or sensitive data through this application. No therapeutic relationship, clinical confidentiality, or medical record is involved.
+
+Under Brazilian Law 13.709/2018 (LGPD), data subjects may request confirmation of processing, access, correction, anonymization, deletion, portability, information about sharing, and withdrawal of consent, by writing to `privacidade@psiativa.com.br`.
+
+- **Data Protection Officer (DPO):** Juan Santos
+- **Email:** `privacidade@psiativa.com.br`
+
+Data subjects may also contact the Brazilian National Data Protection Authority (ANPD).
+
+## 10. Minors
+
+The application is an internal professional tool and is not directed to anyone under 18. We do not knowingly collect data of minors through these workflows.
+
+## 11. Changes to this Policy
+
+We may update this Policy. The current version will always be on this page with the "Last updated" date. If we substantially change permissions or the purpose of data usage, we will update this page before changes take effect.
+
+## 12. Contact
+
+- **Privacy and data protection:** `privacidade@psiativa.com.br`
+- **General matters:** `contato@psiativa.com.br`
+- **Operator:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brazil
+- **Application page:** [psiativa.com.br/apps/social-engine](/apps/social-engine) · **Terms of Use:** [psiativa.com.br/apps/social-engine/termos](/apps/social-engine/termos)
+
+</div>

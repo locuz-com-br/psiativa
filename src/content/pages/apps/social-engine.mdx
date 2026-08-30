@@ -1,0 +1,155 @@
+---
+title: "social-engine (aplicativo interno)"
+description: "Página oficial do aplicativo social-engine operado pela PsiAtiva: agendamento e publicação de conteúdo em redes sociais para nossas marcas próprias."
+publishedAt: 2026-08-30
+---
+
+<div data-lang-block="pt">
+
+# social-engine na PsiAtiva
+
+Página oficial do aplicativo **social-engine** operado pela PsiAtiva em `https://social.psiativa.com.br`. Aqui descrevemos o que o aplicativo faz, quem o utiliza e por que ele solicita acesso a dados de contas e páginas em redes sociais.
+
+[Política de Privacidade do aplicativo](/apps/social-engine/privacidade) · [Termos de Uso do aplicativo](/apps/social-engine/termos)
+
+## 1. O que é este aplicativo
+
+O social-engine é uma ferramenta de agendamento e publicação de postagens em redes sociais baseada em software de código aberto autohospedado. A PsiAtiva mantém uma **instância própria e autohospedada** dessa ferramenta, em contêiner sob nosso controle, publicada exclusivamente em `https://social.psiativa.com.br`.
+
+Trata-se de um **aplicativo interno de retaguarda**. Ele não é um produto oferecido ao público, não tem cadastro aberto e não pode ser usado por terceiros. O acesso exige autenticação e é concedido apenas a operadores autorizados.
+
+Operado por 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brasil.
+
+## 2. O que o aplicativo faz
+
+O aplicativo cuida da gestão operacional, agendamento e publicação de postagens orgânicas exclusivamente para as marcas próprias do mesmo grupo econômico (PsiAtiva, Juan Silva Design, Locuz, NewCar e Zoku):
+
+- **Agenda e publica postagens** com imagem, vídeo e texto nas contas e páginas oficiais das nossas marcas no Instagram, Facebook, YouTube, TikTok, Threads, Bluesky, Mastodon, Telegram e Discord.
+- **Hospeda os arquivos de mídia** (imagens JPEG e vídeos) em nosso próprio armazenamento e CDN seguro (`cdn.psiativa.com.br`) para que sejam acessados pelas plataformas no momento da publicação.
+- **Identifica os perfis conectados** para que o operador selecione e confirme a conta de destino correta de cada marca antes de enviar ou programar qualquer publicação.
+- **Acompanha o status de entrega e métricas básicas** das postagens publicadas em nossos próprios canais para fins de relatório interno de desempenho.
+
+Nenhum desses fluxos atende pacientes nem trata dados clínicos. O tratamento restringe-se ao gerenciamento de conteúdo institucional e comercial das nossas próprias marcas e à comunicação pública com profissionais e empresas.
+
+## 3. Por que solicitamos acesso a dados das plataformas
+
+O aplicativo pede autorização de contas e perfis apenas para as funções estritamente necessárias de identificação de conta, confirmação de destino e publicação do conteúdo agendado:
+
+| Plataforma | Permissão (escopo) | O que ela permite | Por que o aplicativo precisa dela |
+|---|---|---|---|
+| Meta (Instagram) | `instagram_business_basic` | Ler o ID, nome de usuário (@handle) e foto de perfil da conta profissional | Exibir e confirmar qual das nossas contas do Instagram receberá a postagem agendada antes do envio |
+| Meta (Instagram) | `instagram_business_content_publish` | Criar contêineres de mídia e publicar fotos e vídeos no perfil profissional conectado | Publicar automaticamente o post agendado no horário programado |
+| Meta (Facebook) | `pages_manage_posts` | Criar e publicar postagens nas Páginas do Facebook administradas | Publicar postagens agendadas na Página oficial de cada marca |
+| Meta (Facebook) | `pages_read_engagement` e `pages_show_list` | Listar as Páginas gerenciadas e verificar o status da conexão | Permitir que o operador selecione a Página correta de destino e validar a conexão |
+| Google (YouTube) | `https://www.googleapis.com/auth/youtube.upload` | Enviar vídeos e metadados para canais do YouTube autorizados | Publicar vídeos e Shorts agendados nos canais oficiais das nossas marcas |
+| Google (YouTube) | `https://www.googleapis.com/auth/youtube.readonly` | Ler informações de canais e vídeos da conta conectada | Identificar o canal conectado e verificar o status de publicação |
+| TikTok | `video.publish` | Enviar e publicar vídeos na conta comercial conectada do TikTok | Publicar vídeos curtos agendados nas contas oficiais das nossas marcas |
+
+Não solicitamos acesso a mensagens privadas desvinculadas de postagens, contatos pessoais, dados de navegação nem dados de localização. Os dados obtidos por essas permissões são usados **somente** para operar as funções descritas acima, conforme a [Política de Privacidade do aplicativo](/apps/social-engine/privacidade).
+
+## 4. Quais contas se conectam ao aplicativo
+
+Hoje, apenas contas corporativas e perfis profissionais pertencentes às marcas do próprio operador se conectam ao aplicativo: as contas oficiais de `psiativa.com.br`, `juansilva.design`, `locuz.com.br`, `newcar.rio.br` e `zoku`, todas sob nosso controle.
+
+O aplicativo **não** oferece login para clientes ou visitantes, e nenhuma conta de terceiros está conectada. Se isso mudar, a Política de Privacidade será atualizada antes de qualquer nova conexão.
+
+## 5. Como revogar o acesso
+
+O titular de qualquer conta conectada pode encerrar o acesso a qualquer momento nas configurações de segurança de cada plataforma:
+
+- **Meta (Facebook e Instagram):** Configurações do perfil ou Página → Aplicativos e sites conectados → Remover o aplicativo social-engine.
+- **Google (YouTube):** [myaccount.google.com/permissions](https://myaccount.google.com/permissions), removendo o aplicativo da lista de acessos de terceiros.
+- **TikTok:** Configurações de segurança → Aplicativos e serviços conectados → Revogar acesso do aplicativo.
+
+A revogação interrompe imediatamente qualquer leitura ou publicação futura. Para pedir também a exclusão dos dados já armazenados, veja a seção de retenção e exclusão da [Política de Privacidade](/apps/social-engine/privacidade).
+
+## 6. Privacidade e termos
+
+- [Política de Privacidade do aplicativo](/apps/social-engine/privacidade): quais dados acessamos, como usamos, onde guardamos, com quem compartilhamos e como excluímos.
+- [Termos de Uso do aplicativo](/apps/social-engine/termos): quem pode usar, condições de uso e responsabilidades.
+
+## 7. Contato
+
+- **Assuntos gerais:** `contato@psiativa.com.br`
+- **Privacidade e proteção de dados:** `privacidade@psiativa.com.br`
+- **Operador:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brasil
+- **Site institucional:** [psiativa.com.br](/)
+
+_Última atualização: 30 de agosto de 2026._
+
+</div>
+
+<div data-lang-block="en">
+
+# social-engine at PsiAtiva
+
+Official page for the **social-engine** application operated by PsiAtiva at `https://social.psiativa.com.br`. This page describes what the application does, who uses it, and why it requests access to social media accounts and pages.
+
+[Application Privacy Policy](/apps/social-engine/privacidade) · [Application Terms of Use](/apps/social-engine/termos)
+
+## 1. What this application is
+
+social-engine is a self-hosted social media scheduling and publishing tool based on open-source software. PsiAtiva runs its **own self-hosted instance** of it, inside a container under our control, published exclusively at `https://social.psiativa.com.br`.
+
+This is an **internal back office application**. It is not a product offered to the public, it has no open sign-up, and it cannot be used by third parties. Access requires authentication and is granted only to authorized operators.
+
+Operated by 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), Brazilian company registration (CNPJ) 51.525.875/0001-48, Brazil.
+
+## 2. What the application does
+
+The application manages the operational scheduling and publishing of organic posts exclusively for the operator's own group brands (PsiAtiva, Juan Silva Design, Locuz, NewCar, and Zoku):
+
+- **Schedules and publishes posts** with image, video, and text across our official brand accounts and pages on Instagram, Facebook, YouTube, TikTok, Threads, Bluesky, Mastodon, Telegram, and Discord.
+- **Hosts media assets** (JPEG images and videos) on our own storage and CDN (`cdn.psiativa.com.br`) so they can be fetched by platforms at publish time.
+- **Identifies connected profiles** so the operator can select and confirm the correct destination account for each brand before sending or scheduling a post.
+- **Tracks delivery status and basic metrics** for posts published to our own channels for internal performance reporting.
+
+None of these workflows serve patients or handle clinical data. Processing is strictly limited to managing institutional and commercial content for our own brands and public communication with professionals and businesses.
+
+## 3. Why we request access to platform data
+
+The application requests account and profile authorization strictly for the necessary functions of account identification, destination confirmation, and publishing scheduled content:
+
+| Platform | Permission (scope) | What it allows | Why the application needs it |
+|---|---|---|---|
+| Meta (Instagram) | `instagram_business_basic` | Read account ID, username (@handle), and profile picture of the professional account | Display and confirm which of our Instagram accounts will receive the scheduled post before publishing |
+| Meta (Instagram) | `instagram_business_content_publish` | Create media containers and publish photos and videos to the connected professional profile | Automatically publish the scheduled post at the programmed time |
+| Meta (Facebook) | `pages_manage_posts` | Create and publish posts to managed Facebook Pages | Publish scheduled posts to the official Page of each brand |
+| Meta (Facebook) | `pages_read_engagement` and `pages_show_list` | List managed Pages and verify connection status | Allow the operator to select the correct target Page and validate connectivity |
+| Google (YouTube) | `https://www.googleapis.com/auth/youtube.upload` | Upload videos and metadata to authorized YouTube channels | Publish scheduled videos and Shorts to our brands' official channels |
+| Google (YouTube) | `https://www.googleapis.com/auth/youtube.readonly` | Read channel and video information for the connected account | Identify the connected channel and verify publication status |
+| TikTok | `video.publish` | Upload and publish videos to the connected commercial TikTok account | Publish scheduled short videos to our brands' official accounts |
+
+We do not request access to private direct messages unrelated to posts, personal contacts, browsing history, or location data. Data obtained through these permissions is used **solely** to operate the functions described above, as stated in the [Application Privacy Policy](/apps/social-engine/privacidade).
+
+## 4. Which accounts connect to the application
+
+Today, only corporate accounts and professional profiles belonging to the operator's own brands connect to the application: the official accounts of `psiativa.com.br`, `juansilva.design`, `locuz.com.br`, `newcar.rio.br`, and `zoku`, all under our control.
+
+The application does **not** offer login to clients or visitors, and no third-party account is connected. If that changes, the Privacy Policy will be updated before any new connection is made.
+
+## 5. How to revoke access
+
+The owner of any connected account can end access at any time through each platform's security settings:
+
+- **Meta (Facebook and Instagram):** Profile or Page Settings → Connected Apps and Websites → Remove social-engine application.
+- **Google (YouTube):** [myaccount.google.com/permissions](https://myaccount.google.com/permissions), removing the application from the list of third-party accesses.
+- **TikTok:** Security Settings → Connected Apps and Services → Revoke application access.
+
+Revoking stops any future read or publish action immediately. To also request deletion of data already stored, see the retention and deletion section of the [Privacy Policy](/apps/social-engine/privacidade).
+
+## 6. Privacy and terms
+
+- [Application Privacy Policy](/apps/social-engine/privacidade): what platform data we access, how we use it, where we store it, with whom we share it, and how we delete it.
+- [Application Terms of Use](/apps/social-engine/termos): who may use it, conditions of use, and responsibilities.
+
+## 7. Contact
+
+- **General matters:** `contato@psiativa.com.br`
+- **Privacy and data protection:** `privacidade@psiativa.com.br`
+- **Operator:** 51.525.875 JUAN PABLO DOS SANTOS SILVA (PsiAtiva), CNPJ 51.525.875/0001-48, Brazil
+- **Company website:** [psiativa.com.br](/)
+
+_Last updated: August 30, 2026._
+
+</div>
