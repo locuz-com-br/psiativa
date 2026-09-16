@@ -1,15 +1,74 @@
 ---
-// About — Two-column layout (image + text + checklist) (PsiAtiva design system)
+// About — Two-column layout (image/video + text + checklist) (PsiAtiva design system)
 // Previously "WhyUs"
+
+const VIDEO_ASSETS = {
+  webm: 'https://cdn.psiativa.com.br/psiativa.com.br/sections/WhyUs.astro/psiativa.webm',
+  mp4: 'https://cdn.psiativa.com.br/psiativa.com.br/sections/WhyUs.astro/psiativa.mp4',
+  poster: 'https://cdn.psiativa.com.br/psiativa.com.br/sections/WhyUs.astro/psiativa.webp',
+  fallbackJpg: 'https://cdn.psiativa.com.br/psiativa.com.br/sections/WhyUs.astro/psiativa.jpg',
+  width: 720,
+  height: 1280,
+};
 ---
 
 <section class="about section" id="sobre">
   <div class="container">
     <div class="about-grid">
-      <!-- Left: Image/Mockup -->
+      <!-- Left: Video / Mockup / Fallback -->
       <div class="about-left">
-        <div class="about-image-wrapper">
-          <div class="about-illustration">
+        <div class="about-image-wrapper" data-video-container>
+          {/* Main video element with WebM (VP9 Profile 0) and MP4 (H.264 High L4.0) */}
+          <video
+            class="about-video"
+            muted
+            loop
+            playsinline
+            autoplay
+            preload="metadata"
+            poster={VIDEO_ASSETS.poster}
+            width={VIDEO_ASSETS.width}
+            height={VIDEO_ASSETS.height}
+            aria-label="Processo de captação para clínicas de psicologia — PsiAtiva"
+          >
+            <source src={VIDEO_ASSETS.webm} type='video/webm; codecs="vp09.00.40.08"' />
+            <source src={VIDEO_ASSETS.mp4} type='video/mp4; codecs="avc1.640028"' />
+          </video>
+
+          {/* Picture still for prefers-reduced-motion */}
+          <picture class="about-still">
+            <source srcset={VIDEO_ASSETS.poster} type="image/webp" />
+            <img
+              src={VIDEO_ASSETS.fallbackJpg}
+              alt="Processo de captação para clínicas de psicologia — PsiAtiva"
+              width={VIDEO_ASSETS.width}
+              height={VIDEO_ASSETS.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+
+          {/* Sound toggle button */}
+          <button
+            type="button"
+            class="sound-toggle"
+            aria-label="Ativar som do vídeo"
+            data-sound-toggle
+            title="Ativar som"
+          >
+            <svg class="icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+            <svg class="icon-unmuted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+
+          {/* Old placeholder illustration kept as fallback */}
+          <div class="about-illustration" aria-hidden="true">
             <svg width="100%" height="100%" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="400" height="320" rx="16" fill="#F0F7F4"/>
               <rect x="40" y="40" width="200" height="24" rx="12" fill="#7EAE89" opacity="0.3"/>
@@ -166,9 +225,12 @@
   .about-left {
     flex: 1;
     max-width: 592px;
+    display: flex;
+    justify-content: center;
   }
 
   .about-image-wrapper {
+    position: relative;
     border-radius: var(--radius-card);
     overflow: hidden;
     background: linear-gradient(
@@ -176,10 +238,109 @@
       var(--light-blue) 0%,
       var(--background-subtle) 100%
     );
-    aspect-ratio: 4/3;
+    aspect-ratio: 9/16;
+    max-width: 360px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 16px 40px -12px rgba(26, 75, 81, 0.16);
+    border: 1px solid rgba(126, 174, 137, 0.25);
+  }
+
+  .about-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-still {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .about-still img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Sound toggle button */
+  .sound-toggle {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(26, 75, 81, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #FAFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .sound-toggle:hover {
+    background: rgba(26, 75, 81, 0.95);
+    transform: scale(1.08);
+  }
+
+  .sound-toggle .icon-unmuted {
+    display: none;
+  }
+
+  .sound-toggle.is-unmuted .icon-unmuted {
+    display: block;
+  }
+
+  .sound-toggle.is-unmuted .icon-muted {
+    display: none;
+  }
+
+  /* Fallback illustration: hidden unless container has-error */
+  .about-illustration {
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  .about-image-wrapper.has-error {
+    aspect-ratio: 4/3;
+    max-width: 592px;
+  }
+
+  .about-image-wrapper.has-error .about-video,
+  .about-image-wrapper.has-error .about-still,
+  .about-image-wrapper.has-error .sound-toggle {
+    display: none !important;
+  }
+
+  .about-image-wrapper.has-error .about-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .about-video {
+      display: none;
+    }
+    .about-still {
+      display: block;
+    }
+    .sound-toggle {
+      display: none;
+    }
   }
 
   .about-image {
@@ -258,3 +419,31 @@
     }
   }
 </style>
+
+<script>
+  (() => {
+    const container = document.querySelector('[data-video-container]');
+    if (!container) return;
+
+    const video = container.querySelector<HTMLVideoElement>('.about-video');
+    const soundBtn = container.querySelector<HTMLButtonElement>('[data-sound-toggle]');
+
+    if (video) {
+      video.addEventListener('error', () => {
+        container.classList.add('has-error');
+      });
+
+      if (soundBtn) {
+        soundBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          video.muted = !video.muted;
+          soundBtn.classList.toggle('is-unmuted', !video.muted);
+          const label = video.muted ? 'Ativar som do vídeo' : 'Desativar som do vídeo';
+          soundBtn.setAttribute('aria-label', label);
+          soundBtn.setAttribute('title', label);
+        });
+      }
+    }
+  })();
+</script>
+
