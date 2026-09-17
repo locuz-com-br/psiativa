@@ -29,7 +29,8 @@ const VIDEO_ASSETS = {
             poster={VIDEO_ASSETS.poster}
             width={VIDEO_ASSETS.width}
             height={VIDEO_ASSETS.height}
-            aria-label="Processo de captação para clínicas de psicologia — PsiAtiva"
+            aria-label="Processo de captação para clínicas de psicologia, PsiAtiva"
+            data-i18n-aria-label="a11y.whyus_video"
           >
             <source src={VIDEO_ASSETS.webm} type='video/webm; codecs="vp09.00.40.08"' />
             <source src={VIDEO_ASSETS.mp4} type='video/mp4; codecs="avc1.640028"' />
@@ -40,7 +41,8 @@ const VIDEO_ASSETS = {
             <source srcset={VIDEO_ASSETS.poster} type="image/webp" />
             <img
               src={VIDEO_ASSETS.fallbackJpg}
-              alt="Processo de captação para clínicas de psicologia — PsiAtiva"
+              alt="Processo de captação para clínicas de psicologia, PsiAtiva"
+              data-i18n-alt="a11y.whyus_video"
               width={VIDEO_ASSETS.width}
               height={VIDEO_ASSETS.height}
               loading="lazy"
@@ -53,8 +55,10 @@ const VIDEO_ASSETS = {
             type="button"
             class="sound-toggle"
             aria-label="Ativar som do vídeo"
+            data-i18n-aria-label="a11y.video_sound_on"
             data-sound-toggle
-            title="Ativar som"
+            title="Ativar som do vídeo"
+            data-i18n-title="a11y.video_sound_on"
           >
             <svg class="icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
@@ -438,7 +442,13 @@ const VIDEO_ASSETS = {
           e.stopPropagation();
           video.muted = !video.muted;
           soundBtn.classList.toggle('is-unmuted', !video.muted);
-          const label = video.muted ? 'Ativar som do vídeo' : 'Desativar som do vídeo';
+          // Re-key it so a later language toggle relabels it too, then resolve
+          // the string for the language showing now (copy stays in translations.json).
+          const key = video.muted ? 'a11y.video_sound_on' : 'a11y.video_sound_off';
+          soundBtn.setAttribute('data-i18n-aria-label', key);
+          soundBtn.setAttribute('data-i18n-title', key);
+          const label = window.__siteI18n?.t(key)
+            || (video.muted ? 'Ativar som do vídeo' : 'Desativar som do vídeo');
           soundBtn.setAttribute('aria-label', label);
           soundBtn.setAttribute('title', label);
         });

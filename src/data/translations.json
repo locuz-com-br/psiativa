@@ -54,6 +54,10 @@
       "pt": "Sua clínica perde paciente entre o primeiro contato e a sessão confirmada, por falta de processo. A PsiAtiva fecha esse buraco com método clínico e sem pressão.",
       "en": "Your clinic loses patients between the first contact and the confirmed session, for lack of process. PsiAtiva closes that gap with clinical method and no pressure."
     },
+    "typewriter_label": {
+      "pt": "Seu atendimento,",
+      "en": "Your practice,"
+    },
     "cta_primary": {
       "pt": "AGENDAR DIAGNÓSTICO",
       "en": "BOOK A DIAGNOSTIC"
@@ -1583,6 +1587,70 @@
         "pt": "Você foi indicada. A PsiAtiva é a assessoria de captação ética para clínicas e consultórios de psicologia. Diagnóstico gratuito pelo WhatsApp.",
         "en": "You were referred. PsiAtiva is the ethical patient-acquisition consultancy for psychology clinics and private practices. Free diagnostic via WhatsApp."
       }
+    }
+  },
+  "cookie": {
+    "title": {
+      "pt": "Sua privacidade importa",
+      "en": "Your privacy matters"
+    },
+    "body": {
+      "pt": "Usamos Google Analytics, Microsoft Clarity e o Pixel da Meta para entender o uso do site e medir o resultado dos nossos anúncios. Eles só serão carregados com sua autorização. <a href=\"/cookies/\">Saiba mais</a>.",
+      "en": "We use Google Analytics, Microsoft Clarity and the Meta Pixel to understand how the site is used and to measure the result of our ads. They are only loaded with your permission. <a href=\"/cookies/\">Learn more</a>."
+    },
+    "reject": {
+      "pt": "Rejeitar não essenciais",
+      "en": "Reject non-essential"
+    },
+    "accept": {
+      "pt": "Aceitar",
+      "en": "Accept"
+    },
+    "prefs": {
+      "pt": "Preferências de cookies",
+      "en": "Cookie preferences"
+    }
+  },
+  "a11y": {
+    "whatsapp_fab": {
+      "pt": "Fale conosco pelo WhatsApp",
+      "en": "Talk to us on WhatsApp"
+    },
+    "home_link": {
+      "pt": "PsiAtiva, página inicial",
+      "en": "PsiAtiva, home"
+    },
+    "open_menu": {
+      "pt": "Abrir menu",
+      "en": "Open menu"
+    },
+    "switch_language": {
+      "pt": "Trocar idioma",
+      "en": "Switch language"
+    },
+    "language_flag": {
+      "pt": "Idioma",
+      "en": "Language"
+    },
+    "whyus_video": {
+      "pt": "Processo de captação para clínicas de psicologia, PsiAtiva",
+      "en": "Patient acquisition process for psychology clinics, PsiAtiva"
+    },
+    "video_sound_on": {
+      "pt": "Ativar som do vídeo",
+      "en": "Turn on video sound"
+    },
+    "video_sound_off": {
+      "pt": "Desativar som do vídeo",
+      "en": "Turn off video sound"
+    },
+    "prev_testimonial": {
+      "pt": "Depoimento anterior",
+      "en": "Previous testimonial"
+    },
+    "next_testimonial": {
+      "pt": "Próximo depoimento",
+      "en": "Next testimonial"
     }
   }
 }

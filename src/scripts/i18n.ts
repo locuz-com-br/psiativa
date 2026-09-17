@@ -5,6 +5,7 @@
  *   <strong>/<a> that textContent would flatten — authored static strings
  *   only, never user input).
  * Swaps placeholder of elements with [data-i18n-placeholder] attributes.
+ * Swaps aria-label / title / alt of [data-i18n-aria-label] / [data-i18n-title] / [data-i18n-alt].
  * Auto-detects locale from navigator.language, persists via localStorage.
  *
  * React islands can't be reached by these DOM queries (they hydrate after
@@ -19,10 +20,21 @@ import translations from '../data/translations.json';
 type Lang = 'pt' | 'en';
 
 function getNestedValue(obj: any, path: string): string | undefined {
-  return path.split('.').reduce((acc, key) => acc?.[key], obj);
+  const value = path.split('.').reduce((acc, key) => acc?.[key], obj);
+  // A key that resolves to nothing leaves the hardcoded fallback in place, in
+  // whichever language it was authored, with no visible error. Say so in dev.
+  if (import.meta.env.DEV && (value === undefined || value === null)) {
+    console.warn(`[i18n] unresolved key: ${path}`);
+  }
+  return value;
 }
 
+/** The language currently rendered. Set by applyTranslations, read by t(). */
+let activeLang: Lang | null = null;
+
 function applyTranslations(lang: Lang) {
+  activeLang = lang;
+
   // Text content
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n')!;
@@ -59,6 +71,18 @@ function applyTranslations(lang: Lang) {
     }
   });
 
+  // Localized attributes: aria-label / title / alt. Several of these shipped
+  // hardcoded in ONE language, so the other locale read them untranslated.
+  for (const attr of ['aria-label', 'title', 'alt']) {
+    document.querySelectorAll(`[data-i18n-${attr}]`).forEach((el) => {
+      const key = el.getAttribute(`data-i18n-${attr}`)!;
+      const entry = getNestedValue(translations, key);
+      if (entry && typeof entry === 'object' && lang in entry) {
+        el.setAttribute(attr, (entry as Record<string, string>)[lang]);
+      }
+    });
+  }
+
   // Update html lang attribute
   document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
 
@@ -78,6 +102,20 @@ function detectDefaultLang(): Lang {
   // Detect from browser
   const browserLang = navigator.language || (navigator as any).userLanguage || '';
   return browserLang.toLowerCase().startsWith('pt') ? 'pt' : 'en';
+}
+
+function currentLang(): Lang {
+  // What is on screen wins; localStorage is only the pre-init fallback.
+  return activeLang || (localStorage.getItem('site-lang') as Lang) || detectDefaultLang();
+}
+
+/** Resolve one key for the active (or given) language. Copy stays in translations.json. */
+function t(key: string, lang: Lang = currentLang()): string {
+  const entry = getNestedValue(translations, key);
+  if (entry && typeof entry === 'object' && lang in entry) {
+    return (entry as Record<string, string>)[lang];
+  }
+  return '';
 }
 
 function toggleLang() {
@@ -103,4 +141,4 @@ document.getElementById('lang-toggle')?.addEventListener('click', toggleLang);
 document.getElementById('lang-toggle-mobile')?.addEventListener('click', toggleLang);
 
 // Export for external use
-(window as any).__siteI18n = { applyTranslations, toggleLang, detectDefaultLang };
+(window as any).__siteI18n = { applyTranslations, toggleLang, detectDefaultLang, currentLang, t };

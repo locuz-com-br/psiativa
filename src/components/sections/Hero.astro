@@ -87,13 +87,13 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
 
     <!-- Typewriter word (standalone below subtitle) -->
     <div class="hero-typewriter-line animate-fade-in-up delay-200">
-      <span class="hero-typewriter-label">Seu atendimento,</span>
-      <span class="hero-typewriter" id="typewriter-word">{typewriterWords[0]}</span>
+      <span class="hero-typewriter-label" data-i18n="hero.typewriter_label">Seu atendimento,</span>
+      <span class="hero-typewriter" id="typewriter-word">{typewriterWords.pt[0]}</span>
     </div>
 
     <!-- CTA Button -->
     <div class="hero-actions animate-fade-in-up delay-300">
-      <a href={LINKS.socials.whatsapp} target="_blank" rel="noopener" class="btn-primary-light">
+      <a href={LINKS.socials.whatsapp} target="_blank" rel="noopener" class="btn-primary-light" data-whatsapp-cta>
         <span data-i18n="hero.cta_primary">AGENDAR DIAGNÓSTICO</span>
         <span class="icon-circle">
           <svg
@@ -335,42 +335,62 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
 </style>
 
 <script define:vars={{ typewriterWords }}>
-  // Typewriter animation (reduced motion keeps the first word, rendered server-side)
+  // Typewriter animation (reduced motion keeps the first word, rendered server-side).
+  // The word list is per-language: i18n.ts fires `site-lang-change` on init and on
+  // every toggle, so the loop restarts on the list for the language showing now.
   const el = document.getElementById("typewriter-word");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (el && typewriterWords.length > 1 && !reduceMotion) {
-    let wordIndex = 0;
-    let charIndex = typewriterWords[0].length;
-    let isDeleting = true;
+
+  if (el) {
+    let words = typewriterWords.pt;
     let timer;
 
-    function tick() {
-      const currentWord = typewriterWords[wordIndex];
+    function start() {
+      clearTimeout(timer);
+      el.textContent = words[0];
+      if (reduceMotion || words.length < 2) return;
 
-      if (isDeleting) {
-        charIndex--;
-        el.textContent = currentWord.substring(0, charIndex);
-        if (charIndex === 0) {
-          isDeleting = false;
-          wordIndex = (wordIndex + 1) % typewriterWords.length;
-          timer = setTimeout(tick, 300);
-          return;
+      let wordIndex = 0;
+      let charIndex = words[0].length;
+      let isDeleting = true;
+
+      function tick() {
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+          charIndex--;
+          el.textContent = currentWord.substring(0, charIndex);
+          if (charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            timer = setTimeout(tick, 300);
+            return;
+          }
+          timer = setTimeout(tick, 50);
+        } else {
+          const newWord = words[wordIndex];
+          charIndex++;
+          el.textContent = newWord.substring(0, charIndex);
+          if (charIndex === newWord.length) {
+            isDeleting = true;
+            timer = setTimeout(tick, 2500);
+            return;
+          }
+          timer = setTimeout(tick, 80);
         }
-        timer = setTimeout(tick, 50);
-      } else {
-        const newWord = typewriterWords[wordIndex];
-        charIndex++;
-        el.textContent = newWord.substring(0, charIndex);
-        if (charIndex === newWord.length) {
-          isDeleting = true;
-          timer = setTimeout(tick, 2500);
-          return;
-        }
-        timer = setTimeout(tick, 80);
       }
+
+      timer = setTimeout(tick, 2000);
     }
 
-    setTimeout(tick, 2000);
+    window.addEventListener("site-lang-change", (event) => {
+      const next = typewriterWords[event.detail];
+      if (!next || next === words) return;
+      words = next;
+      start();
+    });
+
+    start();
   }
 </script>
 

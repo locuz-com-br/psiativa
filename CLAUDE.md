@@ -43,6 +43,19 @@ in-island `COPY` maps (NOT `translations.json`). **Only display strings are `{pt
 fields (ids, weights, `icp`/`pains`, `slug`, min/max) stay monolingual, and the envelope/payload
 records the language she actually saw.
 
+**Attributes localize too** (added Sprint 33): `[data-i18n-aria-label]`, `[data-i18n-title]` and
+`[data-i18n-alt]` are swapped from the same `{pt,en}` entries, which is what `aria-label`/`title`/`alt`
+need — they are not text nodes, so `data-i18n` never reached them. A11y strings live under the **`a11y.*`**
+keys and the cookie banner under **`cookie.*`**. For a label a script sets itself (the `WhyUs` sound toggle),
+re-point its `data-i18n-*` key and resolve the value with **`window.__siteI18n.t(key)`** — never hardcode the
+string in the component, or it ships in one language only. `t()` follows the language actually **applied**
+(`activeLang`), not `localStorage`, so it cannot disagree with what is on screen.
+
+⚠️ **A dangling key fails SILENTLY.** `getNestedValue` returns `undefined` and the `if (entry)` guard simply
+leaves the hardcoded fallback in place, in whichever language it was authored — no error, and it looks correct
+in PT. `i18n.ts` now `console.warn`s `[i18n] unresolved key: <path>` **in dev only**; run `npm run dev` and read
+the console after adding keys. (This caught `footer.whatsapp_fab_aria`, a key that never existed.)
+
 When you add a string to a localized page: static → `data-i18n` key in `translations.json` + the
 hardcoded PT fallback (same dual-copy rule); island → `{pt,en}` in the island's data/config +
 `pick(x, lang)`. `/quiz` + `/calculadora` are fully bilingual; **`/diagnostico` (forms island) is
@@ -84,6 +97,32 @@ humanizer) and `sources/workspace/psiativa/_config/{voice,marca-identidade-visua
 - 3-register: **clínico → empático → firme.** Drop in real clinic-life signals
   (agenda oscilante, no-show, recepção, WhatsApp, mês bom/mês ruim).
 - GAP = "Gerador de Agenda Previsível". Calm authority; max one "!" per page.
+
+## ⚠️ `public/` is deployed, `src/assets/` is not
+
+`public/**` ships byte-for-byte to the FTP host; `src/assets/**` only ships if a component **imports** it.
+Nothing imports `src/assets/`, so everything there is **source/backup material that never reaches the
+visitor** — by design:
+
+- `src/assets/psiativa.mp4` + `src/assets/renders/` = the WhyUs video masters. The page serves the encoded
+  renders from `cdn.psiativa.com.br` (see `VIDEO_ASSETS` in `WhyUs.astro`); only `scripts/encode-whyus-video.sh`
+  and `scripts/upload-whyus-assets.sh` read these files. ⛔ Keep them out of `public/` and do not "optimize"
+  them away: they are the only masters.
+- `src/assets/fonts-source/` = the original OTF/TTF for **all 54** faces (8.3 MB). **Fonts are served as
+  woff2 only** (Sprint 33): 8 faces in `public/fonts/`, 465 KB total, down from 1.46 MB of OTF/TTF, and the
+  46 never-referenced faces stopped uploading on every deploy. Re-convert with
+  `knowledge/projects/webfont-converter` (`.venv/bin/python` → `convert_font(src, out, 'woff2')`; it repackages
+  the full font, it does **not** subset). ⛔ If you add a `@font-face`, convert it and reference the `.woff2`;
+  an `.otf`/`.ttf` URL under `/fonts/` now **404s**.
+
+## ⚠️ The WhatsApp FAB tucks itself away near a real CTA
+
+`WhatsAppFab.astro` hides while **any** `[data-whatsapp-cta]` is on screen (hero, final CTA, cases, the contact
+row, `obrigado`), because the floating button only exists for when no WhatsApp button is reachable. Mark a new
+WhatsApp CTA with `data-whatsapp-cta` and it joins the rule; the state is decided synchronously before first
+paint (no flash), then by `IntersectionObserver`. It **fails open** — no observer, or no marked CTA, leaves the
+FAB visible. This is separate from `hideWhatsAppFab`, which removes the FAB from a page entirely (the podcast
+rule below); do not conflate them.
 
 ## Verify (after copy changes)
 
@@ -187,8 +226,8 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
   3. Run the discovery-survey copy through **voice-auditor + CFP-light + offer-guardian** before publish.
 
   Plan + capture contract: `plans/native-forms/plan.md`.
-- **`src/pages/raio-x-site.astro`** + `src/components/audit-site/*` + `src/components/sections/AuditSiteCTA.astro`
-  + `src/lib/audit.ts` + `src/config/audit-site.config.ts` = the **Raio-X do Site** (`/raio-x-site`, bilingual PT/EN,
+- **`src/pages/analise-de-site-para-psicologo.astro`** + `src/components/audit-site/*` + `src/components/sections/AuditSiteCTA.astro`
+  + `src/lib/audit.ts` + `src/config/audit-site.config.ts` = the **Raio-X do Site** (`/analise-de-site-para-psicologo/`, bilingual PT/EN,
   Sprint 17a Fase 5, built 2026-08-24). A free site audit: the visitor pastes her site URL, the engine scores it on a
   5-point rubric (clareza · contato · percepção/cuidado · prova/confiança · próximo passo, 20 each), and the **R$ stays
   locked** until she leaves name + WhatsApp. **ICP: neutral input, single-ICP result** — the `/quiz` exception, not the
@@ -213,8 +252,10 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
   - **Pre-deploy gates (front-end is done; the page is indexable and linked from the home, but NOT functional until these close):**
     1. Fill the two webhook vars and **activate** both n8n workflows. Until then every visitor hits a refusal.
     2. **5.6** SEO briefing pass (`psiativa-seo-briefer`) — anti-cannibalization vs. home, quiz and calculadora.
-    3. **5.7** Lock the public name via `psiativa-voice-auditor`. Copy is self-audited only; the route `/raio-x-site` is
-       provisional until this signs off, and changing it after publish costs a redirect.
+    3. **5.7** Lock the public name via `psiativa-voice-auditor`. Copy is self-audited only; the route is
+       provisional until this signs off, and changing it after publish costs a redirect. ⛔ The live route is
+       **`/analise-de-site-para-psicologo/`** (the file is `src/pages/analise-de-site-para-psicologo.astro`);
+       `/raio-x-site` **404s** and only survives as the internal name in `audit-site.config.ts` (`page: "raio-x-site"`).
 
   Plan: `plans/sprint-17-presence-diagnostic-mini-tools.md` · contract: `plans/audit-site-capture-contract.md`.
 - **`src/pages/podcast/*`** + `src/content/podcast/*.md` + `src/config/podcast.config.ts` + the `podcast` collection
@@ -222,7 +263,7 @@ grep -F "<new phrase>" dist/index.html               # confirm fallback shipped
   (built 2026-08-24). The show is the **personal podcast of the psychologist Loivani Venturin Körner (CRP 12/19699)**,
   republished here under the shared "PsiAtiva" brand as agreed mutual promotion. It is **not** a PsiAtiva product page.
   - ⚠️ **Audience is patients / the general public — NEITHER commercial ICP.** This is a third carved-out exception
-    alongside `/quiz` and `/raio-x-site`, and the widest one: the content speaks to people considering therapy, not to
+    alongside `/quiz` and `/analise-de-site-para-psicologo/`, and the widest one: the content speaks to people considering therapy, not to
     clinic owners. ⛔ Do **not** apply hemorrhage framing, clinic-life signals (agenda oscilante, no-show, recepção), or
     the *clínico* register here — the humanizer's ICP layers are built for selling to psychologists and do not apply.
     Vocabulary compliance and the anti-AI layers **do** apply and were audited (zero forbidden terms in visible copy).

@@ -9,6 +9,7 @@ import { WHATSAPP_LINK } from "../../config/site.config";
   target="_blank"
   rel="noopener"
   aria-label="Fale conosco pelo WhatsApp"
+  data-i18n-aria-label="a11y.whatsapp_fab"
   data-analytics-location="whatsapp_fab"
 >
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF">
@@ -17,6 +18,55 @@ import { WHATSAPP_LINK } from "../../config/site.config";
     ></path>
   </svg>
 </a>
+
+<script is:inline>
+  /**
+   * Tucks the FAB away while a full WhatsApp CTA is on screen — the floating
+   * button is only an affordance for when no WhatsApp button is reachable.
+   * Targets carry [data-whatsapp-cta] (hero, final CTA, cases, contact row).
+   *
+   * Runs after the sections are parsed, so the initial state is decided
+   * synchronously (no visible flash), then IntersectionObserver takes over.
+   * Fails OPEN: no observer, or no CTA on the page, leaves the FAB visible.
+   */
+  (() => {
+    const fab = document.querySelector(".whatsapp-fab");
+    if (!fab) return;
+
+    const ctas = document.querySelectorAll("[data-whatsapp-cta]");
+    if (!ctas.length) return;
+
+    const inViewport = (el) => {
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) return false;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const vw = window.innerWidth || document.documentElement.clientWidth;
+      return r.bottom > 0 && r.top < vh && r.right > 0 && r.left < vw;
+    };
+
+    const apply = (tucked) => {
+      if (tucked) fab.setAttribute("data-tucked", "");
+      else fab.removeAttribute("data-tucked");
+    };
+
+    // Initial state, before the first paint: snap, never animate.
+    apply(Array.prototype.some.call(ctas, inViewport));
+    requestAnimationFrame(() => fab.setAttribute("data-fab-armed", ""));
+
+    if (!("IntersectionObserver" in window)) return;
+
+    const visible = new Set();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      }
+      apply(visible.size > 0);
+    });
+
+    ctas.forEach((cta) => observer.observe(cta));
+  })();
+</script>
 
 <style>
   .whatsapp-fab {
@@ -41,5 +91,39 @@ import { WHATSAPP_LINK } from "../../config/site.config";
   .whatsapp-fab:hover {
     transform: scale(1.08);
     box-shadow: 0 6px 20px rgba(31, 128, 42, 0.3);
+  }
+
+  /* Tucked away while a full WhatsApp CTA is on screen (see the script above).
+     The fade only applies once [data-fab-armed] lands, so the first paint
+     snaps straight to the right state instead of animating into it. */
+  .whatsapp-fab[data-fab-armed] {
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      opacity var(--transition-fast),
+      visibility 0s linear 0s;
+  }
+
+  .whatsapp-fab[data-tucked] {
+    opacity: 0;
+    transform: scale(0.85);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* Hiding: hold visibility until the fade finishes. Showing: flip it at once. */
+  .whatsapp-fab[data-fab-armed][data-tucked] {
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      opacity var(--transition-fast),
+      visibility 0s linear 150ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-fab[data-fab-armed],
+    .whatsapp-fab[data-fab-armed][data-tucked] {
+      transition: none;
+    }
   }
 </style>

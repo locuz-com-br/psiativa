@@ -36,6 +36,7 @@ const {
       href={logoHref}
       class="navbar-logo"
       aria-label={`${SITE_CONFIG.name} - Home`}
+      data-i18n-aria-label="a11y.home_link"
     >
       <img
         src={SITE_CONFIG.logos.navbarLight}
@@ -58,8 +59,10 @@ const {
       <button
         class="lang-toggle"
         id="lang-toggle"
-        aria-label="Switch language"
+        aria-label="Trocar idioma"
+        data-i18n-aria-label="a11y.switch_language"
         title="Mudar o Idioma"
+        data-i18n-title="a11y.switch_language"
       >
         <img
           class="lang-toggle-flag"
@@ -67,6 +70,7 @@ const {
           width="20"
           height="15"
           alt="Idioma"
+          data-i18n-alt="a11y.language_flag"
           style="border-radius:2px;"
           loading="eager"
         />
@@ -96,7 +100,8 @@ const {
       <button
         class="lang-toggle"
         id="lang-toggle-mobile"
-        aria-label="Switch language"
+        aria-label="Trocar idioma"
+        data-i18n-aria-label="a11y.switch_language"
       >
         <img
           class="lang-toggle-flag"
@@ -104,6 +109,7 @@ const {
           width="20"
           height="15"
           alt="Idioma"
+          data-i18n-alt="a11y.language_flag"
           style="border-radius:2px;"
           loading="eager"
         />
@@ -112,6 +118,7 @@ const {
         class="navbar-toggle"
         id="navbar-toggle"
         aria-label="Abrir menu"
+        data-i18n-aria-label="a11y.open_menu"
         aria-expanded="false"
       >
         <span></span><span></span><span></span>

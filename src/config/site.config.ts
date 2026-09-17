@@ -72,7 +72,12 @@ export const SITE_CONFIG = {
   // ── Hero Background ────────────────────────
   hero: {
     backgroundImage: "",
-    typewriterWords: ["previsível", "estruturado", "ético", "consistente"],
+    // Animated by Hero.astro, so it cannot carry a data-i18n key (the engine
+    // would fight the animation). Both lists live here; the script picks by lang.
+    typewriterWords: {
+      pt: ["previsível", "estruturado", "ético", "consistente"],
+      en: ["predictable", "structured", "ethical", "consistent"],
+    },
   },
 
   // ── Section Toggles ────────────────────────
