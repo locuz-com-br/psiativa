@@ -374,6 +374,15 @@ const socialEntries = [
     height: 36px;
     border-radius: 50%;
     border: 1px solid rgba(214, 228, 238, 0.2);
+    position: relative;
+  }
+
+  /* Invisible 44×44 tap area (the inset counts from inside the 1px border);
+     the 16px gap keeps neighbours from overlapping. */
+  .footer-social a::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
   }
 
   .footer-social a:hover {

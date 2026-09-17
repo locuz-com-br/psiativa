@@ -142,12 +142,14 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
   }
 
   /* Particle canvas (src/lib/particles.ts), dimmed so it reads as texture.
-     The script reads the palette from these properties, so the colors stay
-     on the brand tokens (never pure #FFFFFF). */
+     0.45 keeps the subtitle at >= 4.5:1 even where a particle's brightest
+     core passes behind it (measured 4.46:1 at 0.5). The script reads the
+     palette from these properties, so the colors stay on the brand tokens
+     (never pure #FFFFFF). */
   .hero-particles {
     position: absolute;
     inset: 0;
-    opacity: 0.5;
+    opacity: 0.45;
     pointer-events: none;
     --particle-color-1: var(--light-blue);
     --particle-color-2: var(--accent-light);
@@ -316,12 +318,27 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
       font-size: 12px;
     }
   }
+
+  /* Phones: without this the CTA sits flush on the section's bottom edge. */
+  @media (max-width: 480px) {
+    .hero-content {
+      padding-bottom: 48px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-typewriter {
+      animation: none;
+      border-right-color: transparent;
+    }
+  }
 </style>
 
 <script define:vars={{ typewriterWords }}>
-  // Typewriter animation
+  // Typewriter animation (reduced motion keeps the first word, rendered server-side)
   const el = document.getElementById("typewriter-word");
-  if (el && typewriterWords.length > 1) {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (el && typewriterWords.length > 1 && !reduceMotion) {
     let wordIndex = 0;
     let charIndex = typewriterWords[0].length;
     let isDeleting = true;
@@ -364,11 +381,14 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
   const hero = container?.closest<HTMLElement>(".hero");
 
   async function mountHeroParticles(container: HTMLElement, hero: HTMLElement) {
-    const { mountParticles } = await import("../../lib/particles");
     const styles = getComputedStyle(container);
     const colors = ["--particle-color-1", "--particle-color-2", "--particle-color-3"]
       .map((name) => styles.getPropertyValue(name).trim())
       .filter(Boolean);
+    // With no resolved token the port falls back to pure white, which the brand bans.
+    if (colors.length === 0) return;
+
+    const { mountParticles } = await import("../../lib/particles");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const particles = mountParticles(container, {

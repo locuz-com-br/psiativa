@@ -229,6 +229,15 @@ const {
     background: transparent;
     cursor: pointer;
     transition: all var(--transition-fast);
+    position: relative;
+  }
+
+  /* Invisible 44×44 tap area around the 36px circle. The inset counts from
+     inside the 1px border, hence 5px. */
+  .lang-toggle::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
   }
 
   .lang-toggle:hover {
@@ -257,6 +266,15 @@ const {
     border: none;
     cursor: pointer;
     padding: 4px;
+    position: relative;
+  }
+
+  /* Invisible 44×44 tap area around the 30×24 icon. Only 4px to the left,
+     where the language toggle's own tap area sits 8px away. */
+  .navbar-toggle::before {
+    content: "";
+    position: absolute;
+    inset: -10px -10px -10px -4px;
   }
 
   .navbar-toggle span {

@@ -327,6 +327,24 @@ video {
   padding: 0 var(--container-padding);
 }
 
+/* The desktop section rhythm (140/120/100) leaves long empty bands on tablets
+   and phones, so the scale steps down with the viewport. */
+@media (max-width: 1024px) {
+  :root {
+    --section-padding-lg: 112px;
+    --section-padding-md: 96px;
+    --section-padding-sm: 80px;
+  }
+}
+
+@media (max-width: 810px) {
+  :root {
+    --section-padding-lg: 88px;
+    --section-padding-md: 72px;
+    --section-padding-sm: 64px;
+  }
+}
+
 /* ─�� Section Base ───────��────────────────────────────────────��� */
 
 .section {
@@ -489,6 +507,32 @@ video {
 
 .btn-secondary-light:hover {
   background: #AADBE0;
+}
+
+/* Phones: long CTA labels wrap inside the pill instead of running off the
+   screen ("Agendar Diagnóstico pelo WhatsApp" is 504px wide on one line). */
+@media (max-width: 480px) {
+  .btn-primary-light,
+  .btn-primary-dark,
+  .btn-secondary-light {
+    max-width: 100%;
+    height: auto;
+    gap: 16px;
+    padding-left: 24px;
+    font-size: 18px;
+    line-height: 1.2;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .btn-primary-light {
+    min-height: 64px;
+  }
+
+  .btn-primary-dark,
+  .btn-secondary-light {
+    min-height: 56px;
+  }
 }
 
 /* Nav CTA */
@@ -686,6 +730,14 @@ video {
 
 .animate-slide-in-right {
   animation: slideInRight 0.6s var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-slide-in-right {
+    animation: none;
+  }
 }
 
 .delay-100 {

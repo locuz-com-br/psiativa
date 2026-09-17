@@ -167,9 +167,10 @@ export const SITE_CONFIG = {
   legal: {
     blog: "/blog/",
     podcast: "/podcast/",
-    terms: "/termos",
-    privacy: "/privacidade",
-    cookies: "/cookies",
+    // Trailing slash = the served URL; without it the host answers 301 first.
+    terms: "/termos/",
+    privacy: "/privacidade/",
+    cookies: "/cookies/",
   },
 
   // ── Tool Page Slugs ────────────────────────
