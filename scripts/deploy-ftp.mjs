@@ -479,6 +479,159 @@ async function connect() {
   }
 }
 
+// --- FTP session recycling (host-side cap workaround) ------------------------
+//
+// ⛔ This host caps ONE control session at 7 DATA connections. The 8th MLSD/STOR
+// never opens: the server still answers `150` and `226`, but nothing ever
+// connects to the port EPSV just advertised, so basic-ftp waits out its own
+// timeout and reports **`Timeout (control socket)` — which names the socket that
+// went QUIET, not the one that broke.** Isolated on juansilva.design (the SAME
+// cPanel account, `pro122.dnspro.com.br` / `zokucomb`) by listing one directory
+// repeatedly on a single session: transfers 1-7 return in ~110ms, #8 dies. It is
+// the COUNT, never the directory.
+//
+// ⛔ A retry around the failing call CANNOT work — basic-ftp tears the control
+// socket down when the timeout fires (`client.closed === true` immediately
+// after), so there is no session left to retry on. The budget is per CONTROL
+// SESSION and reconnecting RESETS it.
+//
+// ⚠️ This is a WORKAROUND for a host-side cap, not a fix. This script deployed
+// fine on 2026-09-17, so the ceiling appeared after that. It still deserves a
+// support ticket; this only removes the block in the meantime.
+//
+// Ported from juansilva.design `scripts/deploy.mjs` (`2aa535e`), which proved it
+// end to end: 273/273 uploaded across 68 sessions.
+const SESSION_BUDGET = Number(env.FTP_SESSION_BUDGET || 6);
+
+// ⚠️ cPHulk and CSF's LF_FTPD count FAILED logins, not successful ones, but that
+// is this host's default rather than a verified reading of its config — so the
+// reconnects are deliberately paced instead of opened as fast as possible.
+const RECYCLE_PAUSE_MS = Number(env.FTP_RECYCLE_PAUSE_MS || 750);
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * Owns the current FTP client and recycles it before the ceiling is reached.
+ *
+ * Only `list`, `uploadFrom` and `downloadTo` open a data connection and so spend
+ * budget; `cd`, `cdup`, `pwd`, `ensureDir`, `remove` and `removeEmptyDir` are
+ * control-channel commands and are free. Getting that split wrong in either
+ * direction is silent — too generous and the deploy stalls again, too strict and
+ * it logs in for nothing.
+ *
+ * ⭐ Because `spend()` is the ONLY thing that recycles, a loop built purely from
+ * control-channel commands cannot be interrupted by one. That is what makes the
+ * prune loop safe: it deletes by BASENAME, and a reconnect mid-loop would
+ * otherwise delete the wrong files.
+ */
+class Session {
+  constructor(client, tls) {
+    this.client = client;
+    this.tls = tls;
+    this.used = 0;
+    this.recycles = 0;
+    // Where a reconnected session has to be put back. Uploads address files by
+    // BASENAME relative to the working directory, so a reconnect that did not
+    // restore it would write them to the docroot root — the one failure mode
+    // here that corrupts the site rather than stopping the run.
+    this.place = null;
+  }
+
+  async spend() {
+    if (this.used < SESSION_BUDGET) {
+      this.used++;
+      return;
+    }
+    try {
+      this.client.close();
+    } catch {
+      /* already gone; the point is only that we do not leak it */
+    }
+    await sleep(RECYCLE_PAUSE_MS);
+    this.client = (await connect()).client;
+    this.recycles++;
+    this.used = 1;
+    if (this.place) await this.applyPlace();
+  }
+
+  async applyPlace() {
+    const { docroot, dir, create } = this.place;
+    await this.client.cd(docroot);
+    if (dir) {
+      // ⛔ `create` is false on every READ path. `ensureDir` would MAKE the
+      // directory, and a dry run that writes to the remote is not a dry run.
+      if (create) await this.client.ensureDir(dir);
+      else await this.client.cd(dir);
+    }
+
+    // ⛔ Verified, not assumed. Uploads name their files by basename, so if a
+    // recycle ever landed somewhere other than where it left off, the remaining
+    // files of that directory would be written to whatever directory this is —
+    // quietly, with every transfer reporting success. That is the only outcome
+    // here that damages the site instead of stopping the run, so it gets a
+    // check rather than a comment. PWD is control-channel; it costs no budget.
+    const base = docroot.replace(/\/+$/, "");
+    const expected = (dir ? `${base}/${dir}` : base).replace(/\/+$/, "");
+    const actual = (await this.client.pwd()).replace(/\/+$/, "");
+    if (actual !== expected) {
+      // Both are trailing-slash-stripped, which turns the root docroot into ""
+      // — printed raw that reads as "expected nothing". Show it as "/".
+      const show = (p) => p || "/";
+      throw new Error(
+        `session recycle landed in "${show(actual)}" but expected "${show(expected)}" — ` +
+          `refusing to continue rather than write into the wrong directory`,
+      );
+    }
+  }
+
+  /** Sets the working directory AND records it for the next reconnect. */
+  async enter(docroot, dir, { create = false } = {}) {
+    this.place = { docroot, dir, create };
+    await this.applyPlace();
+  }
+
+  /* Data connections — these spend budget. */
+  async list(path) {
+    await this.spend();
+    return this.client.list(path);
+  }
+
+  async uploadFrom(localPath, name) {
+    await this.spend();
+    return this.client.uploadFrom(localPath, name);
+  }
+
+  async downloadTo(sink, path) {
+    await this.spend();
+    return this.client.downloadTo(sink, path);
+  }
+
+  /* Control-channel only — no data connection, no budget. */
+  cd(path) {
+    return this.client.cd(path);
+  }
+
+  pwd() {
+    return this.client.pwd();
+  }
+
+  ensureDir(path) {
+    return this.client.ensureDir(path);
+  }
+
+  remove(path) {
+    return this.client.remove(path);
+  }
+
+  removeEmptyDir(path) {
+    return this.client.removeEmptyDir(path);
+  }
+
+  close() {
+    return this.client.close();
+  }
+}
+
 async function enterDocroot(client) {
   // A per-directory FTP account is chrooted to the docroot itself, so its own path
   // is "/" and can never name the host. Declared, never inferred.
@@ -556,7 +709,7 @@ function assertDocrootIdentity(resolved, names) {
   if (failures) die("docroot identity checks failed — nothing was written");
 }
 
-async function readRemoteFile(client, path, maxBytes = 400_000) {
+async function readRemoteFile(session, path, maxBytes = 400_000) {
   const chunks = [];
   let total = 0;
   const sink = new Writable({
@@ -566,7 +719,7 @@ async function readRemoteFile(client, path, maxBytes = 400_000) {
       cb();
     },
   });
-  await client.downloadTo(sink, path);
+  await session.downloadTo(sink, path);
   return Buffer.concat(chunks).toString("utf8");
 }
 
@@ -582,7 +735,7 @@ async function readRemoteFile(client, path, maxBytes = 400_000) {
  * `html.includes(APEX_HOST)` would happily confirm the WRONG site. Match the
  * canonical <link> exactly, which only this docroot's pages carry.
  */
-async function assertSiteIdentity(client, root, names) {
+async function assertSiteIdentity(session, root, names) {
   head("Site identity");
   if (!names.includes("index.html")) {
     warn("no index.html to read — skipped (only reachable with --first-publish)");
@@ -591,8 +744,8 @@ async function assertSiteIdentity(client, root, names) {
 
   let html;
   try {
-    await client.cd(root);
-    html = await readRemoteFile(client, "index.html");
+    await session.enter(root, "");
+    html = await readRemoteFile(session, "index.html");
   } catch (err) {
     warn(`could not read the remote index.html (${err.message.split("\n")[0]}) — skipping the content check`);
     return;
@@ -615,8 +768,18 @@ async function assertSiteIdentity(client, root, names) {
 
 // --- stage 4: index and plan -------------------------------------------------
 
-async function walkRemote(client, rel = "", acc = { files: [], dirs: [], symlinks: [] }) {
-  const list = await client.list();
+/**
+ * ⚠️ Navigates by ABSOLUTE place (`session.enter`) rather than cd/cdup. A session
+ * recycle reconnects at the login directory, so relative navigation would resume
+ * the walk somewhere else and silently index the WRONG tree — which reads
+ * downstream as a pile of missing files and orphans, not as an error.
+ *
+ * ⛔ `create: false` throughout: this is the read path, and `ensureDir` would
+ * create directories on the remote during a dry run.
+ */
+async function walkRemote(session, root, rel = "", acc = { files: [], dirs: [], symlinks: [] }) {
+  await session.enter(root, rel);
+  const list = await session.list();
   for (const item of list) {
     if (item.name === "." || item.name === "..") continue;
     const r = rel ? `${rel}/${item.name}` : item.name;
@@ -626,9 +789,9 @@ async function walkRemote(client, rel = "", acc = { files: [], dirs: [], symlink
     }
     if (item.isDirectory) {
       acc.dirs.push(r);
-      await client.cd(item.name);
-      await walkRemote(client, r, acc);
-      await client.cdup();
+      // The child re-enters its own absolute path, and this level re-enters on
+      // the next iteration's list, so there is nothing to unwind.
+      await walkRemote(session, root, r, acc);
     } else if (item.isFile) {
       acc.files.push({ rel: r, size: item.size });
     }
@@ -663,7 +826,7 @@ function planUpload(localFiles, remote) {
 
 // --- stage 5: upload ---------------------------------------------------------
 
-async function uploadFiles(client, root, files) {
+async function uploadFiles(session, root, files) {
   if (!files.length) {
     pass("nothing to upload — the docroot already matches this build");
     return;
@@ -691,11 +854,13 @@ async function uploadFiles(client, root, files) {
   const started = Date.now();
   for (const [dir, f] of ordered) {
     if (dir !== currentDir) {
-      await client.cd(root);
-      if (dir) await client.ensureDir(dir);
+      // Records the place, so a recycle between two uploads in THIS directory
+      // puts the session back here instead of writing the rest to the docroot
+      // root. `create: true` — the directory may not exist yet on the remote.
+      await session.enter(root, dir, { create: true });
       currentDir = dir;
     }
-    await client.uploadFrom(join(distDir, f.rel), basename(f.rel));
+    await session.uploadFrom(join(distDir, f.rel), basename(f.rel));
     done++;
     if (process.stdout.isTTY) {
       const rate = done / Math.max(1, (Date.now() - started) / 1000);
@@ -707,10 +872,9 @@ async function uploadFiles(client, root, files) {
 }
 
 /** Re-read the docroot and prove every local file landed at the right size. */
-async function verifyUpload(client, root, localFiles) {
+async function verifyUpload(session, root, localFiles) {
   head("Uploaded tree");
-  await client.cd(root);
-  const remote = await walkRemote(client);
+  const remote = await walkRemote(session, root);
   const remoteByRel = new Map(remote.files.map((f) => [f.rel, f.size]));
 
   const missing = localFiles.filter((f) => !remoteByRel.has(f.rel));
@@ -735,7 +899,7 @@ async function verifyUpload(client, root, localFiles) {
 // from production forever. Same-apex sibling docroots live OUTSIDE this login's
 // jail, so a prune here cannot reach them.
 
-async function pruneOrphans(client, root, orphans, remoteDirs) {
+async function pruneOrphans(session, root, orphans, remoteDirs) {
   head("Prune");
   if (!orphans.length) {
     pass("no orphans — the docroot holds nothing this build did not produce");
@@ -752,10 +916,13 @@ async function pruneOrphans(client, root, orphans, remoteDirs) {
   let removed = 0;
   let bytes = 0;
   for (const [dir, entries] of [...byDir].sort(([a], [b]) => a.localeCompare(b))) {
-    await client.cd(root);
-    if (dir) await client.cd(dir);
+    // ⭐ Safe without `enter`: every command in this loop is control-channel,
+    // and only spend() recycles — so no reconnect can land mid-loop and delete
+    // by basename in the wrong directory.
+    await session.cd(root);
+    if (dir) await session.cd(dir);
     for (const f of entries) {
-      await client.remove(basename(f.rel));
+      await session.remove(basename(f.rel));
       removed++;
       bytes += f.size;
       if (process.stdout.isTTY) process.stdout.write(`\r  deleting… ${removed}/${orphans.length}`);
@@ -772,8 +939,8 @@ async function pruneOrphans(client, root, orphans, remoteDirs) {
   for (const dir of deepestFirst) {
     if (isProtected(dir)) continue;
     try {
-      await client.cd(root);
-      await client.removeEmptyDir(dir);
+      await session.cd(root);
+      await session.removeEmptyDir(dir);
       removedDirs++;
     } catch {
       /* still holds files — the normal case */
@@ -954,24 +1121,27 @@ async function main() {
 
   try {
     head("Connect");
-    session = await connect();
-    const { client, tls } = session;
+    const { client, tls } = await connect();
+    session = new Session(client, tls);
+    info(`recycling the session every ${SESSION_BUDGET} data transfers (this host caps one at 7)`);
     if (tls === "verified") pass(`FTPS to ${env.CPANEL_FTP_HOST}:${env.CPANEL_FTP_PORT || 21} (certificate verified)`);
     else if (tls === "unverified") warn(`FTPS to ${env.CPANEL_FTP_HOST} — encrypted, certificate NOT verified`);
     else warn(`plain FTP to ${env.CPANEL_FTP_HOST} — password sent in cleartext`);
     info(`login ${env.CPANEL_FTP_USER}`);
 
     const root = await enterDocroot(client);
-    const names = (await client.list()).map((i) => i.name);
+    // Recorded BEFORE the first listing, so a recycle anywhere from here on has
+    // somewhere to put the session back.
+    await session.enter(root, "");
+    const names = (await session.list()).map((i) => i.name);
     assertDocrootIdentity(root, names);
-    await assertSiteIdentity(client, root, names);
+    await assertSiteIdentity(session, root, names);
 
     const localFiles = walkLocal(distDir);
     const localBytes = localFiles.reduce((total, f) => total + f.size, 0);
 
     head("Index");
-    await client.cd(root);
-    const remote = await walkRemote(client);
+    const remote = await walkRemote(session, root);
     const remoteBytes = remote.files.reduce((total, f) => total + f.size, 0);
     info(`local  dist/: ${localFiles.length} files, ${formatBytes(localBytes)}`);
     info(`remote root:  ${remote.files.length} files, ${formatBytes(remoteBytes)}`);
@@ -988,7 +1158,8 @@ async function main() {
     if (plan.orphans.length > 12) console.log(`      … and ${plan.orphans.length - 12} more`);
 
     if (!PUBLISH) {
-      client.close();
+      info(`FTP sessions used: ${session.recycles + 1}`);
+      session.close();
       session = null;
       console.log("\n✓ dry run complete. Nothing was written.");
       console.log("  Re-run with --publish to upload" + (plan.orphans.length ? ", and --prune to delete the orphans." : "."));
@@ -1002,23 +1173,24 @@ async function main() {
       process.exit(buildFailures ? 1 : 0);
     }
 
-    await uploadFiles(client, root, [...plan.created, ...plan.changed]);
-    const afterUpload = await verifyUpload(client, root, localFiles);
+    await uploadFiles(session, root, [...plan.created, ...plan.changed]);
+    const afterUpload = await verifyUpload(session, root, localFiles);
     if (failures) die("the uploaded tree is incomplete — fix it before pruning");
 
     if (PRUNE) {
       const freshPlan = planUpload(localFiles, afterUpload);
-      await pruneOrphans(client, root, freshPlan.orphans, afterUpload.dirs);
+      await pruneOrphans(session, root, freshPlan.orphans, afterUpload.dirs);
     }
 
-    client.close();
+    info(`FTP sessions used: ${session.recycles + 1}`);
+    session.close();
     session = null;
   } finally {
     // A dangling FTP session is itself a leaked process on an account near its cap
     // — close it even when something above threw.
     if (session?.client) {
       try {
-        session.client.close();
+        session.close();
       } catch {
         /* already gone */
       }
