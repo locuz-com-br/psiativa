@@ -1,6 +1,7 @@
 ---
 // Indicação Hero — dark teal gradient with hemorrhage-style headline (PsiAtiva)
 import { SITE_CONFIG } from "../../../config/site.config";
+import ParticleField from "../../ui/ParticleField.astro";
 
 const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent("Olá! Vim por uma indicação e gostaria de agendar o diagnóstico gratuito.")}`;
 ---
@@ -8,6 +9,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
 <section class="hero" id="inicio">
   <div class="hero-background">
     <div class="hero-bg-gradient"></div>
+    <ParticleField count={160} opacity={0.4} parallax />
   </div>
 
   <div class="hero-content container">

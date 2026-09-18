@@ -99,6 +99,36 @@ export const SITE_CONFIG = {
     whatsappFab: true,
   },
 
+  // ── Home section order ─────────────────────
+  // `index.astro` renders the home in THIS order. Every entry is a key of
+  // `sections` above, so a section still disappears by flipping its toggle;
+  // this array only decides sequence. Reordering the home is a one-line edit
+  // here, never a refactor of the page.
+  //
+  // Rule: no two CTA sections back to back. `quizCta` and `auditSiteCta` sat at
+  // positions 7 and 8 until 2026-09-17; `cases` now separates them.
+  //
+  // ⚠️ This order is a HYPOTHESIS, not a measurement. Re-rank it from the
+  // impression-weighted CTR the CTA beacon collects (clicks / times the section
+  // was actually ON SCREEN) and NEVER from raw click counts: a CTA placed
+  // higher collects more clicks because it is higher, so ranking by raw clicks
+  // only re-elects whatever order already shipped. See `CtaBeacon.astro`.
+  homeOrder: [
+    "hero",
+    "partners",
+    "about",
+    "features",
+    "calcCta",
+    "functionalities",
+    "quizCta",
+    "cases",
+    "auditSiteCta",
+    "testimonials",
+    "faq",
+    "ctaFinal",
+    "contact",
+  ],
+
   // ── Analytics & Integrations ───────────────
   analytics: {
     web3formsKey: "",
@@ -134,6 +164,17 @@ export const SITE_CONFIG = {
     // Empty = beacon renders nothing.
     beaconEndpoint: import.meta.env.PUBLIC_BEACON_ENDPOINT || "",
     beaconSiteId: import.meta.env.PUBLIC_BEACON_SITE_ID || "psiativa-lp",
+    // CTA impression/click beacon — DELIBERATELY its own webhook, and empty by
+    // default so it ships DISABLED.
+    //
+    // ⛔ Do NOT point this at PUBLIC_BEACON_ENDPOINT. That URL is the live
+    // `psiativa-wa-click` flow, which was written when `whatsapp_click` was the
+    // only shape it could receive. Feeding it `cta_view` and `cta_click` risks
+    // counting them as WhatsApp clicks, and that number is the numerator
+    // divided against db_sales.sessions — it would inflate silently, and the
+    // resulting ratio would look plausible while being wrong.
+    // Enable only once a webhook that branches on `event` exists.
+    ctaBeaconEndpoint: import.meta.env.PUBLIC_CTA_BEACON_ENDPOINT || "",
     // Meta Pixel / Dataset IDs (public by design — they ship in the bundle).
     // Supports several datasets because PsiAtiva runs more than one ad account.
     // NOTE: one shared pixel assigned to both ad accounts is the better setup —

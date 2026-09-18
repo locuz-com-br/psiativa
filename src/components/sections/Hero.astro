@@ -2,6 +2,7 @@
 // Hero section — dark teal gradient with typewriter animation (PsiAtiva)
 import { SITE_CONFIG } from "../../config/site.config";
 import LINKS from "../../constants/links";
+import ParticleField from "../ui/ParticleField.astro";
 
 const typewriterWords = SITE_CONFIG.hero.typewriterWords;
 ---
@@ -10,7 +11,7 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
   <!-- Background: CSS gradient (no image) + decorative particle field (JS) -->
   <div class="hero-background">
     <div class="hero-bg-gradient"></div>
-    <div class="hero-particles" data-hero-particles aria-hidden="true"></div>
+    <ParticleField count={200} opacity={0.45} parallax />
   </div>
 
   <div class="hero-content container">
@@ -141,24 +142,10 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
     background: var(--gradient-hero);
   }
 
-  /* Particle canvas (src/lib/particles.ts), dimmed so it reads as texture.
-     0.45 keeps the subtitle at >= 4.5:1 even where a particle's brightest
-     core passes behind it (measured 4.46:1 at 0.5). The script reads the
-     palette from these properties, so the colors stay on the brand tokens
-     (never pure #FFFFFF). */
-  .hero-particles {
-    position: absolute;
-    inset: 0;
-    opacity: 0.45;
-    pointer-events: none;
-    --particle-color-1: var(--light-blue);
-    --particle-color-2: var(--accent-light);
-    --particle-color-3: var(--text-hero-white);
-  }
-
-  .hero-particles :global(canvas) {
-    display: block;
-  }
+  /* The particle canvas is <ParticleField>. Its opacity of 0.45 is MEASURED,
+     not chosen: it keeps the subtitle at >= 4.5:1 even where a particle's
+     brightest core passes behind it (4.46:1 at 0.5, 4.82:1 at 0.45). Changing
+     it re-opens that contrast reading. */
 
   /* Content */
   .hero-content {
@@ -391,42 +378,5 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
     });
 
     start();
-  }
-</script>
-
-<script>
-  // Particle field behind the hero. Purely decorative: without JS, WebGL or
-  // motion the hero reads the same, so it loads on idle and never blocks the copy.
-  const container = document.querySelector<HTMLElement>("[data-hero-particles]");
-  const hero = container?.closest<HTMLElement>(".hero");
-
-  async function mountHeroParticles(container: HTMLElement, hero: HTMLElement) {
-    const styles = getComputedStyle(container);
-    const colors = ["--particle-color-1", "--particle-color-2", "--particle-color-3"]
-      .map((name) => styles.getPropertyValue(name).trim())
-      .filter(Boolean);
-    // With no resolved token the port falls back to pure white, which the brand bans.
-    if (colors.length === 0) return;
-
-    const { mountParticles } = await import("../../lib/particles");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const particles = mountParticles(container, {
-      particleColors: colors,
-      alphaParticles: true,
-      // Lighter on phones and small tablets (same 810px breakpoint as the hero).
-      particleCount: window.matchMedia("(max-width: 810px)").matches ? 120 : 200,
-      // Parallax only where there is a real hovering pointer.
-      moveParticlesOnHover: window.matchMedia("(hover: hover) and (pointer: fine)").matches,
-      hoverTarget: hero,
-      reducedMotion: reduceMotion.matches,
-    });
-    reduceMotion.addEventListener("change", (e) => particles?.setReducedMotion(e.matches));
-  }
-
-  if (container && hero) {
-    const run = () => void mountHeroParticles(container, hero);
-    if ("requestIdleCallback" in window) window.requestIdleCallback(run, { timeout: 2000 });
-    else setTimeout(run, 200);
   }
 </script>

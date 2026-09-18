@@ -7,6 +7,7 @@
 // ─────────────────────────────────────────────────────────────
 import { SITE_CONFIG } from "../config/site.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ParticleField from "../components/ui/ParticleField.astro";
 import CalculadoraIsland from "../components/calculadora/CalculadoraIsland.tsx";
 import {
   breadcrumbSchema,
@@ -77,6 +78,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── Hero (dark teal) ─────────────────────────────────── -->
   <section class="calc-hero">
     <div class="calc-hero-bg"></div>
+    <ParticleField count={160} opacity={0.4} parallax />
     <div class="container calc-hero-content">
       <div class="calc-tag" data-i18n="calculadora.hero.tag">Ferramenta gratuita</div>
       <h1 class="calc-h1">
@@ -171,6 +173,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
 
   <!-- ── CTA final (espelha a home) ───────────────────────── -->
   <section class="calc-cta-final">
+    <ParticleField count={110} opacity={0.28} />
     <div class="container calc-cta-inner">
       <h2 data-i18n="calculadora.cta.title">Primeiro passo: uma conversa. Só isso.</h2>
       <p data-i18n="calculadora.cta.desc">Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
@@ -374,6 +377,13 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   .calc-cta-final {
     background: var(--gradient-testimonials);
     padding: 96px 0;
+    /* Positioning context + clip for the <ParticleField> canvas. */
+    position: relative;
+    overflow: hidden;
+  }
+  .calc-cta-inner {
+    position: relative;
+    z-index: 1;
   }
   .calc-cta-inner {
     text-align: center;

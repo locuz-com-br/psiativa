@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ParticleField from "../../components/ui/ParticleField.astro";
 import { breadcrumbSchema } from "../../lib/schema";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
@@ -19,6 +20,7 @@ const schema = breadcrumbSchema([
   schema={schema}
 >
   <section class="blog-hero">
+    <ParticleField count={160} opacity={0.4} parallax />
     <div class="container blog-hero-inner">
       <span class="section-label">Blog PsiAtiva</span>
       <h1>Guias para organizar a agenda com mais previsibilidade.</h1>
@@ -52,6 +54,14 @@ const schema = breadcrumbSchema([
   .blog-hero {
     padding: 9rem 0 5rem;
     background: var(--gradient-hero);
+    /* Positioning context + clip for the <ParticleField> canvas. */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blog-hero-inner {
+    position: relative;
+    z-index: 1;
   }
 
   .blog-hero-inner {

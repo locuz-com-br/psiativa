@@ -1,0 +1,279 @@
+---
+/**
+ * CTA beacon — impression-weighted click-through for the on-page CTA sections.
+ *
+ * WHY THIS IS A SEPARATE FILE FROM `ClickBeacon.astro` — read before merging them.
+ *
+ * `ClickBeacon` counts WhatsApp clicks, and that number is divided against
+ * `db_sales.sessions` to answer "who clicked and never sent a message". It is a
+ * load-bearing input to an existing server-side comparison. A parse error in a
+ * shared inline script kills BOTH counters at once and the page still renders
+ * perfectly, so the failure is invisible. Two components = two `<script>` tags =
+ * a syntax error in this one cannot take the WhatsApp counter down with it.
+ * Same endpoint, same conventions, independent blast radius.
+ *
+ * ── The question this answers, and why raw clicks cannot ─────────────────────
+ *
+ *     "Which CTA deserves to be first on the home page?"
+ *
+ * Raw click counts CANNOT answer it. Position drives clicks: whatever sits
+ * highest collects the most, so ranking CTAs by clicks just re-elects the order
+ * that already shipped and calls it evidence. The ratio that survives a reorder
+ * is clicks / times-the-section-was-actually-on-screen, so this beacon reports
+ * a DENOMINATOR (`cta_view`) as well as a numerator (`cta_click`).
+ *
+ * A view = >= 50% of the section visible for >= 1000ms continuously. That is a
+ * deliberate threshold, not a default: a section that merely flicked past
+ * during a fast scroll was never a real chance to convert, and counting it
+ * would deflate the CTR of everything below the fold.
+ *
+ * ── Ungated on purpose, and what that costs ──────────────────────────────────
+ * Carries no personal data, for the same reasons set out at length in
+ * `ClickBeacon.astro`: no cookie, no storage, no visitor id, no fingerprint,
+ * referrer reduced to a hostname. The receiving n8n workflow MUST discard the
+ * IP. Consequence to accept: with no visitor id, views and clicks cannot be
+ * joined per person. These are two independent counters over the same traffic,
+ * so their ratio is a population rate, NOT a per-visitor conversion rate. Do
+ * not present it as one.
+ *
+ * ── Implementation notes that are easy to "simplify" into bugs ───────────────
+ *
+ * 1. Views are BATCHED and flushed once, on `visibilitychange` -> hidden (plus
+ *    `pagehide` for Safari, which historically missed it). One beacon per
+ *    pageview instead of five. `unload` is deliberately NOT used: it is
+ *    unreliable and blocks the bfcache.
+ * 2. The flush is idempotent. `visibilitychange` and `pagehide` both fire on a
+ *    real navigation, and double-sending would silently double the denominator
+ *    and halve every CTR.
+ * 3. `text/plain` keeps `sendBeacon` a CORS-simple request (no preflight to
+ *    lose in the unload race). The n8n Webhook node must JSON-parse the RAW
+ *    body; it will not populate `body` as an object.
+ * 4. Clicks send immediately, never batched: the click IS the navigation.
+ * 5. Nothing here may delay or intercept a click. No preventDefault, no await.
+ *    The whole body is try/catch'd: a beacon must never break the CTA it
+ *    measures.
+ *
+ * NOTE ON CSP: ships `is:inline` to match the house style. There is no CSP on
+ * this project today (`public/.htaccess` sets no headers). If a strict
+ * `script-src 'self'` ever lands, this dies SILENTLY while the page renders
+ * fine: move it to `public/` and audit the BUILT html, not the source.
+ */
+interface Props {
+  /** n8n webhook URL. Empty = beacon disabled (renders nothing). */
+  endpoint?: string;
+  /** Stable label for this site, so one endpoint can serve several LPs. */
+  siteId?: string;
+}
+
+const { endpoint = "", siteId = "" } = Astro.props;
+---
+
+{
+  endpoint && (
+    <script is:inline define:vars={{ endpoint, siteId }}>
+      (() => {
+  "use strict";
+
+  // The sections whose click-through we compare. A section not listed here is
+  // never counted, so adding a CTA means adding its id here on purpose.
+  const TRACKED = new Set([
+    "calculadora-cta",
+    "quiz-cta",
+    "raio-x-cta",
+    "cta",
+    "contato",
+  ]);
+
+  const VIEW_RATIO = 0.5;
+  const VIEW_MS = 1000;
+  const DEDUPE_MS = 1500;
+
+  const viewportBucket = () => {
+    const w = window.innerWidth || 0;
+    if (w < 640) return "sm";
+    if (w < 1024) return "md";
+    return "lg";
+  };
+
+  // Hostname only. A full referrer URL can carry query strings that are none of our business.
+  const referrerHost = () => {
+    if (!document.referrer) return "direct";
+    try {
+      const r = new URL(document.referrer);
+      return r.hostname === window.location.hostname ? "internal" : r.hostname;
+    } catch {
+      return "unknown";
+    }
+  };
+
+  const send = (payload) => {
+    let body;
+    try {
+      body = JSON.stringify(payload);
+    } catch {
+      return;
+    }
+    try {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: "text/plain;charset=UTF-8" });
+        if (navigator.sendBeacon(endpoint, blob)) return;
+      }
+      fetch(endpoint, {
+        method: "POST",
+        body,
+        keepalive: true,
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      }).catch(() => {});
+    } catch {
+      // Swallowed on purpose — see the header comment.
+    }
+  };
+
+  const base = () => ({
+    site: siteId || window.location.hostname,
+    path: window.location.pathname,
+    viewport: viewportBucket(),
+    referrer_host: referrerHost(),
+    ts: new Date().toISOString(),
+  });
+
+  // ── Denominator: which CTA sections did this visitor actually see? ──────────
+  //
+  // ⛔ This component ships in <head> (house style, matching ClickBeacon), so at
+  // script-execution time the BODY IS NOT PARSED YET and querySelectorAll finds
+  // ZERO sections. ClickBeacon gets away with running here because its click
+  // handler is delegated off `document`; this half is not. Discovery therefore
+  // waits for DOMContentLoaded. Hoisting it back inline fails SILENTLY: no
+  // error, no observer, and the denominator is simply never recorded, which
+  // reads downstream as "nobody saw any CTA" rather than as a bug.
+  const sections = []; // populated on DOM ready; the click handler shares this array
+  const seen = new Map(); // id -> { position, dwell_ms }
+  const timers = new Map();
+
+  const initSections = () => {
+    try {
+      document.querySelectorAll("section[id]").forEach((el) => {
+        if (TRACKED.has(el.id)) sections.push(el);
+      });
+    } catch {
+      // A selector failure must not cost us the click half below.
+    }
+    if (sections.length === 0 || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const el = entry.target;
+          const id = el.id;
+          if (entry.isIntersecting && entry.intersectionRatio >= VIEW_RATIO) {
+            if (timers.has(id) || seen.has(id)) continue;
+            const startedAt = Date.now();
+            timers.set(
+              id,
+              window.setTimeout(() => {
+                timers.delete(id);
+                // Position is read at record time, so a reorder is self-describing
+                // in the data instead of needing a separate deploy log to decode.
+                seen.set(id, {
+                  position: sections.indexOf(el) + 1,
+                  dwell_ms: Date.now() - startedAt,
+                });
+              }, VIEW_MS),
+            );
+          } else {
+            const t = timers.get(id);
+            if (t !== undefined) {
+              clearTimeout(t);
+              timers.delete(id);
+            }
+          }
+        }
+      },
+      { threshold: [0, VIEW_RATIO, 1] },
+    );
+    sections.forEach((el) => observer.observe(el));
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSections);
+  } else {
+    initSections();
+  }
+
+  // Flush ONCE. visibilitychange and pagehide both fire on a real navigation,
+  // and a double send would double the denominator and halve every CTR.
+  let flushed = false;
+  const flush = () => {
+    if (flushed) return;
+    flushed = true;
+    if (seen.size === 0) return;
+    send({
+      event: "cta_view",
+      ...base(),
+      sections: [...seen.entries()].map(([id, v]) => ({
+        cta_location: id,
+        position: v.position,
+        dwell_ms: v.dwell_ms,
+      })),
+    });
+  };
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") flush();
+  });
+  window.addEventListener("pagehide", flush);
+
+  // ── Numerator: clicks on the tracked CTAs ──────────────────────────────────
+  let lastKey = "";
+  let lastAt = 0;
+
+  // Capture phase, so a handler that stops propagation cannot hide the click.
+  document.addEventListener(
+    "click",
+    (event) => {
+      try {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const anchor = target.closest("a");
+        if (!anchor || !anchor.getAttribute("href")) return;
+
+        let url;
+        try {
+          url = new URL(anchor.href, window.location.href);
+        } catch {
+          return;
+        }
+        // WhatsApp is ClickBeacon's job; counting it here too would double it.
+        if (url.protocol !== "http:" && url.protocol !== "https:") return;
+        if (url.hostname !== window.location.hostname) return;
+
+        const section = anchor.closest("section[id]");
+        const ctaLocation =
+          anchor.dataset.analyticsLocation || (section && section.id) || "";
+        if (!TRACKED.has(ctaLocation)) return;
+
+        const now = Date.now();
+        const key = ctaLocation + "|" + url.pathname;
+        if (key === lastKey && now - lastAt < DEDUPE_MS) return;
+        lastKey = key;
+        lastAt = now;
+
+        send({
+          event: "cta_click",
+          ...base(),
+          cta_location: ctaLocation,
+          destination: url.pathname,
+          position: section ? sections.indexOf(section) + 1 : null,
+        });
+      } catch {
+        // Never let measurement break the CTA.
+      }
+    },
+    true,
+  );
+      })();
+    </script>
+  )
+}

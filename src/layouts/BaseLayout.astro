@@ -4,6 +4,7 @@ import SEOHead from '../components/seo/SEOHead.astro';
 import Analytics from '../components/analytics/Analytics.astro';
 import CookieConsent from '../components/analytics/CookieConsent.astro';
 import ClickBeacon from '../components/analytics/ClickBeacon.astro';
+import CtaBeacon from '../components/analytics/CtaBeacon.astro';
 import MetaPixel from '../components/analytics/MetaPixel.astro';
 
 interface NavItem {
@@ -135,6 +136,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     */}
     <ClickBeacon
       endpoint={SITE_CONFIG.analytics.beaconEndpoint}
+      siteId={SITE_CONFIG.analytics.beaconSiteId}
+    />
+    {/*
+      Ungated for the same reason, and a SEPARATE component on purpose: a parse
+      error in a shared inline script would kill the WhatsApp counter above too,
+      silently. This one reports both halves of CTA click-through (`cta_view`
+      impressions and `cta_click`), because raw clicks measure position, not
+      relevance. See the header of CtaBeacon.astro.
+    */}
+    <CtaBeacon
+      endpoint={SITE_CONFIG.analytics.ctaBeaconEndpoint}
       siteId={SITE_CONFIG.analytics.beaconSiteId}
     />
     {/*

@@ -1,0 +1,147 @@
+---
+/**
+ * ParticleField — the dark-gradient depth layer, reusable across surfaces.
+ *
+ * Extracted from `Hero.astro` (Sprint 33 Item 1) so every `--gradient-hero` /
+ * `--gradient-testimonials` / `--gradient-footer` surface can carry the same
+ * texture. The engine itself is `src/lib/particles.ts`.
+ *
+ * ⛔ LICENCE — `src/lib/particles.ts` is React Bits, MIT + Commons Clause. Using
+ * it inside this website is permitted; redistributing the component "alone, in a
+ * bundle, or as a ported version" is not. This wrapper exists to reuse it across
+ * THIS site's sections. Never lift the pair into a shared template or a package.
+ *
+ * ── Why the options travel as data-attributes ────────────────────────────────
+ * An Astro component `<script>` is bundled and hoisted ONCE no matter how many
+ * times the component renders, which is what keeps `ogl` to a single lazy chunk
+ * on a page with three fields. `define:vars` would force `is:inline` and ship
+ * the whole body once per instance, so per-instance config is read off the DOM.
+ *
+ * ── Colours stay tokens, never hex ───────────────────────────────────────────
+ * `_config/marca-identidade-visual.md` forbids pure #FFFFFF, and the upstream
+ * default palette is exactly that. The caller names CSS custom properties; this
+ * file writes `--particle-color-N: var(--token)` and the script resolves them at
+ * mount. An unresolvable token means NO mount (and no chunk download) rather
+ * than a silent fall back to white.
+ *
+ * ── Mounting is deferred until the surface is near the viewport ──────────────
+ * The footer renders on ~30 URLs. Creating its GL context at idle on every one
+ * of them would spend a WebGL context (browsers cap them, and the cheapest one
+ * gets dropped) on a surface most visitors never scroll to. So the context is
+ * built on first near-viewport intersection; the engine's own observer then
+ * handles pausing once it exists.
+ */
+interface Props {
+  /** Particle count at >810px. Phones get `count * 0.6`, as the hero does. */
+  count?: number;
+  /** Canvas opacity. Dimmed so the field reads as texture, never as content. */
+  opacity?: number;
+  /** CSS custom properties (NOT hex) to sample the palette from. */
+  tokens?: [string, string, string];
+  /**
+   * Pointer parallax. Reads mousemove from the closest `<section>`, since the
+   * canvas sits behind the copy with pointer-events off. Fine pointers only.
+   */
+  parallax?: boolean;
+  /** Upstream's `particleSpread`. Lower packs the field into a shorter band. */
+  spread?: number;
+}
+
+const {
+  count = 200,
+  opacity = 0.45,
+  tokens = ["--light-blue", "--accent-light", "--text-hero-white"],
+  parallax = false,
+  spread = 10,
+} = Astro.props;
+
+const paletteVars = tokens
+  .map((token, i) => `--particle-color-${i + 1}: var(${token});`)
+  .join(" ");
+---
+
+<div
+  class="particle-field"
+  data-particle-field
+  data-count={String(count)}
+  data-spread={String(spread)}
+  data-parallax={parallax ? "true" : "false"}
+  aria-hidden="true"
+  style={`opacity: ${opacity}; ${paletteVars}`}
+>
+</div>
+
+<style>
+  .particle-field {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .particle-field :global(canvas) {
+    display: block;
+  }
+</style>
+
+<script>
+  // Purely decorative: without JS, WebGL or motion every surface reads the same,
+  // so this never blocks copy. One hoisted module drives every instance.
+  import type { ParticlesController } from "../../lib/particles";
+
+  const fields = document.querySelectorAll<HTMLElement>("[data-particle-field]");
+
+  async function mountField(container: HTMLElement) {
+    const styles = getComputedStyle(container);
+    const colors = ["--particle-color-1", "--particle-color-2", "--particle-color-3"]
+      .map((name) => styles.getPropertyValue(name).trim())
+      .filter(Boolean);
+    // With no resolved token the port falls back to pure white, which the brand bans.
+    if (colors.length === 0) return;
+
+    const { mountParticles } = await import("../../lib/particles");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const isPhone = window.matchMedia("(max-width: 810px)").matches;
+    const count = Number(container.dataset.count) || 200;
+
+    // Parallax only where there is a real hovering pointer, and read from the
+    // section because the canvas itself is pointer-events: none.
+    const wantsParallax =
+      container.dataset.parallax === "true" &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const hoverTarget = container.closest<HTMLElement>("section, footer") ?? container;
+
+    const particles: ParticlesController | null = mountParticles(container, {
+      particleColors: colors,
+      alphaParticles: true,
+      particleCount: isPhone ? Math.round(count * 0.6) : count,
+      particleSpread: Number(container.dataset.spread) || 10,
+      moveParticlesOnHover: wantsParallax,
+      hoverTarget,
+      reducedMotion: reduceMotion.matches,
+    });
+    reduceMotion.addEventListener("change", (e) => particles?.setReducedMotion(e.matches));
+  }
+
+  // Build the GL context on first approach, not on every page load. 200px of
+  // rootMargin means the field is already running by the time it is on screen.
+  if (fields.length > 0) {
+    if (!("IntersectionObserver" in window)) {
+      // Fails open: no observer, mount everything on idle like the hero used to.
+      const run = () => fields.forEach((field) => void mountField(field));
+      if ("requestIdleCallback" in window) window.requestIdleCallback(run, { timeout: 2000 });
+      else setTimeout(run, 200);
+    } else {
+      const approach = new IntersectionObserver(
+        (entries, observer) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            observer.unobserve(entry.target);
+            void mountField(entry.target as HTMLElement);
+          }
+        },
+        { rootMargin: "200px" },
+      );
+      fields.forEach((field) => approach.observe(field));
+    }
+  }
+</script>

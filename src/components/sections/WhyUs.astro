@@ -190,7 +190,7 @@ const VIDEO_ASSETS = {
           </li>
         </ul>
 
-        <a href="#funcionalidades" class="btn-primary-dark">
+        <a href="#funcionalidades" class="btn-primary-dark about-cta">
           <span data-i18n="about.cta">Veja como funciona</span>
           <span class="icon-circle">
             <svg
@@ -362,6 +362,14 @@ const VIDEO_ASSETS = {
     gap: 20px;
   }
 
+  /* The column is align-items: stretch, so the button spanned all 444px while
+     .btn-primary-dark left-packs its content: the chevron floated mid-row with
+     dead space after it. Shrink to content like every other CTA on the site,
+     then take the same stretch + space-between the teaser buttons use on phones. */
+  .about-cta {
+    align-self: flex-start;
+  }
+
   .about-heading {
     font-family: var(--font-display);
     font-weight: 600;
@@ -420,6 +428,11 @@ const VIDEO_ASSETS = {
     .about-heading {
       font-size: 28px;
       line-height: 36.4px;
+    }
+
+    .about-cta {
+      align-self: stretch;
+      justify-content: space-between;
     }
   }
 </style>

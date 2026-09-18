@@ -104,8 +104,13 @@
     justify-content: center;
   }
 
+  /* Fluid thirds so the 5 steps land 3-on-top / 2-below. At a fixed 384px,
+     3x384 + 2x32 = 1216px against 1152px of usable container, so the row broke
+     into 2/2/1. Sized off the row, the first three share line one and the
+     remaining two centre underneath (the grid is already justify-content: center). */
   .func-card {
-    width: 384px;
+    width: calc((100% - 64px) / 3);
+    min-width: 0;
     min-height: 300px;
     display: flex;
     flex-direction: column;

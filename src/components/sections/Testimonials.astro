@@ -1,9 +1,11 @@
 ---
 // Testimonials — Dark gradient carousel (PsiAtiva design system)
 import testimonialsData from "../../data/testimonials.json";
+import ParticleField from "../ui/ParticleField.astro";
 ---
 
 <section class="testimonials section" id="depoimentos">
+  <ParticleField count={130} opacity={0.3} />
   <div class="container">
     <div class="testimonials-header">
       <span
@@ -116,6 +118,14 @@ import testimonialsData from "../../data/testimonials.json";
     background: var(--gradient-testimonials);
     padding: var(--section-padding-sm) 0 110px;
     width: 100%;
+    /* Positioning context + clip for the <ParticleField> canvas behind the copy. */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonials > .container {
+    position: relative;
+    z-index: 1;
   }
 
   .testimonials-header {

@@ -2,6 +2,7 @@
 // Footer — Dark teal gradient (PsiAtiva design system)
 import { SITE_CONFIG } from "../../config/site.config";
 import LINKS from "../../constants/links";
+import ParticleField from "../ui/ParticleField.astro";
 
 interface Props {
   minimal?: boolean;
@@ -69,6 +70,7 @@ const socialEntries = [
 ---
 
 <footer class="footer">
+  <ParticleField count={90} opacity={0.2} />
   <div class="container">
     <div class={`footer-top ${minimal ? "minimal" : ""}`}>
       <div class="footer-brand">
@@ -249,6 +251,16 @@ const socialEntries = [
     background: var(--gradient-footer);
     width: 100%;
     padding: 80px 0 40px;
+    /* Positioning context + clip for the <ParticleField> canvas behind the copy.
+       This footer ships on ~30 URLs and carries the densest small text on the
+       site, so its field runs at the lowest opacity of any surface. */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer > .container {
+    position: relative;
+    z-index: 1;
   }
 
   .footer-top {

@@ -8,6 +8,7 @@
 // ─────────────────────────────────────────────────────────────
 import { SITE_CONFIG } from "../config/site.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ParticleField from "../components/ui/ParticleField.astro";
 import QuizIsland from "../components/quiz/QuizIsland.tsx";
 import {
   breadcrumbSchema,
@@ -82,6 +83,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   <!-- ── Hero (dark teal) ─────────────────────────────────── -->
   <section class="quiz-hero">
     <div class="quiz-hero-bg"></div>
+    <ParticleField count={160} opacity={0.4} parallax />
     <div class="container quiz-hero-content">
       <div class="quiz-tag-hero" data-i18n="quiz.hero.tag">Diagnóstico gratuito</div>
       <h1 class="quiz-h1">
@@ -177,6 +179,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
 
   <!-- ── CTA final (espelha a home) ───────────────────────── -->
   <section class="quiz-cta-final">
+    <ParticleField count={110} opacity={0.28} />
     <div class="container quiz-cta-inner">
       <h2 data-i18n="quiz.cta.title">Primeiro passo: uma conversa. Só isso.</h2>
       <p data-i18n="quiz.cta.desc">Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
@@ -380,6 +383,13 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
   .quiz-cta-final {
     background: var(--gradient-testimonials);
     padding: 96px 0;
+    /* Positioning context + clip for the <ParticleField> canvas. */
+    position: relative;
+    overflow: hidden;
+  }
+  .quiz-cta-inner {
+    position: relative;
+    z-index: 1;
   }
   .quiz-cta-inner {
     text-align: center;

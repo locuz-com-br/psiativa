@@ -20,6 +20,25 @@ import { faqPageSchema, organizationSchema, websiteSchema } from '../lib/schema'
 
 const s = SITE_CONFIG.sections;
 
+// Sequence lives in `site.config.ts` (`homeOrder`); this map only says which
+// component each key renders. Adding a section = one entry here + one entry
+// there. Keys not listed in `homeOrder` simply never render.
+const SECTIONS = {
+  hero: Hero,
+  partners: LogoBar,
+  about: WhyUs,
+  features: Services,
+  calcCta: CalcCTA,
+  functionalities: Process,
+  quizCta: QuizCTA,
+  cases: Results,
+  auditSiteCta: AuditSiteCTA,
+  testimonials: Testimonials,
+  faq: FAQ,
+  ctaFinal: CTA,
+  contact: Contact,
+} as const;
+
 function getTranslation(path: string) {
   return path.split('.').reduce((acc, key) => acc?.[key], translations as any)?.pt ?? '';
 }
@@ -42,17 +61,10 @@ const homeSchema = [
   canonicalPath="/"
   schema={homeSchema}
 >
-  {s.hero && <Hero />}
-  {s.partners && <LogoBar />}
-  {s.about && <WhyUs />}
-  {s.features && <Services />}
-  {s.calcCta && <CalcCTA />}
-  {s.functionalities && <Process />}
-  {s.cases && <Results />}
-  {s.quizCta && <QuizCTA />}
-  {s.auditSiteCta && <AuditSiteCTA />}
-  {s.testimonials && <Testimonials />}
-  {s.faq && <FAQ />}
-  {s.ctaFinal && <CTA />}
-  {s.contact && <Contact />}
+  {
+    SITE_CONFIG.homeOrder.map((key) => {
+      const Section = SECTIONS[key];
+      return s[key] && Section ? <Section /> : null;
+    })
+  }
 </BaseLayout>
