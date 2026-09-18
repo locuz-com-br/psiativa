@@ -4,29 +4,50 @@ Where things live, so you load lean. Behavior rules + gotchas are in [`CLAUDE.md
 
 ## Home page copy: section component ↔ translation key ↔ DOM id
 
-Home (`src/pages/index.astro`) render order and mapping. **Names are mismatched —
-the file name, the `translations.json` key, and the DOM id often differ. Use this table.**
+Home render order lives in **`src/config/site.config.ts` → `homeOrder`**, NOT in
+`index.astro` (which only maps each key to its component). Reordering the home is a
+one-line edit there. **Names are mismatched — the file name, the `translations.json`
+key, the `sections`/`homeOrder` key and the DOM id all differ. Use this table.**
 
-| Component (`src/components/sections/`) | `translations.json` key | DOM id | Notes |
-|---|---|---|---|
-| `Hero.astro` | `hero.*` | `#inicio` | typewriter words in `site.config.ts` |
-| `LogoBar.astro` | `partners.*` | — | **DISABLED** (`sections.partners=false`) |
-| `WhyUs.astro` | `about.*` | `#sobre` | "About" two-column + checklist |
-| `Services.astro` | `features.*` | `#funcionalidades` | 3 problem/solution cards |
-| `CalcCTA.astro` | `calcCta.*` | `#calculadora-cta` | teaser → `/calculadora` (after Services) |
-| `Process.astro` | `func.*` | `#funcionalidades-detail` | the GAP, 5 numbered steps |
-| `Results.astro` | `cases.*` | `#resultados` | 4 stat numbers |
-| `QuizCTA.astro` | `quizCta.*` | `#quiz-cta` | teaser → `/quiz` (after Results) |
-| `Testimonials.astro` | `testimonials.*` | `#depoimentos` | + reads `data/testimonials.json` |
-| `FAQ.astro` | `faq.*` | `#faq` | + reads `data/faq.json`; PT fallback via `getTranslation()` |
-| `CTA.astro` | `cta.*` | `#cta` | |
-| `Contact.astro` | `contact.*` | `#contato` | renders `ContactForm.tsx` (React island) |
+⚠️ `homeOrder` is a **hypothesis**, not a measurement. Re-rank it from impression-weighted
+CTR (`CtaBeacon.astro`), never from raw click counts: a CTA placed higher collects more
+clicks *because* it is higher, so raw counts only re-elect the order that already shipped.
+
+| # | Component (`src/components/sections/`) | `homeOrder` key | `translations.json` key | DOM id | Notes |
+|---|---|---|---|---|---|
+| 1 | `Hero.astro` | `hero` | `hero.*` | `#inicio` | typewriter words in `site.config.ts`; `<ParticleField>` |
+| — | `LogoBar.astro` | `partners` | `partners.*` | — | **DISABLED** (`sections.partners=false`) |
+| 2 | `WhyUs.astro` | `about` | `about.*` | `#sobre` | "About" two-column + checklist |
+| 3 | `Services.astro` | `features` | `features.*` | `#funcionalidades` | 3 problem/solution cards, fluid thirds |
+| 4 | `CalcCTA.astro` | `calcCta` | `calcCta.*` | `#calculadora-cta` | teaser → `/calculadora` |
+| 5 | `Process.astro` | `functionalities` | `func.*` | `#funcionalidades-detail` | the GAP, 5 steps, **3 top / 2 below** |
+| 6 | `QuizCTA.astro` | `quizCta` | `quizCta.*` | `#quiz-cta` | teaser → `/quiz` |
+| 7 | `Results.astro` | `cases` | `cases.*` | `#resultados` | 4 stat numbers |
+| 8 | `AuditSiteCTA.astro` | `auditSiteCta` | — | `#raio-x-cta` | teaser → `/analise-de-site-para-psicologo/` |
+| 9 | `Testimonials.astro` | `testimonials` | `testimonials.*` | `#depoimentos` | + `data/testimonials.json`; `<ParticleField>` |
+| 10 | `FAQ.astro` | `faq` | `faq.*` | `#faq` | + `data/faq.json`; PT fallback via `getTranslation()` |
+| 11 | `CTA.astro` | `ctaFinal` | `cta.*` | `#cta` | |
+| 12 | `Contact.astro` | `contact` | `contact.*` | `#contato` | renders `ContactForm.tsx` (React island) |
+
+⛔ **No two CTA sections may sit back to back.** `quizCta` and `auditSiteCta` were adjacent
+at 7 and 8 until 2026-09-17; `cases` now separates them. `ctaFinal` + `contact` ARE adjacent
+on purpose: proof → objections (FAQ) → ask → form is the intended close.
 | `Navbar.astro` | `nav.*` | — | prop-driven: `items`/`cta`/`logoHref` (home set = default) |
 | `Footer.astro` | `footer.*` | — | |
 | `Integrations.astro` | `integrations.*` | — | **DISABLED** (`sections.integrations=false`) |
 | `WhatsAppFab.astro` | — | — | floating WhatsApp button |
 
-Section on/off toggles: `src/config/site.config.ts` → `sections`.
+Section on/off toggles: `src/config/site.config.ts` → `sections`. A key must appear in
+BOTH `sections` (on/off) and `homeOrder` (where) to render.
+
+**Shared UI / analytics added 2026-09-17:**
+- `src/components/ui/ParticleField.astro` — the dark-gradient depth layer, on all 9 surfaces
+  using `--gradient-hero` / `--gradient-testimonials` / `--gradient-footer`. Wraps
+  `src/lib/particles.ts` (⛔ React Bits, MIT + Commons Clause: this site only, never a package).
+  Per-surface `count` / `opacity` / brand-token palette; mounts on first near-viewport intersection.
+- `src/components/analytics/CtaBeacon.astro` — `cta_view` + `cta_click`, identifier-free and
+  ungated. ⛔ Ships **disabled**: needs its own `PUBLIC_CTA_BEACON_ENDPOINT`, never the
+  `PUBLIC_BEACON_ENDPOINT` URL (that flow counts WhatsApp clicks and would count these too).
 
 ## Config & engine
 

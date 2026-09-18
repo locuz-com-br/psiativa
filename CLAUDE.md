@@ -113,7 +113,13 @@ visitor** — by design:
   46 never-referenced faces stopped uploading on every deploy. Re-convert with
   `knowledge/projects/webfont-converter` (`.venv/bin/python` → `convert_font(src, out, 'woff2')`; it repackages
   the full font, it does **not** subset). ⛔ If you add a `@font-face`, convert it and reference the `.woff2`;
-  an `.otf`/`.ttf` URL under `/fonts/` now **404s**.
+  an `.otf`/`.ttf` URL under `/fonts/` **404s locally**.
+  - ⛔ **…but NOT on the host.** `npm run deploy` is `deploy-ftp.mjs --publish` **without** `--prune`, and FTP has no
+    mirror-delete (the script's own header says so), so dropping a file from `dist/` **never unpublishes it**. After
+    the woff2 switch all 54 originals still answered **200** on `psiativa.com.br` at URLs nothing references. Removing
+    an asset is only half-done until `node scripts/deploy-ftp.mjs --publish --prune` runs — irreversible on the
+    remote, so it is the owner's call. ⚠️ Never report a payload cut as bytes removed from the **server** without
+    probing an old URL and getting a 404; a 200 on the new file only proves the upload.
 
 ## ⚠️ The WhatsApp FAB tucks itself away near a real CTA
 
