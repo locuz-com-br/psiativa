@@ -8,7 +8,7 @@ publishedAt: 2026-08-03
 
 # Política de Privacidade do aplicativo n8n
 
-**Última atualização:** 3 de agosto de 2026
+**Última atualização:** 22 de setembro de 2026
 
 Esta Política descreve como o aplicativo **n8n** operado pela PsiAtiva em `https://n8n.psiativa.com.br` acessa, usa, armazena, compartilha e exclui dados obtidos de contas Google, além dos demais dados que ele trata. Ela se aplica especificamente a esse aplicativo. O que o aplicativo é e o que ele faz está descrito na [página do aplicativo](/apps/n8n).
 
@@ -28,7 +28,7 @@ O aplicativo acessa dados de contas Google **apenas** das contas corporativas do
 |---|---|---|
 | `https://www.googleapis.com/auth/spreadsheets` | Conteúdo das planilhas de trabalho: nome, telefone, e-mail, cidade, perfil profissional, origem do contato, andamento do atendimento, datas e anotações operacionais | Leitura e escrita de linhas e colunas, por chamadas à API do Google Sheets |
 | `https://www.googleapis.com/auth/drive.file` | Identificador, nome e metadados apenas dos arquivos criados pelo aplicativo ou selecionados explicitamente pelo operador | Leitura de metadados para localizar a planilha de trabalho no seletor de arquivos |
-| `https://www.googleapis.com/auth/calendar` e `https://www.googleapis.com/auth/calendar.events` | Eventos da agenda: título, descrição, data e hora de início e fim, status e endereços de e-mail dos participantes convidados | Leitura, criação, atualização e cancelamento de eventos, por chamadas à API do Google Agenda |
+| `https://www.googleapis.com/auth/calendar` e `https://www.googleapis.com/auth/calendar.events` | Eventos da agenda: título, descrição, data e hora de início e fim, status, endereços de e-mail dos participantes convidados e o link de videochamada (Google Meet) gerado com o evento | Leitura, criação, atualização e cancelamento de eventos, por chamadas à API do Google Agenda |
 
 O aplicativo também armazena o **token de autorização (OAuth)** e o identificador da conta que concedeu o acesso, necessários para manter a conexão ativa.
 
@@ -44,7 +44,7 @@ Usamos os dados obtidos das APIs do Google exclusivamente para prover e melhorar
 | Ler a fila de atendimento e evitar registros duplicados | Conteúdo de planilhas |
 | Atualizar o andamento de cada atendimento e as anotações da equipe | Conteúdo de planilhas |
 | Localizar a planilha correta de trabalho | Metadados de arquivo (`drive.file`) |
-| Criar, remarcar e cancelar compromissos das conversas agendadas | Eventos de agenda |
+| Criar, remarcar e cancelar compromissos das conversas agendadas, com link de videochamada (Google Meet) | Eventos de agenda |
 | Manter a conexão autorizada ativa entre execuções | Token de autorização |
 
 **Não** usamos dados do Google para publicidade, criação de perfis de anúncio, venda ou aluguel de dados, tomada de decisão automatizada com efeitos jurídicos, nem para treinar ou aperfeiçoar modelos de inteligência artificial, próprios ou de terceiros.
@@ -138,7 +138,7 @@ Podemos atualizar esta Política. A versão vigente estará sempre nesta página
 
 # Privacy Policy for the n8n application
 
-**Last updated:** August 3, 2026
+**Last updated:** September 22, 2026
 
 This Policy describes how the **n8n** application operated by PsiAtiva at `https://n8n.psiativa.com.br` accesses, uses, stores, shares and deletes data obtained from Google accounts, as well as the other data it handles. It applies specifically to that application. What the application is and what it does is described on the [application page](/apps/n8n).
 
@@ -158,7 +158,7 @@ The application accesses Google account data **only** from the operator's own bu
 |---|---|---|
 | `https://www.googleapis.com/auth/spreadsheets` | Working spreadsheet content: name, phone, email, city, professional profile, contact source, conversation status, dates and operational notes | Reading and writing rows and columns through Google Sheets API calls |
 | `https://www.googleapis.com/auth/drive.file` | Identifier, name and metadata only of files created by the application or explicitly selected by the operator | Reading metadata to locate the working spreadsheet in the file picker |
-| `https://www.googleapis.com/auth/calendar` and `https://www.googleapis.com/auth/calendar.events` | Calendar events: title, description, start and end date and time, status, and email addresses of invited attendees | Reading, creating, updating and cancelling events through Google Calendar API calls |
+| `https://www.googleapis.com/auth/calendar` and `https://www.googleapis.com/auth/calendar.events` | Calendar events: title, description, start and end date and time, status, email addresses of invited attendees, and the video-call link (Google Meet) generated with the event | Reading, creating, updating and cancelling events through Google Calendar API calls |
 
 The application also stores the **OAuth authorization token** and the identifier of the account that granted access, which are required to keep the connection active.
 
@@ -174,7 +174,7 @@ We use data obtained from Google APIs exclusively to provide and improve the use
 | Read the work queue and avoid duplicate records | Spreadsheet content |
 | Update the status of each conversation and the team's notes | Spreadsheet content |
 | Locate the correct working spreadsheet | File metadata (`drive.file`) |
-| Create, reschedule and cancel appointments for booked conversations | Calendar events |
+| Create, reschedule and cancel appointments for booked conversations, with a video-call link (Google Meet) | Calendar events |
 | Keep the authorized connection active between runs | Authorization token |
 
 We do **not** use Google data for advertising, ad profiling, selling or renting data, automated decision making with legal effects, or to train or improve artificial intelligence models, whether our own or third party.
