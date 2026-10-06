@@ -558,7 +558,7 @@ function devMockReveal(
   proj: { gap: number; mensalPorPaciente: number },
 ): RevealPayload {
   const TABELA: Record<Perfil, Record<Produto, number>> = {
-    autonomo: { p7k: 9074, p10k: 16000 },
+    autonomo: { p7k: 7124, p10k: 16640 },
     clinica: { p7k: 15340, p10k: 33540 },
   };
   const MIDIA: Record<Perfil, Record<Produto, number>> = {
