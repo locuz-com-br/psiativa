@@ -289,8 +289,8 @@
   },
   "cta": {
     "label": {
-      "pt": "Pronta para ativar sua clínica?",
-      "en": "Ready to activate your clinic?"
+      "pt": "Agenda previsível começa com processo.",
+      "en": "A predictable schedule starts with process."
     },
     "title_1": {
       "pt": "Cada semana sem processo ",
@@ -579,8 +579,8 @@
   },
   "footer": {
     "tagline": {
-      "pt": "Captação ética e previsível para clínicas de psicologia.",
-      "en": "Ethical and predictable patient acquisition for psychology clinics."
+      "pt": "Processo de captação para clínicas de psicologia, do primeiro contato à sessão confirmada.",
+      "en": "Patient acquisition process for psychology clinics, from initial contact to confirmed session."
     },
     "col_product": {
       "pt": "Processo",
@@ -1498,8 +1498,8 @@
         "en": ". We work with clinics and solo psychologists who want a predictable schedule without giving up their clinical identity."
       },
       "tagline": {
-        "pt": "Processo de captação para clínicas de psicologia.",
-        "en": "Patient acquisition process for psychology clinics."
+        "pt": "Processo de captação para clínicas de psicologia, do primeiro contato à sessão confirmada.",
+        "en": "Patient acquisition process for psychology clinics, from initial contact to confirmed session."
       }
     },
     "faq": {
@@ -1633,8 +1633,8 @@
       "en": "Language"
     },
     "whyus_video": {
-      "pt": "Processo de captação para clínicas de psicologia, PsiAtiva",
-      "en": "Patient acquisition process for psychology clinics, PsiAtiva"
+      "pt": "Agenda aberta e celular com uma mensagem nova sobre a mesa de uma sala de atendimento.",
+      "en": "An open appointment book and a phone with a new message on the desk of a therapy room."
     },
     "video_sound_on": {
       "pt": "Ativar som do vídeo",

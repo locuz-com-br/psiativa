@@ -8,8 +8,8 @@ export const SITE_CONFIG = {
   // ── Brand ──────────────────────────────────
   name: "PsiAtiva",
   tagline: {
-    pt: "Processo de captação para clínicas de psicologia.",
-    en: "Patient acquisition process for psychology clinics.",
+    pt: "Processo de captação para clínicas de psicologia, do primeiro contato à sessão confirmada.",
+    en: "Patient acquisition process for psychology clinics, from initial contact to confirmed session.",
   },
   description: {
     pt: "Processo de captação para clínicas de psicologia, do primeiro contato à sessão confirmada. Agenda previsível, menos faltas e um processo estruturado que respeita sua identidade clínica.",
