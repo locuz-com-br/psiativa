@@ -1,0 +1,605 @@
+---
+// /agendar (Sprint 11 F5). Talks only to the WF-H facade (SITE_CONFIG.agenda.endpoint).
+// Copy: `agendar.*` in translations.json. The PT values are rendered here as the static fallback AND handed to the
+// script as its fallback map, so the two copies cannot drift. Plan: plans/sprint-11-closer-booking-engine-gcal-sdr.md §F5.
+import translations from "../../data/translations.json";
+import { SITE_CONFIG } from "../../config/site.config";
+import LINKS from "../../constants/links";
+
+const A = translations.agendar;
+const PT: Record<string, string> = {};
+const walk = (node: Record<string, any>, prefix: string) => {
+  for (const [key, value] of Object.entries(node)) {
+    if (value && typeof value === "object" && "pt" in value) PT[prefix + key] = value.pt;
+    else if (value && typeof value === "object") walk(value, `${prefix}${key}.`);
+  }
+};
+walk(A, "");
+const endpoint = SITE_CONFIG.agenda.endpoint;
+const consent = SITE_CONFIG.agenda.consentVersion;
+---
+
+<section class="ag-section">
+  <div class="container">
+    <div id="agendar" class="ag-card" data-endpoint={endpoint} data-consent={consent}>
+      <h1 id="ag-title" data-ag-key="pub.title">{A.pub.title.pt}</h1>
+      <p id="ag-lead" class="ag-lead" data-ag-key="pub.lead">{A.pub.lead.pt}</p>
+
+      <div id="ag-manage" class="ag-manage" hidden>
+        <p id="ag-manage-title" class="ag-manage-title"></p>
+        <p id="ag-manage-ask" data-ag-key="man.ask">{A.man.ask.pt}</p>
+        <div class="ag-actions">
+          <button type="button" id="ag-trocar" class="btn btn-primary" data-ag-key="man.trocar">{A.man.trocar.pt}</button>
+          <button type="button" id="ag-cancelar" class="btn btn-outline" data-ag-key="man.cancelar">{A.man.cancelar.pt}</button>
+        </div>
+        <div id="ag-confirm" class="ag-confirm" hidden>
+          <p id="ag-confirm-text"></p>
+          <div class="ag-actions">
+            <button type="button" id="ag-sim" class="btn btn-primary" data-ag-key="man.sim">{A.man.sim.pt}</button>
+            <button type="button" id="ag-outro" class="btn btn-outline" data-ag-key="man.outro">{A.man.outro.pt}</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="ag-status" class="ag-status" role="status" aria-live="polite" data-ag-key="st.carregando">
+        {A.st.carregando.pt}
+      </p>
+      <a
+        id="ag-wa"
+        class="btn btn-primary ag-wa"
+        href={LINKS.socials.whatsapp}
+        target="_blank"
+        rel="noopener"
+        data-whatsapp-cta
+        data-ag-key="wa"
+        hidden>{A.wa.pt}</a
+      >
+
+      <div id="ag-grid" class="ag-grid" hidden>
+        <div id="ag-days" class="ag-days" role="group"></div>
+        <div id="ag-slots" class="ag-slots" role="group"></div>
+        <p class="ag-hint" data-ag-key="grid.tz">{A.grid.tz.pt}</p>
+        <p id="ag-picked" class="ag-picked" hidden>
+          <span id="ag-picked-text"></span>
+          <button type="button" id="ag-change" class="ag-link" data-ag-key="grid.change">{A.grid.change.pt}</button>
+        </p>
+      </div>
+
+      <form id="ag-form" class="ag-form" novalidate hidden data-clarity-mask="true">
+        <div id="ag-public-fields">
+          <label class="ag-field">
+            <span data-ag-key="form.name">{A.form.name.pt}</span>
+            <input id="ag-name" name="name" autocomplete="name" maxlength="120" />
+            <small id="ag-name-err" class="ag-field-err" role="alert" hidden></small>
+          </label>
+          <label class="ag-field">
+            <span data-ag-key="form.phone">{A.form.phone.pt}</span>
+            <input id="ag-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" />
+            <small class="ag-help" data-ag-key="form.phone_help">{A.form.phone_help.pt}</small>
+            <small id="ag-phone-err" class="ag-field-err" role="alert" hidden></small>
+          </label>
+        </div>
+        <div id="ag-email-field">
+          <label class="ag-field">
+            <span data-ag-key="form.email">{A.form.email.pt}</span>
+            <input id="ag-email" name="email" type="email" autocomplete="email" maxlength="160" />
+            <small class="ag-help" data-ag-key="form.email_help">{A.form.email_help.pt}</small>
+            <small id="ag-email-err" class="ag-field-err" role="alert" hidden></small>
+          </label>
+        </div>
+        <div id="ag-consent-field">
+          <label class="ag-consent">
+            <input id="ag-consent" type="checkbox" />
+            <span data-ag-key="form.consent">{A.form.consent.pt}</span>
+          </label>
+          <a class="ag-link" href={LINKS.legal.privacy} target="_blank" rel="noopener" data-ag-key="form.privacy"
+            >{A.form.privacy.pt}</a
+          >
+        </div>
+        <p id="ag-erro" class="ag-erro" role="alert" hidden></p>
+        <button type="submit" id="ag-submit" class="btn btn-primary ag-submit" disabled data-ag-key="form.submit">
+          {A.form.submit.pt}
+        </button>
+      </form>
+
+      <div id="ag-done" class="ag-done" hidden>
+        <h2 id="ag-done-title"></h2>
+        <p id="ag-done-text"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="ag-pt" set:html={JSON.stringify(PT)} />
+
+<script>
+  import {
+    WHATSAPP_STATES, dayLabel, fill, hourLabel, normalizePhone, parseToken, refusalKey, slotLabel,
+    validEmail, validName, type Lang,
+  } from "../../lib/agendar";
+
+  type Slot = { starts_at: string };
+  type Dia = { dia: string; slots: Slot[] };
+  type Answer = Record<string, any>;
+
+  const root = document.getElementById("agendar")!;
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+  const PT: Record<string, string> = JSON.parse($("ag-pt").textContent || "{}");
+  const i18n = () => (window as any).__siteI18n;
+  const lang = (): Lang => (i18n()?.currentLang?.() === "en" ? "en" : "pt");
+  const t = (key: string, vars: Record<string, string> = {}) => fill(i18n()?.t?.(`agendar.${key}`) || PT[key] || "", vars);
+
+  /** Every script-set string goes through here, so a language toggle can re-render it. */
+  function say(el: HTMLElement, key: string, vars: Record<string, string> = {}) {
+    el.dataset.agKey = key;
+    el.dataset.agVars = JSON.stringify(vars);
+    el.textContent = t(key, vars);
+  }
+  /** Elements with no slot-derived vars (header, form labels): safe to re-run at any time. */
+  function relabelStatic() {
+    root.querySelectorAll<HTMLElement>("[data-ag-key]").forEach((el) => {
+      if (el.dataset.agSlot === undefined) el.textContent = t(el.dataset.agKey!, JSON.parse(el.dataset.agVars || "{}"));
+    });
+  }
+  function relabel() {
+    root.querySelectorAll<HTMLElement>("[data-ag-key]").forEach((el) => {
+      const vars = JSON.parse(el.dataset.agVars || "{}");
+      if (el.dataset.agSlot) vars.label = slotLabel(el.dataset.agSlot, lang());
+      el.textContent = t(el.dataset.agKey!, vars);
+    });
+    renderGrid();
+  }
+
+  const state = {
+    token: null as string | null,
+    modo: "publico" as string,
+    dias: [] as Dia[],
+    dia: "",
+    slot: "",
+    managing: false,
+    busy: false,
+  };
+
+  // ── Network: the facade, or a dev-only fixture ─────────────────────────
+  let fixture: Record<string, Answer> | null = null;
+  async function call(body: Answer): Promise<Answer> {
+    if (fixture) {
+      const answer = fixture[body.op === "gerenciar" ? `gerenciar_${body.acao}` : body.op] || fixture[body.op];
+      await new Promise((r) => setTimeout(r, Number(fixture.delay ?? 250)));
+      return answer || { ok: false, resultado: "indisponivel" };
+    }
+    try {
+      const response = await fetch(root.dataset.endpoint!, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(15_000),
+      });
+      const answer = await response.json();
+      return answer && typeof answer === "object" ? answer : { ok: false, resultado: "indisponivel" };
+    } catch {
+      return { ok: false, resultado: "indisponivel" };
+    }
+  }
+
+  // ── States ─────────────────────────────────────────────────────────────
+  function status(key: string | null, vars: Record<string, string> = {}) {
+    // The site's i18n may finish after this script started: every state change re-syncs the static strings.
+    if (i18n()) relabelStatic();
+    const el = $("ag-status");
+    el.hidden = !key;
+    if (key) say(el, key, vars);
+    el.classList.toggle("is-error", !!key && key.startsWith("st.") && key !== "st.carregando");
+  }
+  /** A refusal that ends the flow: text + WhatsApp, grid and form gone. */
+  function stop(key: string) {
+    status(`st.${key}`);
+    $("ag-wa").hidden = !WHATSAPP_STATES.has(key);
+    $("ag-grid").hidden = true;
+    $("ag-form").hidden = true;
+    $("ag-manage").hidden = true;
+  }
+  function done(titleKey: string, textKey: string, label = "") {
+    status(null);
+    $("ag-grid").hidden = $("ag-form").hidden = $("ag-manage").hidden = true;
+    const title = $("ag-done-title");
+    say(title, titleKey, { label });
+    if (label) title.dataset.agSlot = state.slot;
+    say($("ag-done-text"), textKey);
+    $("ag-done").hidden = false;
+    $("ag-done").scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  // ── Header by mode ─────────────────────────────────────────────────────
+  function header(answer: Answer) {
+    if (state.modo === "publico") return;
+    const icp = answer.icp === "consultorio" ? "consultorio" : "clinica";
+    say($("ag-title"), answer.nome ? "priv.title" : "priv.title_anon", { nome: String(answer.nome || "") });
+    say($("ag-lead"), `priv.lead_${icp}`);
+  }
+
+  // ── Grid ───────────────────────────────────────────────────────────────
+  function renderGrid() {
+    const days = $("ag-days");
+    const slots = $("ag-slots");
+    if (!state.dias.length) return;
+    days.replaceChildren(
+      ...state.dias.map((d) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "ag-day";
+        b.textContent = dayLabel(d.dia, lang());
+        b.setAttribute("aria-pressed", String(d.dia === state.dia));
+        b.addEventListener("click", () => { state.dia = d.dia; renderGrid(); });
+        return b;
+      }),
+    );
+    const day = state.dias.find((d) => d.dia === state.dia) || state.dias[0];
+    slots.replaceChildren(
+      ...day.slots.map((s) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "ag-slot";
+        b.textContent = hourLabel(s.starts_at, lang());
+        b.setAttribute("aria-pressed", String(s.starts_at === state.slot));
+        b.addEventListener("click", () => pick(s.starts_at));
+        return b;
+      }),
+    );
+  }
+  function pick(startsAt: string) {
+    state.slot = startsAt;
+    const text = $("ag-picked-text");
+    say(text, "grid.picked", { label: slotLabel(startsAt, lang()) });
+    text.dataset.agSlot = startsAt;
+    $("ag-picked").hidden = false;
+    $("ag-form").hidden = false;
+    renderGrid();
+    ready();
+  }
+  function ready() {
+    const consentOk = state.managing || $<HTMLInputElement>("ag-consent").checked;
+    $<HTMLButtonElement>("ag-submit").disabled = state.busy || !state.slot || !consentOk;
+  }
+  async function loadGrid(keepStatus = false) {
+    if (!keepStatus) status("st.carregando");
+    const answer = await call({ op: "horarios", ...(state.token ? { token: state.token } : {}) });
+    if (answer.ok !== true || answer.resultado !== "horarios") return stop(refusalKey(answer)), null;
+    state.dias = (answer.dias || []).filter((d: Dia) => d.slots?.length);
+    if (!state.dias.length) return stop("vazio"), null;
+    state.dia = state.dias.some((d) => d.dia === state.dia) ? state.dia : state.dias[0].dia;
+    state.slot = "";
+    $("ag-picked").hidden = true;
+    if (!keepStatus) status(null);
+    $("ag-grid").hidden = false;
+    renderGrid();
+    ready();
+    return answer;
+  }
+
+  // ── Form mode ──────────────────────────────────────────────────────────
+  function formMode() {
+    const publico = state.modo === "publico";
+    $("ag-public-fields").hidden = !publico;
+    $("ag-email-field").hidden = state.managing;
+    $("ag-consent-field").hidden = state.managing;
+  }
+  function fieldError(id: string, key: string | null) {
+    const el = $(id);
+    el.hidden = !key;
+    if (key) say(el, key);
+  }
+
+  async function submit(event: Event) {
+    event.preventDefault();
+    if (state.busy || !state.slot) return;
+    const body: Answer = { starts_at: state.slot };
+    if (state.managing) Object.assign(body, { op: "gerenciar", token: state.token, acao: "remarcar" });
+    else {
+      Object.assign(body, { op: "agendar", consent_version: root.dataset.consent });
+      if (state.token) body.token = state.token;
+      const email = $<HTMLInputElement>("ag-email").value.trim();
+      fieldError("ag-email-err", validEmail(email) ? null : "form.email_err");
+      let ok = validEmail(email);
+      if (email) body.lead_email = email;
+      if (state.modo === "publico") {
+        const name = $<HTMLInputElement>("ag-name").value.trim();
+        const phone = normalizePhone($<HTMLInputElement>("ag-phone").value);
+        fieldError("ag-name-err", validName(name) ? null : "form.name_err");
+        fieldError("ag-phone-err", phone ? null : "st.whatsapp_invalido");
+        ok = ok && validName(name) && !!phone;
+        Object.assign(body, { lead_name: name, phone });
+      }
+      if (!ok) return;
+    }
+    state.busy = true;
+    const button = $("ag-submit");
+    say(button, "form.sending");
+    $("ag-erro").hidden = true;
+    ready();
+    const answer = await call(body);
+    state.busy = false;
+    say(button, "form.submit");
+    ready();
+    if (answer.ok === true && answer.resultado === "agendado")
+      return done("ok.title", "ok.text", slotLabel(answer.starts_at || state.slot, lang()));
+    if (answer.ok === true && answer.resultado === "remarcado")
+      return done("man.remarcado_title", "man.remarcado_text", slotLabel(answer.starts_at || state.slot, lang()));
+    const key = refusalKey(answer);
+    if (key === "slot_taken") {
+      await loadGrid(true);
+      return status("st.slot_taken");
+    }
+    if (key === "whatsapp_invalido" && state.modo === "publico") return fieldError("ag-phone-err", "st.whatsapp_invalido");
+    if (["zapi_indisponivel", "invalido"].includes(key)) {
+      const erro = $("ag-erro");
+      erro.hidden = false;
+      return say(erro, `st.${key}`);
+    }
+    stop(key);
+  }
+
+  // ── Gerenciar ──────────────────────────────────────────────────────────
+  function manage(answer: Answer) {
+    const atual = answer.atual?.starts_at ? String(answer.atual.starts_at) : "";
+    const title = $("ag-manage-title");
+    say(title, "man.title", { atual: slotLabel(atual, lang()) });
+    title.dataset.agSlot = atual;
+    $("ag-manage").hidden = false;
+    $("ag-grid").hidden = true;
+    $("ag-trocar").addEventListener("click", () => openReschedule());
+    $("ag-outro").addEventListener("click", () => openReschedule());
+    $("ag-cancelar").addEventListener("click", () => {
+      const text = $("ag-confirm-text");
+      say(text, "man.confirm", { atual: slotLabel(atual, lang()) });
+      text.dataset.agSlot = atual;
+      $("ag-confirm").hidden = false;
+    });
+    $("ag-sim").addEventListener("click", async (event) => {
+      const button = event.currentTarget as HTMLButtonElement;
+      if (button.disabled) return;
+      button.disabled = true;
+      const result = await call({ op: "gerenciar", token: state.token, acao: "cancelar" });
+      button.disabled = false;
+      if (result.ok === true && result.resultado === "cancelado") return done("man.cancelado_title", "man.cancelado_text");
+      stop(refusalKey(result));
+    });
+  }
+  function openReschedule() {
+    $("ag-confirm").hidden = true;
+    $("ag-manage").hidden = true;
+    $("ag-grid").hidden = false;
+    renderGrid();
+  }
+  // The manage title uses {atual}; relabel() re-derives it through data-ag-slot, not {label}.
+  function fixAtualRelabel() {
+    for (const id of ["ag-manage-title", "ag-confirm-text"]) {
+      const el = $(id);
+      if (el.dataset.agSlot !== undefined) {
+        el.dataset.agVars = JSON.stringify({ atual: slotLabel(el.dataset.agSlot, lang()) });
+        el.textContent = t(el.dataset.agKey!, { atual: slotLabel(el.dataset.agSlot, lang()) });
+      }
+    }
+  }
+
+  // ── Boot ───────────────────────────────────────────────────────────────
+  async function boot() {
+    relabel(); // static PT fallback → the language actually applied
+    window.addEventListener("site-lang-change", () => { relabel(); fixAtualRelabel(); });
+    if (import.meta.env.DEV) {
+      const name = new URLSearchParams(location.search).get("fixture");
+      if (name) {
+        const files = import.meta.glob("../../../tests/agendar/fixtures/*.json", { import: "default" });
+        const load = files[`../../../tests/agendar/fixtures/${name}.json`];
+        fixture = load ? ((await load()) as Record<string, Answer>) : { horarios: { ok: false, resultado: "indisponivel" } };
+        if (fixture.token && !location.hash) history.replaceState(null, "", `${location.pathname}${location.search}#t=${"a".repeat(64)}`);
+      }
+    }
+    const { token, malformed } = parseToken(location.hash);
+    if (location.hash) history.replaceState(null, "", `${location.pathname}${location.search}`);
+    if (malformed) return stop("link_invalido");
+    state.token = token;
+    if (!fixture && !root.dataset.endpoint) {
+      console.error("[agendar] PUBLIC_AGENDA_ENDPOINT is empty: the page stays closed");
+      return stop("desligado");
+    }
+    $("ag-form").addEventListener("submit", submit);
+    $("ag-consent").addEventListener("change", ready);
+    $("ag-change").addEventListener("click", () => {
+      state.slot = "";
+      $("ag-picked").hidden = true;
+      renderGrid();
+      ready();
+    });
+
+    const answer = await loadGrid();
+    if (!answer) return;
+    state.modo = ["agendar", "gerenciar"].includes(answer.modo) && token ? answer.modo : "publico";
+    if (token && state.modo === "publico") return stop("link_invalido");
+    header(answer);
+    if (state.modo === "gerenciar") {
+      state.managing = true;
+      manage(answer);
+    }
+    formMode();
+    $("ag-form").hidden = !state.slot;
+  }
+  boot();
+</script>
+
+<style>
+  .ag-section {
+    padding: clamp(6.5rem, 11vw, 9rem) 0 clamp(3rem, 8vw, 6rem);
+    background:
+      radial-gradient(circle at top, rgba(126, 174, 137, 0.2), transparent 42%),
+      var(--background);
+  }
+  .ag-card {
+    width: min(100%, 720px);
+    margin: 0 auto;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    background: rgba(250, 255, 255, 0.96);
+    box-shadow: 0 24px 70px rgba(26, 75, 81, 0.11);
+  }
+  .ag-card h1 {
+    margin-bottom: 0.75rem;
+    font-size: clamp(1.9rem, 6vw, 3rem);
+    line-height: 1.1;
+  }
+  .ag-lead {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+  .ag-status {
+    margin-top: 1.5rem;
+    color: var(--text-secondary);
+  }
+  .ag-status.is-error {
+    padding: 1rem;
+    border-radius: var(--radius-card);
+    background: var(--background-subtle);
+    color: var(--text-primary, inherit);
+  }
+  .ag-wa {
+    margin-top: 1rem;
+  }
+  .ag-grid {
+    margin-top: 1.75rem;
+  }
+  .ag-days {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+  }
+  :global(.ag-day),
+  :global(.ag-slot) {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: #fff;
+    font: inherit;
+    cursor: pointer;
+  }
+  :global(.ag-day) {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+  :global(.ag-day[aria-pressed="true"]),
+  :global(.ag-slot[aria-pressed="true"]) {
+    border-color: transparent;
+    background: var(--gradient-brand);
+    color: #fff;
+  }
+  .ag-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .ag-hint,
+  .ag-help {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  .ag-picked {
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  .ag-link {
+    min-height: 44px;
+    margin-left: 0.25rem;
+    padding: 0 0.25rem;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-weight: 400;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  a.ag-link {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0;
+  }
+  .ag-form {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .ag-form > div {
+    display: grid;
+    gap: 1rem;
+  }
+  .ag-field {
+    display: grid;
+    gap: 0.35rem;
+  }
+  .ag-field input {
+    min-height: 44px;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    font: inherit;
+  }
+  .ag-field-err,
+  .ag-erro {
+    color: #a33a2b;
+  }
+  .ag-consent {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    line-height: 1.55;
+  }
+  .ag-consent input {
+    width: 24px;
+    height: 24px;
+    margin-top: 0.1rem;
+  }
+  .ag-submit {
+    min-height: 48px;
+  }
+  .ag-submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .ag-manage,
+  .ag-done {
+    margin-top: 1.5rem;
+  }
+  .ag-manage-title,
+  .ag-done h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+  }
+  .ag-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .ag-actions .btn {
+    min-height: 44px;
+  }
+  .ag-confirm {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border-radius: var(--radius-card);
+    background: var(--background-subtle);
+  }
+  [hidden] {
+    display: none !important;
+  }
+</style>

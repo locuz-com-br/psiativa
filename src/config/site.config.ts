@@ -219,6 +219,17 @@ export const SITE_CONFIG = {
     cookies: "/cookies/",
   },
 
+  // /agendar (Sprint 11 F5): the public WF-H facade, e.g. https://n8n.psiativa.com.br/webhook/agenda-publica.
+  // ⛔ Empty = the page renders the `desligado` state and logs one console error; it never fetches "".
+  // The page ships dark: no CTA links to /agendar until F8, and WF-H refuses everything while
+  // `agenda_publica_ativa` is false.
+  agenda: {
+    endpoint: import.meta.env.PUBLIC_AGENDA_ENDPOINT || "",
+    // Must equal inbox.settings `gravacao_aviso_versao`, or WF-H answers `invalido`.
+    // Bump both together when the consent text in translations.json (`agendar.form.consent`) changes.
+    consentVersion: "pendente",
+  },
+
   // ── Tool Page Slugs ────────────────────────
   // Linkadas no rodapé sitewide de propósito: sem isso cada ferramenta recebe
   // 3 links internos contra 18 de /blog/ e /podcast/ (medido em

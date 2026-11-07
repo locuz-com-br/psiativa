@@ -1652,5 +1652,219 @@
       "pt": "Próximo depoimento",
       "en": "Next testimonial"
     }
+  },
+  "agendar": {
+    "meta": {
+      "title": {
+        "pt": "Agendar bate-papo · PsiAtiva",
+        "en": "Book a chat · PsiAtiva"
+      },
+      "description": {
+        "pt": "Escolha um horário para o bate-papo de 20 minutos com a PsiAtiva.",
+        "en": "Pick a time for a 20-minute chat with PsiAtiva."
+      }
+    },
+    "pub": {
+      "title": {
+        "pt": "Escolha um horário para o bate-papo",
+        "en": "Pick a time for the chat"
+      },
+      "lead": {
+        "pt": "São 20 minutos por Google Meet com o especialista da PsiAtiva. Ele olha onde a sua clínica perde pacientes entre o primeiro contato e a primeira sessão, e mostra o caminho para a sua situação.",
+        "en": "It is 20 minutes on Google Meet with a PsiAtiva specialist. They look at where your clinic loses patients between the first contact and the first session, and show the way forward for your situation."
+      }
+    },
+    "priv": {
+      "title": {
+        "pt": "{nome}, escolha o melhor horário para o nosso bate-papo",
+        "en": "{nome}, pick the best time for our chat"
+      },
+      "title_anon": {
+        "pt": "Escolha o melhor horário para o nosso bate-papo",
+        "en": "Pick the best time for our chat"
+      },
+      "lead_clinica": {
+        "pt": "São 20 minutos por Google Meet. A conversa parte do que você já contou sobre a sua clínica, para mostrar onde os pacientes se perdem entre o primeiro contato e a primeira sessão.",
+        "en": "It is 20 minutes on Google Meet. We start from what you already told us about your clinic, to show where patients get lost between the first contact and the first session."
+      },
+      "lead_consultorio": {
+        "pt": "São 20 minutos por Google Meet. A conversa parte do que você já contou sobre o seu consultório, para mostrar onde a sua agenda perde espaço e o que dá para ajustar sem mudar o seu jeito de atender.",
+        "en": "It is 20 minutes on Google Meet. We start from what you already told us about your practice, to show where your schedule loses room and what can change without changing the way you work."
+      }
+    },
+    "grid": {
+      "tz": {
+        "pt": "Horários de Brasília.",
+        "en": "Times in Brasília time."
+      },
+      "picked": {
+        "pt": "Horário escolhido: {label}.",
+        "en": "Selected time: {label}."
+      },
+      "change": {
+        "pt": "trocar",
+        "en": "change"
+      }
+    },
+    "form": {
+      "name": {
+        "pt": "Seu nome",
+        "en": "Your name"
+      },
+      "phone": {
+        "pt": "Seu WhatsApp, com DDD",
+        "en": "Your WhatsApp, with area code"
+      },
+      "phone_help": {
+        "pt": "É por ele que chegam o link da chamada e o lembrete.",
+        "en": "The call link and the reminder arrive there."
+      },
+      "email": {
+        "pt": "Seu e-mail",
+        "en": "Your e-mail"
+      },
+      "email_help": {
+        "pt": "Se quiser, mandamos também o convite da agenda.",
+        "en": "If you like, we also send the calendar invite."
+      },
+      "consent": {
+        "pt": "Entendi que a conversa é gravada só para virar áudio e transcrição. Depois disso, a gravação é apagada. A transcrição fica só com a equipe da PsiAtiva e serve para o especialista preparar os próximos passos com você.",
+        "en": "I understand the chat is recorded only to become audio and a transcript. After that, the recording is deleted. The transcript stays with the PsiAtiva team only and helps the specialist prepare the next steps with you."
+      },
+      "privacy": {
+        "pt": "Como cuidamos dos seus dados",
+        "en": "How we look after your data"
+      },
+      "submit": {
+        "pt": "Confirmar horário",
+        "en": "Confirm time"
+      },
+      "sending": {
+        "pt": "Confirmando…",
+        "en": "Confirming…"
+      },
+      "name_err": {
+        "pt": "Escreva o seu nome.",
+        "en": "Write your name."
+      },
+      "email_err": {
+        "pt": "Confira o e-mail.",
+        "en": "Check the e-mail."
+      }
+    },
+    "st": {
+      "carregando": {
+        "pt": "Buscando os horários livres…",
+        "en": "Looking for open times…"
+      },
+      "vazio": {
+        "pt": "Os próximos dias estão sem horário livre. Chame a gente no WhatsApp que encontramos um horário com você.",
+        "en": "The next days have no open time. Message us on WhatsApp and we will find a time with you."
+      },
+      "indisponivel": {
+        "pt": "Não conseguimos abrir a agenda agora. Tente de novo em alguns minutos ou chame a gente no WhatsApp.",
+        "en": "We could not open the calendar right now. Try again in a few minutes or message us on WhatsApp."
+      },
+      "slot_taken": {
+        "pt": "Esse horário acabou de ser ocupado. Escolha outro, por favor.",
+        "en": "That time was just taken. Please pick another one."
+      },
+      "ja_agendado": {
+        "pt": "Você já tem uma conversa marcada com a PsiAtiva. Os detalhes estão no seu WhatsApp, junto com o link para trocar o horário.",
+        "en": "You already have a chat booked with PsiAtiva. The details are on your WhatsApp, with the link to change the time."
+      },
+      "ja_agendado_ip": {
+        "pt": "Já existe uma conversa marcada a partir desta conexão. Se for outra pessoa da sua clínica, chame a gente no WhatsApp.",
+        "en": "A chat was already booked from this connection. If you are someone else from your clinic, message us on WhatsApp."
+      },
+      "whatsapp_invalido": {
+        "pt": "Não encontramos WhatsApp neste número. Confira o DDD e os dígitos.",
+        "en": "We could not find WhatsApp on this number. Check the area code and the digits."
+      },
+      "zapi_indisponivel": {
+        "pt": "Não conseguimos conferir o seu número agora. Tente de novo em alguns minutos.",
+        "en": "We could not check your number right now. Try again in a few minutes."
+      },
+      "limite": {
+        "pt": "Muitas tentativas seguidas. Espere um pouco e tente de novo, ou chame a gente no WhatsApp.",
+        "en": "Too many tries in a row. Wait a little and try again, or message us on WhatsApp."
+      },
+      "invalido": {
+        "pt": "Algo não saiu como esperado. Recarregue a página e tente de novo.",
+        "en": "Something did not go as expected. Reload the page and try again."
+      },
+      "link_invalido": {
+        "pt": "Este link não está mais valendo. Chame a gente no WhatsApp que mandamos um novo.",
+        "en": "This link is no longer valid. Message us on WhatsApp and we will send a new one."
+      },
+      "link_vencido": {
+        "pt": "Este link venceu. Chame a gente no WhatsApp que mandamos um novo.",
+        "en": "This link has expired. Message us on WhatsApp and we will send a new one."
+      },
+      "desligado": {
+        "pt": "A agenda online está fechada no momento. Chame a gente no WhatsApp para marcar o seu horário.",
+        "en": "Online booking is closed right now. Message us on WhatsApp to book your time."
+      }
+    },
+    "ok": {
+      "title": {
+        "pt": "Pronto, está marcado: {label}.",
+        "en": "Done, you are booked: {label}."
+      },
+      "text": {
+        "pt": "O link da chamada e a confirmação estão chegando no seu WhatsApp. Se precisar trocar o horário, é pela mensagem.",
+        "en": "The call link and the confirmation are on their way to your WhatsApp. To change the time, use that message."
+      }
+    },
+    "man": {
+      "title": {
+        "pt": "Sua conversa está marcada para {atual}.",
+        "en": "Your chat is booked for {atual}."
+      },
+      "ask": {
+        "pt": "Quer trocar o horário ou cancelar?",
+        "en": "Do you want to change the time or cancel?"
+      },
+      "trocar": {
+        "pt": "Trocar horário",
+        "en": "Change time"
+      },
+      "cancelar": {
+        "pt": "Cancelar a conversa",
+        "en": "Cancel the chat"
+      },
+      "confirm": {
+        "pt": "Cancelar a conversa de {atual}? Se quiser, dá para escolher outro horário em vez de cancelar.",
+        "en": "Cancel the chat on {atual}? If you prefer, you can pick another time instead."
+      },
+      "sim": {
+        "pt": "Sim, cancelar",
+        "en": "Yes, cancel"
+      },
+      "outro": {
+        "pt": "Escolher outro horário",
+        "en": "Pick another time"
+      },
+      "remarcado_title": {
+        "pt": "Pronto, mudamos para {label}.",
+        "en": "Done, we moved it to {label}."
+      },
+      "remarcado_text": {
+        "pt": "A confirmação e o novo link estão chegando no seu WhatsApp.",
+        "en": "The confirmation and the new link are on their way to your WhatsApp."
+      },
+      "cancelado_title": {
+        "pt": "Conversa cancelada.",
+        "en": "Chat cancelled."
+      },
+      "cancelado_text": {
+        "pt": "Quando fizer sentido, é só chamar a gente no WhatsApp para marcar de novo.",
+        "en": "Whenever it makes sense, message us on WhatsApp to book again."
+      }
+    },
+    "wa": {
+      "pt": "Chamar no WhatsApp",
+      "en": "Message us on WhatsApp"
+    }
   }
 }

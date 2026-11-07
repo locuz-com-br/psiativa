@@ -1,0 +1,13 @@
+---
+// /agendar (Sprint 11 F5). Ships dark: noindex, linked from no CTA until F8, and WF-H refuses everything while
+// `agenda_publica_ativa` is false (that switch is the rollback; an FTP deploy without --prune never unpublishes).
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Agendar from "../components/agendar/Agendar.astro";
+import translations from "../data/translations.json";
+
+const meta = translations.agendar.meta;
+---
+
+<BaseLayout title={meta.title.pt} description={meta.description.pt} canonicalPath="/agendar" noindex={true}>
+  <Agendar />
+</BaseLayout>
