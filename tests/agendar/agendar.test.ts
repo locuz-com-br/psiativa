@@ -59,3 +59,25 @@ test("every state the page can show has PT and EN text", async () => {
     "zapi_indisponivel", "limite", "invalido", "link_invalido", "link_vencido", "desligado", "indisponivel"])
     assert.ok(a.st[s]?.pt && a.st[s]?.en, s);
 });
+
+test("fix 6.1: phone and e-mail input rules", async () => {
+  const { maskPhone, phoneDigits, sanitizeEmail, validEmailStrict, validWhatsapp } = await import("../../src/lib/fields.ts");
+  // typing is filtered
+  assert.equal(maskPhone("21abc977174067999"), "(21) 97717-4067");
+  assert.equal(maskPhone("2133334444"), "(21) 3333-4444");
+  assert.equal(maskPhone("219"), "(21) 9");
+  assert.equal(phoneDigits("+55 (21) 97717-4067"), "21977174067");
+  assert.equal(sanitizeEmail(" ana maria@cli@nica.com.br<>"), "anamaria@clinica.com.br");
+  // only real WhatsApp-shaped numbers
+  assert.equal(validWhatsapp("(21) 97717-4067"), "5521977174067");
+  assert.equal(validWhatsapp("(21) 3333-4444"), "552133334444");
+  assert.equal(validWhatsapp("(20) 97717-4067"), null); // DDD 20 does not exist
+  assert.equal(validWhatsapp("(21) 87717-4067"), null); // 11 digits must be a 9xxxx mobile
+  assert.equal(validWhatsapp("(21) 9771-4067"), null); // 10 digits starting 9: neither shape
+  assert.equal(validWhatsapp("(21) 1234-5678"), null);
+  // only real-looking addresses
+  for (const ok of ["ana@clinica.com.br", "a.b+c@x-y.io"]) assert.ok(validEmailStrict(ok), ok);
+  for (const bad of ["ana@clinica", "ana@@x.com", "ana..b@x.com", ".ana@x.com", "ana@-x.com", "ana@x.c", "ana @x.com"])
+    assert.ok(!validEmailStrict(bad), bad);
+});
+

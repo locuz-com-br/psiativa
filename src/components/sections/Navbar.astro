@@ -13,6 +13,8 @@ interface Props {
   items?: NavItem[];
   cta?: NavItem;
   logoHref?: string;
+  /** Logo + language toggle only (no links, CTA or menu). */
+  minimal?: boolean;
 }
 
 const defaultItems: NavItem[] = [
@@ -27,10 +29,13 @@ const {
   items = defaultItems,
   cta = { href: LINKS.contact.phoneHref, key: "nav.cta", label: "Diagnóstico Gratuito" },
   logoHref = LINKS.pages.home,
+  minimal = false,
 } = Astro.props;
 ---
 
-<nav class="navbar" id="navbar">
+<!-- Fix 5 (Juan, /agendar review): the full bar only while it sits over the page's hero; past it, `is-compact`
+     shrinks it to logo + CTA + language. `is-minimal` (e.g. /agendar) is always logo + language. -->
+<nav class:list={["navbar", { "is-minimal": minimal }]} id="navbar">
   <div class="navbar-inner container">
     <a
       href={logoHref}
@@ -97,6 +102,9 @@ const {
     </div>
 
     <div class="navbar-mobile-actions">
+      <a href={cta.href} class="btn-nav-cta navbar-compact-cta">
+        <span data-i18n={cta.key}>{cta.label}</span>
+      </a>
       <button
         class="lang-toggle"
         id="lang-toggle-mobile"
@@ -359,9 +367,64 @@ const {
       padding: 8px 8px 8px 14px;
     }
   }
+  /* ── Compact (scrolled past the hero) and minimal states ── */
+  .navbar-inner {
+    transition: max-width 0.3s ease, height 0.3s ease, padding 0.3s ease;
+  }
+  .navbar-compact-cta {
+    display: none;
+  }
+  .navbar.is-compact .navbar-inner,
+  .navbar.is-minimal .navbar-inner {
+    max-width: 760px;
+  }
+  .navbar.is-compact .navbar-links,
+  .navbar.is-minimal .navbar-links,
+  .navbar.is-minimal .btn-nav-cta,
+  .navbar.is-minimal .navbar-toggle,
+  .navbar.is-minimal .navbar-mobile {
+    display: none !important;
+  }
+  .navbar.is-minimal .navbar-inner {
+    max-width: 520px;
+  }
+  @media (max-width: 810px) {
+    .navbar.is-compact .navbar-toggle,
+    .navbar.is-compact .navbar-mobile {
+      display: none !important;
+    }
+    .navbar.is-compact:not(.is-minimal) .navbar-compact-cta {
+      display: inline-flex;
+      min-height: 40px;
+      padding: 0 14px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .navbar.is-compact .navbar-logo img {
+      height: 32px;
+    }
+    .navbar.is-minimal .navbar-mobile-actions {
+      display: flex;
+    }
+  }
 </style>
 
 <script>
+  // Compact once the bar is no longer over the hero (the page's first section); no hero → after 80px.
+  const nav = document.getElementById("navbar");
+  const hero = document.querySelector<HTMLElement>("main > section, main section");
+  let queued = false;
+  const update = () => {
+    queued = false;
+    if (!nav) return;
+    const barBottom = nav.getBoundingClientRect().bottom;
+    const past = hero ? hero.getBoundingClientRect().bottom <= barBottom : window.scrollY > 80;
+    nav.classList.toggle("is-compact", past);
+  };
+  window.addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+
   // Mobile toggle
   const toggle = document.getElementById("navbar-toggle");
   const mobile = document.getElementById("navbar-mobile");

@@ -1,3 +1,4 @@
+import { validEmailStrict, validWhatsapp } from "./fields.ts";
 // /agendar (Sprint 11 F5) — pure logic, no DOM. Tested by tests/agendar/agendar.test.ts.
 // The WF-H facade owns every rule; this only shapes input and maps its answers to copy keys.
 
@@ -13,22 +14,22 @@ export function parseToken(hash: string): { token: string | null; malformed: boo
 
 /** Brazilian mobile/landline with DDD → `55` + digits, or null. WF-H re-checks it with Z-API. */
 export function normalizePhone(raw: string): string | null {
-  let digits = String(raw || "").replace(/\D/g, "");
-  if (digits.length === 10 || digits.length === 11) digits = "55" + digits;
-  return /^55[1-9][0-9]9?[0-9]{8}$/.test(digits) ? digits : null;
+  return validWhatsapp(raw);
 }
 
 export const validName = (raw: string) => String(raw || "").trim().length >= 2;
-export const validEmail = (raw: string) => !raw.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw.trim());
+/** Optional on /agendar: empty is fine, anything typed must be a real address. */
+export const validEmail = (raw: string) => !raw.trim() || validEmailStrict(raw);
 
 /** Every refusal WF-H can send (`Fechar recusa`), each with its own text in `agendar.st.*`. */
 const REFUSALS = new Set([
   "slot_taken", "ja_agendado", "ja_agendado_ip", "whatsapp_invalido", "zapi_indisponivel",
   "limite", "invalido", "link_invalido", "link_vencido", "desligado", "indisponivel",
 ]);
-/** States that end the flow and offer WhatsApp instead of a retry. */
+/** States that end the flow with WhatsApp as their one action (the button is the only way forward). */
 export const WHATSAPP_STATES = new Set([
-  "vazio", "indisponivel", "ja_agendado_ip", "limite", "link_invalido", "link_vencido", "desligado",
+  "vazio", "indisponivel", "ja_agendado", "ja_agendado_ip", "limite", "link_invalido", "link_vencido", "desligado",
+  "whatsapp_invalido",
 ]);
 
 /** Map a facade answer to the `agendar.st.*` key. `ip_ausente` is shown as `invalido`. */
@@ -66,6 +67,20 @@ export function dayLabel(dia: string, lang: Lang): string {
   if (!p) return dia;
   if (lang === "pt") return `${PT_DAYS[p.weekday]}, ${p.day}/${p.month}`;
   return `${new Intl.DateTimeFormat("en-US", { timeZone: ZONE, weekday: "short" }).format(p.date)}, ${p.month}/${p.day}`;
+}
+
+/** Calendar header: "novembro 2026" / "November 2026". `mes` is YYYY-MM. */
+export function monthLabel(mes: string, lang: Lang): string {
+  const [y, m] = mes.split("-").map(Number);
+  if (!y || !m) return mes;
+  return new Intl.DateTimeFormat(lang === "pt" ? "pt-BR" : "en-US", { month: "long", year: "numeric", timeZone: "UTC" })
+    .format(new Date(Date.UTC(y, m - 1, 15)))
+    .replace(" de ", " ");
+}
+
+/** Calendar column heads, Sunday first. */
+export function weekdayInitials(lang: Lang): string[] {
+  return lang === "pt" ? ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 }
 
 /** Full slot label for summaries and results: "terça, 10/11 às 10h" / "Tue, 11/10 at 10:00". */

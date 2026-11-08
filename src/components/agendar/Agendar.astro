@@ -5,6 +5,7 @@
 import translations from "../../data/translations.json";
 import { SITE_CONFIG } from "../../config/site.config";
 import LINKS from "../../constants/links";
+import ParticleField from "../ui/ParticleField.astro";
 
 const A = translations.agendar;
 const PT: Record<string, string> = {};
@@ -20,11 +21,48 @@ const consent = SITE_CONFIG.agenda.consentVersion;
 ---
 
 <section class="ag-section">
+  <!-- Fix 5.1: the home hero's background (same gradient + particle field), running up under the navbar. -->
+  <div class="ag-bg" aria-hidden="true">
+    <ParticleField count={200} opacity={0.45} parallax />
+  </div>
   <div class="container">
     <div id="agendar" class="ag-card" data-endpoint={endpoint} data-consent={consent}>
-      <h1 id="ag-title" data-ag-key="pub.title">{A.pub.title.pt}</h1>
+      <aside class="ag-info">
+      <h1 id="ag-title" tabindex="-1" data-ag-key="pub.title">{A.pub.title.pt}</h1>
       <p id="ag-lead" class="ag-lead" data-ag-key="pub.lead">{A.pub.lead.pt}</p>
+      <ul id="ag-meta" class="ag-meta">
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+          <span data-ag-key="info.duracao">{A.info.duracao.pt}</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2" /><path d="m16 10 5-3v10l-5-3" /></svg>
+          <span data-ag-key="info.meet">{A.info.meet.pt}</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></svg>
+          <span data-ag-key="grid.tz">{A.grid.tz.pt}</span>
+        </li>
+      </ul>
+      <!-- Fix 7: the whole box changes the time (no inner button); the "Trocar" link sits under the submit. -->
+      <button type="button" id="ag-picked" class="ag-picked" data-ag-aria="grid.change_aria" hidden>
+        <span id="ag-picked-text"></span>
+      </button>
 
+      <a
+        id="ag-wa"
+        class="btn btn-primary ag-wa"
+        href={LINKS.socials.whatsapp}
+        target="_blank"
+        rel="noopener"
+        data-whatsapp-cta
+        data-ag-key="wa"
+        hidden>{A.wa.pt}</a
+      >
+
+      </aside>
+
+      <div class="ag-main">
       <div id="ag-manage" class="ag-manage" hidden>
         <p id="ag-manage-title" class="ag-manage-title"></p>
         <p id="ag-manage-ask" data-ag-key="man.ask">{A.man.ask.pt}</p>
@@ -44,37 +82,38 @@ const consent = SITE_CONFIG.agenda.consentVersion;
       <p id="ag-status" class="ag-status" role="status" aria-live="polite" data-ag-key="st.carregando">
         {A.st.carregando.pt}
       </p>
-      <a
-        id="ag-wa"
-        class="btn btn-primary ag-wa"
-        href={LINKS.socials.whatsapp}
-        target="_blank"
-        rel="noopener"
-        data-whatsapp-cta
-        data-ag-key="wa"
-        hidden>{A.wa.pt}</a
-      >
-
       <div id="ag-grid" class="ag-grid" hidden>
-        <div id="ag-days" class="ag-days" role="group"></div>
-        <div id="ag-slots" class="ag-slots" role="group"></div>
-        <p class="ag-hint" data-ag-key="grid.tz">{A.grid.tz.pt}</p>
-        <p id="ag-picked" class="ag-picked" hidden>
-          <span id="ag-picked-text"></span>
-          <button type="button" id="ag-change" class="ag-link" data-ag-key="grid.change">{A.grid.change.pt}</button>
-        </p>
+        <div class="ag-cal">
+          <div class="ag-cal-head">
+            <h2 id="ag-month" class="ag-month"></h2>
+            <div class="ag-cal-nav">
+              <button type="button" id="ag-prev" class="ag-nav" data-ag-aria="grid.prev">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6" /></svg>
+              </button>
+              <button type="button" id="ag-next" class="ag-nav" data-ag-aria="grid.next">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+              </button>
+            </div>
+          </div>
+          <div id="ag-weekdays" class="ag-weekdays" aria-hidden="true"></div>
+          <div id="ag-days" class="ag-days" role="group"></div>
+        </div>
+        <div id="ag-times" class="ag-times" hidden>
+          <p id="ag-times-title" class="ag-times-title"></p>
+          <div id="ag-slots" class="ag-slots" role="group"></div>
+        </div>
       </div>
 
       <form id="ag-form" class="ag-form" novalidate hidden data-clarity-mask="true">
         <div id="ag-public-fields">
           <label class="ag-field">
             <span data-ag-key="form.name">{A.form.name.pt}</span>
-            <input id="ag-name" name="name" autocomplete="name" maxlength="120" />
+            <input id="ag-name" name="name" autocomplete="name" maxlength="120" data-ag-ph="form.name_ph" placeholder={A.form.name_ph.pt} />
             <small id="ag-name-err" class="ag-field-err" role="alert" hidden></small>
           </label>
           <label class="ag-field">
             <span data-ag-key="form.phone">{A.form.phone.pt}</span>
-            <input id="ag-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" />
+            <input id="ag-phone" name="phone" type="tel" autocomplete="tel-national" inputmode="numeric" maxlength="15" placeholder="(21) 99999-9999" />
             <small class="ag-help" data-ag-key="form.phone_help">{A.form.phone_help.pt}</small>
             <small id="ag-phone-err" class="ag-field-err" role="alert" hidden></small>
           </label>
@@ -82,29 +121,49 @@ const consent = SITE_CONFIG.agenda.consentVersion;
         <div id="ag-email-field">
           <label class="ag-field">
             <span data-ag-key="form.email">{A.form.email.pt}</span>
-            <input id="ag-email" name="email" type="email" autocomplete="email" maxlength="160" />
+            <input id="ag-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="160" spellcheck="false" autocapitalize="off" data-ag-ph="form.email_ph" placeholder={A.form.email_ph.pt} />
             <small class="ag-help" data-ag-key="form.email_help">{A.form.email_help.pt}</small>
             <small id="ag-email-err" class="ag-field-err" role="alert" hidden></small>
           </label>
         </div>
         <div id="ag-consent-field">
           <label class="ag-consent">
-            <input id="ag-consent" type="checkbox" />
-            <span data-ag-key="form.consent">{A.form.consent.pt}</span>
+            <!-- Checkbox: Uiverse.io by SelfMadeSystem (green-bobcat-29), recoloured. The input stays in the
+                 accessibility tree (transparent, on top of the drawing), not display:none. -->
+            <span class="ag-check">
+              <input id="ag-consent" type="checkbox" />
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path
+                  d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16"
+                  pathLength="575.0541381835938"
+                  class="ag-check-path"></path>
+              </svg>
+            </span>
+            <span
+              ><span data-ag-key="form.consent">{A.form.consent.pt}</span>
+              <a class="ag-inline" href={LINKS.legal.terms} target="_blank" rel="noopener" data-ag-key="form.terms"
+                >{A.form.terms.pt}</a
+              >
+              <span data-ag-key="form.and">{A.form.and.pt}</span>
+              <a class="ag-inline" href={LINKS.legal.privacy} target="_blank" rel="noopener" data-ag-key="form.privacy"
+                >{A.form.privacy.pt}</a
+              ></span
+            >
           </label>
-          <a class="ag-link" href={LINKS.legal.privacy} target="_blank" rel="noopener" data-ag-key="form.privacy"
-            >{A.form.privacy.pt}</a
-          >
         </div>
         <p id="ag-erro" class="ag-erro" role="alert" hidden></p>
-        <button type="submit" id="ag-submit" class="btn btn-primary ag-submit" disabled data-ag-key="form.submit">
-          {A.form.submit.pt}
-        </button>
+        <div class="ag-cta">
+          <button type="submit" id="ag-submit" class="btn btn-primary ag-submit" disabled data-ag-key="form.submit">
+            {A.form.submit.pt}
+          </button>
+          <button type="button" id="ag-change" class="ag-change" data-ag-key="grid.change">{A.grid.change.pt}</button>
+        </div>
       </form>
 
       <div id="ag-done" class="ag-done" hidden>
         <h2 id="ag-done-title"></h2>
         <p id="ag-done-text"></p>
+      </div>
       </div>
     </div>
   </div>
@@ -114,9 +173,10 @@ const consent = SITE_CONFIG.agenda.consentVersion;
 
 <script>
   import {
-    WHATSAPP_STATES, dayLabel, fill, hourLabel, normalizePhone, parseToken, refusalKey, slotLabel,
+    WHATSAPP_STATES, dayLabel, fill, hourLabel, monthLabel, weekdayInitials, normalizePhone, parseToken, refusalKey, slotLabel,
     validEmail, validName, type Lang,
   } from "../../lib/agendar";
+  import { afterPress, maskPhone, sanitizeEmail } from "../../lib/fields";
 
   type Slot = { starts_at: string };
   type Dia = { dia: string; slots: Slot[] };
@@ -137,6 +197,8 @@ const consent = SITE_CONFIG.agenda.consentVersion;
   }
   /** Elements with no slot-derived vars (header, form labels): safe to re-run at any time. */
   function relabelStatic() {
+    root.querySelectorAll<HTMLElement>("[data-ag-aria]").forEach((el) => el.setAttribute("aria-label", t(el.dataset.agAria!)));
+    root.querySelectorAll<HTMLInputElement>("[data-ag-ph]").forEach((el) => (el.placeholder = t(el.dataset.agPh!)));
     root.querySelectorAll<HTMLElement>("[data-ag-key]").forEach((el) => {
       if (el.dataset.agSlot === undefined) el.textContent = t(el.dataset.agKey!, JSON.parse(el.dataset.agVars || "{}"));
     });
@@ -155,10 +217,33 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     modo: "publico" as string,
     dias: [] as Dia[],
     dia: "",
+    mes: "",
     slot: "",
     managing: false,
     busy: false,
   };
+
+  // ── This browser's booking (Juan, F5 review): "already booked" shows the time only to the browser that booked.
+  // Another device gets no time (anyone can type any number on the public page).
+  const MEMO = "psiativa-agendar";
+  function remember(startsAt: string, phone: string | null) {
+    try { localStorage.setItem(MEMO, JSON.stringify({ starts_at: startsAt, phone })); } catch {}
+  }
+  function forget() {
+    try { localStorage.removeItem(MEMO); } catch {}
+  }
+  /** The booked time this browser saved, if it is still ahead and (on the public page) for the same number. */
+  function recalled(phone: string | null): string | null {
+    try {
+      const memo = JSON.parse(localStorage.getItem(MEMO) || "null");
+      if (!memo?.starts_at || Date.parse(memo.starts_at) <= Date.now()) return null;
+      if (phone && memo.phone && memo.phone !== phone) return null;
+      return String(memo.starts_at);
+    } catch {
+      return null;
+    }
+  }
+  let lastPhone: string | null = null;
 
   // ── Network: the facade, or a dev-only fixture ─────────────────────────
   let fixture: Record<string, Answer> | null = null;
@@ -191,23 +276,47 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     if (key) say(el, key, vars);
     el.classList.toggle("is-error", !!key && key.startsWith("st.") && key !== "st.carregando");
   }
-  /** A refusal that ends the flow: text + WhatsApp, grid and form gone. */
+  /** A refusal that ends the flow: the H1 is its one action, the lead explains, at most one button. */
+  /** Which panels show: `cal` (info + calendar [+ times]), `form` (info + form), `stop` (info only), `done`. */
+  function step(name: "cal" | "form" | "stop" | "done") {
+    root.dataset.step = name;
+  }
   function stop(key: string) {
-    status(`st.${key}`);
-    $("ag-wa").hidden = !WHATSAPP_STATES.has(key);
+    status(null);
+    step("stop");
+    $("ag-picked").hidden = true;
+    const title = $("ag-title");
+    const booked = key === "ja_agendado" ? recalled(lastPhone) : null;
+    if (booked) {
+      // The time this browser booked, plus the one way to reach us.
+      say(title, "st.ja_agendado_memo_title", { label: slotLabel(booked, lang()) });
+      title.dataset.agSlot = booked;
+      say($("ag-lead"), "st.ja_agendado_memo");
+      $("ag-wa").hidden = false;
+      say($("ag-wa"), "wa");
+    } else {
+      delete title.dataset.agSlot;
+      say(title, `st.${key}_title`);
+      say($("ag-lead"), `st.${key}`);
+      $("ag-wa").hidden = !WHATSAPP_STATES.has(key);
+      say($("ag-wa"), "wa");
+    }
     $("ag-grid").hidden = true;
     $("ag-form").hidden = true;
     $("ag-manage").hidden = true;
+    title.focus();
   }
   function done(titleKey: string, textKey: string, label = "") {
     status(null);
+    step("done");
+    $("ag-picked").hidden = true;
     $("ag-grid").hidden = $("ag-form").hidden = $("ag-manage").hidden = true;
     const title = $("ag-done-title");
     say(title, titleKey, { label });
     if (label) title.dataset.agSlot = state.slot;
     say($("ag-done-text"), textKey);
     $("ag-done").hidden = false;
-    $("ag-done").scrollIntoView({ block: "center", behavior: "smooth" });
+    root.scrollIntoView({ block: "start", behavior: "smooth" });
   }
 
   // ── Header by mode ─────────────────────────────────────────────────────
@@ -220,22 +329,51 @@ const consent = SITE_CONFIG.agenda.consentVersion;
 
   // ── Grid ───────────────────────────────────────────────────────────────
   function renderGrid() {
-    const days = $("ag-days");
-    const slots = $("ag-slots");
     if (!state.dias.length) return;
-    days.replaceChildren(
-      ...state.dias.map((d) => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "ag-day";
-        b.textContent = dayLabel(d.dia, lang());
-        b.setAttribute("aria-pressed", String(d.dia === state.dia));
-        b.addEventListener("click", () => { state.dia = d.dia; renderGrid(); });
-        return b;
-      }),
+    const open = new Map(state.dias.map((d) => [d.dia, d]));
+    const months = [...new Set(state.dias.map((d) => d.dia.slice(0, 7)))].sort();
+    if (!months.includes(state.mes)) state.mes = (state.dia || state.dias[0].dia).slice(0, 7);
+    const at = months.indexOf(state.mes);
+    $<HTMLButtonElement>("ag-prev").disabled = at <= 0;
+    $<HTMLButtonElement>("ag-next").disabled = at >= months.length - 1;
+    $("ag-month").textContent = monthLabel(state.mes, lang());
+    $("ag-weekdays").replaceChildren(
+      ...weekdayInitials(lang()).map((w) => Object.assign(document.createElement("span"), { textContent: w })),
     );
-    const day = state.dias.find((d) => d.dia === state.dia) || state.dias[0];
-    slots.replaceChildren(
+    // Month grid, Sunday first: blanks, then every day; only the open ones are buttons.
+    const [y, m] = state.mes.split("-").map(Number);
+    const first = new Date(Date.UTC(y, m - 1, 1)).getUTCDay();
+    const total = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    const cells: HTMLElement[] = Array.from({ length: first }, () => document.createElement("span"));
+    for (let n = 1; n <= total; n++) {
+      const dia = `${state.mes}-${String(n).padStart(2, "0")}`;
+      if (!open.has(dia)) {
+        cells.push(Object.assign(document.createElement("span"), { className: "ag-off", textContent: String(n) }));
+        continue;
+      }
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "ag-day";
+      b.textContent = String(n);
+      b.setAttribute("aria-label", dayLabel(dia, lang()));
+      b.setAttribute("aria-pressed", String(dia === state.dia));
+      b.addEventListener("click", () => {
+        // Fix 5.3: clicking the chosen day again unselects it (and closes the times panel).
+        state.dia = state.dia === dia ? "" : dia;
+        renderGrid();
+        if (state.dia && window.matchMedia("(max-width: 1023px)").matches)
+          $("ag-times").scrollIntoView({ block: "start", behavior: "smooth" });
+      });
+      cells.push(b);
+    }
+    $("ag-days").replaceChildren(...cells);
+    // Times panel: only once a day is chosen.
+    const day = open.get(state.dia);
+    $("ag-times").hidden = !day;
+    root.classList.toggle("has-times", !!day);
+    if (!day) return;
+    $("ag-times-title").textContent = dayLabel(day.dia, lang());
+    $("ag-slots").replaceChildren(
       ...day.slots.map((s) => {
         const b = document.createElement("button");
         b.type = "button";
@@ -253,9 +391,14 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     say(text, "grid.picked", { label: slotLabel(startsAt, lang()) });
     text.dataset.agSlot = startsAt;
     $("ag-picked").hidden = false;
+    // Like Cal.com: the chosen time moves to the info panel and the form takes the calendar's place.
+    $("ag-grid").hidden = true;
     $("ag-form").hidden = false;
-    renderGrid();
+    step("form");
     ready();
+    // Fix 6: the card shrinks when the form replaces the calendar; bring its top back under the navbar
+    // instead of scrolling past it.
+    root.scrollIntoView({ block: "start", behavior: "smooth" });
   }
   function ready() {
     const consentOk = state.managing || $<HTMLInputElement>("ag-consent").checked;
@@ -267,11 +410,13 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     if (answer.ok !== true || answer.resultado !== "horarios") return stop(refusalKey(answer)), null;
     state.dias = (answer.dias || []).filter((d: Dia) => d.slots?.length);
     if (!state.dias.length) return stop("vazio"), null;
-    state.dia = state.dias.some((d) => d.dia === state.dia) ? state.dia : state.dias[0].dia;
+    if (!state.dias.some((d) => d.dia === state.dia)) state.dia = "";
     state.slot = "";
     $("ag-picked").hidden = true;
+    $("ag-form").hidden = true;
     if (!keepStatus) status(null);
     $("ag-grid").hidden = false;
+    step("cal");
     renderGrid();
     ready();
     return answer;
@@ -284,10 +429,16 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     $("ag-email-field").hidden = state.managing;
     $("ag-consent-field").hidden = state.managing;
   }
-  function fieldError(id: string, key: string | null) {
+  /** Error tooltip under the field + the field's state: `error` (red), `ok` (green check), or neutral. */
+  function fieldError(id: string, key: string | null, ok = false) {
     const el = $(id);
     el.hidden = !key;
     if (key) say(el, key);
+    const input = $<HTMLInputElement>(id.replace(/-err$/, ""));
+    if (!input) return;
+    input.dataset.state = key ? "error" : ok ? "ok" : "";
+    if (key) input.setAttribute("aria-invalid", "true");
+    else input.removeAttribute("aria-invalid");
   }
 
   async function submit(event: Event) {
@@ -299,16 +450,17 @@ const consent = SITE_CONFIG.agenda.consentVersion;
       Object.assign(body, { op: "agendar", consent_version: root.dataset.consent });
       if (state.token) body.token = state.token;
       const email = $<HTMLInputElement>("ag-email").value.trim();
-      fieldError("ag-email-err", validEmail(email) ? null : "form.email_err");
+      fieldError("ag-email-err", validEmail(email) ? null : "form.email_err", !!email);
       let ok = validEmail(email);
       if (email) body.lead_email = email;
       if (state.modo === "publico") {
         const name = $<HTMLInputElement>("ag-name").value.trim();
         const phone = normalizePhone($<HTMLInputElement>("ag-phone").value);
-        fieldError("ag-name-err", validName(name) ? null : "form.name_err");
-        fieldError("ag-phone-err", phone ? null : "st.whatsapp_invalido");
+        fieldError("ag-name-err", validName(name) ? null : "form.name_err", validName(name));
+        fieldError("ag-phone-err", phone ? null : "form.phone_err", !!phone);
         ok = ok && validName(name) && !!phone;
         Object.assign(body, { lead_name: name, phone });
+        lastPhone = phone;
       }
       if (!ok) return;
     }
@@ -321,6 +473,8 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     state.busy = false;
     say(button, "form.submit");
     ready();
+    if (answer.ok === true && ["agendado", "remarcado"].includes(answer.resultado))
+      remember(String(answer.starts_at || state.slot), state.modo === "publico" ? lastPhone : null);
     if (answer.ok === true && answer.resultado === "agendado")
       return done("ok.title", "ok.text", slotLabel(answer.starts_at || state.slot, lang()));
     if (answer.ok === true && answer.resultado === "remarcado")
@@ -347,6 +501,7 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     title.dataset.agSlot = atual;
     $("ag-manage").hidden = false;
     $("ag-grid").hidden = true;
+    step("form");
     $("ag-trocar").addEventListener("click", () => openReschedule());
     $("ag-outro").addEventListener("click", () => openReschedule());
     $("ag-cancelar").addEventListener("click", () => {
@@ -361,6 +516,7 @@ const consent = SITE_CONFIG.agenda.consentVersion;
       button.disabled = true;
       const result = await call({ op: "gerenciar", token: state.token, acao: "cancelar" });
       button.disabled = false;
+      if (result.ok === true && result.resultado === "cancelado") forget();
       if (result.ok === true && result.resultado === "cancelado") return done("man.cancelado_title", "man.cancelado_text");
       stop(refusalKey(result));
     });
@@ -369,6 +525,7 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     $("ag-confirm").hidden = true;
     $("ag-manage").hidden = true;
     $("ag-grid").hidden = false;
+    step("cal");
     renderGrid();
   }
   // The manage title uses {atual}; relabel() re-derives it through data-ag-slot, not {label}.
@@ -405,12 +562,56 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     }
     $("ag-form").addEventListener("submit", submit);
     $("ag-consent").addEventListener("change", ready);
-    $("ag-change").addEventListener("click", () => {
+    // Fix 6.1: filter as the user types (phone mask keeps the caret after the same digit), check on blur.
+    const phone = $<HTMLInputElement>("ag-phone");
+    phone.addEventListener("input", () => {
+      const caret = phone.selectionStart ?? phone.value.length;
+      const before = phone.value.slice(0, caret).replace(/\D/g, "").length;
+      phone.value = maskPhone(phone.value);
+      let pos = 0;
+      for (let seen = 0; pos < phone.value.length && seen < before; pos++) if (/\d/.test(phone.value[pos])) seen++;
+      phone.setSelectionRange(pos, pos);
+      if (normalizePhone(phone.value)) fieldError("ag-phone-err", null, true);
+      else if (phone.dataset.state === "ok") fieldError("ag-phone-err", null);
+    });
+    phone.addEventListener("blur", () => afterPress(() => {
+      if (phone.value) fieldError("ag-phone-err", normalizePhone(phone.value) ? null : "form.phone_err", true);
+      else fieldError("ag-phone-err", null);
+    }));
+    const nameEl = $<HTMLInputElement>("ag-name");
+    nameEl.addEventListener("input", () => {
+      if (validName(nameEl.value)) fieldError("ag-name-err", null, true);
+    });
+    nameEl.addEventListener("blur", () => afterPress(() => {
+      if (nameEl.value) fieldError("ag-name-err", validName(nameEl.value) ? null : "form.name_err", true);
+    }));
+    const email = $<HTMLInputElement>("ag-email");
+    email.addEventListener("input", () => {
+      const clean = sanitizeEmail(email.value);
+      if (clean !== email.value) email.value = clean;
+      if (email.value && validEmail(email.value)) fieldError("ag-email-err", null, true);
+      else if (email.dataset.state === "ok") fieldError("ag-email-err", null);
+    });
+    email.addEventListener("blur", () => afterPress(() =>
+      fieldError("ag-email-err", validEmail(email.value) ? null : "form.email_err", !!email.value)));
+    const changeTime = () => {
       state.slot = "";
       $("ag-picked").hidden = true;
+      $("ag-form").hidden = true;
+      $("ag-grid").hidden = false;
+      step("cal");
       renderGrid();
       ready();
-    });
+    };
+    $("ag-change").addEventListener("click", changeTime);
+    $("ag-picked").addEventListener("click", changeTime);
+    const months = (dir: number) => {
+      const all = [...new Set(state.dias.map((d) => d.dia.slice(0, 7)))].sort();
+      state.mes = all[Math.min(all.length - 1, Math.max(0, all.indexOf(state.mes) + dir))] || state.mes;
+      renderGrid();
+    };
+    $("ag-prev").addEventListener("click", () => months(-1));
+    $("ag-next").addEventListener("click", () => months(1));
 
     const answer = await loadGrid();
     if (!answer) return;
@@ -423,38 +624,137 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     }
     formMode();
     $("ag-form").hidden = !state.slot;
+    $("ag-meta").hidden = state.managing;
   }
   boot();
 </script>
 
 <style>
   .ag-section {
-    padding: clamp(6.5rem, 11vw, 9rem) 0 clamp(3rem, 8vw, 6rem);
-    background:
-      radial-gradient(circle at top, rgba(126, 174, 137, 0.2), transparent 42%),
-      var(--background);
+    position: relative;
+    overflow: hidden;
+    /* The sticky navbar takes 64px of flow (56px on mobile): pull the section up under it. Its visual bottom is
+       18px lower (82px / 74px); the card sits 2rem below that (1rem on mobile). */
+    margin-top: -64px;
+    /* No footer on /agendar: the section fills the viewport (+64px pulled up under the navbar). */
+    min-height: calc(100svh + 64px);
+    padding: calc(82px + 2rem) 0 clamp(3rem, 8vw, 6rem);
+    background: var(--gradient-hero);
   }
+  @media (max-width: 810px) {
+    .ag-section {
+      margin-top: -56px;
+      min-height: calc(100svh + 56px);
+      padding-top: calc(74px + 1rem);
+    }
+  }
+  .ag-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .ag-section > .container {
+    position: relative;
+    z-index: 1;
+  }
+  /* Fix 4 (Juan's review): Calendly / Cal.com layout. Info on the left, month calendar in the center, the day's
+     times on the right once a day is chosen; stacked in that order below 1024px. */
   .ag-card {
-    width: min(100%, 720px);
+    display: grid;
+    width: min(100%, 880px);
     margin: 0 auto;
-    padding: clamp(1.5rem, 5vw, 3rem);
     border: 1px solid var(--color-border);
     border-radius: 24px;
     background: rgba(250, 255, 255, 0.96);
     box-shadow: 0 24px 70px rgba(26, 75, 81, 0.11);
+    transition: width 0.2s ease;
+  }
+  /* Scroll targets land below the sticky navbar (82px desktop / 74px mobile) plus the page gap. */
+  .ag-card,
+  .ag-times {
+    scroll-margin-top: calc(82px + 2rem);
+  }
+  @media (max-width: 810px) {
+    .ag-card,
+    .ag-times {
+      scroll-margin-top: calc(74px + 1rem);
+    }
+  }
+  .ag-card.has-times[data-step="cal"] {
+    width: min(100%, 1100px);
+  }
+  .ag-card[data-step="stop"] {
+    width: min(100%, 640px);
+  }
+  .ag-card[data-step="stop"] .ag-main,
+  .ag-card[data-step="stop"] .ag-meta {
+    display: none;
+  }
+  .ag-info,
+  .ag-main {
+    min-width: 0;
+    padding: clamp(1.25rem, 4vw, 2rem);
+  }
+  .ag-info {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .ag-card[data-step="stop"] .ag-info {
+    border: 0;
+  }
+  @media (min-width: 1024px) {
+    .ag-card:not([data-step="stop"]) {
+      grid-template-columns: 320px 1fr;
+    }
+    .ag-card:not([data-step="stop"]) .ag-info {
+      border-right: 1px solid var(--color-border);
+      border-bottom: 0;
+    }
+    .ag-card.has-times .ag-grid {
+      grid-template-columns: 1fr 220px;
+    }
+    .ag-times {
+      padding-left: 1.5rem;
+      border-left: 1px solid var(--color-border);
+    }
+    .ag-slots {
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 0.25rem;
+    }
   }
   .ag-card h1 {
     margin-bottom: 0.75rem;
-    font-size: clamp(1.9rem, 6vw, 3rem);
-    line-height: 1.1;
+    font-size: clamp(1.6rem, 4.5vw, 2.1rem);
+    line-height: 1.15;
   }
   .ag-lead {
     color: var(--text-secondary);
-    font-size: 1.05rem;
-    line-height: 1.65;
+    line-height: 1.6;
+  }
+  .ag-meta {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--text-secondary);
+  }
+  .ag-meta li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
+  .ag-meta svg,
+  .ag-nav svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
   .ag-status {
-    margin-top: 1.5rem;
     color: var(--text-secondary);
   }
   .ag-status.is-error {
@@ -464,33 +764,89 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     color: var(--text-primary, inherit);
   }
   .ag-wa {
-    margin-top: 1rem;
+    margin-top: 1.25rem;
   }
   .ag-grid {
-    margin-top: 1.75rem;
+    display: grid;
+    gap: 1.5rem;
   }
-  .ag-days {
+  .ag-cal-head {
     display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .ag-month {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .ag-cal-nav {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .ag-nav {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 12px;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .ag-nav:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  .ag-weekdays,
+  .ag-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    text-align: center;
+  }
+  .ag-weekdays {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  :global(.ag-off) {
+    display: grid;
+    place-items: center;
+    min-height: 44px;
+    color: var(--text-secondary);
+    opacity: 0.55;
   }
   :global(.ag-day),
   :global(.ag-slot) {
     min-height: 44px;
-    min-width: 44px;
-    padding: 0.5rem 0.9rem;
-    border: 1px solid var(--color-border);
+    min-width: 0;
+    border: 1px solid transparent;
     border-radius: 12px;
-    background: #fff;
     font: inherit;
+    font-weight: 600;
     cursor: pointer;
   }
   :global(.ag-day) {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    white-space: nowrap;
+    aspect-ratio: 1;
+    max-height: 64px;
+    /* Open days read as tinted tiles (Cal.com); --background-subtle was near the card's own colour. */
+    background: rgba(26, 75, 81, 0.1);
+  }
+  :global(.ag-slot) {
+    width: 100%;
+    border-color: var(--color-border);
+    background: #fff;
+  }
+  :global(.ag-day:hover),
+  :global(.ag-slot:hover) {
+    border-color: var(--color-primary, #1a4b51);
   }
   :global(.ag-day[aria-pressed="true"]),
   :global(.ag-slot[aria-pressed="true"]) {
@@ -498,22 +854,65 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     background: var(--gradient-brand);
     color: #fff;
   }
+  .ag-times-title {
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
   .ag-slots {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
     gap: 0.5rem;
-    margin-top: 1rem;
+  }
+  .ag-hint {
+    margin-top: 0.5rem;
   }
   .ag-hint,
   .ag-help {
     display: block;
-    margin-top: 0.5rem;
     color: var(--text-secondary);
     font-size: 0.9rem;
   }
   .ag-picked {
+    display: block;
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: var(--background-subtle);
+    color: var(--secondary);
+    font: inherit;
+    text-align: left;
+    /* "Horário escolhido:" on one line, the time on the next (the copy carries a \n). */
+    white-space: pre-line;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .ag-picked:hover {
+    border-color: var(--color-border);
+  }
+  /* The two buttons under the fields: 2rem from the form (the form's 1rem gap + 1rem), no gap between. */
+  .ag-form > .ag-cta {
+    display: grid;
+    gap: 0;
     margin-top: 1rem;
-    font-weight: 600;
+  }
+  .ag-change {
+    min-height: 44px;
+    border: 0;
+    border-radius: var(--radius-pill, 999px);
+    background: none;
+    color: var(--text-secondary);
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .ag-change:hover {
+    background: rgba(74, 74, 74, 0.08);
+  }
+  .ag-inline {
+    color: inherit;
+    text-decoration: underline;
   }
   .ag-link {
     min-height: 44px;
@@ -535,7 +934,6 @@ const consent = SITE_CONFIG.agenda.consentVersion;
   .ag-form {
     display: grid;
     gap: 1rem;
-    margin-top: 1.5rem;
   }
   .ag-form > div {
     display: grid;
@@ -545,28 +943,114 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     display: grid;
     gap: 0.35rem;
   }
+  /* Fix 7: fields after Uiverse.io (shadowmurphy, hard-warthog-73): 2px border + 7px ring, in the brand teal
+     (--secondary) instead of the original blue. */
   .ag-field input {
     min-height: 44px;
     padding: 0.6rem 0.8rem;
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+    outline: none;
+    background-color: transparent;
     font: inherit;
+    transition: all 0.5s;
   }
-  .ag-field-err,
+  /* Juan: the field takes the card's background and the brand's light border; the ring only while selected. */
+  .ag-field input:hover {
+    border-color: var(--secondary);
+  }
+  .ag-field input:focus {
+    border: 2px solid var(--secondary);
+    box-shadow: 0 0 0 7px var(--secondary-20);
+  }
   .ag-erro {
     color: #a33a2b;
   }
+  /* Fix 6.1: field states. Error = red border + a tooltip bubble under the field; ok = green border + check. */
+  .ag-field input[data-state="error"] {
+    border: 2px solid #c0392b;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+  }
+  .ag-field input[data-state="ok"] {
+    border: 2px solid #2e7d4f;
+    padding-right: 2.5rem;
+    background: transparent
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232e7d4f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E")
+      no-repeat right 0.8rem center / 18px;
+  }
+  .ag-field-err {
+    position: relative;
+    justify-self: start;
+    margin-top: 0.4rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    background: #c0392b;
+    color: #fff;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  .ag-field-err::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 1rem;
+    width: 10px;
+    height: 10px;
+    background: inherit;
+    transform: rotate(45deg);
+  }
+  /* Focused by script on a stop state (screen readers land on the action); no ring for a heading. */
+  #ag-title:focus {
+    outline: none;
+  }
   .ag-consent {
     display: grid;
-    grid-template-columns: 24px 1fr;
+    grid-template-columns: 16px 1fr;
     gap: 0.75rem;
     align-items: start;
     line-height: 1.55;
   }
-  .ag-consent input {
-    width: 24px;
-    height: 24px;
-    margin-top: 0.1rem;
+  /* 16px drawing (Juan: 0.5rem smaller than 24px); the transparent input keeps a 44px tap area around it. */
+  .ag-check {
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin-top: 0.3rem;
+  }
+  .ag-check input {
+    position: absolute;
+    inset: -14px;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .ag-check svg {
+    width: 16px;
+    height: 16px;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .ag-check-path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+    stroke-dasharray: 241 9999999;
+    stroke-dashoffset: 0;
+  }
+  .ag-check input:checked ~ svg .ag-check-path {
+    stroke-dasharray: 70.5096664428711 9999999;
+    stroke-dashoffset: -262.2723388671875;
+  }
+  .ag-check input:focus-visible ~ svg {
+    outline: 2px solid var(--secondary);
+    outline-offset: 4px;
+    border-radius: 4px;
   }
   .ag-submit {
     min-height: 48px;
@@ -575,9 +1059,9 @@ const consent = SITE_CONFIG.agenda.consentVersion;
     opacity: 0.55;
     cursor: not-allowed;
   }
-  .ag-manage,
+  .ag-erro:not([hidden]) + .ag-submit,
   .ag-done {
-    margin-top: 1.5rem;
+    margin-top: 0;
   }
   .ag-manage-title,
   .ag-done h2 {

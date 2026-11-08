@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import { afterPress, sanitizeEmail, validEmailStrict, validWhatsapp } from '../../lib/fields';
 import 'react-phone-number-input/style.css';
 import { trackEvent } from '../../lib/analytics';
 
@@ -11,6 +12,14 @@ export default function ContactForm() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [phoneValue, setPhoneValue] = useState<string | undefined>('');
   const [phoneCountry, setPhoneCountry] = useState<any>('BR');
+  // Fix 6.1: field-level errors (e-mail must be real; phone optional, but if filled it must be a valid
+  // WhatsApp number: a real BR mobile/landline, or a valid number for the chosen country).
+  const [fieldErr, setFieldErr] = useState<{ email?: boolean; phone?: boolean }>({});
+  const [fieldOk, setFieldOk] = useState<{ email?: boolean; phone?: boolean }>({});
+  const stateStyle = (k: 'email' | 'phone') =>
+    fieldErr[k] ? fieldErrorBorder : fieldOk[k] ? fieldOkBorder : {};
+  const phoneOk = (v: string | undefined) =>
+    !v || (v.startsWith('+55') ? !!validWhatsapp(v.slice(3)) : isValidPhoneNumber(v));
   const captchaRef = useRef<HCaptcha>(null);
 
   useEffect(() => {
@@ -71,6 +80,11 @@ export default function ContactForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const emailValue = String(new FormData(e.currentTarget).get('email') || '');
+    const errs = { email: !validEmailStrict(emailValue), phone: !phoneOk(phoneValue) };
+    setFieldErr(errs);
+    if (errs.email || errs.phone) return;
 
     if (!captchaToken) {
       setStatus('captcha_required');
@@ -199,8 +213,29 @@ export default function ContactForm() {
             required
             placeholder="seu@email.com"
             data-i18n-placeholder="contact.form_email_placeholder"
-            style={inputStyles}
+            style={{ ...inputStyles, ...stateStyle('email') }}
+            inputMode="email"
+            maxLength={160}
+            spellCheck={false}
+            autoCapitalize="off"
+            aria-invalid={fieldErr.email || undefined}
+            onInput={(e) => {
+              const el = e.currentTarget;
+              const clean = sanitizeEmail(el.value);
+              if (clean !== el.value) el.value = clean;
+              const good = validEmailStrict(clean);
+              setFieldOk((f) => ({ ...f, email: good }));
+              if (good) setFieldErr((f) => ({ ...f, email: false }));
+            }}
+            onBlur={(e) => {
+              // Read the value now: React clears currentTarget before a deferred updater runs.
+              const v = e.currentTarget.value;
+              afterPress(() => setFieldErr((f) => ({ ...f, email: !!v && !validEmailStrict(v) })));
+            }}
           />
+          {fieldErr.email && (
+            <p style={tooltipStyles} role="alert" data-i18n="contact.form_email_invalid">Confira o e-mail.</p>
+          )}
         </div>
       </div>
 
@@ -209,13 +244,27 @@ export default function ContactForm() {
           <label style={labelStyles} htmlFor="phone" data-i18n="contact.form_phone">Telefone</label>
           <PhoneInput
             id="phone"
-            international
+            // National format: "21 99999-9999" reads as BR (+55), not as country code +21. The country select
+            // still switches to an international number.
             defaultCountry={phoneCountry}
             value={phoneValue}
-            onChange={setPhoneValue}
+            onChange={(v) => {
+              setPhoneValue(v);
+              setFieldOk((f) => ({ ...f, phone: !!v && phoneOk(v) }));
+              if (phoneOk(v)) setFieldErr((f) => ({ ...f, phone: false }));
+            }}
+            onBlur={() => afterPress(() => setFieldErr((f) => ({ ...f, phone: !phoneOk(phoneValue) })))}
+            limitMaxLength
             placeholder="(11) 99999-9999"
             className="tpl-phone-input"
+            // The border lives on the inner <input>; it reads --input-border.
+            style={{ '--input-border': fieldErr.phone ? '#c0392b' : fieldOk.phone ? '#2e7d4f' : undefined } as React.CSSProperties}
           />
+          {fieldErr.phone && (
+            <p style={tooltipStyles} role="alert" data-i18n="contact.form_phone_invalid">
+              Confira o número de WhatsApp, com DDD.
+            </p>
+          )}
         </div>
         <div style={fieldStyles}>
           <label style={labelStyles} htmlFor="company" data-i18n="contact.form_company">Nome da Clínica</label>
@@ -347,6 +396,21 @@ const successStyles: React.CSSProperties = {
   borderRadius: '0.75rem',
   background: 'rgba(126, 174, 137, 0.1)',
   border: '1px solid rgba(126, 174, 137, 0.2)',
+};
+
+// Fix 6.1: field states (error = red border + tooltip bubble under the field; ok = green border).
+// Full `border` shorthand: inputStyles sets `border`, and mixing it with `borderColor` breaks React re-renders.
+const fieldErrorBorder: React.CSSProperties = { border: '1px solid #c0392b', boxShadow: '0 0 0 3px rgba(192, 57, 43, 0.12)' };
+const fieldOkBorder: React.CSSProperties = { border: '1px solid #2e7d4f' };
+const tooltipStyles: React.CSSProperties = {
+  alignSelf: 'flex-start',
+  margin: '0.4rem 0 0',
+  padding: '0.45rem 0.7rem',
+  borderRadius: '8px',
+  background: '#c0392b',
+  color: '#fff',
+  fontSize: '0.85rem',
+  lineHeight: 1.4,
 };
 
 const errorStyles: React.CSSProperties = {

@@ -21,6 +21,10 @@ interface Props {
   descriptionKey?: string;
   hideNavAndFooter?: boolean;
   hideWhatsAppFab?: boolean;
+  /** Navbar with only the logo + language toggle (no links, no CTA, no menu), e.g. /agendar. */
+  navMinimal?: boolean;
+  /** Drop the footer only (the navbar stays), e.g. /agendar fills the viewport. */
+  hideFooter?: boolean;
   /** Suprime os links do funil (Calculadora · Quiz · Análise de site) no rodapé.
    *  Usado pelas páginas do `/podcast/`, que falam com PACIENTE, não com as ICPs
    *  comerciais — ver brief-podcast-anticanibalizacao.md §6.3/§7. */
@@ -46,6 +50,8 @@ const {
   descriptionKey,
   hideNavAndFooter = false,
   hideWhatsAppFab = hideNavAndFooter,
+  navMinimal = false,
+  hideFooter = hideNavAndFooter,
   hideFunnelLinks = false,
   canonicalPath,
   ogType = "website",
@@ -174,11 +180,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       )
     }
     <!-- End Google Tag Manager (noscript) -->
-    {!hideNavAndFooter && <Navbar items={navbar?.items} cta={navbar?.cta} logoHref={navbar?.logoHref} />}
+    {!hideNavAndFooter && <Navbar items={navbar?.items} cta={navbar?.cta} logoHref={navbar?.logoHref} minimal={navMinimal} />}
     <main>
       <slot />
     </main>
-    {!hideNavAndFooter && (
+    {!hideFooter && (
       <Footer
         minimal={footerType === "minimal"}
         showCookiePreferences={hasAnalytics}
