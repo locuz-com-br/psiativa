@@ -281,12 +281,13 @@ const consent = SITE_CONFIG.agenda.consentVersion;
   function step(name: "cal" | "form" | "stop" | "done") {
     root.dataset.step = name;
   }
-  function stop(key: string) {
+  function stop(key: string, answer?: Answer) {
     status(null);
     step("stop");
     $("ag-picked").hidden = true;
     const title = $("ag-title");
-    const booked = key === "ja_agendado" ? recalled(lastPhone) : null;
+    // F5b: WF-H sends atual only to an accepted private link; the public page falls back to this browser's memo.
+    const booked = key === "ja_agendado" ? (answer?.atual?.starts_at ? String(answer.atual.starts_at) : recalled(lastPhone)) : null;
     if (booked) {
       // The time this browser booked, plus the one way to reach us.
       say(title, "st.ja_agendado_memo_title", { label: slotLabel(booked, lang()) });
@@ -490,7 +491,7 @@ const consent = SITE_CONFIG.agenda.consentVersion;
       erro.hidden = false;
       return say(erro, `st.${key}`);
     }
-    stop(key);
+    stop(key, answer);
   }
 
   // ── Gerenciar ──────────────────────────────────────────────────────────
