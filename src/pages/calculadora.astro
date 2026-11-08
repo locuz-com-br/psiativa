@@ -5,7 +5,6 @@
 // ICP-alvo do texto que ranqueia: Perfil B — consultório solo.
 // Briefing: plans/seo-briefing-roi-calculator.md
 // ─────────────────────────────────────────────────────────────
-import { SITE_CONFIG } from "../config/site.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ParticleField from "../components/ui/ParticleField.astro";
 import CalculadoraIsland from "../components/calculadora/CalculadoraIsland.tsx";
@@ -62,9 +61,6 @@ const schema = [
   ]),
 ];
 
-const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
-  "Olá! Usei a calculadora de custo da inação no site da PsiAtiva e gostaria de entender melhor o meu cenário.",
-)}`;
 ---
 
 <BaseLayout
@@ -177,7 +173,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
     <div class="container calc-cta-inner">
       <h2 data-i18n="calculadora.cta.title">Primeiro passo: uma conversa. Só isso.</h2>
       <p data-i18n="calculadora.cta.desc">Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
-      <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-light">
+      <a href="/agendar/?perfil=consultorio" class="btn-primary-light">
         <span data-i18n="calculadora.cta.btn">AGENDAR DIAGNÓSTICO</span>
         <span class="icon-circle">
           <svg

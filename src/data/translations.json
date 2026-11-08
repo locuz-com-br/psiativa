@@ -301,8 +301,8 @@
       "en": "is a patient who won't return"
     },
     "btn": {
-      "pt": "Agendar Diagnóstico pelo WhatsApp",
-      "en": "Book a Diagnostic via WhatsApp"
+      "pt": "Agendar Diagnóstico",
+      "en": "Book a Diagnostic"
     },
     "btn_secondary": {
       "pt": "Preencher Formulário",
@@ -1680,6 +1680,10 @@
       "lead": {
         "pt": "São 20 minutos com o especialista da PsiAtiva. Ele olha onde a sua clínica perde pacientes entre o primeiro contato e a primeira sessão, e mostra o caminho para a sua situação.",
         "en": "It is 20 minutes with a PsiAtiva specialist. They look at where your clinic loses patients between the first contact and the first session, and show the way forward for your situation."
+      },
+      "lead_consultorio": {
+        "pt": "São 20 minutos com o especialista da PsiAtiva. Ele olha onde a sua agenda perde espaço entre o primeiro contato e a primeira sessão, e o que dá para ajustar sem mudar o seu jeito de atender.",
+        "en": "It is 20 minutes with a PsiAtiva specialist. They look at where your schedule loses room between the first contact and the first session, and what can be adjusted without changing the way you work."
       }
     },
     "priv": {

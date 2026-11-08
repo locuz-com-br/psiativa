@@ -23,7 +23,8 @@ import { WHATSAPP_LINK } from "../../config/site.config";
   /**
    * Tucks the FAB away while a full WhatsApp CTA is on screen — the floating
    * button is only an affordance for when no WhatsApp button is reachable.
-   * Targets carry [data-whatsapp-cta] (hero, final CTA, cases, contact row).
+   * Targets carry [data-whatsapp-cta]: the home hero and the footer (whole areas, since
+   * Sprint 11 F8 sent the hero/cases/final buttons to /agendar) and the contact row.
    *
    * Runs after the sections are parsed, so the initial state is decided
    * synchronously (no visible flash), then IntersectionObserver takes over.

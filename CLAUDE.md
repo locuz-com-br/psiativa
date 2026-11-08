@@ -123,8 +123,9 @@ visitor** — by design:
 
 ## ⚠️ The WhatsApp FAB tucks itself away near a real CTA
 
-`WhatsAppFab.astro` hides while **any** `[data-whatsapp-cta]` is on screen (hero, final CTA, cases, the contact
-row, `obrigado`), because the floating button only exists for when no WhatsApp button is reachable. Mark a new
+`WhatsAppFab.astro` hides while **any** `[data-whatsapp-cta]` is on screen (the whole hero section on `/` and
+`/indicacao`, the whole footer, the contact row, `obrigado`, `/agendar`). Since Sprint 11 F8 the hero, cases and final
+CTA buttons go to `/agendar`, so the hero and the footer are marked as AREAS. It hides there because the floating button only exists for when no WhatsApp button is reachable. Mark a new
 WhatsApp CTA with `data-whatsapp-cta` and it joins the rule; the state is decided synchronously before first
 paint (no flash), then by `IntersectionObserver`. It **fails open** — no observer, or no marked CTA, leaves the
 FAB visible. This is separate from `hideWhatsAppFab`, which removes the FAB from a page entirely (the podcast

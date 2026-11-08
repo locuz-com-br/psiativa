@@ -227,7 +227,7 @@ export const SITE_CONFIG = {
     endpoint: import.meta.env.PUBLIC_AGENDA_ENDPOINT || "",
     // Must equal inbox.settings `gravacao_aviso_versao`, or WF-H answers `invalido`.
     // Bump both together when the consent text in translations.json (`agendar.form.consent`) changes.
-    consentVersion: "pendente",
+    consentVersion: "2026-11-08",
   },
 
   // ── Tool Page Slugs ────────────────────────

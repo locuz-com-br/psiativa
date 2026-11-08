@@ -81,3 +81,20 @@ test("fix 6.1: phone and e-mail input rules", async () => {
     assert.ok(!validEmailStrict(bad), bad);
 });
 
+
+test("waHref: each stop state pre-fills its own text; the booked time when known", async () => {
+  const { waHref } = await import("../../src/lib/agendar.ts");
+  const base = "https://wa.me/5521966442965?text=Ol%C3%A1%21%20Vim%20pelo%20site";
+  const text = (k: string, s = "") => new URL(waHref(base, k, s)).searchParams.get("text") || "";
+  assert.equal(new URL(waHref(base, "vazio")).pathname, "/5521966442965");
+  assert.match(text("ja_agendado", "terça, 10/11 às 14h"), /Já agendei um bate-papo para terça, 10\/11 às 14h/);
+  assert.match(text("ja_agendado"), /Já tenho um bate-papo agendado/);
+  assert.match(text("ja_agendado_ip", "x"), /Já tenho um bate-papo agendado/);
+  assert.match(text("link_vencido"), /venceu/);
+  assert.match(text("desligado"), /não consegui/);
+  for (const k of ["ja_agendado", "ja_agendado_ip", "vazio", "link_vencido", "link_invalido", "whatsapp_invalido", "limite", "desligado", "indisponivel"]) {
+    const t = text(k, k === "ja_agendado" ? "terça às 14h" : "");
+    assert.ok(!/[–—]|reuni|Vim pelo site/i.test(t), `${k}: ${t}`);
+  }
+  assert.equal(waHref("not a url", "vazio"), "not a url");
+});

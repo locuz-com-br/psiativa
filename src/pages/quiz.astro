@@ -6,7 +6,6 @@
 // cada resultado fala com um ICP só. SEM oferta em lugar nenhum.
 // Plano: plans/quiz-diagnostico/plan.md
 // ─────────────────────────────────────────────────────────────
-import { SITE_CONFIG } from "../config/site.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ParticleField from "../components/ui/ParticleField.astro";
 import QuizIsland from "../components/quiz/QuizIsland.tsx";
@@ -67,9 +66,6 @@ const schema = [
   ]),
 ];
 
-const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
-  "Olá! Fiz o diagnóstico de 2 minutos no site da PsiAtiva e gostaria de conversar sobre o que apareceu.",
-)}`;
 ---
 
 <BaseLayout
@@ -183,7 +179,7 @@ const whatsappLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=$
     <div class="container quiz-cta-inner">
       <h2 data-i18n="quiz.cta.title">Primeiro passo: uma conversa. Só isso.</h2>
       <p data-i18n="quiz.cta.desc">Sem compromisso. A gente olha o seu cenário e te diz, com honestidade, se um processo faz sentido agora.</p>
-      <a href={whatsappLink} target="_blank" rel="noopener" class="btn-primary-light">
+      <a href="/agendar/" class="btn-primary-light">
         <span data-i18n="quiz.cta.btn">AGENDAR DIAGNÓSTICO</span>
         <span class="icon-circle">
           <svg

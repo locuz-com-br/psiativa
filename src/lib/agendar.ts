@@ -95,3 +95,26 @@ export function slotLabel(iso: string, lang: Lang): string {
 export function fill(template: string, vars: Record<string, string> = {}): string {
   return template.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? "");
 }
+
+/** The text each stop state pre-fills in the WhatsApp button, so the team reads the context first.
+ *  PT always: it is what the team receives (Renata answers it), not page copy. No dashes, never "reunião". */
+const WA_TEXT: Record<string, string> = {
+  ja_agendado: "Olá! Já tenho um bate-papo agendado pelo site e queria falar sobre ele.",
+  ja_agendado_ip: "Olá! Já tenho um bate-papo agendado pelo site e queria falar sobre ele.",
+  vazio: "Olá! Quis agendar um bate-papo pelo site, mas não achei horário livre. Podemos combinar por aqui?",
+  link_vencido: "Olá! Recebi um link de agendamento, mas ele venceu. Pode me mandar um novo?",
+  link_invalido: "Olá! Recebi um link de agendamento, mas ele não abriu. Pode me mandar um novo?",
+  whatsapp_invalido: "Olá! Tentei agendar um bate-papo pelo site, mas meu número não foi aceito. Podemos combinar por aqui?",
+};
+const WA_FALLBACK = "Olá! Tentei agendar um bate-papo pelo site e não consegui. Podemos combinar por aqui?";
+
+/** `base` is the site's wa.me link; only its `text` changes. `slotPt` (a PT slot label) names the booked time. */
+export function waHref(base: string, key: string, slotPt = ""): string {
+  let url: URL;
+  try { url = new URL(base); } catch { return base; }
+  const text = key === "ja_agendado" && slotPt
+    ? `Olá! Já agendei um bate-papo para ${slotPt} pelo site e queria falar sobre esse horário.`
+    : WA_TEXT[key] || WA_FALLBACK;
+  url.searchParams.set("text", text);
+  return url.toString();
+}

@@ -174,7 +174,7 @@ const consent = SITE_CONFIG.agenda.consentVersion;
 <script>
   import {
     WHATSAPP_STATES, dayLabel, fill, hourLabel, monthLabel, weekdayInitials, normalizePhone, parseToken, refusalKey, slotLabel,
-    validEmail, validName, type Lang,
+    validEmail, validName, waHref, type Lang,
   } from "../../lib/agendar";
   import { afterPress, maskPhone, sanitizeEmail } from "../../lib/fields";
 
@@ -281,6 +281,8 @@ const consent = SITE_CONFIG.agenda.consentVersion;
   function step(name: "cal" | "form" | "stop" | "done") {
     root.dataset.step = name;
   }
+  // The site's wa.me link as rendered; each stop state only swaps its pre-filled text.
+  const waBase = $("ag-wa").getAttribute("href") || "";
   function stop(key: string, answer?: Answer) {
     status(null);
     step("stop");
@@ -295,12 +297,14 @@ const consent = SITE_CONFIG.agenda.consentVersion;
       say($("ag-lead"), "st.ja_agendado_memo");
       $("ag-wa").hidden = false;
       say($("ag-wa"), "wa");
+      $("ag-wa").setAttribute("href", waHref(waBase, key, slotLabel(booked, "pt")));
     } else {
       delete title.dataset.agSlot;
       say(title, `st.${key}_title`);
       say($("ag-lead"), `st.${key}`);
       $("ag-wa").hidden = !WHATSAPP_STATES.has(key);
       say($("ag-wa"), "wa");
+      $("ag-wa").setAttribute("href", waHref(waBase, key));
     }
     $("ag-grid").hidden = true;
     $("ag-form").hidden = true;
@@ -322,7 +326,11 @@ const consent = SITE_CONFIG.agenda.consentVersion;
 
   // ── Header by mode ─────────────────────────────────────────────────────
   function header(answer: Answer) {
-    if (state.modo === "publico") return;
+    // Public visit from the solo-ICP page (/calculadora links ?perfil=consultorio): consultório copy, same flow.
+    if (state.modo === "publico") {
+      if (new URLSearchParams(location.search).get("perfil") === "consultorio") say($("ag-lead"), "pub.lead_consultorio");
+      return;
+    }
     const icp = answer.icp === "consultorio" ? "consultorio" : "clinica";
     say($("ag-title"), answer.nome ? "priv.title" : "priv.title_anon", { nome: String(answer.nome || "") });
     say($("ag-lead"), `priv.lead_${icp}`);

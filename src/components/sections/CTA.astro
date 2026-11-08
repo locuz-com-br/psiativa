@@ -1,6 +1,5 @@
 ---
 // CTA Final — Clean centered section (PsiAtiva design system)
-import LINKS from "../../constants/links";
 ---
 
 <section class="cta-final section" id="cta">
@@ -16,8 +15,8 @@ import LINKS from "../../constants/links";
         >
       </h2>
       <div class="cta-final-actions">
-        <a href={LINKS.socials.whatsapp} target="_blank" rel="noopener" class="btn-primary-dark" data-whatsapp-cta>
-          <span data-i18n="cta.btn">Agendar Diagnóstico pelo WhatsApp</span>
+        <a href="/agendar/" class="btn-primary-dark">
+          <span data-i18n="cta.btn">Agendar Diagnóstico</span>
           <span class="icon-circle">
             <svg
               width="14"
@@ -25,27 +24,6 @@ import LINKS from "../../constants/links";
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </span>
-        </a>
-        <a href="#contato" class="btn-secondary-light">
-          <span data-i18n="cta.btn_secondary">Preencher Formulário</span>
-          <span
-            class="icon-circle"
-            style="width:40px;height:40px;background:var(--primary);border-radius:100%;display:flex;align-items:center;justify-content:center;"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--accent)"
               stroke-width="2.5"
               stroke-linecap="round"
               stroke-linejoin="round"

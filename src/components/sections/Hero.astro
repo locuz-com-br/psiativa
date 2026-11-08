@@ -1,13 +1,12 @@
 ---
 // Hero section — dark teal gradient with typewriter animation (PsiAtiva)
 import { SITE_CONFIG } from "../../config/site.config";
-import LINKS from "../../constants/links";
 import ParticleField from "../ui/ParticleField.astro";
 
 const typewriterWords = SITE_CONFIG.hero.typewriterWords;
 ---
 
-<section class="hero" id="inicio">
+<section class="hero" id="inicio" data-whatsapp-cta>
   <!-- Background: CSS gradient (no image) + decorative particle field (JS) -->
   <div class="hero-background">
     <div class="hero-bg-gradient"></div>
@@ -94,7 +93,7 @@ const typewriterWords = SITE_CONFIG.hero.typewriterWords;
 
     <!-- CTA Button -->
     <div class="hero-actions animate-fade-in-up delay-300">
-      <a href={LINKS.socials.whatsapp} target="_blank" rel="noopener" class="btn-primary-light" data-whatsapp-cta>
+      <a href="/agendar/" class="btn-primary-light">
         <span data-i18n="hero.cta_primary">AGENDAR DIAGNÓSTICO</span>
         <span class="icon-circle">
           <svg
