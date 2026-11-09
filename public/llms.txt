@@ -1,0 +1,25 @@
+# PsiAtiva
+
+> Processo de captação para clínicas de psicologia, do primeiro contato à sessão confirmada. Agenda previsível, menos faltas e um processo estruturado que respeita sua identidade clínica.
+
+## Páginas principais
+
+- [Início](https://psiativa.com.br/): o processo de captação para clínicas e consultórios de psicologia
+- [Análise de site para psicólogo](https://psiativa.com.br/analise-de-site-para-psicologo/): análise da presença digital do consultório
+- [Calculadora](https://psiativa.com.br/calculadora/)
+- [Quiz](https://psiativa.com.br/quiz/)
+
+## Conteúdo
+
+- [Blog](https://psiativa.com.br/blog/): artigos para psicólogas e clínicas
+- [Agenda previsível para psicóloga autônoma](https://psiativa.com.br/blog/agenda-previsivel-psicologa-autonoma/)
+- [Agenda vazia](https://psiativa.com.br/blog/agenda-vazia-psicologa/)
+- [Aparecer no Google](https://psiativa.com.br/blog/aparecer-no-google-psicologa/)
+- [WhatsApp no consultório solo](https://psiativa.com.br/blog/whatsapp-consultorio-solo/)
+- [Podcast](https://psiativa.com.br/podcast/): episódios
+
+## Opcional
+
+- [Privacidade](https://psiativa.com.br/privacidade/)
+- [Termos](https://psiativa.com.br/termos/)
+- [Cookies](https://psiativa.com.br/cookies/)
