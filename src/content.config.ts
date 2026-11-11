@@ -16,6 +16,8 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     seoTitle: z.string(),
+    /** Visible H1 when it differs from `title` (approved copy). */
+    h1: z.string().optional(),
     description: z.string(),
     excerpt: z.string(),
     publishedAt: z.coerce.date(),

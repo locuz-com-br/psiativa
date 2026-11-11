@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ParticleField from "../../components/ui/ParticleField.astro";
 import { articleSchema, breadcrumbSchema, faqPageSchema } from "../../lib/schema";
 
 export async function getStaticPaths() {
@@ -48,13 +49,19 @@ const schemas = [
 >
   <article class="blog-post">
     <header class="post-header">
+      <!-- Same look as the home hero: teal gradient + particle field -->
+      <div class="post-header-bg">
+        <div class="post-header-gradient"></div>
+        <ParticleField count={120} opacity={0.45} />
+      </div>
       <div class="container post-header-inner">
         <a class="back-link" href="/blog/">Blog PsiAtiva</a>
         <div class="post-meta">
-          <span>{post.data.icp}</span>
-          <span>{post.data.cluster}</span>
-          <span>{published}</span>
+          <span class="tag-pill">{post.data.icp}</span>
+          <span class="tag-pill">{post.data.cluster}</span>
+          <span class="tag-pill">{published}</span>
         </div>
+        <h1 class="post-title">{post.data.h1 ?? post.data.title}</h1>
       </div>
     </header>
 
@@ -70,19 +77,39 @@ const schemas = [
   }
 
   .post-header {
-    padding: 8.5rem 0 2rem;
-    background: var(--background-subtle);
-    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+    /* Tuck under the floating nav like the home hero (its top: -72px) */
+    margin-top: -72px;
+    padding: calc(9rem + 72px) 0 4.5rem;
+    text-align: center;
+  }
+
+  .post-header-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .post-header-gradient {
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-hero);
   }
 
   .post-header-inner {
-    max-width: 880px;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
   }
 
   .back-link {
     display: inline-flex;
-    margin-bottom: 1.25rem;
-    color: var(--secondary);
+    color: var(--light-blue);
     font-family: var(--font-ui);
     font-weight: 700;
   }
@@ -90,11 +117,36 @@ const schemas = [
   .post-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.65rem;
-    color: var(--text-secondary);
+    justify-content: center;
+    gap: 8px;
+  }
+
+  /* Same pill as the home hero's tags */
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    min-height: 32px;
+    border-radius: var(--radius-tag);
+    background: var(--secondary-40);
+    backdrop-filter: blur(10.5px);
+    -webkit-backdrop-filter: blur(10.5px);
     font-family: var(--font-ui);
-    font-size: 0.9rem;
     font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.56px;
+    text-transform: uppercase;
+    color: var(--light-blue);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-hero-white);
+    margin: 0;
   }
 
   .post-body {
