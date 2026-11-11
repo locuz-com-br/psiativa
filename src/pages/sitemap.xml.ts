@@ -13,6 +13,7 @@ export async function GET() {
     { loc: "/calculadora/", lastmod: new Date() },
     { loc: "/quiz/", lastmod: new Date() },
     { loc: "/analise-de-site-para-psicologo/", lastmod: new Date() },
+    { loc: "/servico-de-captacao-para-clinicas-de-psicologia/", lastmod: new Date("2026-11-10") },
     { loc: "/podcast/", lastmod: new Date() },
     ...pages.map((page) => ({
       loc: `/${page.id}/`,

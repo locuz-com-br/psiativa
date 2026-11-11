@@ -24,6 +24,11 @@ const blog = defineCollection({
     icp: z.string(),
     gapStage: z.string(),
     draft: z.boolean().default(false),
+    /** Revisora técnica (psicóloga com CRP). Vira `reviewedBy` no schema do artigo. */
+    reviewedBy: z.object({
+      name: z.string(),
+      crp: z.string(),
+    }).optional(),
     faqs: z.array(z.object({
       question: z.string(),
       answer: z.string(),

@@ -1,0 +1,229 @@
+---
+// ─────────────────────────────────────────────────────────────
+// /servico-de-captacao-para-clinicas-de-psicologia — página de serviço (Sprint 50)
+// ICP: Perfil A (clínica com equipe e recepção). Copy TRAVADA: aprovada pelos
+// gates (cfp/voz/oferta), pelo revisor Opus, pelo dono e pela revisora CRP.
+// ⛔ Não reescreva frases. ⛔ SEM `offers` / `price` no schema.
+// A FAQ visível e o FAQPage saem do MESMO array `faqs`.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  breadcrumbSchema,
+  faqPageSchema,
+  organizationSchema,
+  reviewerPersonSchema,
+} from "../lib/schema";
+import { SITE_CONFIG } from "../config/site.config";
+
+const title = "Serviço de captação para clínicas de psicologia";
+const description =
+  "A PsiAtiva organiza a captação da clínica de psicologia, do primeiro contato no WhatsApp à sessão confirmada, dentro das regras do CFP.";
+const pagePath = "/servico-de-captacao-para-clinicas-de-psicologia/";
+const pageUrl = new URL(pagePath, SITE_CONFIG.url).toString();
+const siteRoot = new URL("/", SITE_CONFIG.url).toString();
+const cfpCodigoUrl = "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo-de-etica-psicologia.pdf";
+const resumo =
+  "A PsiAtiva é uma consultoria brasileira de captação de pacientes para clínicas de psicologia com equipe e recepção. Ela organiza o caminho do primeiro contato até a sessão confirmada: presença no Google, primeira resposta no WhatsApp, acompanhamento e confirmação de consultas. O método se chama GAP e segue o Código de Ética e as normas do CFP.";
+
+const faqs = [
+  {
+    question: "A PsiAtiva atende clínicas de psicologia?",
+    answer:
+      "Sim. A PsiAtiva atende clínicas de psicologia com equipe e recepção, em todo o Brasil. Para quem atende sozinha, sem recepção, o caminho é outro.",
+  },
+  {
+    question: "Vocês só cuidam de anúncios?",
+    answer:
+      "Não. Anúncio pode fazer parte, conforme a clínica. O trabalho está no que acontece depois que a pessoa escreve: a primeira resposta da recepção, o acompanhamento e a confirmação da consulta.",
+  },
+  {
+    question: "Captação de pacientes fere a ética do CFP?",
+    answer:
+      "Não, quando é feita com cuidado. Organizar o acompanhamento de quem pediu atendimento é cuidado, não pressão. O Código de Ética do Psicólogo veda prometer resultado, fazer sensacionalismo e expor informação sigilosa. É ele que orienta a divulgação, e cada etapa do processo segue essas regras. Depoimento de paciente a PsiAtiva não usa.",
+  },
+  {
+    question: "Minha recepção vai dar conta?",
+    answer:
+      "A proposta é organizar o que ela já faz, não somar tarefa. A recepção recebe um roteiro para a primeira resposta e é treinada junto com a gente.",
+  },
+  {
+    question: "A PsiAtiva cuida do Google da clínica?",
+    answer:
+      "Sim. Isso inclui o Perfil da Empresa no Google e o site da clínica, como parte do caminho até a primeira mensagem.",
+  },
+  {
+    question: "Como começa?",
+    answer:
+      "Com uma conversa sobre a sua clínica, para entender como o contato chega hoje e onde ele se perde. Se preferir um primeiro passo menor, a análise do site mostra como a clínica aparece.",
+  },
+];
+
+const schema = [
+  organizationSchema(),
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: `${title} | PsiAtiva`,
+    description,
+    inLanguage: "pt-BR",
+    isPartOf: { "@id": `${siteRoot}#website` },
+    breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+    mainEntity: { "@id": `${pageUrl}#service` },
+    reviewedBy: reviewerPersonSchema({ name: "Loivani Venturin Körner", crp: "CRP 12/19699" }),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name: "Serviço de captação de pacientes para clínicas de psicologia",
+    serviceType: "Captação de pacientes para clínicas de psicologia",
+    description: resumo,
+    provider: { "@id": `${siteRoot}#organization` },
+    areaServed: "BR",
+    audience: {
+      "@type": "BusinessAudience",
+      audienceType: "Clínicas de psicologia com equipe e recepção",
+    },
+    url: pageUrl,
+  },
+  { ...faqPageSchema(faqs), "@id": `${pageUrl}#faq` },
+  {
+    ...breadcrumbSchema([
+      { name: "Início", path: "/" },
+      { name: "Serviço de captação para clínicas", path: pagePath },
+    ]),
+    "@id": `${pageUrl}#breadcrumb`,
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath={pagePath} schema={schema}>
+  <article class="svc">
+    <header class="svc-hero">
+      <div class="container svc-prose">
+        <nav class="svc-crumbs" aria-label="Breadcrumb">
+          <a href="/">Início</a> <span aria-hidden="true">›</span> <span>Serviço de captação para clínicas</span>
+        </nav>
+        <h1>Serviço de captação de pacientes para clínicas de psicologia</h1>
+        <p class="svc-lead">Sua clínica recebe contatos. O problema é quantos chegam até a sessão confirmada.</p>
+        <blockquote class="svc-review"><p>Revisão: Loivani Venturin Körner, psicóloga, CRP 12/19699.</p></blockquote>
+      </div>
+    </header>
+
+    <div class="container svc-prose svc-body">
+      <h2>Resumo</h2>
+      <p>{resumo}</p>
+
+      <h2>Quem oferece serviço de captação para clínicas de psicologia?</h2>
+      <p>Existem dois tipos de fornecedor. O primeiro cuida da chegada do contato: anúncios, site e posição no Google. O segundo cuida do processo: o que acontece depois que a pessoa escreve para a clínica.</p>
+      <p>A PsiAtiva é do segundo tipo. Ela trabalha com a clínica que já tem demanda, por indicação ou Instagram, e organiza o caminho até a sessão confirmada. Anúncio pode ou não fazer parte, conforme a realidade de cada clínica.</p>
+      <p>Se você quer entender o problema antes de pensar em serviço, comece pelo <a href="/">processo de captação para clínicas de psicologia</a>.</p>
+
+      <h2>Por que a clínica perde paciente entre o contato e a sessão?</h2>
+      <p>Semana morta de novo. Recepção que apaga incêndio o dia todo. Mensagem no WhatsApp que fica sem resposta à noite. Falta na primeira avaliação.</p>
+      <p>Esses sinais têm uma causa comum: o caminho entre a primeira mensagem e a sessão confirmada não tem dono nem rotina. O paciente que procurou a clínica esperou, não recebeu retorno claro e escolheu outro lugar. A qualidade do atendimento não entrou na conta.</p>
+      <p>Quando a agenda depende só de indicação, qualquer mês em que a fonte seca vira um mês ruim. Organizar esse caminho tira a agenda do improviso.</p>
+
+      <h2>O que a PsiAtiva entrega para a clínica?</h2>
+      <h3>Diagnóstico do caminho atual</h3>
+      <p>Um mapa de como o contato chega hoje, quem responde, em quanto tempo e em que ponto ele some.</p>
+      <h3>Presença no Google e Perfil da Empresa</h3>
+      <p>O Perfil da Empresa e o site da clínica ajustados para que quem procura encontre informação clara e consiga escrever.</p>
+      <h3>Roteiro da primeira resposta para a recepção</h3>
+      <p>Um roteiro para a primeira mensagem, em tom de acolhimento, com logística e sem perguntar sintoma ou diagnóstico.</p>
+      <h3>Rotina de acompanhamento e confirmação</h3>
+      <p>Quem retorna, quando retorna e como a consulta é confirmada, sem soar como cobrança.</p>
+      <h3>Acompanhamento dos números que a clínica já vê</h3>
+      <p>A agenda da semana, o comparecimento e o tempo de resposta, olhados juntos com a clínica.</p>
+
+      <h2>Como funciona o processo, do primeiro contato à sessão confirmada?</h2>
+      <p>O método se chama GAP, de Gerador de Agenda Previsível. Ele segue o caminho do paciente, em cinco passos:</p>
+      <ol>
+        <li><strong>Diagnóstico.</strong> Entender como o contato chega e onde ele se perde.</li>
+        <li><strong>Presença.</strong> Deixar a clínica clara e fácil de encontrar no Google.</li>
+        <li><strong>Primeira resposta.</strong> Dar à recepção um roteiro de acolhimento para a primeira mensagem.</li>
+        <li><strong>Acompanhamento e confirmação.</strong> Criar a rotina de retorno e de confirmação de consulta.</li>
+        <li><strong>Ajuste.</strong> Olhar os números da clínica e corrigir o que ainda trava o caminho.</li>
+      </ol>
+      <p>O problema e a lógica por trás dele estão explicados em <a href="/">processo de captação para clínicas de psicologia</a>.</p>
+
+      <h2>Como a captação de pacientes funciona dentro das regras do CFP?</h2>
+      <p>A captação de pacientes de uma clínica de psicologia é permitida, desde que a divulgação respeite o Código de Ética Profissional do Psicólogo, em especial o artigo que trata da publicidade. Na prática, isso significa informar o nome e o número de CRP do profissional, sem prometer resultado, sem sensacionalismo, sem se colocar acima de colegas e sem expor informação sigilosa. Por isso a PsiAtiva não usa depoimento de paciente. Na PsiAtiva, cada etapa do GAP segue essas regras. O diagnóstico olha para o processo da clínica, não para o paciente. A primeira resposta da recepção trata de logística, nunca de sintoma ou diagnóstico. O acompanhamento e a confirmação são lembretes de cuidado, sem pressão. E a divulgação mostra quem atende e como funciona. Para conferir o texto original do Código de Ética, <a href={cfpCodigoUrl} target="_blank" rel="noopener noreferrer">consulte o site do CFP</a>.</p>
+      <p>Leia também: <a href="/blog/divulgar-clinica-de-psicologia-regras-do-cfp/">o que o CFP permite na divulgação da clínica</a>.</p>
+
+      <h2>Para qual clínica a PsiAtiva faz sentido?</h2>
+      <p>Para a clínica de psicologia com equipe, em geral de 2 a 15 profissionais, que tem recepção ou alguém que cuida do primeiro contato. Ela já tem demanda, por indicação ou Instagram, e sente que a agenda oscila mais do que deveria.</p>
+      <p>Para quem atende sozinha, sem recepção, esta página não é o caminho.</p>
+
+      <h2>O que a PsiAtiva não faz</h2>
+      <ul>
+        <li>Não usa depoimento de paciente.</li>
+        <li>Não publica antes e depois.</li>
+        <li>Não pergunta sintoma nem diagnóstico no primeiro contato.</li>
+        <li>Não troca a recepção da clínica por um software.</li>
+      </ul>
+      <p>A PsiAtiva organiza o caminho com a equipe que você já tem.</p>
+    </div>
+
+    <section class="svc-faq">
+      <div class="container svc-prose">
+        <h2>Perguntas frequentes</h2>
+        {
+          faqs.map((f) => (
+            <details class="svc-faq-item">
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="svc-cta">
+      <div class="container svc-prose svc-cta-inner">
+        <h2>Próximo passo</h2>
+        <p>Primeiro passo: uma conversa. Só isso.</p>
+        <div class="svc-cta-btns">
+          <a class="svc-btn svc-btn-primary" href="/agendar">Agende uma conversa sobre a sua clínica</a>
+          <a class="svc-btn svc-btn-secondary" href="/analise-de-site-para-psicologo/">Veja como está o site da clínica</a>
+        </div>
+      </div>
+    </section>
+
+    <p class="container svc-prose svc-legal">PsiAtiva é uma marca da Locuz. Zoku Web Design Ltda · CNPJ 51.978.533/0001-83</p>
+  </article>
+</BaseLayout>
+
+<style>
+  .svc-hero { padding: 8.5rem 0 2rem; background: var(--background-subtle); border-bottom: 1px solid var(--color-border); }
+  .svc-prose { max-width: 820px; }
+  .svc-crumbs { margin-bottom: 1.25rem; font-size: 0.9rem; color: var(--text-secondary); }
+  .svc-crumbs a { color: var(--secondary); font-weight: 700; }
+  .svc h1 { margin: 0 0 1rem; color: var(--text-heading); font-size: clamp(2.2rem, 5.5vw, 3.6rem); line-height: 1.12; }
+  .svc-lead { font-size: 1.2rem; line-height: 1.6; color: var(--text-heading); }
+  .svc-review { margin: 1.5rem 0 0; padding: 0.9rem 1.25rem; border-left: 4px solid var(--accent); background: var(--background); }
+  .svc-review p { margin: 0; font-weight: 700; color: var(--text-heading); }
+  .svc-body { padding-top: 2rem; padding-bottom: 3rem; }
+  .svc h2 { margin: 2.75rem 0 1rem; color: var(--text-heading); font-size: clamp(1.6rem, 3.5vw, 2.1rem); line-height: 1.2; }
+  .svc h3 { margin: 1.75rem 0 0.5rem; color: var(--text-heading-dark); font-size: 1.25rem; }
+  .svc-body p, .svc-body li, .svc-faq p { color: var(--text-secondary); font-size: 1.06rem; line-height: 1.75; }
+  .svc-body p { margin-bottom: 1.15rem; }
+  .svc-body ul, .svc-body ol { margin: 0 0 1.5rem 1.25rem; }
+  .svc-body li { margin-bottom: 0.6rem; }
+  .svc-body a { color: var(--secondary); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .svc-faq { padding: 3rem 0; background: var(--background-subtle); }
+  .svc-faq h2 { margin-top: 0; }
+  .svc-faq-item { border-bottom: 1px solid var(--color-border); padding: 0.9rem 0; }
+  .svc-faq-item summary { cursor: pointer; font-weight: 600; color: var(--text-heading); }
+  .svc-faq-item p { margin: 0.6rem 0 0; }
+  .svc-cta { padding: 3.5rem 0; }
+  .svc-cta-inner { text-align: center; }
+  .svc-cta h2 { margin-top: 0; }
+  .svc-cta p { margin: 0 0 1.5rem; font-size: 1.1rem; color: var(--text-primary); }
+  .svc-cta-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .svc-btn { display: inline-block; padding: 0.85rem 1.5rem; border-radius: 10px; font-weight: 600; text-decoration: none; }
+  .svc-btn-primary { background: var(--primary); color: #fff; }
+  .svc-btn-secondary { border: 1px solid var(--primary); color: var(--primary); }
+  .svc-legal { padding-bottom: 2rem; font-size: 0.8rem; color: var(--text-secondary); text-align: center; }
+</style>

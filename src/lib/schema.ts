@@ -17,6 +17,35 @@ interface ArticleSchemaInput {
   publishedAt: Date | string;
   updatedAt?: Date | string;
   image?: string;
+  reviewedBy?: ReviewerInput;
+}
+
+export interface ReviewerInput {
+  name: string;
+  /** Ex.: "CRP 12/19699". */
+  crp: string;
+}
+
+// Revisora técnica (psicóloga). Sem `worksFor`: ela revisa, não é da equipe.
+export function reviewerPersonSchema(input: ReviewerInput) {
+  const region = input.crp.match(/CRP\s*(\d+)\//)?.[1];
+  return {
+    "@type": "Person",
+    name: input.name,
+    jobTitle: "Psicóloga",
+    identifier: input.crp,
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Registro profissional",
+      name: input.crp,
+      recognizedBy: {
+        "@type": "Organization",
+        name: region
+          ? `Conselho Regional de Psicologia da ${Number(region)}ª Região`
+          : "Conselho Regional de Psicologia",
+      },
+    },
+  };
 }
 
 const siteUrl = SITE_CONFIG.url;
@@ -57,6 +86,7 @@ export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": absoluteUrl("/#website"),
     name: SITE_CONFIG.name,
     url: siteUrl,
     inLanguage: SITE_CONFIG.defaultLocale,
@@ -110,11 +140,13 @@ export function articleSchema(input: ArticleSchemaInput) {
     dateModified: isoDate(input.updatedAt ?? input.publishedAt),
     author: {
       "@type": "Organization",
+      "@id": absoluteUrl("/#organization"),
       name: SITE_CONFIG.name,
       url: siteUrl,
     },
     publisher: {
       "@type": "Organization",
+      "@id": absoluteUrl("/#organization"),
       name: SITE_CONFIG.name,
       logo: {
         "@type": "ImageObject",
@@ -125,6 +157,7 @@ export function articleSchema(input: ArticleSchemaInput) {
       "@type": "WebPage",
       "@id": absoluteUrl(input.path),
     },
+    ...(input.reviewedBy ? { reviewedBy: reviewerPersonSchema(input.reviewedBy) } : {}),
   };
 }
 
