@@ -25,6 +25,8 @@ const blog = defineCollection({
     cluster: z.string(),
     icp: z.string(),
     gapStage: z.string(),
+    /** Linha de abertura renderizada no hero, abaixo do H1. */
+    lead: z.string().optional(),
     draft: z.boolean().default(false),
     /** Revisora técnica (psicóloga com CRP). Vira `reviewedBy` no schema do artigo. */
     reviewedBy: z.object({

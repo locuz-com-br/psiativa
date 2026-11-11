@@ -59,6 +59,10 @@ const schemas = [
           <a href="/">Início</a> <span aria-hidden="true">›</span> <a href="/blog/">Blog</a>
         </nav>
         <h1 class="post-title">{post.data.h1 ?? post.data.title}</h1>
+        {post.data.lead && <p class="post-lead">{post.data.lead}</p>}
+        {post.data.reviewedBy && (
+          <blockquote class="post-review"><p>Revisão: {post.data.reviewedBy.name}, psicóloga, {post.data.reviewedBy.crp}.</p></blockquote>
+        )}
         <p class="post-date">{published}</p>
       </div>
     </header>
@@ -116,6 +120,26 @@ const schemas = [
     margin: 0 0 1rem;
     font-size: clamp(2.2rem, 5.5vw, 3.6rem);
     line-height: 1.12;
+    color: var(--text-hero-white);
+  }
+
+  .post-lead {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-hero-white);
+  }
+
+  .post-review {
+    margin: 1.5rem 0 1rem;
+    padding: 0.9rem 1.25rem;
+    border-left: 4px solid var(--light-blue);
+    background: var(--secondary-40);
+  }
+
+  .post-review p {
+    margin: 0;
+    font-weight: 700;
     color: var(--text-hero-white);
   }
 
