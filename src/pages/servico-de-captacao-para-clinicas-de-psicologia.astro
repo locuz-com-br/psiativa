@@ -1,4 +1,5 @@
 ---
+import ParticleField from "../components/ui/ParticleField.astro";
 // ─────────────────────────────────────────────────────────────
 // /servico-de-captacao-para-clinicas-de-psicologia — página de serviço (Sprint 50)
 // ICP: Perfil A (clínica com equipe e recepção). Copy TRAVADA: aprovada pelos
@@ -101,7 +102,11 @@ const schema = [
 <BaseLayout title={title} description={description} canonicalPath={pagePath} schema={schema}>
   <article class="svc">
     <header class="svc-hero">
-      <div class="container svc-prose">
+      <div class="svc-hero-bg">
+        <div class="svc-hero-gradient"></div>
+        <ParticleField count={120} opacity={0.45} />
+      </div>
+      <div class="container svc-prose svc-hero-inner">
         <nav class="svc-crumbs" aria-label="Breadcrumb">
           <a href="/">Início</a> <span aria-hidden="true">›</span> <span>Serviço de captação para clínicas</span>
         </nav>
@@ -196,7 +201,14 @@ const schema = [
 </BaseLayout>
 
 <style>
-  .svc-hero { padding: 8.5rem 0 2rem; background: var(--background-subtle); border-bottom: 1px solid var(--color-border); }
+  .svc-hero { position: relative; overflow: hidden; margin-top: -72px; padding: calc(8.5rem + 72px) 0 3rem; }
+  .svc-hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .svc-hero-gradient { width: 100%; height: 100%; background: var(--gradient-hero); }
+  .svc-hero-inner { position: relative; z-index: 1; }
+  .svc-hero .svc-crumbs, .svc-hero .svc-crumbs a { color: var(--light-blue); }
+  .svc .svc-hero h1, .svc-hero .svc-lead { color: var(--text-hero-white); }
+  .svc-hero .svc-review { background: var(--secondary-40); border-left-color: var(--light-blue); }
+  .svc-hero .svc-review p { color: var(--text-hero-white); }
   .svc-prose { max-width: 820px; }
   .svc-crumbs { margin-bottom: 1.25rem; font-size: 0.9rem; color: var(--text-secondary); }
   .svc-crumbs a { color: var(--secondary); font-weight: 700; }

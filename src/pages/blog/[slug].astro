@@ -55,13 +55,11 @@ const schemas = [
         <ParticleField count={120} opacity={0.45} />
       </div>
       <div class="container post-header-inner">
-        <a class="back-link" href="/blog/">Blog PsiAtiva</a>
-        <div class="post-meta">
-          <span class="tag-pill">{post.data.icp}</span>
-          <span class="tag-pill">{post.data.cluster}</span>
-          <span class="tag-pill">{published}</span>
-        </div>
+        <nav class="post-crumbs" aria-label="Breadcrumb">
+          <a href="/">Início</a> <span aria-hidden="true">›</span> <a href="/blog/">Blog</a>
+        </nav>
         <h1 class="post-title">{post.data.h1 ?? post.data.title}</h1>
+        <p class="post-date">{published}</p>
       </div>
     </header>
 
@@ -81,8 +79,7 @@ const schemas = [
     overflow: hidden;
     /* Tuck under the floating nav like the home hero (its top: -72px) */
     margin-top: -72px;
-    padding: calc(9rem + 72px) 0 4.5rem;
-    text-align: center;
+    padding: calc(8.5rem + 72px) 0 3rem;
   }
 
   .post-header-bg {
@@ -97,56 +94,35 @@ const schemas = [
     background: var(--gradient-hero);
   }
 
+  /* Text style of the service page hero, colors of the home hero */
   .post-header-inner {
     position: relative;
     z-index: 1;
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
+    max-width: 820px;
   }
 
-  .back-link {
-    display: inline-flex;
+  .post-crumbs {
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
     color: var(--light-blue);
-    font-family: var(--font-ui);
+  }
+
+  .post-crumbs a {
+    color: var(--light-blue);
     font-weight: 700;
   }
 
-  .post-meta {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  /* Same pill as the home hero's tags */
-  .tag-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 14px;
-    min-height: 32px;
-    border-radius: var(--radius-tag);
-    background: var(--secondary-40);
-    backdrop-filter: blur(10.5px);
-    -webkit-backdrop-filter: blur(10.5px);
-    font-family: var(--font-ui);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.56px;
-    text-transform: uppercase;
-    color: var(--light-blue);
-  }
-
   .post-title {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(2.25rem, 5vw, 3.5rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    line-height: 1.12;
     color: var(--text-hero-white);
+  }
+
+  .post-date {
     margin: 0;
+    font-size: 1rem;
+    color: var(--light-blue);
   }
 
   .post-body {
