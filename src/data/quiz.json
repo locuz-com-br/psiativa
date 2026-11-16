@@ -6,7 +6,7 @@
     "title": { "pt": "Descubra onde sua agenda está vazando", "en": "Find out where your schedule is leaking" },
     "subtitle": { "pt": "São 6 perguntas sobre o seu dia a dia. No fim, você vê qual buraco esvazia sua agenda hoje e recebe um material pra começar a fechar esse buraco.", "en": "It's 6 questions about your day to day. At the end, you see which hole drains your schedule today and get a resource to start closing it." },
     "note": { "pt": "De graça, sem cadastro. Você só deixa seu WhatsApp no fim, pra eu te enviar o material.", "en": "Free, no sign-up. You only leave your WhatsApp at the end, so I can send you the resource." },
-    "start": { "pt": "Começar", "en": "Start" }
+    "start": { "pt": "Fazer o diagnóstico", "en": "Take the diagnostic" }
   },
 
   "questions": [
